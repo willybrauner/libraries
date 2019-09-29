@@ -1,5 +1,8 @@
-import React, {createElement, useEffect, useState, useRef} from 'react';
-import useBoundingclientrect from '@rooks/use-boundingclientrect';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  EListener,
+  useBoundingClientRect
+} from '../../../hooks/use-bounding-client-rect/src/useBoundingClientRect';
 
 interface IProps {
   // pass class to block component
@@ -27,7 +30,10 @@ export function GridLayout(props: IProps) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   // get root dimentions and position properties
-  const rootRect = useBoundingclientrect(rootRef);
+  const rootRect = useBoundingClientRect(
+    rootRef,
+    EListener.ON_SCROLL_AND_RESIZE
+  );
 
   // Get current window width
   const [windowWidth, setWindowWidth] = useState<number>(
