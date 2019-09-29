@@ -1,7 +1,7 @@
 {
     "files": [],
     "references": [
-        { "path": "x-cli" },
-        { "path": "x-core" }
+        { "path": "front-react" },
+        { "path": "front-utils" }
     ]
 }
