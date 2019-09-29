@@ -5,8 +5,9 @@
     "moduleResolution": "node",
     "jsx": "react",
     "lib": ["dom", "dom.iterable", "es6", "scripthost"],
-    "baseUrl": "./",
-    "outDir": "./lib",
+    "baseUrl": "../../../",
+    "rootDir": "src",
+    "outDir": "lib",
     "isolatedModules": false,
     "noEmitOnError": false,
     "experimentalDecorators": true,
@@ -15,6 +16,5 @@
     "noEmitHelpers": true,
     "allowUnreachableCode": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }

@@ -1,7 +1,11 @@
 {
     "files": [],
     "references": [
-        { "path": "front-react" },
-        { "path": "front-utils" }
+        {
+            "path": "front-react/components/grid-layout-component"
+        },
+        {
+            "path": "front-react/hooks/use-bounding-client-rect"
+        }
     ]
 }

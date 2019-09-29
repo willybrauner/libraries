@@ -1,7 +1,8 @@
 import './Main.less';
-import React, {useRef} from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {EListener, useBoundingClientRect} from '../src/useBoundingClientRect';
+import {useRef} from 'react';
 
 declare var module: any;
 // active HMR

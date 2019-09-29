@@ -1,13 +1,14 @@
 import './Main.less';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {GridLayout} from '../src/GridLayout';
-import ReactDOM from 'react-dom';
-import React from 'react';
 
 declare var module: any;
 // active HMR
 if (module.hot) module.hot.accept();
 
 export const App = () => {
+
   return (
     <div className="App">
       <div className="App_wrapper">

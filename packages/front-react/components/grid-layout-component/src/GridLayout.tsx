@@ -2,7 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {
   EListener,
   useBoundingClientRect
-} from '../../../hooks/use-bounding-client-rect/src/useBoundingClientRect';
+} from "../../../hooks/use-bounding-client-rect/src/useBoundingClientRect"
+
 
 interface IProps {
   // pass class to block component
@@ -17,14 +18,28 @@ interface IProps {
   // Set custom column color
   color?: string;
   //  Set a max-width to the all grid (px value)
-  maxWidth?: number | null;
+  maxWidth?: number;
 }
+
+/**
+ * default properties
+ */
+GridLayout.defaultProps = {
+  columnsNumber: 12,
+  gutterSize: 20,
+  showGridByDefault: false,
+  color: 'rgba(255, 0, 0, 0.14)',
+  maxWidth: null
+};
 
 // component name
 const component: string = 'GridLayout';
 
+/**
+ * Grid Layout Component
+ * @param props
+ */
 export function GridLayout(props: IProps) {
-  // --------------------------------------------------------------------------- WINDOW SIZE
 
   // Get root ref
   const rootRef = useRef<HTMLDivElement>(null);
@@ -35,9 +50,12 @@ export function GridLayout(props: IProps) {
     EListener.ON_SCROLL_AND_RESIZE
   );
 
+  // --------------------------------------------------------------------------- WINDOW SIZE
+
+  // TODO utiliser useWindowSize
   // Get current window width
   const [windowWidth, setWindowWidth] = useState<number>(
-    window && window.innerWidth
+    window.innerWidth
   );
 
   /**
@@ -47,9 +65,9 @@ export function GridLayout(props: IProps) {
     // set new value
     const resizeHandler = () => {
       // if window object is not define, do not continue
-      if (window == undefined) return;
+      if (typeof window === undefined) return;
       // set new value
-      setWindowWidth(window && window.innerWidth);
+      setWindowWidth(window.innerWidth);
     };
     // start check viewport width on init component
     resizeHandler();
@@ -184,19 +202,6 @@ export function GridLayout(props: IProps) {
     // return nothing
   } else return null;
 }
-
-// ----------------------------------------------------------------------------- DEFAULT PROPS
-
-/**
- * Set default properties
- */
-GridLayout.defaultProps = {
-  columnsNumber: 12,
-  gutterSize: 20,
-  showGridByDefault: false,
-  color: 'rgba(255, 0, 0, 0.14)',
-  maxWidth: null
-};
 
 // ----------------------------------------------------------------------------- CSS
 

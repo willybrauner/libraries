@@ -8,6 +8,9 @@
     "test": "lerna run test",
     "clean": "rm -rf packages/**/**/**/lib"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
   "devDependencies": {
     "@types/node": "^8.0.28",
     "lerna": "^2.9.0",

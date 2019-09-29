@@ -1,19 +1,21 @@
 {
   "name": "react-grid-layout-component",
-  "version": "3.0.3",
+  "version": "1.0.0",
   "description": "This component allow to display a simple fixed grid layout on front of your react app.",
   "scripts": {
     "dev": "yarn && parcel ./example/index.html --open",
     "build": "tsc --declaration",
     "clean": "rm -rf .cache && rm -rf dist && rm -rf node_modules && yarn",
-    "prettier": "prettier --write '**/*.{tsx,ts,jsx,js,json}'"
+    "prettier": "prettier --write '**/*.{tsx,ts,less,json}'"
   },
   "dependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "@rooks/use-boundingclientrect": "^3.2.4"
+    "react": "^16.0.0",
+    "react-dom": "^16.10.1"
   },
   "devDependencies": {
+    "@types/node": "^12.7.8",
+    "@types/react": "^16.9.3",
+    "@types/react-dom": "^16.9.1",
     "husky": ">=1",
     "less": "^3.10.3",
     "lint-staged": ">=8",
@@ -26,7 +28,6 @@
     "url": "git+https://github.com/willybrauner/react-grid-layout-component.git"
   },
   "keywords": [
-    "preact",
     "react",
     "component"
   ],
@@ -42,7 +43,7 @@
     }
   },
   "lint-staged": {
-    "*.{tsx,ts,json}": [
+    "*.{tsx,ts,less,json}": [
       "prettier --write",
       "git add"
     ]
