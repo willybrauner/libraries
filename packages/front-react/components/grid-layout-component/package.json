@@ -1,0 +1,50 @@
+{
+  "name": "react-grid-layout-component",
+  "version": "3.0.3",
+  "description": "This component allow to display a simple fixed grid layout on front of your react app.",
+  "scripts": {
+    "dev": "yarn && parcel ./example/index.html --open",
+    "build": "tsc --declaration",
+    "clean": "rm -rf .cache && rm -rf dist && rm -rf node_modules && yarn",
+    "prettier": "prettier --write '**/*.{tsx,ts,jsx,js,json}'"
+  },
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "@rooks/use-boundingclientrect": "^3.2.4"
+  },
+  "devDependencies": {
+    "husky": ">=1",
+    "less": "^3.10.3",
+    "lint-staged": ">=8",
+    "parcel-bundler": "^1.12.3",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willybrauner/react-grid-layout-component.git"
+  },
+  "keywords": [
+    "preact",
+    "react",
+    "component"
+  ],
+  "author": "Willy Brauner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willybrauner/react-grid-layout-component/issues"
+  },
+  "homepage": "https://github.com/willybrauner/react-grid-layout-component#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{tsx,ts,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

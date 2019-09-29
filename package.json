@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "scripts": {
+    "bootstrap": "mini-solid framework",
+    "build": "tsc -b packages/front-react/components/grid-layout-component",
+    "test": "lerna run test",
+    "clean": "rimraf packages/**/**/**/lib"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.28",
+    "ava": "^0.22.0",
+    "lerna": "^2.9.0",
+    "rimraf": "^2.6.2",
+    "typescript": "~3.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

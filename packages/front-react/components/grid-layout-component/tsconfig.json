@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es6",
+    "moduleResolution": "node",
+    "jsx": "react",
+    //    "jsxFactory": "h",
+    "lib": ["dom", "dom.iterable", "es6", "scripthost"],
+    "baseUrl": "./",
+    "outDir": "./lib",
+    "isolatedModules": false,
+    "noEmitOnError": false,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "allowUnreachableCode": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
