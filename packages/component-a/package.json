@@ -1,0 +1,29 @@
+{
+  "name": "component-a",
+  "description": "",
+  "author": "Willy Brauner",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "src/index.tsx",
+  "scripts": {
+    "dev": "yarn && parcel ./example/index.html --open",
+    "build": "tsc --declaration",
+    "clean": "rm -rf .cache && rm -rf dist && rm -rf node_modules && yarn",
+    "prettier": "prettier --write '**/*.{tsx,ts,json}'"
+  },
+  "dependencies": {
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1"
+  },
+  "keywords": [
+    "react",
+    "component"
+  ],
+  "lint-staged": {
+    "*.{tsx,ts,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

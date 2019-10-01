@@ -1,7 +1,0 @@
-example/
-.idea
-node_modules
-dist
-.cache
-.prettierrc
-.prettierignore
