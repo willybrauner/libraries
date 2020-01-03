@@ -1,11 +1,10 @@
 {
-  "name": "use-bounding-client-rect",
+  "name": "use-window-size",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
-    "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
@@ -18,9 +17,6 @@
     "@babel/core": "^7.7.7",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
-    "husky": ">=3",
-    "less": "^3.10.3",
-    "parcel-bundler": "^1.12.4",
     "typescript": "^3.7.3"
   },
   "keywords": [

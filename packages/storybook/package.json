@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "react-grid-layout-component": "^1.0.0",
     "use-bounding-client-rect": "^1.0.0",
+    "use-window-size": "^1.0.0",
     "utils-array": "^1.0.0"
   },
   "devDependencies": {

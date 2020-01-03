@@ -11,7 +11,7 @@ import '../style.css';
 /**
  * Demo
  */
-export const UseBoundingClientRectDemo = () => {
+export const Demo = () => {
 
   // get ref
   const elementRef = useRef(null);
@@ -41,7 +41,7 @@ storiesOf(storyName, module)
     sidebar: README
   }
 })
-.add("basic example", () => <UseBoundingClientRectDemo />, {
+.add("basic example", () => <Demo />, {
   info: README
 });
 

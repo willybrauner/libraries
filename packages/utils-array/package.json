@@ -8,10 +8,11 @@
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
+  "dependencies": {
+    "react-grid-layout-component": "^1.0.0",
+    "use-bounding-client-rect": "^1.0.0"
+  },
   "devDependencies": {
     "typescript": "^3.5.3"
-  },
-  "dependencies": {
-    "use-bounding-client-rect": "^1.0.0"
   }
 }

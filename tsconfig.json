@@ -12,7 +12,7 @@
     "noImplicitAny": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
-    "strictNullChecks": true
+    "strictNullChecks": false
   },
   "exclude": [
     "node_modules",
