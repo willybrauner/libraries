@@ -1,7 +1,0 @@
-{
-  "files": [],
-  "references": [
-    { "path": "component-a" },
-    { "path": "component-b" }
-  ]
-}

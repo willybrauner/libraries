@@ -1,42 +1,11 @@
 {
+  "name": "root",
   "private": true,
-  "name": "soliquid",
-  "description": "framework",
   "scripts": {
-    "bootstrap": "lerna bootstrap --use-workspaces",
-    "build": "lerna exec --parallel -- yarn build",
-    "test": "lerna run test",
-    "clean": "rm -rf packages/**/lib",
-    "prettier": "prettier --write \"**/*.{tsx,ts,js,less,json,md,yml}\""
+    "clean": "lerna clean"
   },
   "devDependencies": {
-    "@types/node": "^12.7.8",
-    "@types/react": "^16.9.3",
-    "@types/react-dom": "^16.9.1",
-    "lerna": "^2.9.0",
-    "lint-staged": ">=8",
-    "parcel-bundler": "^1.12.3",
-    "prettier": "^1.18.2",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
-    "typescript": "^3.5.3"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{tsx,ts,js,less,json,md,yml}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "dependencies": {
-    "component-a": "file:packages/component-a",
-    "component-b": "file:packages/component-b"
+    "lerna": "^3.20.2",
+    "typescript": "^3.7.4"
   }
 }
