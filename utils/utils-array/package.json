@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "react-grid-layout-component": "^1.0.0",
-    "use-bounding-client-rect": "^1.0.0"
+    "use-bounding-client-rect": "^1.0.0",
+    "use-window-width": "^1.0.4"
   },
   "devDependencies": {
     "typescript": "^3.5.3"

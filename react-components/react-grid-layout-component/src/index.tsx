@@ -1,8 +1,6 @@
 import React, {useRef} from 'react';
-import {useWindowSize} from './helpers/useWindowSize';
-import useBoundingClientRect from "use-bounding-client-rect"
-import {EListener} from "use-bounding-client-rect/dist/useBoundingclientRect"
-
+import {useBoundingClientRect, EListener} from "use-bounding-client-rect"
+import {useWindowSize} from "use-window-size"
 
 interface IProps {
   /**

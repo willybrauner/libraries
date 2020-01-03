@@ -1,9 +1,9 @@
 {
   "packages": [
-    "utils/*",
     "react-hooks/*",
     "react-components/*",
-    "test/*"
+    "utils/*",
+    "storybook/"
   ],
   "version": "0.0.1"
 }

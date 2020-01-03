@@ -10,11 +10,10 @@ import '../style.css';
  * Demo
  */
 export const MergeDemo = () => {
-  const arr = merge([...["collection", "hello"], ...["","2de array"]]);
+  const arr = merge([...["collection", "hello"], ["test","second-array"]]);
   console.log(arr);
   return <div>
-    <h1>array-merge</h1>
-    {arr}
+    final string: {arr}
   </div>;
 }
 

@@ -1,9 +1,6 @@
 import React, {useRef} from 'react'
-import {
-  EListener,
-  useBoundingclientRect
-} from "use-bounding-client-rect/dist/useBoundingclientRect"
 import {storiesOf} from "@storybook/react"
+import {EListener, useBoundingClientRect} from 'use-bounding-client-rect';
 import README from "use-bounding-client-rect/README.md";
 const storyName = "use-bounding-client-rect";
 import '../style.css';
@@ -17,7 +14,7 @@ export const Demo = () => {
   const elementRef = useRef(null);
 
   // get ref rect
-  const rect = useBoundingclientRect(
+  const rect = useBoundingClientRect(
     elementRef,
     EListener.ON_SCROLL_AND_RESIZE
   );

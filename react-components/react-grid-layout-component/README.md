@@ -1,7 +1,5 @@
 # React Grid Layout Component
 
-![npm](https://img.shields.io/npm/v/react-grid-layout-component)
-
 This component allow to display a simple fixed grid layout on front of your react app.
 
 ![screen](./screen.png)
@@ -28,7 +26,7 @@ export const AppRoot = () => {
 };
 ```
 
-- [GridLayout tsx component](src/GridLayout.tsx) contains default props, you can overwrite as you need:
+- [GridLayout tsx component](src/index.tsx) contains default props, you can overwrite as you need:
 
 | props | type | description | default value |
 | --- | --- | --- | --- |

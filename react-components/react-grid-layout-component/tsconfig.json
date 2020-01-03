@@ -5,7 +5,8 @@
     "rootDir": "./src"
   },
   "references": [
-    { "path":  "../use-bounding-client-rect" }
+    { "path":  "../../react-hooks/use-bounding-client-rect" },
+    { "path":  "../../react-hooks/use-window-size" }
   ],
   "exclude": [
     "node_modules",

@@ -1,7 +1,7 @@
 {
   "name": "use-bounding-client-rect",
   "version": "1.0.0",
-  "description": "",
+  "description": "Get dynamically bounding client rect",
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
@@ -18,9 +18,6 @@
     "@babel/core": "^7.7.7",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
-    "husky": ">=3",
-    "less": "^3.10.3",
-    "parcel-bundler": "^1.12.4",
     "typescript": "^3.7.3"
   },
   "keywords": [

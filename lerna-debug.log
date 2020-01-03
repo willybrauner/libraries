@@ -1,6 +1,6 @@
 0 silly argv { _: [ 'bootstrap' ], lernaVersion: '3.20.2', '$0': 'lerna' }
 1 notice cli v3.20.2
 2 verbose rootPath /Users/willybrauner/Local/library
-3 error JSONError: Unexpected token } in JSON at position 448 while parsing near '...dom": "^16.12.0",  },  "devDependencie...' in ../use-bounding-client-rect/package.json
+3 error JSONError: Unexpected token } in JSON at position 367 while parsing near '...dom": "^16.12.0",  },  "devDependencie...' in ../react-hooks/use-window-size/package.json
 3 error     at module.exports (/Users/willybrauner/Local/library/node_modules/parse-json/index.js:26:19)
 3 error     at parse (/Users/willybrauner/Local/library/node_modules/load-json-file/index.js:15:9)
