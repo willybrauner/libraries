@@ -2,9 +2,15 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "clean": "lerna clean"
+    "clean": "lerna clean",
+    "scaffold": "node ./config/tasks/scaffold.js"
   },
   "devDependencies": {
+    "@zouloux/files": "^0.6.0",
+    "app-root-path": "^3.0.0",
+    "change-case": "^4.1.1",
+    "colors": "^1.4.0",
+    "inquirer": "^7.0.1",
     "lerna": "^3.20.2",
     "typescript": "^3.7.4"
   }

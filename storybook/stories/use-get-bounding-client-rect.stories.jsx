@@ -8,7 +8,7 @@ import '../style.css';
 /**
  * Demo
  */
-export const Demo = () => {
+export const App = () => {
 
   // get ref
   const elementRef = useRef(null);
@@ -38,7 +38,7 @@ storiesOf(storyName, module)
     sidebar: README
   }
 })
-.add("basic example", () => <Demo />, {
+.add("basic example", () => <App />, {
   info: README
 });
 

@@ -8,7 +8,7 @@ import {useWindowSize} from 'use-window-size';
 /**
  * Demo
  */
-export const Demo = () => {
+export const App = () => {
 
   // get window size
   const windowSize = useWindowSize();
@@ -33,7 +33,7 @@ storiesOf(storyName, module)
     sidebar: README
   }
 })
-.add("basic example", () => <Demo />, {
+.add("basic example", () => <App />, {
   info: README
 });
 

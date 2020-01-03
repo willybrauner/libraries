@@ -8,7 +8,7 @@ const storyName = "react-grid-layout-component";
 /**
  * Demo
  */
-export const Demo = () => {
+export const App = () => {
 
   // show grid state
   const [showGrid, setShowGrid] = useState(true);
@@ -29,7 +29,6 @@ export const Demo = () => {
           <h1 className="App_title" style={css.title}>React Grid Layout Component</h1>
           <p>Just press "G Key" on your keyboard to toggle the grid. 💪</p>
         </div>
-
         {showGrid && <GridLayout gutterSize={20} maxWidth={1024} />}
       </div>
   );
@@ -56,7 +55,7 @@ storiesOf(storyName, module)
     sidebar: README
   }
 })
-.add("basic example", () => <Demo />, {
+.add("basic example", () => <App />, {
   info: README
 });
 

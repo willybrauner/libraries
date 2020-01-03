@@ -9,7 +9,7 @@ import '../style.css';
 /**
  * Demo
  */
-export const MergeDemo = () => {
+export const App = () => {
   const arr = merge([...["collection", "hello"], ["test","second-array"]]);
   console.log(arr);
   return <div>
@@ -23,11 +23,10 @@ export const MergeDemo = () => {
 storiesOf(storyName, module)
 .addParameters({
   readme: {
-    sidebar: README,
-    codeTheme: 'GHColors',
+    sidebar: README
   }
 })
-.add("basic example", () => <MergeDemo />, {
+.add("basic example", () => <App />, {
   info: README
 });
 
