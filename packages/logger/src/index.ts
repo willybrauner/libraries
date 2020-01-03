@@ -1,4 +1,5 @@
 
-export default function logger(message: string) {
+export function logger(message: any):void
+{
   console.log(">", message);
 }

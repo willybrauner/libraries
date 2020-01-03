@@ -1,4 +1,10 @@
-import logger from "logger";
+import {logger} from "logger";
+import {merge} from "utils-array"
 
-console.log('coucou');
 logger("Application started");
+
+const arr = ["bla"];
+
+const test = merge(['super', 'test', arr as any])
+logger(test);
+

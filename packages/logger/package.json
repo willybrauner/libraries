@@ -10,5 +10,9 @@
   },
   "devDependencies": {
     "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "use-bounding-client-rect": "^1.0.0",
+    "utils-array": "^1.0.0"
   }
 }

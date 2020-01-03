@@ -1,18 +1,17 @@
 {
-  "name": "app",
+  "name": "utils-array",
   "version": "1.0.0",
+  "main": "dist/index",
+  "types": "dist/index",
   "scripts": {
-    "dev": "parcel src/example/index.html",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
-  "dependencies": {
-    "logger": "1.0.0",
-    "use-bounding-client-rect": "^1.0.0",
-    "utils-array": "^1.0.0"
-  },
   "devDependencies": {
     "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "use-bounding-client-rect": "^1.0.0"
   }
 }
