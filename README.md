@@ -1,3 +1,9 @@
-# WIP Library
+# Libraries (WIP)
+
+## Credits
 
 © Willy Brauner
+
+## Licence
+
+MIT
