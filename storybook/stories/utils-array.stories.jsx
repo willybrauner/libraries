@@ -20,7 +20,8 @@ export const App = () => {
 storiesOf(storyName, module)
   .addParameters({
     readme: {
-      sidebar: README
+      sidebar: README,
+      codeTheme: "darcula"
     }
   })
   .add("basic example", () => <App />, {

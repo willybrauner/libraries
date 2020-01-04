@@ -2,12 +2,15 @@ import { addParameters, addDecorator, configure } from "@storybook/react";
 import theme from "./theme";
 import { addReadme } from "storybook-readme";
 
+addDecorator(addReadme);
+
 addParameters({
   options: {
     /**
      * Load theme
      */
     theme,
+
     /**
      * show story component as full screen
      * @type {Boolean}
@@ -68,8 +71,6 @@ addParameters({
     isToolshown: true
   }
 });
-
-addDecorator(addReadme);
 
 // automatically import all files ending in *.stories.js
 configure(
