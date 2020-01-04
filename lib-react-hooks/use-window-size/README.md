@@ -1,10 +1,10 @@
-# Use Window Size 
+# Use Window Size
 
 ## About
 
 React hook allowing to get dynamically window width and height of any react Ref.
 
-## Installation 
+## Installation
 
 ```shell script
 $ npm install @wb/use-window-size

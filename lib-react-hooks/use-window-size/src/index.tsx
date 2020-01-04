@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react";
 
 /**
  * Window size dimensions interface
@@ -35,11 +35,11 @@ export function useWindowSize(): IWindowSize {
     // start check viewport dimensions
     resizeHandler();
     // écouter le rezise
-    window.addEventListener('resize', resizeHandler);
+    window.addEventListener("resize", resizeHandler);
 
     return () => {
       // supprimer l'écoute du resize
-      window.removeEventListener('resize', resizeHandler);
+      window.removeEventListener("resize", resizeHandler);
     };
   }, []);
 

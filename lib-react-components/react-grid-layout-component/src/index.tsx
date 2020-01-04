@@ -1,6 +1,6 @@
-import React, {useRef} from 'react';
-import {useBoundingClientRect, EListener} from "use-bounding-client-rect"
-import {useWindowSize} from "use-window-size"
+import React, { useRef } from "react";
+import { useBoundingClientRect, EListener } from "use-bounding-client-rect";
+import { useWindowSize } from "use-window-size";
 
 interface IProps {
   /**
@@ -29,12 +29,12 @@ GridLayout.defaultProps = {
   columnsNumber: 12,
   gutterSize: 20,
   showGridByDefault: false,
-  color: 'rgba(255, 0, 0, 0.14)',
+  color: "rgba(255, 0, 0, 0.14)",
   maxWidth: null
 } as IProps;
 
 // component name
-const component: string = 'GridLayout';
+const component: string = "GridLayout";
 
 /**
  * @name GridLayout
@@ -73,8 +73,8 @@ export function GridLayout(props: IProps) {
     }
     // return style for root element
     return {
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: "auto",
+      marginRight: "auto",
       maxWidth: pMaxWidth
     };
   };
@@ -157,19 +157,19 @@ export function GridLayout(props: IProps) {
  */
 const css: any = {
   root: {
-    position: 'fixed',
-    top: '0',
-    bottom: '0',
-    left: '0',
-    right: '0'
+    position: "fixed",
+    top: "0",
+    bottom: "0",
+    left: "0",
+    right: "0"
   },
   columns: {
-    display: 'flex',
-    flexWrap: 'nowrap',
-    justifyContent: 'space-between',
-    width: '100%'
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "space-between",
+    width: "100%"
   },
   column: {
-    height: '100vh'
+    height: "100vh"
   }
 };

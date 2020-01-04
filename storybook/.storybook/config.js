@@ -1,7 +1,6 @@
-import {addParameters, addDecorator, configure } from '@storybook/react';
+import { addParameters, addDecorator, configure } from "@storybook/react";
 import theme from "./theme";
 import { addReadme } from "storybook-readme";
-
 
 addParameters({
   options: {
@@ -66,13 +65,14 @@ addParameters({
      * show/hide tool bar
      * @type {Boolean}
      */
-    isToolshown: true,
-
-  },
+    isToolshown: true
+  }
 });
 
 addDecorator(addReadme);
 
 // automatically import all files ending in *.stories.js
-configure(require.context('../stories', true, /\.stories\.(tsx|ts|jsx|js)$/), module);
-
+configure(
+  require.context("../stories", true, /\.stories\.(tsx|ts|jsx|js)$/),
+  module
+);

@@ -1,3 +1,3 @@
-# WIP Library 
+# WIP Library
 
 © Willy Brauner

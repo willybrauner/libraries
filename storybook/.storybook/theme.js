@@ -7,7 +7,7 @@ export default create({
   // colorSecondary: "grey",
 
   // // UI
-   appBg: "white",
+  appBg: "white",
   // appContentBg: "skyblue",
   // appBorderColor: "grey",
   // appBorderRadius: 4,
@@ -31,7 +31,7 @@ export default create({
   // inputTextColor: "black",
   // inputBorderRadius: 4,
 
-  brandTitle: "Library",
+  brandTitle: "Library"
   //brandUrl: "",
   //brandImage: ""
 });

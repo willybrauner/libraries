@@ -7,7 +7,7 @@ const changeCase = require("change-case");
 const { QuickTemplate } = require("../helpers/helper-template");
 // Some colors in the terminal @see : https://github.com/marak/colors.js/
 require("colors");
-const log = require('debug');
+const log = require("debug");
 
 // ----------------------------------------------------------------------------- LOGS
 
@@ -87,7 +87,6 @@ const componentScaffolder = () =>
       moduleName = answer.moduleName;
     });
 
-
     // component name "ComponentName" for subfolder and component
     let lowerModuleName = changeCase.paramCase(moduleName);
 
@@ -96,14 +95,11 @@ const componentScaffolder = () =>
 
     // TODO copy folder
 
-
     // // Check if component already exists
     // if (Files.getFiles(`${componentPath}.js`).files.length > 0) {
     //   console.log(`This component already exists. Aborting.`.red.bold);
     //   return;
     // }
-
-
 
     console.log(componentPath);
 

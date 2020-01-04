@@ -1,4 +1,4 @@
-# Utils array 
+# Utils array
 
 ## Installation
 

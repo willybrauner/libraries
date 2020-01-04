@@ -5,6 +5,5 @@ module.exports = {
   root: appRoot.resolve(""),
 
   // Skeletons path
-  skeletonsPath: appRoot.resolve("config/skeletons"),
-
+  skeletonsPath: appRoot.resolve("config/skeletons")
 };
