@@ -1,11 +1,11 @@
-# @wb/utils-array
+# @wbe/utils-array
 
 ## Installation
 
 - Install package:
 
 ```shell script
-$ npm install @wb/utils-array
+$ npm install @wbe/utils-array
 ```
 
 ## Credit

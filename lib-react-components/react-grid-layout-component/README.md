@@ -1,4 +1,4 @@
-# @wb/react-grid-layout-component
+# @wbe/react-grid-layout-component
 
 This component allow to display a simple fixed grid layout on front of your react app.
 
@@ -9,13 +9,13 @@ This component allow to display a simple fixed grid layout on front of your reac
 - Install package:
 
 ```shell script
-$ npm install -S @wb/react-grid-layout-component
+$ npm install -S @wbe/react-grid-layout-component
 ```
 
 - Import `<GridLayout />` component on the project root component:
 
 ```typescript jsx
-import { GridLayout } from "@wb/react-grid-layout-component";
+import { GridLayout } from "@wbe/react-grid-layout-component";
 
 export const App = () => {
   return (

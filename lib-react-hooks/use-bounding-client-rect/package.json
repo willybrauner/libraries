@@ -1,5 +1,5 @@
 {
-  "name": "@wb/use-bounding-client-rect",
+  "name": "@wbe/use-bounding-client-rect",
   "version": "0.0.6",
   "description": "Get dynamically bounding client rect",
   "main": "dist/index",

@@ -1,5 +1,5 @@
 {
-  "name": "@wb/libraries",
+  "name": "@wbe/libraries",
   "version": "0.0.6",
   "description": "Standalone libraries package",
   "main": "dist/index",
@@ -14,10 +14,10 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wb/react-grid-layout-component": "^0.0.6",
-    "@wb/use-bounding-client-rect": "^0.0.6",
-    "@wb/use-window-size": "^0.0.6",
-    "@wb/utils-array": "^0.0.6"
+    "@wbe/react-grid-layout-component": "^0.0.6",
+    "@wbe/use-bounding-client-rect": "^0.0.6",
+    "@wbe/use-window-size": "^0.0.6",
+    "@wbe/utils-array": "^0.0.6"
   },
   "devDependencies": {
     "typescript": "^3.7.3"
@@ -32,5 +32,6 @@
     "access": "public"
   },
   "author": "Willy Brauner",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "1cc83f4d73f405b1076e91da18daf1edeaf764f2"
 }

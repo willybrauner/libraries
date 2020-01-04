@@ -1,11 +1,11 @@
-# @wb/%%dashCaseModuleName%%
+# @wbe/%%dashCaseModuleName%%
 
 ## About
 
 ## Installation
 
 ```shell script
-$ npm install @wb/%%dashCaseModuleName%%
+$ npm install @wbe/%%dashCaseModuleName%%
 ```
 
 ## Credits

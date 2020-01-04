@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import README from "@wb/utils-array/README.md";
-import { merge } from "@wb/utils-array";
+import README from "@wbe/utils-array/README.md";
+import { merge } from "@wbe/utils-array";
 const storyName = "utils-array";
 import "../style.css";
 

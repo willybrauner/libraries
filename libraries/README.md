@@ -1,11 +1,11 @@
-# @wb/undefined
+# @wbe/undefined
 
 ## About
 
 ## Installation
 
 ```shell script
-$ npm install @wb/undefined
+$ npm install @wbe/undefined
 ```
 
 ## Credits
