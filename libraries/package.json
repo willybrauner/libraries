@@ -4,11 +4,14 @@
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
-  "private": false,
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
     "@wb/react-grid-layout-component": "^0.0.4",
