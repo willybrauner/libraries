@@ -1,6 +1,6 @@
 {
   "name": "@wbe/use-window-size",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
