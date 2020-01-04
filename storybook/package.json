@@ -38,5 +38,6 @@
     "storybook-readme": "^5.0.8",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.4"
-  }
+  },
+  "gitHead": "07a03e6afcdb266a9b142ec9f4202ef453387464"
 }

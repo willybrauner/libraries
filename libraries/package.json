@@ -25,6 +25,10 @@
     "node",
     "typescript"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Willy Brauner",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "07a03e6afcdb266a9b142ec9f4202ef453387464"
 }
