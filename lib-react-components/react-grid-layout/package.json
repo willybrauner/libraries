@@ -11,6 +11,10 @@
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
+  },
   "dependencies": {
     "@wbe/use-bounding-client-rect": "^0.0.11",
     "@wbe/use-window-size": "^0.0.11",
