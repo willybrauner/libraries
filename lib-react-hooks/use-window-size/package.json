@@ -27,7 +27,10 @@
     "react",
     "hook"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Willy Brauner",
   "license": "MIT",
-  "gitHead": "ea89dc93d256f3025314ccfa0eda562fe3fecbce"
+  "gitHead": "0e2b9d149f87e364f7ce6e87fda797946b8c2e92"
 }
