@@ -4,7 +4,7 @@
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
-  "private": true,
+  "private": false,
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
