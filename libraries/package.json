@@ -1,6 +1,6 @@
 {
   "name": "@wb/libraries",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
@@ -11,10 +11,10 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wb/react-grid-layout-component": "^0.0.3",
-    "@wb/use-bounding-client-rect": "^0.0.3",
-    "@wb/use-window-size": "^0.0.3",
-    "@wb/utils-array": "^0.0.3"
+    "@wb/react-grid-layout-component": "^0.0.4",
+    "@wb/use-bounding-client-rect": "^0.0.4",
+    "@wb/use-window-size": "^0.0.4",
+    "@wb/utils-array": "^0.0.4"
   },
   "devDependencies": {
     "typescript": "^3.7.3"
