@@ -1,11 +1,13 @@
-# @wbe/undefined
+# @wbe/libraries
 
 ## About
+
+Standalone libraries package.
 
 ## Installation
 
 ```shell script
-$ npm install @wbe/undefined
+$ npm install @wbe/libraries
 ```
 
 ## Credits
