@@ -24,5 +24,6 @@
     "component"
   ],
   "author": "Willy Brauner",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "58725160cf654a58e0a9b022c1572a076054fc14"
 }
