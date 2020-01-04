@@ -1,6 +1,6 @@
 {
   "name": "@wb/react-grid-layout-component",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
@@ -12,10 +12,10 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
+    "@wb/use-bounding-client-rect": "^0.0.2",
+    "@wb/use-window-size": "^0.0.2",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "@wb/use-bounding-client-rect": "^1.0.0",
-    "@wb/use-window-size": "^1.0.0"
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.16",

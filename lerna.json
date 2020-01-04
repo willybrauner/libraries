@@ -1,10 +1,10 @@
 {
   "packages": [
-    "lib-react-hooks/*",
     "lib-react-components/*",
+    "lib-react-hooks/*",
     "lib-utils/*",
-    "storybook/",
-    "libraries/"
+    "libraries/",
+    "storybook/"
   ],
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
