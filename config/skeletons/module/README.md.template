@@ -1,11 +1,11 @@
-# %%capitalComponentName%% 
+# @wb/%%dashCaseModuleName%%
 
 ## About
 
-## Installation 
+## Installation
 
 ```shell script
-$ npm install @wb/%%capitalComponentName%%
+$ npm install @wb/%%dashCaseModuleName%%
 ```
 
 ## Credits

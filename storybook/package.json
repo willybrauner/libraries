@@ -1,20 +1,20 @@
 {
-  "name": "storybook",
+  "name": "@wb/storybook",
   "version": "1.0.0",
-  "description": "",
+  "description": "@wb/library storybook",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "author": "",
+  "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "react-grid-layout-component": "^1.0.0",
-    "use-bounding-client-rect": "^1.0.0",
-    "use-window-size": "^1.0.0",
-    "utils-array": "^1.0.0"
+    "@wb/react-grid-layout-component": "^1.0.0",
+    "@wb/use-bounding-client-rect": "^1.0.0",
+    "@wb/use-window-size": "^1.0.0",
+    "@wb/utils-array": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

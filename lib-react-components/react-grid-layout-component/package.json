@@ -1,5 +1,5 @@
 {
-  "name": "react-grid-layout-component",
+  "name": "@wb/react-grid-layout-component",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index",
@@ -13,16 +13,12 @@
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "use-bounding-client-rect": "^1.0.0",
-    "use-window-size": "^1.0.0"
+    "@wb/use-bounding-client-rect": "^1.0.0",
+    "@wb/use-window-size": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
-    "husky": ">=3",
-    "less": "^3.10.3",
-    "parcel-bundler": "^1.12.4",
     "typescript": "^3.7.3"
   },
   "keywords": [

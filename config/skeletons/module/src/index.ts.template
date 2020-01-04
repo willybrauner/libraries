@@ -1,0 +1,8 @@
+
+/**
+ * %%camelCaseModuleName%%
+ * @description
+ */
+export function %%camelCaseModuleName%%():void {
+
+}

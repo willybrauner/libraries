@@ -1,5 +1,5 @@
 {
-  "name": "utils-array",
+  "name": "@wb/utils-array",
   "version": "1.0.0",
   "main": "dist/index",
   "types": "dist/index",
@@ -8,12 +8,7 @@
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
-  "dependencies": {
-    "react-grid-layout-component": "^1.0.0",
-    "use-bounding-client-rect": "^1.0.0",
-    "use-window-width": "^1.0.4"
-  },
   "devDependencies": {
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.3"
   }
 }
