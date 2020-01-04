@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { GridLayout } from "@wbe/react-grid-layout-component";
 import README from "@wbe/react-grid-layout-component/README.md";
-import "../style.css";
+import "../../style.css";
 const storyName = "react-grid-layout-component";
 
 /**
@@ -52,7 +52,7 @@ const css = {
 /**
  * Config
  */
-storiesOf(storyName, module)
+storiesOf(`react-components/${storyName}`, module)
   .addParameters({
     readme: {
       sidebar: README,

@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-window-size/README.md";
 import { useWindowSize } from "@wbe/use-window-size";
 const storyName = "use-window-size";
-import "../style.css";
+import "../../style.css";
 
 /**
  * Demo
@@ -26,7 +26,7 @@ export const App = () => {
 /**
  * Config
  */
-storiesOf(storyName, module)
+storiesOf(`react-hooks/${storyName}`, module)
   .addParameters({
     readme: {
       sidebar: README,

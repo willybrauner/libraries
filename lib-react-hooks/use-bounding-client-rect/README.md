@@ -1,4 +1,4 @@
-# @wbe/use-bounding-client-rect
+# use-bounding-client-rect
 
 ## About
 

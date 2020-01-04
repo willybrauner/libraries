@@ -1,4 +1,4 @@
-# @wbe/react-grid-layout-component
+# react-grid-layout-component
 
 This component allow to display a simple fixed grid layout on front of your react app.
 

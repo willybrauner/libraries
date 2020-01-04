@@ -1,4 +1,4 @@
-# @wbe/use-window-size
+# use-window-size
 
 ## About
 

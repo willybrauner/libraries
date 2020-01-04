@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 /**
  * Window size dimensions interface
  */
-interface IWindowSize {
+export interface IWindowSize {
   width: number;
   height: number;
 }

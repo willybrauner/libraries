@@ -6,7 +6,7 @@ import {
 } from "@wbe/use-bounding-client-rect";
 import README from "@wbe/use-bounding-client-rect/README.md";
 const storyName = "use-bounding-client-rect";
-import "../style.css";
+import "../../style.css";
 
 /**
  * Demo
@@ -32,7 +32,7 @@ export const App = () => {
 /**
  * Config
  */
-storiesOf(storyName, module)
+storiesOf(`react-hooks/${storyName}`, module)
   .addParameters({
     readme: {
       sidebar: README,
