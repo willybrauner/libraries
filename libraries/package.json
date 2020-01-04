@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
@@ -14,10 +14,10 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/react-grid-layout-component": "^0.0.7",
-    "@wbe/use-bounding-client-rect": "^0.0.7",
-    "@wbe/use-window-size": "^0.0.7",
-    "@wbe/utils-array": "^0.0.7"
+    "@wbe/react-grid-layout-component": "^0.0.8",
+    "@wbe/use-bounding-client-rect": "^0.0.8",
+    "@wbe/use-window-size": "^0.0.8",
+    "@wbe/utils-array": "^0.0.8"
   },
   "devDependencies": {
     "typescript": "^3.7.3"
