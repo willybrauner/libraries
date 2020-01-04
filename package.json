@@ -1,5 +1,6 @@
 {
-  "name": "@wb/libraries",
+  "name": "libraries",
+  "description": "Mono-repos libraries for front-end application",
   "private": true,
   "scripts": {
     "clean": "lerna clean",
