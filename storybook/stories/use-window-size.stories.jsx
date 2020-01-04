@@ -1,9 +1,9 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import README from "use-window-size/README.md";
+import README from "@wb/use-window-size/README.md";
+import { useWindowSize } from "@wb/use-window-size";
 const storyName = "use-window-size";
 import "../style.css";
-import { useWindowSize } from "use-window-size";
 
 /**
  * Demo

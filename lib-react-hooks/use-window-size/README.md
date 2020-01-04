@@ -1,4 +1,4 @@
-# Use Window Size
+# @wb/use-window-size
 
 ## About
 

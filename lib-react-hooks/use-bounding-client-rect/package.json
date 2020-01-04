@@ -4,6 +4,7 @@
   "description": "Get dynamically bounding client rect",
   "main": "dist/index",
   "types": "dist/index",
+  "private": true,
   "scripts": {
     "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",

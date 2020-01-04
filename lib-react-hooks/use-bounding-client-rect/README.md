@@ -1,4 +1,4 @@
-# Use Bounding Cient Rect
+# @wb/use-bounding-client-rect
 
 ## About
 

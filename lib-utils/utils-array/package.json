@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "dist/index",
   "types": "dist/index",
+  "private": true,
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",

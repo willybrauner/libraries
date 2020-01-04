@@ -1,4 +1,4 @@
-# Utils array
+# @wb/utils-array
 
 ## Installation
 

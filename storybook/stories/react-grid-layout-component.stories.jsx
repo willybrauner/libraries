@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { GridLayout } from "react-grid-layout-component";
-import README from "react-grid-layout-component/README.md";
+import { GridLayout } from "@wb/react-grid-layout-component";
+import README from "@wb/react-grid-layout-component/README.md";
 import "../style.css";
 const storyName = "react-grid-layout-component";
 

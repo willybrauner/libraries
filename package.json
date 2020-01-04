@@ -1,5 +1,5 @@
 {
-  "name": "library",
+  "name": "@wb/libraries",
   "private": true,
   "scripts": {
     "clean": "lerna clean",
