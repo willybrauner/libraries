@@ -4,7 +4,7 @@ import {
   useEffect,
   MutableRefObject,
   useCallback
-} from 'react';
+} from "react";
 
 /**
  * Listener choice
@@ -61,14 +61,14 @@ export function useBoundingClientRect(
       pListener === EListener.ON_RESIZE ||
       pListener === EListener.ON_SCROLL_AND_RESIZE
     ) {
-      window.addEventListener('resize', update);
+      window.addEventListener("resize", update);
     }
     // listen on scroll
     if (
       pListener === EListener.ON_SCROLL ||
       pListener === EListener.ON_SCROLL_AND_RESIZE
     ) {
-      document.addEventListener('scroll', update);
+      document.addEventListener("scroll", update);
     }
 
     // stop listen
@@ -77,13 +77,13 @@ export function useBoundingClientRect(
         pListener === EListener.ON_RESIZE ||
         pListener === EListener.ON_SCROLL_AND_RESIZE
       ) {
-        window.removeEventListener('resize', update);
+        window.removeEventListener("resize", update);
       }
       if (
         pListener === EListener.ON_SCROLL ||
         pListener === EListener.ON_SCROLL_AND_RESIZE
       ) {
-        document.removeEventListener('scroll', update);
+        document.removeEventListener("scroll", update);
       }
     };
   }, [pRef.current]);

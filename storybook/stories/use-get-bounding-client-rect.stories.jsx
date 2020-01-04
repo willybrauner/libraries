@@ -1,15 +1,14 @@
-import React, {useRef} from 'react'
-import {storiesOf} from "@storybook/react"
-import {EListener, useBoundingClientRect} from 'use-bounding-client-rect';
-import README from "use-bounding-client-rect/README.md";
+import React, { useRef } from "react";
+import { storiesOf } from "@storybook/react";
+import { EListener, useBoundingClientRect } from "@wb/use-bounding-client-rect";
+import README from "@wb/use-bounding-client-rect/README.md";
 const storyName = "use-bounding-client-rect";
-import '../style.css';
+import "../style.css";
 
 /**
  * Demo
  */
 export const App = () => {
-
   // get ref
   const elementRef = useRef(null);
 
@@ -22,28 +21,21 @@ export const App = () => {
   return (
     <div ref={elementRef}>
       <p> Resize your browser and check element properties change.</p>
-      <pre>
-        {JSON.stringify(rect, null, 2)}
-      </pre>
+      <pre>{JSON.stringify(rect, null, 2)}</pre>
     </div>
-  )
+  );
 };
 
 /**
  * Config
  */
 storiesOf(storyName, module)
-.addParameters({
-  readme: {
-    sidebar: README
-  }
-})
-.add("basic example", () => <App />, {
-  info: README
-});
-
-
-
-
-
-
+  .addParameters({
+    readme: {
+      sidebar: README,
+      codeTheme: "darcula"
+    }
+  })
+  .add("basic example", () => <App />, {
+    info: README
+  });

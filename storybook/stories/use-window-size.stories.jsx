@@ -1,15 +1,14 @@
-import React from 'react'
-import {storiesOf} from "@storybook/react"
-import README from "use-window-size/README.md";
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import README from "@wb/use-window-size/README.md";
+import { useWindowSize } from "@wb/use-window-size";
 const storyName = "use-window-size";
-import '../style.css';
-import {useWindowSize} from 'use-window-size';
+import "../style.css";
 
 /**
  * Demo
  */
 export const App = () => {
-
   // get window size
   const windowSize = useWindowSize();
 
@@ -21,24 +20,19 @@ export const App = () => {
         <li>window height: {windowSize.height}</li>
       </ul>
     </div>
-  )
+  );
 };
 
 /**
  * Config
  */
 storiesOf(storyName, module)
-.addParameters({
-  readme: {
-    sidebar: README
-  }
-})
-.add("basic example", () => <App />, {
-  info: README
-});
-
-
-
-
-
-
+  .addParameters({
+    readme: {
+      sidebar: README,
+      codeTheme: "darcula"
+    }
+  })
+  .add("basic example", () => <App />, {
+    info: README
+  });

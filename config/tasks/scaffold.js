@@ -7,7 +7,9 @@ const changeCase = require("change-case");
 const { QuickTemplate } = require("../helpers/helper-template");
 // Some colors in the terminal @see : https://github.com/marak/colors.js/
 require("colors");
-const log = require('debug');
+const log = require("debug")(
+  `${require("../../package.json").name}:config:scaffold`
+);
 
 // ----------------------------------------------------------------------------- LOGS
 
@@ -19,50 +21,27 @@ const showSuccess = pMessage => {
   console.log(`→ ${pMessage}\n`.cyan);
 };
 
-/**
- * Show set of instructions and examples
- * @param pInstructions instructions list
- * @param pExamples examples list, optional
- */
-const showInstructions = (pInstructions, pExamples) => {
-  console.log("Read carefully:".yellow.bold);
-
-  // Show instructions
-  pInstructions.map((instruction, i) => {
-    console.log(`${i + 1}. ${instruction}`.yellow);
-  });
-
-  // Show examples
-  pExamples &&
-    pExamples.map((example, i) => {
-      i === 0 && console.log("");
-      console.log(`${example}`.yellow);
-    });
-
-  console.log("");
-};
-
 // ----------------------------------------------------------------------------- COMMON TASKS
 
 /**
- * Ask for the component folder
+ * Ask for the module folder
  */
-const askWhichComponentFolder = () => {
+const _askFolder = (pFolder = config.moduleFolders) => {
   return Inquirer.prompt({
     type: "list",
     name: "subFolder",
-    message: "Which component folder?",
-    choices: config.moduleFolders
+    message: "Which folder?",
+    choices: pFolder
   });
 };
 
 /**
- * Ask for the component name
+ * Ask for the name
  */
-const askComponentName = () => {
+const _askName = (pType = "module") => {
   return Inquirer.prompt({
     type: "input",
-    message: "module name? (classCase)",
+    message: `${pType} name?`,
     name: "moduleName"
   });
 };
@@ -71,41 +50,102 @@ const askComponentName = () => {
  * Ask question and scaffold a component with a specific script template
  * @returns {Promise<any>}
  */
-const componentScaffolder = () =>
+const moduleScaffolder = () =>
   new Promise(async resolve => {
     // Static sub-folder for pages
 
     let subFolder = "";
     // Get sub-folder for components
-    await askWhichComponentFolder().then(answer => {
+    await _askFolder().then(answer => {
       subFolder = answer.subFolder;
     });
 
     // Get component name
     let moduleName = "";
-    await askComponentName().then(answer => {
+    await _askName().then(answer => {
       moduleName = answer.moduleName;
     });
 
-
     // component name "ComponentName" for subfolder and component
-    let lowerModuleName = changeCase.paramCase(moduleName);
+    let dashCaseModuleName = changeCase.paramCase(moduleName);
+    let camelCaseModuleName = changeCase.camelCase(moduleName);
 
     // Base path of the component (no extension here)
-    let componentPath = `${paths.root}/${subFolder}/${lowerModuleName}/`;
+    let modulePath = `${paths.root}/${subFolder}/${dashCaseModuleName}`;
 
-    // TODO copy folder
+    // Check if component already exists
+    if (Files.getFiles(`${modulePath}`).files.length > 0) {
+      console.log(`This module already exists. Aborting.`.red.bold);
+      return;
+    }
 
+    /**
+     * Create File with template
+     * @param filePath
+     * @param templatePath: path/to/template/
+     * @param fileName ex: index
+     * @param extension ex: ".ts"
+     * @param replaceExpressions Expressions list to replace
+     */
+    const createFile = ({
+      filePath = `${modulePath}/`,
+      templatePath = `${paths.skeletonsPath}`,
+      fileName = "",
+      extension = "",
+      replaceExpressions = {
+        camelCaseModuleName
+      }
+    }) => {
+      // get new file path
+      const newFilePath = `${filePath}${fileName}${extension}`;
+      // get template path
+      const templateFilePath = `${templatePath}${fileName}${extension}.template`;
+      // log them
+      log({ newFilePath, templateFilePath });
+      // create file with template
+      Files.new(newFilePath).write(
+        QuickTemplate(
+          Files.getFiles(templateFilePath).read(),
+          replaceExpressions
+        )
+      );
+    };
 
-    // // Check if component already exists
-    // if (Files.getFiles(`${componentPath}.js`).files.length > 0) {
-    //   console.log(`This component already exists. Aborting.`.red.bold);
-    //   return;
-    // }
-
-
-
-    console.log(componentPath);
+    // create index
+    createFile({
+      filePath: `${modulePath}/src/`,
+      templatePath: `${paths.skeletonsPath}/module/src/`,
+      fileName: "index",
+      extension: subFolder.includes("react") ? ".tsx" : ".ts"
+    });
+    // create gitignore
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      fileName: ".gitignore"
+    });
+    // create npmignore
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      fileName: ".npmignore"
+    });
+    // create package.json
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      fileName: "package",
+      extension: ".json"
+    });
+    // create readme
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      fileName: "README",
+      extension: ".md"
+    });
+    // create tsconfig
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      fileName: "tsconfig",
+      extension: ".json"
+    });
 
     // Done
     showSuccess("Module created!");
@@ -117,7 +157,7 @@ const componentScaffolder = () =>
 const scaffolders = [
   {
     name: "Module",
-    exec: () => componentScaffolder()
+    exec: () => moduleScaffolder()
   }
 ];
 

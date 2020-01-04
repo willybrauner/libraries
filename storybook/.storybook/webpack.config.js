@@ -1,9 +1,8 @@
-module.exports = ({config}) => {
-
+module.exports = ({ config }) => {
   /**
    * Resolve extensions
    */
-  config.resolve.extensions.push('.js', '.jsx', '.ts', '.tsx');
+  config.resolve.extensions.push(".js", ".jsx", ".ts", ".tsx");
 
   /**
    * Typescript
@@ -12,12 +11,12 @@ module.exports = ({config}) => {
     test: /\.stories\.tsx?$/,
     use: [
       {
-        loader: require.resolve('awesome-typescript-loader'),
+        loader: require.resolve("awesome-typescript-loader")
       },
       {
-        loader: require.resolve('react-docgen-typescript-loader'),
-      },
-    ],
+        loader: require.resolve("react-docgen-typescript-loader")
+      }
+    ]
   });
 
   /**
@@ -25,8 +24,8 @@ module.exports = ({config}) => {
    */
   config.module.rules.push({
     test: /\.stories\.(jsx|js)?$/,
-    loaders: [require.resolve('@storybook/source-loader')],
-    enforce: 'pre',
+    loaders: [require.resolve("@storybook/source-loader")],
+    enforce: "pre"
   });
 
   return config;

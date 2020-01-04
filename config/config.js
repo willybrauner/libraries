@@ -4,5 +4,5 @@ module.exports = {
   /**
    * Scaffold compatible folder
    */
-  moduleFolders: ["react-hooks", "react-components", "utils"]
+  moduleFolders: ["lib-react-hooks", "lib-react-components", "lib-utils"]
 };
