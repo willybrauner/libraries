@@ -12,7 +12,7 @@
   "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "@wbe/react-grid-layout-component": "^0.0.8",
+    "@wbe/react-grid-layout": "^0.0.8",
     "@wbe/use-bounding-client-rect": "^0.0.8",
     "@wbe/use-window-size": "^0.0.8"
   },
