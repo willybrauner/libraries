@@ -8,7 +8,7 @@ const storyName = "react-grid-layout-component";
 /**
  * Demo
  */
-export const App = () => {
+export const App = ({ gutterSize }) => {
   // show grid state
   const [showGrid, setShowGrid] = useState(true);
 
@@ -30,7 +30,9 @@ export const App = () => {
         </h1>
         <p>Just press "G Key" on your keyboard to toggle the grid. 💪</p>
       </div>
-      {showGrid && <GridLayout gutterSize={20} maxWidth={1024} />}
+      {showGrid && (
+        <GridLayout columnsNumber={6} gutterSize={gutterSize} maxWidth={1024} />
+      )}
     </div>
   );
 };
@@ -39,7 +41,7 @@ const css = {
   wrapper: {
     position: "absolute",
     top: "50%",
-    left: "calc(100vw/12*1)",
+    left: "calc(100vw/6*1)",
     transform: "translateY(-50%)"
   },
   title: {
@@ -57,6 +59,5 @@ storiesOf(storyName, module)
       codeTheme: "darcula"
     }
   })
-  .add("basic example", () => <App />, {
-    info: README
-  });
+  .add("basic example", () => <App gutterSize={20} />)
+  .add("column line", () => <App gutterSize={0} />);
