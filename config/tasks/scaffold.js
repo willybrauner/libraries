@@ -93,6 +93,7 @@ const moduleScaffolder = () =>
       fileName = "",
       extension = "",
       replaceExpressions = {
+        dashCaseModuleName,
         camelCaseModuleName
       }
     }) => {
