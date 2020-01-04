@@ -1,6 +1,6 @@
 {
   "name": "@wb/storybook",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "@wb/library storybook",
   "main": "index.js",
   "private": true,
@@ -12,10 +12,10 @@
   "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "@wb/react-grid-layout-component": "^0.0.5",
-    "@wb/use-bounding-client-rect": "^0.0.5",
-    "@wb/use-window-size": "^0.0.5",
-    "@wb/utils-array": "^0.0.5"
+    "@wb/react-grid-layout-component": "^0.0.6",
+    "@wb/use-bounding-client-rect": "^0.0.6",
+    "@wb/use-window-size": "^0.0.6",
+    "@wb/utils-array": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
