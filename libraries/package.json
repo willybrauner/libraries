@@ -1,0 +1,30 @@
+{
+  "name": "@wb/libraries",
+  "version": "1.0.0",
+  "description": "Standalone libraries package",
+  "main": "dist/index",
+  "types": "dist/index",
+  "private": true,
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "compile": "tsc -b tsconfig.json"
+  },
+  "dependencies": {
+    "@wb/react-grid-layout-component": "^1.0.0",
+    "@wb/use-bounding-client-rect": "^1.0.0",
+    "@wb/use-window-size": "^1.0.0",
+    "@wb/utils-array": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.3"
+  },
+  "keywords": [
+    "react",
+    "libraries",
+    "node",
+    "typescript"
+  ],
+  "author": "Willy Brauner",
+  "license": "MIT"
+}

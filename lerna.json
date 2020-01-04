@@ -3,7 +3,8 @@
     "lib-react-hooks/*",
     "lib-react-components/*",
     "lib-utils/*",
-    "storybook/"
+    "storybook/",
+    "libraries/"
   ],
   "version": "0.0.1"
 }
