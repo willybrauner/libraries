@@ -9,7 +9,7 @@ import {
 /**
  * Listener choice
  */
-export enum EListener {
+enum EListener {
   // listen rect only on init
   ON_INIT,
   //  listen rect on init + scroll
@@ -103,4 +103,4 @@ function useBoundingClientRect(
   return rect;
 }
 
-export { useBoundingClientRect as default };
+export { useBoundingClientRect as default, EListener };

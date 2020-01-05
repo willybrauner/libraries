@@ -2,9 +2,15 @@
   "name": "@wbe/%%dashCaseModuleName%%",
   "version": "1.0.0",
   "description": "",
+  "author": "Willy Brauner",
+  "license": "MIT",
   "main": "dist/index",
   "types": "dist/index",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
+  },
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
@@ -22,6 +28,7 @@
   "keywords": [
     "react"
   ],
-  "author": "Willy Brauner",
-  "license": "MIT"
+  "publishConfig": {
+    "access": "public"
+  }
 }

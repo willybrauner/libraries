@@ -1,8 +1,10 @@
 
 /**
  * %%camelCaseModuleName%%
- * @description
+ * @description:
  */
-export function %%camelCaseModuleName%%():void {
+function %%camelCaseModuleName%%():void {
 
 }
+
+export { %%camelCaseModuleName%% as default }

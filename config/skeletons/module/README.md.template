@@ -2,11 +2,21 @@
 
 ## About
 
+// TODO
+
 ## Installation
 
 ```shell script
 $ npm install @wbe/%%dashCaseModuleName%%
 ```
+
+## Usage
+
+```js
+import { %%camelCaseModuleName%% } from "@wbe/%%dashCaseModuleName%%;"
+```
+
+// TODO
 
 ## Credits
 
