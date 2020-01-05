@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "lerna clean",
     "scaffold": "node ./config/tasks/scaffold.js",
+    "publish:all": "lerna bootstrap && lerna run compile && lerna publish",
     "prettier": "prettier --write '*/**/**/**/*.{js,jsx,ts,tsx,css,json,md}'"
   },
   "devDependencies": {
