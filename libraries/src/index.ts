@@ -3,8 +3,7 @@
  * @description: export every packages
  */
 
-// prettier-ignore
-export { GridLayout } from "../../lib-react-components/react-grid-layout";
+export { GridLayout } from "@wbe/react-grid-layout";
 export {
   EListener,
   useBoundingClientRect
