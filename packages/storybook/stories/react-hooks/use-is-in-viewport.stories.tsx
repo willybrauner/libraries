@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-is-in-viewport/README.md";
 import useIsInViewport from "@wbe/use-is-in-viewport";
-import "../../style.css";
+import "../../global-style.css";
 
 // set story name
 const storyName = "use-is-in-viewport";

@@ -1,4 +1,5 @@
 import { addParameters, addDecorator, configure } from "@storybook/react";
+// @ts-ignore
 import theme from "./theme";
 // @ts-ignore
 import { addReadme } from "storybook-readme";
@@ -55,8 +56,8 @@ addParameters({
   }
 });
 
-// @ts-ignore
 configure(
+  // @ts-ignore
   require.context("../stories", true, /\.stories\.(tsx|jsx)?$/),
   module
 );

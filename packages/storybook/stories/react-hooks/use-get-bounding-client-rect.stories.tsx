@@ -5,7 +5,7 @@ import useBoundingClientRect, {
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-bounding-client-rect/README.md";
 const storyName = "use-bounding-client-rect";
-import "../../style.css";
+import "../../global-style.css";
 
 /**
  * Demo
