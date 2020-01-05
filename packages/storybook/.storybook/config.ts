@@ -1,5 +1,6 @@
 import { addParameters, addDecorator, configure } from "@storybook/react";
 import theme from "./theme";
+// @ts-ignore
 import { addReadme } from "storybook-readme";
 
 addDecorator(addReadme);
@@ -54,8 +55,8 @@ addParameters({
   }
 });
 
-// automatically import all files ending in *.stories.js
+// @ts-ignore
 configure(
-  require.context("../stories", true, /\.stories\.(tsx|ts|jsx|js)$/),
+  require.context("../stories", true, /\.stories\.(tsx|jsx)?$/),
   module
 );

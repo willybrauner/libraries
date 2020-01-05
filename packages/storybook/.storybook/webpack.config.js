@@ -1,29 +1,22 @@
 module.exports = ({ config }) => {
   /**
-   * Resolve extensions
-   */
-  config.resolve.extensions.push(".js", ".jsx", ".ts", ".tsx");
-
-  /**
    * Typescript
    */
+
   config.module.rules.push({
-    test: /\.stories\.tsx?$/,
-    use: [
-      {
-        loader: require.resolve("awesome-typescript-loader")
-      },
-      {
-        loader: require.resolve("react-docgen-typescript-loader")
-      }
-    ]
+    test: /\.(ts|tsx)$/,
+    loader: require.resolve("babel-loader"),
+    options: {
+      presets: [["react-app", { flow: false, typescript: true }]]
+    }
   });
+  config.resolve.extensions.push(".ts", ".tsx");
 
   /**
    * Sources
    */
   config.module.rules.push({
-    test: /\.stories\.(jsx|js)?$/,
+    test: /\.stories\.(tsx|jsx)?$/,
     loaders: [require.resolve("@storybook/source-loader")],
     enforce: "pre"
   });

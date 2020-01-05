@@ -11,10 +11,14 @@ const storyName = "use-is-in-viewport";
  * Demo
  */
 export const App = () => {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const isInViewport = useIsInViewport();
 
-  return <div ref={rootRef}>{storyName} TODO</div>;
+  return (
+    <div ref={rootRef} onClick={() => console.log("gekffk")}>
+      {storyName} TODO
+    </div>
+  );
 };
 
 /**

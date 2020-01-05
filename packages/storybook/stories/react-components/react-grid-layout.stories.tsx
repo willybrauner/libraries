@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { storiesOf } from "@storybook/react";
 import GridLayout from "@wbe/react-grid-layout";
 import README from "@wbe/react-grid-layout/README.md";
@@ -8,7 +8,7 @@ const storyName = "react-grid-layout";
 /**
  * Demo
  */
-export const App = ({ gutterSize }) => {
+export const App = ({ gutterSize }: { gutterSize: number }) => {
   // show grid state
   const [showGrid, setShowGrid] = useState(true);
 
@@ -37,7 +37,7 @@ export const App = ({ gutterSize }) => {
   );
 };
 
-const css = {
+const css: { [x: string]: CSSProperties } = {
   wrapper: {
     position: "absolute",
     top: "50%",
@@ -45,7 +45,7 @@ const css = {
     transform: "translateY(-50%)"
   },
   title: {
-    "font-size": "3rem"
+    fontSize: "3rem"
   }
 };
 
