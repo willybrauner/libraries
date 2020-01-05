@@ -44,7 +44,7 @@ const component: string = "GridLayout";
  * @param props
  * @constructor
  */
-export function GridLayout(props: IProps) {
+function GridLayout(props: IProps) {
   // --------------------------------------------------------------------------- WINDOW SIZE
 
   // Get root ref
@@ -176,3 +176,5 @@ const css: any = {
     height: "100vh"
   }
 };
+
+export { GridLayout as default };
