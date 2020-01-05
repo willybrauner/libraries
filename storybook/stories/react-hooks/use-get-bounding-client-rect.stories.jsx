@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
-import { storiesOf } from "@storybook/react";
-import {
-  EListener,
-  useBoundingClientRect
+import useBoundingClientRect, {
+  EListener
 } from "@wbe/use-bounding-client-rect";
+import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-bounding-client-rect/README.md";
 const storyName = "use-bounding-client-rect";
 import "../../style.css";

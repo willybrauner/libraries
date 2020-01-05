@@ -13,8 +13,8 @@ export interface IWindowSize {
  * return a object with innerDimension object
  * @constructor
  */
-export function useWindowSize(): IWindowSize {
-  // ------------------------------------------------------------------------- STATES
+function useWindowSize(): IWindowSize {
+  // --------------------------------------------------------------------------- STATES
 
   // Set a new state
   const [windowSize, setWindowSize] = useState<IWindowSize>({
@@ -22,10 +22,10 @@ export function useWindowSize(): IWindowSize {
     height: window?.innerHeight
   });
 
-  // ------------------------------------------------------------------------- EFFECTS
+  // --------------------------------------------------------------------------- EFFECTS
 
   useEffect(() => {
-    // action au resize
+    // resize handler
     const resizeHandler = () => {
       setWindowSize({
         width: window?.innerWidth,
@@ -34,11 +34,11 @@ export function useWindowSize(): IWindowSize {
     };
     // start check viewport dimensions
     resizeHandler();
-    // écouter le rezise
+    // listen rezise
     window.addEventListener("resize", resizeHandler);
 
     return () => {
-      // supprimer l'écoute du resize
+      // stop to listen
       window.removeEventListener("resize", resizeHandler);
     };
   }, []);
@@ -46,3 +46,5 @@ export function useWindowSize(): IWindowSize {
   // retourner l'objet
   return windowSize;
 }
+
+export { useWindowSize as default };

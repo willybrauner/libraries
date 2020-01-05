@@ -26,7 +26,7 @@ export enum EListener {
  * @param {EListener} pListener
  * @return ClientRect
  */
-export function useBoundingClientRect(
+function useBoundingClientRect(
   pRef: MutableRefObject<HTMLElement>,
   pListener: EListener = EListener.ON_INIT
 ): ClientRect | DOMRect | null {
@@ -102,3 +102,5 @@ export function useBoundingClientRect(
   // return offset
   return rect;
 }
+
+export { useBoundingClientRect as default };
