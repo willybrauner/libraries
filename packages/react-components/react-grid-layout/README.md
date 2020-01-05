@@ -2,7 +2,7 @@
 
 This component allow to display a simple fixed grid layout on front of your react app.
 
-![screen](./screen.png)
+![screen](screen.png)
 
 ## Installation
 

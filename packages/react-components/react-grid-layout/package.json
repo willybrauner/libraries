@@ -1,12 +1,14 @@
 {
-  "name": "@wbe/libraries",
+  "name": "@wbe/react-grid-layout",
   "version": "0.0.20",
-  "description": "Standalone libraries package",
+  "description": "",
   "main": "dist/index",
   "types": "dist/index",
+  "private": false,
   "scripts": {
+    "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
-    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
   "repository": {
@@ -14,18 +16,19 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/react-grid-layout": "^0.0.20",
     "@wbe/use-bounding-client-rect": "^0.0.20",
-    "@wbe/use-window-size": "^0.0.20"
+    "@wbe/use-window-size": "^0.0.20",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "typescript": "^3.7.3"
   },
   "keywords": [
     "react",
-    "libraries",
-    "node",
-    "typescript"
+    "component"
   ],
   "publishConfig": {
     "access": "public"

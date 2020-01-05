@@ -1,13 +1,12 @@
 {
-  "name": "@wbe/use-window-size",
+  "name": "@wbe/libraries",
   "version": "0.0.20",
-  "description": "",
+  "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
-  "private": false,
   "scripts": {
     "build": "npm run clean && npm run compile",
-    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
   "repository": {
@@ -15,17 +14,18 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "@wbe/react-grid-layout": "^0.0.20",
+    "@wbe/use-bounding-client-rect": "^0.0.20",
+    "@wbe/use-window-size": "^0.0.20"
   },
   "devDependencies": {
-    "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
     "typescript": "^3.7.3"
   },
   "keywords": [
     "react",
-    "hook"
+    "libraries",
+    "node",
+    "typescript"
   ],
   "publishConfig": {
     "access": "public"

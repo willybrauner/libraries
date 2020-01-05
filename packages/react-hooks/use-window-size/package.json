@@ -1,14 +1,13 @@
 {
-  "name": "@wbe/react-grid-layout",
+  "name": "@wbe/use-window-size",
   "version": "0.0.20",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
   "private": false,
   "scripts": {
-    "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
-    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "tsc -b tsconfig.json"
   },
   "repository": {
@@ -16,8 +15,6 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^0.0.20",
-    "@wbe/use-window-size": "^0.0.20",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -28,7 +25,7 @@
   },
   "keywords": [
     "react",
-    "component"
+    "hook"
   ],
   "publishConfig": {
     "access": "public"

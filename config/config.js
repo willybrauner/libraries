@@ -2,7 +2,7 @@ const paths = require("./paths");
 
 module.exports = {
   /**
-   * Scaffold compatible folder
+   * Scaffold compatible module folders
    */
-  moduleFolders: ["lib-react-hooks", "lib-react-components", "lib-utils"]
+  moduleFolders: ["react-hooks", "react-components", "utils", "style"]
 };

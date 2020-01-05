@@ -71,7 +71,7 @@ const moduleScaffolder = () =>
     let camelCaseModuleName = changeCase.camelCase(moduleName);
 
     // Base path of the component (no extension here)
-    let modulePath = `${paths.root}/${subFolder}/${dashCaseModuleName}`;
+    let modulePath = `${paths.packagesPath}/${subFolder}/${dashCaseModuleName}`;
 
     // Check if component already exists
     if (Files.getFiles(`${modulePath}`).files.length > 0) {
