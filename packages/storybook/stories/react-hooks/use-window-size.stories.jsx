@@ -2,8 +2,10 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-window-size/README.md";
 import useWindowSize from "@wbe/use-window-size";
-const storyName = "use-window-size";
 import "../../style.css";
+
+// set story name
+const storyName = "use-window-size";
 
 /**
  * Demo

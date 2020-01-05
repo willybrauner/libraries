@@ -2,7 +2,7 @@
 
 ## About
 
-// TODO
+Check if a specific ref element is visible in viewport.
 
 ## Installation
 
