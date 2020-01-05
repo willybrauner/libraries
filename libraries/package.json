@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
