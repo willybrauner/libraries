@@ -1,11 +1,8 @@
 /**
- * libraries
- * @description: export every packages
+ * libraries standalone
+ * @description: export every libs
  */
-
-export { default as GridLayout } from "@wbe/react-grid-layout";
-export {
-  EListener,
-  useBoundingClientRect
-} from "@wbe/use-bounding-client-rect";
-export { useWindowSize, IWindowSize } from "@wbe/use-window-size";
+// prettier-ignore
+export { default as GridLayout} from "@wbe/react-grid-layout";
+export { default as useBoundingClientRect } from "@wbe/use-bounding-client-rect";
+export { default as useWindowSize } from "@wbe/use-window-size";
