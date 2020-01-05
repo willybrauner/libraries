@@ -3,7 +3,7 @@
  * @description: export every packages
  */
 
-export { GridLayout } from "@wbe/react-grid-layout";
+export { default as GridLayout } from "@wbe/react-grid-layout";
 export {
   EListener,
   useBoundingClientRect
