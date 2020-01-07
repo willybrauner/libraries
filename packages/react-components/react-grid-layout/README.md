@@ -1,14 +1,12 @@
 # @wbe/react-grid-layout
 
+This component allow to display a simple fixed grid layout on front of your react app.
+
 ![](https://img.shields.io/npm/v/@wbe/react-grid-layout/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/react-grid-layout.svg)
 ![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%2Freact-components%2Freact-grid-layout)
 ![](https://img.shields.io/npm/dt/@wbe/react-grid-layout.svg)
 ![](https://img.shields.io/npm/l/@wbe/react-grid-layout.svg)
-
-## About
-
-This component allow to display a simple fixed grid layout on front of your react app.
 
 ![screen](https://i.gyazo.com/c1c179ee4453e2a7d1d62f2a17837f70.png)
 
@@ -22,7 +20,7 @@ $ npm install -S @wbe/react-grid-layout
 
 Import `<GridLayout />` component anywhere.
 
-```typescript jsx
+```jsx
 // ...
 import GridLayout from "@wbe/react-grid-layout";
 

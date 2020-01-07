@@ -1,14 +1,12 @@
 # @wbe/%%dashCaseModuleName%%
 
+%%moduleDescription%%
+
 ![](https://img.shields.io/npm/v/@wbe/%%dashCaseModuleName%%/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/%%dashCaseModuleName%%.svg)
 ![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%2F%%subFolder%%%2F%%dashCaseModuleName%%)
 ![](https://img.shields.io/npm/dt/@wbe/%%dashCaseModuleName%%.svg)
 ![](https://img.shields.io/npm/l/@wbe/%%dashCaseModuleName%%.svg)
-
-## About
-
-%%moduleDescription%%
 
 ## Installation
 
@@ -22,9 +20,5 @@ $ npm install @wbe/%%dashCaseModuleName%%
 import { %%camelCaseModuleName%% } from "@wbe/%%dashCaseModuleName%%;"
 ```
 
-// TODO
 
 
-## Props
-
-##
