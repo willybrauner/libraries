@@ -1,14 +1,12 @@
 # @wbe/use-bounding-client-rect
 
+React hook allow to get dynamically boundClientRect of any React Ref.
+
 ![](https://img.shields.io/npm/v/@wbe/use-bounding-client-rect/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/use-bounding-client-rect.svg)
 ![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%2Freact-hooks%2Fuse-bounding-client-rect)
 ![](https://img.shields.io/npm/dt/@wbe/use-bounding-client-rect.svg)
 ![](https://img.shields.io/npm/l/@wbe/use-bounding-client-rect.svg)
-
-## About
-
-React hook allow to get dynamically boundClientRect of any React Ref.
 
 ## Installation
 
