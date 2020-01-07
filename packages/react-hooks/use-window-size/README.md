@@ -18,7 +18,7 @@ $ npm install -S @wbe/use-window-size
 
 ## How to use
 
-```jsx
+```typescript jsx
 // ...
 import useWindowSize from "@wbe/use-window-size";
 

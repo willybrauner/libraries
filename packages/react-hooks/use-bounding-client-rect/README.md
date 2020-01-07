@@ -1,19 +1,71 @@
 # use-bounding-client-rect
 
+![](https://img.shields.io/npm/v/@wbe/use-bounding-client-rect/latest.svg)
+![](https://img.shields.io/bundlephobia/minzip/@wbe/use-bounding-client-rect.svg)
+![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%2Freact-hooks%2Fuse-bounding-client-rect)
+![](https://img.shields.io/npm/dt/@wbe/use-bounding-client-rect.svg)
+![](https://img.shields.io/npm/l/@wbe/use-bounding-client-rect.svg)
+
 ## About
 
-React hook allowing to get dynamically boundClientRect of any react Ref.
+React hook allow to get dynamically boundClientRect of any React Ref.
 
 ## Installation
 
 ```shell script
-$ npm install @wbe/use-bounding-client-rect
+$ npm install -S @wbe/use-bounding-client-rect
 ```
 
-## Credit
+## How to use
 
-© Willy Brauner
+Basic usage:
 
-## Licence
+```typescript jsx
+// ...
+import { useRef } from "react";
+import useBoundingClientRect from "@wbe/use-window-size";
 
-MIT
+const App = () => {
+  // get ref
+  const rootRef = useRef();
+  // get window size
+  const refRect = useBoundingClientRect(rootRef);
+
+  return (
+    <div ref={rootRef}>
+      {refRect.x}, {refRect.y} ...
+    </div>
+  );
+};
+```
+
+## Parameters
+
+| params    | type                          | description      | default value     |
+| --------- | ----------------------------- | ---------------- | ----------------- |
+| pRef      | MutableRefObject<HTMLElement> | element ref      | /                 |
+| pListener | EListener                     | kind of listener | EListener.ON_INIT |
+
+pListener options are:
+
+- `ON_INIT`: listen rect only on init
+- `ON_SCROLL`: listen rect on init + scroll
+- `ON_RESIZE`: listen rect on init + resize
+- `ON_SCROLL_AND_RESIZE`: listen rect on init + scroll + resize
+
+## Returned
+
+The hook return an object (ClientRect interface):
+
+```
+{
+  "x": number,
+  "y": number,
+  "width": number,
+  "height": number,
+  "top": number,
+  "right": number,
+  "bottom": number,
+  "left": number
+}
+```
