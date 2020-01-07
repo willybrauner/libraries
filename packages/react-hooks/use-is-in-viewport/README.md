@@ -1,4 +1,4 @@
-# use-is-in-viewport
+# @wbe/use-is-in-viewport
 
 ## About
 

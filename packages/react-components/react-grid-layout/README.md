@@ -1,4 +1,4 @@
-# react-grid-layout
+# @wbe/react-grid-layout
 
 ![](https://img.shields.io/npm/v/@wbe/react-grid-layout/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/react-grid-layout.svg)

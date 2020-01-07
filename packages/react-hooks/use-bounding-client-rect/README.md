@@ -1,4 +1,4 @@
-# use-bounding-client-rect
+# @wbe/use-bounding-client-rect
 
 ![](https://img.shields.io/npm/v/@wbe/use-bounding-client-rect/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/use-bounding-client-rect.svg)

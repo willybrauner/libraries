@@ -1,4 +1,4 @@
-# use-window-size
+# @wbe/use-window-size
 
 ![](https://img.shields.io/npm/v/@wbe/use-window-size/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/use-window-size.svg)
