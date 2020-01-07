@@ -1,19 +1,29 @@
 # @wbe/libraries
 
+![](https://img.shields.io/npm/v/@wbe/libraries/latest.svg)
+![](https://img.shields.io/bundlephobia/minzip/@wbe/libraries.svg)
+![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%libraries)
+![](https://img.shields.io/npm/dt/@wbe/libraries.svg)
+![](https://img.shields.io/npm/l/@wbe/libraries.svg)
+
 ## About
 
-Standalone libraries package.
+This package is standalone repos who embarks every modules of [libraries](https://github.com/willybrauner/libraries).
 
 ## Installation
 
 ```shell script
-$ npm install @wbe/libraries
+$ npm install -S @wbe/libraries
 ```
 
-## Credits
+## How to use
 
-© Willy Brauner
+Each modules can be imported separatly:
 
-## Licence
+```jsx
+import { GridLayout } from "@wbe/libraries";
+```
 
-MIT
+## Availables modules
+
+Check [storybook](https://github.com/willybrauner/libraries/packages/storybook/).
