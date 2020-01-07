@@ -1,10 +1,10 @@
 {
   "packages": [
     "packages/libraries/",
-    "packages/storybook/",
     "packages/react-components/*",
     "packages/react-hooks/*",
+    "packages/storybook/",
     "packages/utils/*"
   ],
-  "version": "0.0.21"
+  "version": "0.0.22"
 }
