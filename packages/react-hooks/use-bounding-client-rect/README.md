@@ -20,9 +20,8 @@ $ npm install -S @wbe/use-bounding-client-rect
 
 Basic usage:
 
-```typescript jsx
+```jsx
 // ...
-import { useRef } from "react";
 import useBoundingClientRect from "@wbe/use-window-size";
 
 const App = () => {

@@ -1,27 +1,27 @@
 import { MutableRefObject, useCallback, useEffect, useState } from "react";
-import useWindowSize from "@wbe/use-window-size";
-import {
-  default as useBoundingClientRect,
+import useWindowSize, { IWindowSize } from "@wbe/use-window-size";
+import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
 const log = require("debug")("libraries:react-hooks:useIsInViewport");
 
 /**
  * Check if a component is visible in viewport
- * @param {MutableRefObject<HTMLElement>} pRef: component to check
- * @param {number} pOffset: Define an offset before the component being in window
- * @param {boolean} pToogleVisibility: Repeat the check visibility even if element if already pass to true
+ * @param {MutableRefObject<HTMLElement>} pRef: element ref to check
+ * @param {boolean} pToggleVisibility: Repeat the check visibility even if ref element visibility is already passed to true
+ * @param {number} pOffset: Define a positive or negative offset to the ref element
+ * @return {boolean}
  */
 function useIsInViewport(
   pRef: MutableRefObject<HTMLElement>,
-  pToogleVisibility: boolean = false,
+  pToggleVisibility: boolean = false,
   pOffset: number = 0
 ): boolean {
-  // get offset top du composant
+  // get component dimensions
   const refRect = useBoundingClientRect(pRef, EListener.ON_SCROLL_AND_RESIZE);
   // get window size
   const windowSize = useWindowSize();
-  // get visible state component in window
+  // create a visible state
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   /**
@@ -38,42 +38,43 @@ function useIsInViewport(
     // check
     if (!pRefRect || !pWindowSize) return;
 
-    // TRAITER LE TOP IMAGE
+    // EL TOP
     const topIsVisible =
-      // si le top image est visible au dessus du bottom viewport
+      // if el top is visible above the viewport bottom
       pRefRect.top < pWindowSize.height - pOffset &&
-      // et que ce meme top est visible en dessous du top viewport
+      // and his top is visible below viewport top
       pRefRect.top > 0;
 
-    // TRAITER LE BOTTOM IMAGE
+    //  EL BOTTOM
     const bottomIsVisible =
-      // si le bottom image est visible au dessus du bottom viewport
+      // if el bottom is visible above the viewport bottom
       pRefRect.bottom < pWindowSize.height &&
-      // et que le bottom image est visible en dessous du top
+      // and el bottom is visible below viewport top
       pRefRect.bottom - pOffset > 0;
 
-    // TRAITER LE CAS OU L'IMAGE EST PLUS GRAND OU EGALE AU VIEWPORT
+    // IN CASE ELEMENT IS BIGGER OR EGAL TO VIEWPORT
     const isCropOrEgalOnTopAndBottom =
-      // si le top est au dessus du viewport
+      // if el top is above the viewport
       pRefRect.top <= 0 &&
-      // et si le bottom est en meme temps en dessous
+      // and if the bottom of the el is at the same time below the viewport
       pRefRect.bottom >= pWindowSize.height;
 
-    log({ topIsVisible, bottomIsVisible, isCropOrEgalOnTopAndBottom });
+    // log each conditions
+    log("conditions:", {
+      topIsVisible,
+      bottomIsVisible,
+      isCropOrEgalOnTopAndBottom
+    });
 
-    // return boolean result, is part of element visible on window ?
+    // return boolean result
     return topIsVisible || bottomIsVisible || isCropOrEgalOnTopAndBottom;
   };
 
   /**
-   *  Update state depend of offset element
+   *  Update state depend of element size & position
    */
   const updateState = useCallback(
-    (
-      pRefRect: ClientRect,
-      pWindowSize: { width: number; height: number },
-      pOffset: number
-    ): void => {
+    (pRefRect: ClientRect, pWindowSize: IWindowSize, pOffset: number): void => {
       // if is in viewport
       if (isInViewPort(pRefRect, pWindowSize, pOffset)) {
         // the element is visible
@@ -81,7 +82,7 @@ function useIsInViewport(
         // if element is not in viewport
       } else {
         // if element is already visible and toggle option is not activated, exit
-        if (isVisible && !pToogleVisibility) return;
+        if (isVisible && !pToggleVisibility) return;
         // the element isn't visible in the window
         setIsVisible(false);
       }
