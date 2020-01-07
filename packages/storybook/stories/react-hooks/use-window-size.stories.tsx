@@ -12,14 +12,14 @@ const storyName = "use-window-size";
  */
 export const App = () => {
   // get window size
-  const windowSize = useWindowSize();
+  const { width, height } = useWindowSize();
 
   return (
     <div>
       <p> Resize your browser and check width & height change.</p>
       <ul>
-        <li>window width: {windowSize.width}</li>
-        <li>window height: {windowSize.height}</li>
+        <li>window width: {width}</li>
+        <li>window height: {height}</li>
       </ul>
     </div>
   );

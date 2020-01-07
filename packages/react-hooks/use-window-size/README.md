@@ -1,19 +1,37 @@
 # use-window-size
 
+![](https://img.shields.io/npm/v/@wbe/use-window-size/latest.svg)
+![](https://img.shields.io/bundlephobia/minzip/@wbe/use-window-size.svg)
+![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%2Freact-hooks%2Fuse-window-size)
+![](https://img.shields.io/npm/dt/@wbe/use-window-size.svg)
+![](https://img.shields.io/npm/l/@wbe/use-window-size.svg)
+
 ## About
 
-React hook allowing to get dynamically window width and height of any react Ref.
+React hook allow to get dynamically window dimension.
 
 ## Installation
 
 ```shell script
-$ npm install @wbe/use-window-size
+$ npm install -S @wbe/use-window-size
 ```
 
-## Credits
+## How to use
 
-© Willy Brauner
+```jsx
+// ...
+import useWindowSize from "@wbe/use-window-size";
 
-## Licence
+const App = () => {
+  // get window size
+  const { width, height } = useWindowSize();
 
-MIT
+  // Resize your browser and check width & height change.
+  return (
+    <ul>
+      <li>window width: {width}</li>
+      <li>window height: {height}</li>
+    </ul>
+  );
+};
+```
