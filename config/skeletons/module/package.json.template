@@ -1,7 +1,7 @@
 {
   "name": "@wbe/%%dashCaseModuleName%%",
   "version": "0.0.1",
-  "description": "",
+  "description": "%%moduleDescription%%",
   "author": "Willy Brauner",
   "license": "MIT",
   "main": "dist/index",

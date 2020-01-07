@@ -46,6 +46,14 @@ const _askName = (pType = "module") => {
   });
 };
 
+const _askDescription = (pType = "module") => {
+  return Inquirer.prompt({
+    type: "input",
+    message: `${pType} description?`,
+    name: "moduleDescription"
+  });
+};
+
 /**
  * Ask question and scaffold a component with a specific script template
  * @returns {Promise<any>}
@@ -64,6 +72,12 @@ const moduleScaffolder = () =>
     let moduleName = "";
     await _askName().then(answer => {
       moduleName = answer.moduleName;
+    });
+
+    // Get component name
+    let moduleDescription = "";
+    await _askDescription().then(answer => {
+      moduleDescription = answer.moduleDescription;
     });
 
     // component name "ComponentName" for subfolder and component
@@ -94,7 +108,9 @@ const moduleScaffolder = () =>
       extension = "",
       replaceExpressions = {
         dashCaseModuleName,
-        camelCaseModuleName
+        camelCaseModuleName,
+        subFolder,
+        moduleDescription
       }
     }) => {
       // get new file path
