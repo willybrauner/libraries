@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@wbe/react-grid-layout": "^0.0.23",
+    "@wbe/react-responsive-image": "^0.0.1",
     "@wbe/use-bounding-client-rect": "^0.0.23",
     "@wbe/use-is-in-viewport": "^0.0.23",
     "@wbe/use-window-size": "^0.0.23"

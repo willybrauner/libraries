@@ -17,12 +17,15 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
+    "@wbe/use-bounding-client-rect": "^0.0.23",
+    "@wbe/use-is-in-viewport": "^0.0.23",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "debug": "^4.1.1",
     "typescript": "^3.7.3"
   },
   "keywords": [
