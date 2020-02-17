@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import README from "@wbe/react-use-responsive-url/README.md";
+import README from "@wbe/use-responsive-url/README.md";
 import useResponsiveUrl from "@wbe/use-responsive-url/src";
 import "../../global-style.css";
 

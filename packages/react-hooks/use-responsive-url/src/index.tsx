@@ -10,8 +10,6 @@ function useResponsiveUrl(
   pImages: IImage[],
   pForceWidth?: number | EImageSize
 ) {
-  console.log("hello responsive url");
-
   // get current window size
   const windowSize = useWindowSize();
 
