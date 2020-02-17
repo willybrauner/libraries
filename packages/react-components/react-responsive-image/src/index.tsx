@@ -39,8 +39,8 @@ interface IProps {
   // load image at Xpx of top/bottom window
   // ex: -40 allow to preload image when it's top or bottom is to 40px before or after border window
   lazyOffset?: number;
-  // force no responsive image to specific image size
-  forceImageSize?: EImageSize;
+  // force image version with specific width
+  forceImageWidth?: EImageSize;
   // force a custom vertical ratio : vertical ratio = height / width
   forceVerticalRatio?: number;
   // show placeholder
@@ -85,14 +85,6 @@ export interface IImage {
   ratio?: number;
 }
 
-// TODO VIRER
-export interface IGetResponsiveImage {
-  // array of image objects
-  pImages: IImage[];
-  // container width
-  pWidth: number | EImageSize;
-}
-
 /**
  * Responsive break sizes
  * FIXME these values need to be inject via Root app Config
@@ -115,8 +107,6 @@ const transparentImageUrl =
  *  - lazyloading with preloading before showing
  *  - set aspect ratio background color behind image during lazyloading
  */
-
-// Image function
 function ResponsiveImage(props: IProps) {
   // get root ref
   const rootRef = useRef(null);
@@ -131,12 +121,11 @@ function ResponsiveImage(props: IProps) {
   /**
    * Select responsive image
    */
-
   const responsiveImage = useResponsiveImageData(
     props.data,
-    !!props.forceImageSize
+    !!props.forceImageWidth
       ? // select fix image
-        props.forceImageSize
+        props.forceImageWidth
       : // else, select component width
         rootRect && rootRect.width
   );
@@ -463,8 +452,14 @@ function ResponsiveImage(props: IProps) {
   }
 }
 
+// ----------------------------------------------------------------------------- HOOK
+
 /**
  * useResponsiveImageData
+ * Get responsive image depend of window Width / parent width
+ * Depend of Witch pWidth is passed to the function
+ * @param pImages
+ * @param pForceWidth
  */
 function useResponsiveImageData(
   pImages: IImage[],
@@ -473,12 +468,7 @@ function useResponsiveImageData(
   // get current window size
   const windowSize = useWindowSize();
 
-  /**
-   * Get responsive image depend of window Width / parent width
-   * Depend of Witch pWidth is passed to the function
-   * @param pImages
-   * @param pWidth
-   */
+  //
   const getResponsiveImage = (
     pImages: IImage[],
     pWidth: number | EImageSize
@@ -525,14 +515,17 @@ function useResponsiveImageData(
   );
 
   useLayoutEffect(() => {
+    // select a width value as reference
+    // pForceWidth is a static value
+    // windowSize.width is a dynamic value
     const selectedWidth = pForceWidth || windowSize?.width;
 
-    debug("selected width", selectedWidth);
-
+    // set this value in local state
     setResponsiveImage(getResponsiveImage(pImages, selectedWidth));
   }, [pForceWidth, windowSize]);
 
   return responsiveImage;
 }
 
+// final export
 export { ResponsiveImage as default, useResponsiveImageData };
