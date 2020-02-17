@@ -19,7 +19,7 @@
     "@wbe/use-window-size": "^0.0.23"
   },
   "devDependencies": {
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.5"
   },
   "keywords": [
     "react",

@@ -14,12 +14,12 @@
     "change-case": "^4.1.1",
     "colors": "^1.4.0",
     "debug": "^4.1.1",
-    "husky": "^3.1.0",
-    "inquirer": "^7.0.1",
+    "husky": "^4.2.3",
+    "inquirer": "^7.0.4",
     "lerna": "^3.20.2",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.5"
   },
   "husky": {
     "hooks": {
