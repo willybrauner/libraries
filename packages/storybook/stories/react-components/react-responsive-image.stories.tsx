@@ -3,57 +3,39 @@ import { storiesOf } from "@storybook/react";
 import README from "@wbe/react-responsive-image/README.md";
 import ResponsiveImage, { EImageType } from "@wbe/react-responsive-image/src";
 import "../../global-style.css";
+import FakeDataUtils from "@wbe/fake-data-utils/src";
 
 // set story name
 const storyName = "react-responsive-image";
 
+const thumbs = FakeDataUtils.instance.getResponsiveImageData(16 / 9);
+
 /**
  * Demo
  */
-
-const imageData = [
-  {
-    width: 200,
-    height: 150,
-    url: "https://picsum.photos/200/150"
-  },
-  {
-    width: 400,
-    height: 600,
-    url: "https://picsum.photos/400/600"
-  },
-  {
-    width: 600,
-    height: 400,
-    url: "https://picsum.photos/600/400"
-  },
-  {
-    width: 800,
-    height: 600,
-    url: "https://picsum.photos/800/600"
-  },
-  {
-    width: 1000,
-    height: 800,
-    url: "https://picsum.photos/1000/800"
-  },
-  {
-    width: 1400,
-    height: 1200,
-    url: "https://picsum.photos/1400/1200"
-  }
-];
-
-export const App = () => {
+export const ImageTag = () => {
   return (
-    <div className="App">
+    <div className="ImageTag">
+      <h2>{"<img> tag + responsive url"}</h2>
       <ResponsiveImage
-        classNames={[`App_responsiveImage`]}
-        data={imageData}
+        data={thumbs}
         type={EImageType.IMAGE_TAG}
-        imageStyle={{ width: "50%" }}
+        imageStyle={{ width: "100%" }}
+      />
+    </div>
+  );
+};
+
+export const ImageTagPlaceholder = () => {
+  return (
+    <div className="ImageTag">
+      <h2>{"<img> tag + responsive url + placeholder"}</h2>
+      <ResponsiveImage
+        data={thumbs}
+        type={EImageType.IMAGE_TAG}
+        imageStyle={{ width: "100%" }}
         placeholder={true}
-        forceVerticalRatio={50}
+        placeholderColor={"pink"}
       />
     </div>
   );
@@ -69,4 +51,7 @@ storiesOf(`react-components/${storyName}`, module)
       codeTheme: "darcula"
     }
   })
-  .add("basic example", () => <App />);
+  .add("<img> tag", () => <ImageTag />)
+  .add("<img> tag placeholder", () => <ImageTagPlaceholder />);
+
+// TODO add background Image test

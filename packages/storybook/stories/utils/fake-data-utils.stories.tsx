@@ -13,7 +13,7 @@ const storyName = "fake-data-utils";
 export const FakeDataImage = () => {
   return (
     <div>
-      <h1>Fake image array</h1>
+      <h2>Fake image array</h2>
       <p>Ratio 16/9</p>
       <pre>
         {JSON.stringify(
@@ -29,7 +29,7 @@ export const FakeDataImage = () => {
 export const FakeText = () => {
   return (
     <div>
-      <h1>Fake text</h1>
+      <h2>Fake text</h2>
       <pre>TODO</pre>
     </div>
   );
@@ -38,7 +38,7 @@ export const FakeText = () => {
 export const FakeVideo = () => {
   return (
     <div>
-      <h1>Fake video</h1>
+      <h2>Fake video</h2>
       <pre>TODO</pre>
     </div>
   );
