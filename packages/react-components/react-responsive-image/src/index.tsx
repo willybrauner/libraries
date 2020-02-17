@@ -9,7 +9,6 @@ import React, {
   useRef,
   useState
 } from "react";
-import { getResponsiveImage } from "./getResponsiveImage";
 import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
@@ -40,22 +39,28 @@ interface IProps {
   // load image at Xpx of top/bottom window
   // ex: -40 allow to preload image when it's top or bottom is to 40px before or after border window
   lazyOffset?: number;
-  // fix no responsive image to specific image size
-  fixImageSize?: EImageSize;
-  // fix a custom vertical ratio : vertical ratio = height / width
-  fixVerticalRatio?: number;
+  // force no responsive image to specific image size
+  forceImageSize?: EImageSize;
+  // force a custom vertical ratio : vertical ratio = height / width
+  forceVerticalRatio?: number;
+  // show placeholder
+  placeholder?: boolean;
   // set specific background color
-  backgroundColor?: string;
+  placeholderColor?: string;
   // change css backgroundPosition
   backgroundPosition?: number[];
+  // style first child style
+  containerStyle?: CSSProperties;
   // style child element
-  childStyle?: CSSProperties;
+  imageStyle?: CSSProperties;
 }
 
 /**
  * Default props
  */
 ResponsiveImage.defaultProps = {
+  placeholder: false,
+  placeholderColor: "transparent",
   lazy: false,
   lazyOffset: 0
 };
@@ -78,6 +83,14 @@ export interface IImage {
   width?: number;
   height?: number;
   ratio?: number;
+}
+
+// TODO VIRER
+export interface IGetResponsiveImage {
+  // array of image objects
+  pImages: IImage[];
+  // container width
+  pWidth: number | EImageSize;
 }
 
 /**
@@ -115,7 +128,56 @@ function ResponsiveImage(props: IProps) {
 
   // --------------------------------------------------------------------------- SELECT IMAGE
 
-  // wrap responsive image state in memoise state
+  /**
+   * Get responsive image depend of window Width / parent width
+   * Depend of Witch pWidth is passed to the function
+   * @param pImagesList
+   * @param pWidth
+   */
+  const getResponsiveImage = ({
+    pImages,
+    pWidth
+  }: IGetResponsiveImage): IImage => {
+    // si pas d'image, ne pas continuer
+    if (pImages == null) return;
+
+    // retourner les largeurs d'image dispo en fonction de la taille du window
+    const imagesWidth =
+      // sortir la largeur de chaque image
+      pImages
+        .map(el => el.width)
+        // les trier de la plus petite à la plus grande
+        .sort((a, b) => a - b)
+        // retourner uniquement les images qui ont une largeur plus grandre
+        // que la largeur fr pWidth
+        .filter(el => el > pWidth);
+
+    // Stoquer la plus grande image du tableau qui servira de fallback
+    const biggestImage = pImages.reduce(
+      (a, b) => ((a.width || 0) > b.width ? a : b),
+      pImages[0]
+    );
+
+    // retourner un objet image :
+    const filtered = pImages
+      .map(el => {
+        // si la taille est egale à largeur d'image la plus petite du tableau,
+        // retouner l'élément
+        if (el.width === imagesWidth[0]) return el;
+        // si la plus grande image est quand meme plus petite que
+        // la taille du tableau, retourner cette plus grande image
+        if (biggestImage.width <= pWidth) return biggestImage;
+      })
+      // filter le tableau et selectionner le premier objet du talbeau
+      .filter(val => val);
+
+    // retourner le résultat
+    return filtered.length > 0 ? filtered[0] : null;
+  };
+
+  /**
+   * Select responsive image
+   */
   const responsiveImage = useMemo((): IImage => {
     // exit if no data is set by props
     if (props.data == null) return;
@@ -123,9 +185,9 @@ function ResponsiveImage(props: IProps) {
       // image data
       pImages: props.data,
       // size of container depend of fix image size or component width
-      pWidth: !!props.fixImageSize
+      pWidth: !!props.forceImageSize
         ? // select fix image
-          props.fixImageSize
+          props.forceImageSize
         : // else, select component width
           rootRect && rootRect.width
     });
@@ -224,8 +286,12 @@ function ResponsiveImage(props: IProps) {
    * @param pResponsiveImage
    * @param pCustomRatio
    */
+
   const verticalRatio = useCallback(
-    (pResponsiveImage: IImage, pCustomRatio: number): number => {
+    (
+      pResponsiveImage: IImage = responsiveImage,
+      pCustomRatio: number = props.forceVerticalRatio
+    ): number => {
       // check
       if (!pResponsiveImage) return;
 
@@ -238,15 +304,15 @@ function ResponsiveImage(props: IProps) {
         return pResponsiveImage.ratio;
       }
       // else if image as dimensions, calc ratio
-      else if (!!responsiveImage.width && !!responsiveImage.height) {
-        return responsiveImage.height / responsiveImage.width;
+      else if (!!pResponsiveImage.width && !!pResponsiveImage.height) {
+        return pResponsiveImage.height / pResponsiveImage.width;
       }
       // else, there is no rato and no dimension
       else {
         return null;
       }
     },
-    [responsiveImage, props.fixVerticalRatio]
+    [responsiveImage, props.forceVerticalRatio]
   );
 
   /**
@@ -255,17 +321,18 @@ function ResponsiveImage(props: IProps) {
    * @param pBackgroundColor
    */
   const backgroundColorStyle = useCallback(
-    (pBackgroundColor: string): CSSProperties => ({
+    (pBackgroundColor: string = props.placeholderColor): CSSProperties => ({
       backgroundColor: !!pBackgroundColor ? pBackgroundColor : null
     }),
-    [props.backgroundColor]
+    [props.placeholderColor]
   );
 
   /**
    * Padding ratio style
+   * TODO revoir
    */
   const paddingRatioStyle = useCallback(
-    (pRatio: number | null): CSSProperties => {
+    (pRatio: number | null = verticalRatio()): CSSProperties => {
       return {
         // Padding ratio set to wrapper about to show background behind image
         paddingBottom:
@@ -280,7 +347,7 @@ function ResponsiveImage(props: IProps) {
    * background-image style
    */
   const backgroundImageStyle = useCallback(
-    (pRequiredURL: string): CSSProperties => ({
+    (pRequiredURL: string = requiredURL): CSSProperties => ({
       // return background image
       backgroundImage: !!pRequiredURL ? `url("${pRequiredURL}")` : null
     }),
@@ -291,7 +358,9 @@ function ResponsiveImage(props: IProps) {
    * background-position style
    */
   const backgroundPositionStyle = useCallback(
-    (pBackgroundPosition: number[]): CSSProperties => ({
+    (
+      pBackgroundPosition: number[] = props.backgroundPosition
+    ): CSSProperties => ({
       // return background position
       backgroundPosition: !!pBackgroundPosition
         ? `${pBackgroundPosition[0]}% ${pBackgroundPosition[1]}%`
@@ -317,52 +386,43 @@ function ResponsiveImage(props: IProps) {
   /**
    * Image DOM render
    */
-  const imageTagRender = (
-    pClassBlock: string,
-    pLazy: boolean,
-    pURL: string,
-    pAlt: string | null,
-    pBackgroundColor?: string,
-    pChildStyle?: CSSProperties
-  ) => {
-    // if not lazy and no background color is set
-    if (!pLazy && !pBackgroundColor) {
+  const imageTagRender = () => {
+    // if not lazy and no placeholder
+    if (!props?.lazy && !props?.placeholder) {
       // return a simple image tag
       return (
         <img
-          className={pClassBlock}
+          className={classBlock}
           ref={rootRef}
-          src={pURL}
-          alt={pAlt}
-          style={pChildStyle}
+          src={requiredURL}
+          alt={props?.alt}
+          style={props?.imageStyle}
         />
       );
     }
-    // else, if lazy or a background color is set
+    // else, if lazy or a placeholder
     else {
       return (
-        <div className={pClassBlock} ref={rootRef}>
+        <div className={classBlock} ref={rootRef} style={props?.containerStyle}>
           <div
             className={`${componentName}_wrapper`}
             style={{
               position: "relative",
               overflow: "hidden",
-              ...backgroundColorStyle(pBackgroundColor),
-              ...paddingRatioStyle(
-                verticalRatio(responsiveImage, props.fixVerticalRatio)
-              )
+              ...backgroundColorStyle(),
+              ...paddingRatioStyle()
             }}
           >
             <img
               className={`${componentName}_image`}
-              src={pURL}
-              alt={pAlt}
+              src={requiredURL}
+              alt={props.alt}
               style={{
                 // always object fit cover the image tag
                 // in case padding ratio is bigger or smaller than the real ratio
                 objectFit: "cover",
                 ...imageElementPosition,
-                ...pChildStyle
+                ...props.imageStyle
               }}
             />
           </div>
@@ -374,54 +434,44 @@ function ResponsiveImage(props: IProps) {
   /**
    * Background Image Render
    */
-  const backgroundImageRender = (
-    pClassBlock: string,
-    pLazy: boolean,
-    pUrl: string,
-    pBackgroundPosition: number[],
-    pChildren: ReactNode,
-    pBackgroundColor: string,
-    pChildStyle: CSSProperties
-  ) => {
-    // if not lazy and no background color
-    if (!pLazy && !pBackgroundColor) {
+  const backgroundImageRender = () => {
+    // if not lazy and no placeholder
+    if (!props?.lazy && !props?.placeholder) {
       return (
         <div
-          className={pClassBlock}
+          className={classBlock}
           ref={rootRef}
-          children={pChildren}
+          children={props?.children}
           style={{
-            ...backgroundImageStyle(pUrl),
-            ...backgroundPositionStyle(pBackgroundPosition),
-            ...pChildStyle
+            ...backgroundImageStyle(),
+            ...backgroundPositionStyle(),
+            ...props?.imageStyle
           }}
         />
       );
     }
 
-    // else, if lazy or a background color is set
+    // else, if lazy or a placeholder
     else {
       return (
-        <div className={pClassBlock} ref={rootRef}>
+        <div className={classBlock} ref={rootRef} style={props.containerStyle}>
           <div
             className={`${componentName}_wrapper`}
             style={{
               position: "relative",
               overflow: "hidden",
-              ...backgroundColorStyle(pBackgroundColor),
-              ...paddingRatioStyle(
-                verticalRatio(responsiveImage, props.fixVerticalRatio)
-              )
+              ...backgroundColorStyle(),
+              ...paddingRatioStyle()
             }}
           >
             <div
               className={`${componentName}_image`}
-              children={pChildren}
+              children={props.children}
               style={{
-                ...backgroundImageStyle(pUrl),
-                ...backgroundPositionStyle(pBackgroundPosition),
+                ...backgroundImageStyle(),
+                ...backgroundPositionStyle(),
                 ...imageElementPosition,
-                ...pChildStyle
+                ...props?.imageStyle
               }}
             />
           </div>
@@ -440,44 +490,29 @@ function ResponsiveImage(props: IProps) {
     props.lazy
       ? `${componentName}-${imageIsPreLoaded ? "lazyloaded" : "lazyload"}`
       : "",
-    // background color class
-    !!props.backgroundColor ? `${componentName}-backgroundColor` : "",
+    // placeholderColor class
+    props.placeholderColor ? `${componentName}-placeholderColor` : "",
     // props class
-    props?.classNames
+    ...(props?.classNames ? props.classNames : [])
   ]
     .filter(v => v)
     .join(" ");
 
   // --------------------------------------------------------------------------- RENDER
 
-  // check
-  if (!responsiveImage || !responsiveImage.url || !requiredURL) {
+  // check and exit
+  if (!responsiveImage || !responsiveImage?.url || !requiredURL) {
     return null;
   }
   // if classic image DOM
   else if (props.type === EImageType.IMAGE_TAG) {
-    return imageTagRender(
-      classBlock,
-      props.lazy,
-      requiredURL,
-      props.alt,
-      backgroundColorStyle(props.backgroundColor).backgroundColor,
-      props.childStyle
-    );
+    return imageTagRender();
   }
 
   // if Background image on div
   else if (props.type === EImageType.BACKGROUND_IMAGE) {
-    return backgroundImageRender(
-      classBlock,
-      props.lazy,
-      requiredURL,
-      props.backgroundPosition,
-      props.children,
-      backgroundColorStyle(props.backgroundColor).backgroundColor,
-      props.childStyle
-    );
-  } else return null;
+    return backgroundImageRender();
+  }
 }
 
 export { ResponsiveImage as default };

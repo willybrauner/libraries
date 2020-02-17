@@ -1,14 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/react-responsive-image/README.md";
-//import ResponsiveImage from "@wbe/react-responsive-image";
-// TODO à remplacer avec l'import quand le module sera développé
-import ResponsiveImage, {
-  EImageType
-  // @ts-ignore
-} from "../../../react-components/react-responsive-image/src";
+import ResponsiveImage, { EImageType } from "@wbe/react-responsive-image/src";
 import "../../global-style.css";
 
+// set story name
 const storyName = "react-responsive-image";
 
 /**
@@ -31,7 +27,14 @@ const imageData = [
 export const App = () => {
   return (
     <div className="App">
-      <ResponsiveImage data={imageData} type={EImageType.IMAGE_TAG} />
+      <ResponsiveImage
+        classNames={[`App_responsiveImage`]}
+        data={imageData}
+        type={EImageType.IMAGE_TAG}
+        imageStyle={{ width: "50%" }}
+        placeholder={true}
+        forceVerticalRatio={50}
+      />
     </div>
   );
 };
