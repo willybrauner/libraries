@@ -17,6 +17,8 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
+    "@wbe/react-responsive-image": "^0.0.1",
+    "@wbe/use-window-size": "^0.0.23",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
