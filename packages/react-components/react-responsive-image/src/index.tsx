@@ -1,4 +1,3 @@
-// @ts-ignore
 import React, {
   CSSProperties,
   ReactNode,
@@ -13,15 +12,16 @@ import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
 import useIsInViewport from "@wbe/use-is-in-viewport";
+import useWindowSize from "../../../react-hooks/use-window-size/dist";
 
-// ------------------------------------------------------------------------------- CONFIG
+// ----------------------------------------------------------------------------- CONFIG
 
 // component name
 const componentName: string = "ResponsiveImage";
 //  init debug tool
 const debug = require("debug")(`lib:${componentName}`);
 
-// ------------------------------------------------------------------------------- STRUCT
+// ----------------------------------------------------------------------------- STRUCT
 
 interface IProps {
   // element classes
@@ -129,69 +129,17 @@ function ResponsiveImage(props: IProps) {
   // --------------------------------------------------------------------------- SELECT IMAGE
 
   /**
-   * Get responsive image depend of window Width / parent width
-   * Depend of Witch pWidth is passed to the function
-   * @param pImagesList
-   * @param pWidth
-   */
-  const getResponsiveImage = ({
-    pImages,
-    pWidth
-  }: IGetResponsiveImage): IImage => {
-    // si pas d'image, ne pas continuer
-    if (pImages == null) return;
-
-    // retourner les largeurs d'image dispo en fonction de la taille du window
-    const imagesWidth =
-      // sortir la largeur de chaque image
-      pImages
-        .map(el => el.width)
-        // les trier de la plus petite à la plus grande
-        .sort((a, b) => a - b)
-        // retourner uniquement les images qui ont une largeur plus grandre
-        // que la largeur fr pWidth
-        .filter(el => el > pWidth);
-
-    // Stoquer la plus grande image du tableau qui servira de fallback
-    const biggestImage = pImages.reduce(
-      (a, b) => ((a.width || 0) > b.width ? a : b),
-      pImages[0]
-    );
-
-    // retourner un objet image :
-    const filtered = pImages
-      .map(el => {
-        // si la taille est egale à largeur d'image la plus petite du tableau,
-        // retouner l'élément
-        if (el.width === imagesWidth[0]) return el;
-        // si la plus grande image est quand meme plus petite que
-        // la taille du tableau, retourner cette plus grande image
-        if (biggestImage.width <= pWidth) return biggestImage;
-      })
-      // filter le tableau et selectionner le premier objet du talbeau
-      .filter(val => val);
-
-    // retourner le résultat
-    return filtered.length > 0 ? filtered[0] : null;
-  };
-
-  /**
    * Select responsive image
    */
-  const responsiveImage = useMemo((): IImage => {
-    // exit if no data is set by props
-    if (props.data == null) return;
-    return getResponsiveImage({
-      // image data
-      pImages: props.data,
-      // size of container depend of fix image size or component width
-      pWidth: !!props.forceImageSize
-        ? // select fix image
-          props.forceImageSize
-        : // else, select component width
-          rootRect && rootRect.width
-    });
-  }, [props.data, rootRect]);
+
+  const responsiveImage = useResponsiveImageData(
+    props.data,
+    !!props.forceImageSize
+      ? // select fix image
+        props.forceImageSize
+      : // else, select component width
+        rootRect && rootRect.width
+  );
 
   // init separatly url of this object
   const [requiredURL, setRequiredURL] = useState<string>(transparentImageUrl);
@@ -515,4 +463,76 @@ function ResponsiveImage(props: IProps) {
   }
 }
 
-export { ResponsiveImage as default };
+/**
+ * useResponsiveImageData
+ */
+function useResponsiveImageData(
+  pImages: IImage[],
+  pForceWidth?: number | EImageSize
+) {
+  // get current window size
+  const windowSize = useWindowSize();
+
+  /**
+   * Get responsive image depend of window Width / parent width
+   * Depend of Witch pWidth is passed to the function
+   * @param pImages
+   * @param pWidth
+   */
+  const getResponsiveImage = (
+    pImages: IImage[],
+    pWidth: number | EImageSize
+  ): IImage => {
+    // si pas d'image, ne pas continuer
+    if (pImages == null) return;
+
+    // retourner les largeurs d'image dispo en fonction de la taille du window
+    const imagesWidth =
+      // sortir la largeur de chaque image
+      pImages
+        .map((el: any) => el.width)
+        // les trier de la plus petite à la plus grande
+        .sort((a: any, b: any) => a - b)
+        // retourner uniquement les images qui ont une largeur plus grandre
+        // que la largeur fr pWidth
+        .filter((el: any) => el > pWidth);
+
+    // Stoquer la plus grande image du tableau qui servira de fallback
+    const biggestImage = pImages.reduce(
+      (a: any, b: any) => ((a.width || 0) > b.width ? a : b),
+      pImages[0]
+    );
+
+    // retourner un objet image :
+    const filtered = pImages
+      .map((el: any) => {
+        // si la taille est egale à largeur d'image la plus petite du tableau,
+        // retouner l'élément
+        if (el.width === imagesWidth[0]) return el;
+        // si la plus grande image est quand meme plus petite que
+        // la taille du tableau, retourner cette plus grande image
+        if (biggestImage.width <= pWidth) return biggestImage;
+      })
+      // filter le tableau et selectionner le premier objet du talbeau
+      .filter((val: any) => val);
+
+    // retourner le résultat
+    return filtered.length > 0 ? filtered[0] : null;
+  };
+
+  const [responsiveImage, setResponsiveImage] = useState<IImage>(
+    getResponsiveImage(pImages, pForceWidth)
+  );
+
+  useLayoutEffect(() => {
+    const selectedWidth = pForceWidth || windowSize?.width;
+
+    debug("selected width", selectedWidth);
+
+    setResponsiveImage(getResponsiveImage(pImages, selectedWidth));
+  }, [pForceWidth, windowSize]);
+
+  return responsiveImage;
+}
+
+export { ResponsiveImage as default, useResponsiveImageData };
