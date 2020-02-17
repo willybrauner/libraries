@@ -1,11 +1,11 @@
 import "../../global-style.css";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import README from "@wbe/fake-data-generator/README.md";
-import FakeDataGenerator from "@wbe/fake-data-generator/src";
+import README from "@wbe/fake-data-utils/README.md";
+import FakeDataUtils from "@wbe/fake-data-utils/src";
 
 // set story name
-const storyName = "fake-data-generator";
+const storyName = "fake-data-utils";
 
 /**
  * Demo
@@ -17,7 +17,7 @@ export const FakeDataImage = () => {
       <p>Ratio 16/9</p>
       <pre>
         {JSON.stringify(
-          FakeDataGenerator.instance.getResponsiveImageData(16 / 9),
+          FakeDataUtils.instance.getResponsiveImageData(16 / 9),
           null,
           2
         )}

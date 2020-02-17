@@ -1,30 +1,30 @@
 import { EImageSize, IImage } from "@wbe/react-responsive-image/src";
 // component name
-const name: string = "fake-data-generator";
+const name: string = "fake-data-utils";
 //  init debug tool
 const debug = require("debug")(`lib:${name}`);
 
 /**
- * @name FakeDataGenerator
+ * @name FakeDataUtils
  * @description Generate fake data to simulate content
  */
-class FakeDataGenerator {
+class FakeDataUtils {
   // --------------------------------------------------------------------------- SINGLETON
 
   // Singleton
-  protected static __instance: FakeDataGenerator;
+  protected static __instance: FakeDataUtils;
 
   /**
-   * Get FakeDataGenerator singleton instance.
+   * Get FakeDataUtils singleton instance.
    */
   static get instance() {
     // Create instance
-    if (FakeDataGenerator.__instance == null) {
-      FakeDataGenerator.__instance = new FakeDataGenerator();
+    if (FakeDataUtils.__instance == null) {
+      FakeDataUtils.__instance = new FakeDataUtils();
     }
 
     // Return singleton instance
-    return FakeDataGenerator.__instance;
+    return FakeDataUtils.__instance;
   }
 
   // --------------------------------------------------------------------------- LOCAL
@@ -46,7 +46,7 @@ class FakeDataGenerator {
   }
 
   static get randomId() {
-    return FakeDataGenerator.randomIntFromInterval(1, 200);
+    return FakeDataUtils.randomIntFromInterval(1, 200);
   }
 
   // --------------------------------------------------------------------------- PUBLIC API
@@ -81,7 +81,7 @@ class FakeDataGenerator {
         // API
         pImageAPI,
         "/id/",
-        FakeDataGenerator.randomId,
+        FakeDataUtils.randomId,
         // size
         "/",
         imageSize.width,
@@ -105,4 +105,4 @@ class FakeDataGenerator {
   }
 }
 
-export { FakeDataGenerator as default };
+export { FakeDataUtils as default };

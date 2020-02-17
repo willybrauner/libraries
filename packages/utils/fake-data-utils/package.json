@@ -1,5 +1,5 @@
 {
-  "name": "@wbe/fake-data-generator",
+  "name": "@wbe/fake-data-utils",
   "version": "0.0.1",
   "description": "Generate fake data image/text/video allowing to test UI components",
   "author": "Willy Brauner",
