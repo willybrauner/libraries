@@ -1,0 +1,31 @@
+import "../../global-style.css";
+import React from "react";
+import { storiesOf } from "@storybook/react";
+
+// set story name
+const storyName = "%%dashCaseModuleName%%";
+
+/**
+ * Demo
+ */
+export const App = () => {
+  return (
+    <div>
+      {storyName}
+    </div>
+  );
+};
+
+/**
+ * Config
+ */
+storiesOf(`%%subFolder%%/${storyName}`, module)
+  .addParameters({
+    readme: {
+      // sidebar: README,
+      codeTheme: "darcula"
+    }
+  })
+  .add("basic example", () => <App />, {
+    // info: README
+  });

@@ -6,5 +6,7 @@ module.exports = {
   // Skeletons path
   skeletonsPath: appRoot.resolve("config/skeletons"),
   // packages path
-  packagesPath: appRoot.resolve("packages")
+  packagesPath: appRoot.resolve("packages"),
+  //
+  storiesPath: appRoot.resolve("packages/storybook/stories")
 };
