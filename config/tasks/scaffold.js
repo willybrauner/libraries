@@ -98,7 +98,7 @@ const moduleScaffolder = () =>
 
     // Base path of the component (no extension here)
     let modulePath = `${paths.packagesPath}/${subFolder}/${dashCaseModuleName}`;
-    let storiesPath = `${paths.storiesPath}/`;
+    let storiesPath = `${paths.storiesPath}`;
 
     // Check if component already exists
     if (Files.getFiles(`${modulePath}`).files.length > 0) {
@@ -197,10 +197,10 @@ const moduleScaffolder = () =>
       });
 
       console.log(`
-        You just create a new story in storybook module. \n
-        Path: ${storiesPath}/${subFolder}/ \n\n
-        run this command to add the new module as storybook dependance: \n
-        $ lerna add @wbe/${dashCaseModuleName} --scope=@wbe/storybook
+    You just create a new story in storybook module. 
+    Path: ${storiesPath}/${subFolder}/\n
+    run this command to add the new module as storybook dependance:
+    $ lerna add @wbe/${dashCaseModuleName} --scope=@wbe/storybook \n
       `);
     }
 
