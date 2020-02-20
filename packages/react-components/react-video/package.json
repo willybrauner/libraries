@@ -1,5 +1,5 @@
 {
-  "name": "@wbe/react-grid-layout",
+  "name": "@wbe/react-video",
   "version": "0.0.23",
   "description": "",
   "main": "dist/index",
@@ -16,8 +16,6 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^0.0.23",
-    "@wbe/use-window-size": "^0.0.23",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

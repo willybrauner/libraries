@@ -1,6 +1,7 @@
 /**
  * TODO
  *  - Fixer les imports
+ *  - Mettre les bonnes dépendances dans le package.json
  */
 
 import css from "./ReactVideo.module.less";
