@@ -36,7 +36,7 @@ const thumbs: IImage[] = [
 
 const App = () => {
   // will return the first object of thumbs array
-  // (600 is the up closest to 500)
+  // (640 is the up closest to 500)
   const responsiveImageData: IImage = useResponsiveImageData(thumbs, 500);
 
   // ...
