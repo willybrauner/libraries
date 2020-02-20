@@ -5,24 +5,26 @@ import useWindowSize from "@wbe/use-window-size";
 /**
  * Single Image Object properties
  * TODO duplicate of IImage from react-responsive-image
+ * TODO find a way get the same interface in :
+ * - react-responsive-image
+ * - use-responsive-image-data
  */
-interface IImage {
+export interface IImage {
   url: string;
   width?: number;
   height?: number;
-  ratio?: number;
 }
 
 /**
  * useResponsiveImageData
- */
-/**
- * useResponsiveImageData
  * Get responsive image depend of window Width / parent width
- * @param pImages
- * @param pWidth
+ * @param {IImage[]} pImages
+ * @param {number|null} pWidth
  */
-function useResponsiveImageData(pImages: IImage[], pWidth?: number) {
+function useResponsiveImageData(
+  pImages: IImage[],
+  pWidth: number | null = null
+) {
   // get current window size use as fallback
   const windowSize = useWindowSize();
 
