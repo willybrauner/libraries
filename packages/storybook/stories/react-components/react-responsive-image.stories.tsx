@@ -70,8 +70,7 @@ export const BackgroundImagePlaceholder = () => {
 storiesOf(`react-components/${storyName}`, module)
   .addParameters({
     readme: {
-      sidebar: README,
-      codeTheme: "darcula"
+      sidebar: README
     }
   })
   .add("<img> tag", () => <ImageTag />)

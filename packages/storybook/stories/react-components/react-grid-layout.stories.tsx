@@ -55,8 +55,7 @@ const css: { [x: string]: CSSProperties } = {
 storiesOf(`react-components/${storyName}`, module)
   .addParameters({
     readme: {
-      sidebar: README,
-      codeTheme: "darcula"
+      sidebar: README
     }
   })
   .add("basic example", () => <App gutterSize={20} />)

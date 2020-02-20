@@ -74,8 +74,7 @@ const css: { [x: string]: CSSProperties } = {
 storiesOf(`react-hooks/${storyName}`, module)
   .addParameters({
     readme: {
-      sidebar: README,
-      codeTheme: "darcula"
+      sidebar: README
     }
   })
   .add("basic example", () => <App offset={0} />)

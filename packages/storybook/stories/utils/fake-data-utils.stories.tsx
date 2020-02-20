@@ -50,8 +50,7 @@ export const FakeVideo = () => {
 storiesOf(`utils/${storyName}`, module)
   .addParameters({
     readme: {
-      sidebar: README,
-      codeTheme: "darcula"
+      sidebar: README
     }
   })
   .add("fake image", () => <FakeDataImage />, {

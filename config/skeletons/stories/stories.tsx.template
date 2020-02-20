@@ -23,7 +23,7 @@ storiesOf(`%%subFolder%%/${storyName}`, module)
   .addParameters({
     readme: {
       // sidebar: README,
-      codeTheme: "darcula"
+
     }
   })
   .add("basic example", () => <App />, {
