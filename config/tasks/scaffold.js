@@ -200,7 +200,7 @@ const moduleScaffolder = () =>
     You just create a new story in storybook module. 
     Path: ${storiesPath}/${subFolder}/\n
     run this command to add the new module as storybook dependance:
-    $ lerna add @wbe/${dashCaseModuleName} --scope=@wbe/storybook \n
+    $ lerna add @wbe/${dashCaseModuleName} --scope=@wbe/storybook && lerna bootstrap \n
       `);
     }
 

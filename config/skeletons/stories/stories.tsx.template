@@ -1,6 +1,8 @@
 import "../../global-style.css";
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import README from "@wbe/%%dashCaseModuleName%%/README.md";
+// import your module from src
 
 // set story name
 const storyName = "%%dashCaseModuleName%%";
@@ -22,10 +24,7 @@ export const App = () => {
 storiesOf(`%%subFolder%%/${storyName}`, module)
   .addParameters({
     readme: {
-      // sidebar: README,
-
+      sidebar: README
     }
   })
-  .add("basic example", () => <App />, {
-    // info: README
-  });
+  .add("basic example", () => <App />);
