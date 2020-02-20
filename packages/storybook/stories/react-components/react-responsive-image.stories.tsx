@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import "../../global-style.css";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/react-responsive-image/README.md";
-import ResponsiveImage, {
-  EImageType,
-  useResponsiveImageData
-} from "@wbe/react-responsive-image/src";
+import ResponsiveImage, { EImageType } from "@wbe/react-responsive-image/src";
 import FakeDataUtils from "@wbe/fake-data-utils/src";
-import useWindowSize from "@wbe/use-window-size/src";
 
 // set story name
 const storyName = "react-responsive-image";
@@ -194,27 +190,6 @@ export const BackgroundImagePlaceholder = () => {
   );
 };
 
-export const ResponsiveImageData = () => {
-  // get current width
-  const { width } = useWindowSize();
-  // get selected responsive image data object
-  const selectedResponsiveImageData = useResponsiveImageData(thumbs, width);
-
-  return (
-    <div>
-      <h2>useResponsiveImageData</h2>
-      <pre>{JSON.stringify(selectedResponsiveImageData, null, 2)}</pre>
-
-      <p>
-        Internal hook <em>useResponsiveImageData</em> return image data depend
-        to dynamic or static width value. In this example, width value depend of
-        current window width, so, you can observe image data object changing if
-        you resize your browser.
-      </p>
-    </div>
-  );
-};
-
 /**
  * Config
  */
@@ -229,7 +204,6 @@ storiesOf(`react-components/${storyName}`, module)
   .add("img - lazy", () => <ImageTagLazy />)
   .add("img - force image width", () => <ImageTagForceWidth />)
   .add("background-image", () => <BackgroundImage />)
-  .add("background-image - placeholder", () => <BackgroundImagePlaceholder />)
-  .add("use-responsive-image-data", () => <ResponsiveImageData />);
+  .add("background-image - placeholder", () => <BackgroundImagePlaceholder />);
 
 // TODO add background Image test

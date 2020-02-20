@@ -1,7 +1,7 @@
 {
-  "name": "@wbe/react-responsive-image",
+  "name": "@wbe/use-responsive-image-data",
   "version": "0.0.1",
-  "description": "React responsive image with lazy option",
+  "description": "This hook allow to return a specific IImage object depending of specific width value.",
   "author": "Willy Brauner",
   "license": "MIT",
   "main": "dist/index",
@@ -17,9 +17,7 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^0.0.23",
-    "@wbe/use-is-in-viewport": "^0.0.23",
-    "@wbe/use-responsive-image-data": "^0.0.1",
+    "@wbe/use-window-size": "^0.0.23",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

@@ -12,7 +12,11 @@
     "noImplicitAny": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    // allow to not notify conflicts if the same dependance is imported in
+    // two differents packages but not the same version
+    // pass to true for disable this check.
+    "skipLibCheck": false
   },
   "exclude": ["node_modules", "dist"]
 }
