@@ -1,13 +1,18 @@
+/**
+ * TODO
+ *  - Fixer les imports
+ */
+
 import css from "./ReactVideo.module.less";
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import React, {LegacyRef, useEffect, useRef, useState} from "react";
 import { merge } from "../../common/lib/helpers/classNameHelper";
 import { prepare } from "../../common/helpers/prepare";
 import {
   EImageType,
   IImage,
   ResponsiveImage
-} from "@wbe/ResponsiveImage";
-import { useIsInViewport } from "@wbe/useIsInViewport";
+} from "../../common/lib/react-components/responsiveImage/ResponsiveImage";
+import { useIsInViewport } from "../../common/lib/react-hooks/useIsInViewport";
 
 /**
  * Type of video
