@@ -479,39 +479,39 @@ function useResponsiveImageData(
     pWidth: number | EImageSize
   ): IImage => {
     // check and exit if no images.
-    if (pImages == null) return;
+    if (!pImages) return;
 
-    // retourner les largeurs d'image dispo en fonction de la taille du window
+    // return available image width in array, depend of pWidth
     const imagesWidth =
-      // sortir la largeur de chaque image
+      // get each el width
       pImages
-        .map((el: any) => el.width)
-        // les trier de la plus petite à la plus grande
-        .sort((a: any, b: any) => a - b)
-        // retourner uniquement les images qui ont une largeur plus grandre
-        // que la largeur fr pWidth
+        .map((el: IImage) => el?.width)
+        // sort smaller to larger
+        .sort((a: number, b: number) => a - b)
+        // return only images who got biggest width than pWidth
         .filter((el: any) => el > pWidth);
 
-    // Stoquer la plus grande image du tableau qui servira de fallback
+    // keep the biggest image object of array
     const biggestImage = pImages.reduce(
       (a: any, b: any) => ((a.width || 0) > b.width ? a : b),
       pImages[0]
     );
 
-    // retourner un objet image :
+    // prepare filtered image array we gonna return
     const filtered = pImages
       .map((el: any) => {
-        // si la taille est egale à largeur d'image la plus petite du tableau,
-        // retouner l'élément
+        // if image width is smallest than the images array
+        // return it
         if (el.width === imagesWidth[0]) return el;
-        // si la plus grande image est quand meme plus petite que
-        // la taille du tableau, retourner cette plus grande image
+
+        // if the biggest image is smallest than the smallest image of array,
+        // return this biggest image
         if (biggestImage.width <= pWidth) return biggestImage;
       })
-      // filter le tableau et selectionner le premier objet du talbeau
+      // filter the array
       .filter((val: any) => val);
 
-    // retourner le résultat
+    // return the appropriate image object
     return filtered.length > 0 ? filtered[0] : null;
   };
 
