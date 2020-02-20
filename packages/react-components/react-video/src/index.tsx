@@ -1,5 +1,5 @@
 import css from "./ReactVideo.module.less";
-import React, { useEffect, useRef, useState } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { merge } from "../../common/lib/helpers/classNameHelper";
 import { prepare } from "../../common/helpers/prepare";
 import {
@@ -60,10 +60,10 @@ interface IProps {
   playOnlyInViewport?: boolean;
 
   // PlayIn animation (between poster and video)
-  playIn?: (pRootRef, pPosterRef, p: () => any) => void;
+  playIn?: (pRootRef: LegacyRef<HTMLDivElement>, pPosterRef:LegacyRef<HTMLDivElement>, pOnCompleted: () => any) => void;
 
   // PlayOut animation (between poster and video)
-  playOut?: (pRootRef, pPosterRef, pOnCompleted: () => any) => void;
+  playOut?: (pRootRef: LegacyRef<HTMLDivElement>, pPosterRef:LegacyRef<HTMLDivElement>, pOnCompleted: () => any) => void;
 
   // Background color of the component. May be used to avoid fading out on white.
   backgroundColor?: string;
