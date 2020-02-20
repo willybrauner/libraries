@@ -4,7 +4,6 @@ import React, {
   useCallback,
   useEffect,
   useLayoutEffect,
-  useMemo,
   useRef,
   useState
 } from "react";
@@ -50,7 +49,7 @@ interface IProps {
   // change css backgroundPosition
   backgroundPosition?: number[];
   // style first child style
-  containerStyle?: CSSProperties;
+  rootStyle?: CSSProperties;
   // style child element
   imageStyle?: CSSProperties;
 }
@@ -124,9 +123,9 @@ function ResponsiveImage(props: IProps) {
   const responsiveImage = useResponsiveImageData(
     props.data,
     !!props.forceImageWidth
-      ? // select fix image
+      ? // select force image width props value as width reference
         props.forceImageWidth
-      : // else, select component width
+      : // else, select component root as width reference
         rootRect && rootRect.width
   );
 
@@ -135,11 +134,17 @@ function ResponsiveImage(props: IProps) {
 
   /**
    *  Start URL selector
-   *  Depend of root width
+   *  Depend of width reference
    */
   useLayoutEffect(() => {
     // exit if no data is set by props
-    if (props.data == null) return;
+    if (!props?.data) return;
+
+    debug(
+      "useResponsiveImageData hook return image data object",
+      responsiveImage
+    );
+
     // set required URL
     setRequiredURL(
       // if lazy is active
@@ -340,7 +345,7 @@ function ResponsiveImage(props: IProps) {
     // else, if lazy or a placeholder
     else {
       return (
-        <div className={classBlock} ref={rootRef} style={props?.containerStyle}>
+        <div className={classBlock} ref={rootRef} style={props?.rootStyle}>
           <div
             className={`${componentName}_wrapper`}
             style={{
@@ -391,7 +396,7 @@ function ResponsiveImage(props: IProps) {
     // else, if lazy or a placeholder
     else {
       return (
-        <div className={classBlock} ref={rootRef} style={props.containerStyle}>
+        <div className={classBlock} ref={rootRef} style={props?.rootStyle}>
           <div
             className={`${componentName}_wrapper`}
             style={{
@@ -468,12 +473,12 @@ function useResponsiveImageData(
   // get current window size
   const windowSize = useWindowSize();
 
-  //
-  const getResponsiveImage = (
+  // get image data object depend of pWidth
+  const getImageDataObject = (
     pImages: IImage[],
     pWidth: number | EImageSize
   ): IImage => {
-    // si pas d'image, ne pas continuer
+    // check and exit if no images.
     if (pImages == null) return;
 
     // retourner les largeurs d'image dispo en fonction de la taille du window
@@ -511,7 +516,7 @@ function useResponsiveImageData(
   };
 
   const [responsiveImage, setResponsiveImage] = useState<IImage>(
-    getResponsiveImage(pImages, pForceWidth)
+    getImageDataObject(pImages, pForceWidth)
   );
 
   useLayoutEffect(() => {
@@ -521,7 +526,7 @@ function useResponsiveImageData(
     const selectedWidth = pForceWidth || windowSize?.width;
 
     // set this value in local state
-    setResponsiveImage(getResponsiveImage(pImages, selectedWidth));
+    setResponsiveImage(getImageDataObject(pImages, selectedWidth));
   }, [pForceWidth, windowSize]);
 
   return responsiveImage;

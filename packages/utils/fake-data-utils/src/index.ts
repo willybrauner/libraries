@@ -73,7 +73,7 @@ class FakeDataUtils {
       // get image size depend of el
       const imageSize = {
         width: el,
-        height: el / pRatio
+        height: Math.round(el / pRatio)
       };
 
       // build url

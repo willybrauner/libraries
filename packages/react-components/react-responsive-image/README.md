@@ -17,5 +17,5 @@ $ npm install @wbe/react-responsive-image
 ## How to use
 
 ```js
-import { reactResponsiveImage } from "@wbe/react-responsive-image;";
+import { reactResponsiveImage } from "@wbe/react-responsive-image";
 ```
