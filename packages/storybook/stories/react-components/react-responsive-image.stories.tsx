@@ -22,7 +22,7 @@ export const ImageTag = () => {
   return (
     <div>
       <section>
-        <h2>{"img tag"}</h2>
+        <h2>img</h2>
         <p>
           This is a simple {`<img>`} HTML tag with responsive image data as data
           props. Resize your browser and check image url change.
@@ -44,7 +44,7 @@ export const ImageTagPlaceholder = () => {
   return (
     <div>
       <section>
-        <h2>{"img tag with placeholder"}</h2>
+        <h2>img - placeholder</h2>
         <p>
           This image as got the same properties than the previous one, except it
           takes a placeholder. Placeholder ratio size is calc via image
@@ -63,7 +63,7 @@ export const ImageTagPlaceholder = () => {
             if (imageOpacity === 1) setImageOpacity(0);
           }}
         >
-          <h2>toggle image opacity</h2>
+          <h2>toggle image opacity to show placeholder</h2>
         </button>
         <ResponsiveImage
           data={thumbs}
@@ -86,7 +86,7 @@ export const ImageTagPlaceholder = () => {
 export const ImageTagLazy = () => {
   return (
     <div>
-      <h2>img tag lazyload</h2>
+      <h2>img - lazyload</h2>
       <p>
         Set props "lazy" to "true" if you want to lazyload the image. In browser
         network dev tab, check images loading when you scroll the page.
@@ -96,8 +96,8 @@ export const ImageTagLazy = () => {
         or bottom{" "}
       </p>
       {new Array(50).fill(null).map((el, i) => {
+        // get thumbs per iteration
         const thumbs = FakeDataUtils.instance.getResponsiveImageData(16 / 9);
-
         return (
           <ResponsiveImage
             key={i}
@@ -110,6 +110,24 @@ export const ImageTagLazy = () => {
           />
         );
       })}
+    </div>
+  );
+};
+
+export const ImageTagForceWidth = () => {
+  return (
+    <div>
+      <h2>img - force by width</h2>
+      <p>
+        Force to display the image whose size is closest to the value provided
+        in px.
+      </p>
+      <ResponsiveImage
+        data={thumbs}
+        type={EImageType.IMAGE_TAG}
+        forceImageWidth={800}
+        imageStyle={{ width: "100%" }}
+      />
     </div>
   );
 };
@@ -143,7 +161,7 @@ export const BackgroundImagePlaceholder = () => {
   return (
     <div>
       <section>
-        <h2>{"background-image with placeholder"}</h2>
+        <h2>{"background-image - placeholder"}</h2>
         <p>
           This background-image as got the same properties than the previous
           one, except it takes a placeholder. Placeholder ratio size is calc via
@@ -156,7 +174,7 @@ export const BackgroundImagePlaceholder = () => {
             if (imageOpacity === 1) setImageOpacity(0);
           }}
         >
-          <h2>toggle image opacity</h2>
+          <h2>toggle image opacity to show placeholder</h2>
         </button>
         <ResponsiveImage
           data={thumbs}
@@ -209,6 +227,7 @@ storiesOf(`react-components/${storyName}`, module)
   .add("img", () => <ImageTag />)
   .add("img - placeholder", () => <ImageTagPlaceholder />)
   .add("img - lazy", () => <ImageTagLazy />)
+  .add("img - force image width", () => <ImageTagForceWidth />)
   .add("background-image", () => <BackgroundImage />)
   .add("background-image - placeholder", () => <BackgroundImagePlaceholder />)
   .add("use-responsive-image-data", () => <ResponsiveImageData />);

@@ -27,7 +27,7 @@ interface IProps {
   classNames?: string[];
   // type of image
   type: EImageType;
-  // Array of image object [{}, {}, ...]
+  // Array of image object
   data: IImage[];
   // alt text
   alt?: string;
@@ -38,8 +38,8 @@ interface IProps {
   // load image at Xpx of top/bottom window
   // ex: -40 allow to preload image when it's top or bottom is to 40px before or after border window
   lazyOffset?: number;
-  // force image version with specific width
-  forceImageWidth?: EImageSize;
+  // Force to display the image whose size is closest to the value provided in px
+  forceImageWidth?: number;
   // force a custom vertical ratio : vertical ratio = height / width
   forceVerticalRatio?: number;
   // show placeholder
@@ -82,17 +82,6 @@ export interface IImage {
   width?: number;
   height?: number;
   ratio?: number;
-}
-
-/**
- * Responsive break sizes
- * FIXME these values need to be inject via Root app Config
- */
-export enum EImageSize {
-  SMALL = 640,
-  MEDIUM = 1024,
-  LARGE = 1640,
-  XLARGE = 1900
 }
 
 // transparent image URL
@@ -462,23 +451,16 @@ function ResponsiveImage(props: IProps) {
 /**
  * useResponsiveImageData
  * Get responsive image depend of window Width / parent width
- * Depend of Witch pWidth is passed to the function
  * @param pImages
- * @param pForceWidth
+ * @param pWidth
  */
-function useResponsiveImageData(
-  pImages: IImage[],
-  pForceWidth?: number | EImageSize
-) {
-  // get current window size
+function useResponsiveImageData(pImages: IImage[], pWidth?: number) {
+  // get current window size use as fallback
   const windowSize = useWindowSize();
 
   // get image data object depend of pWidth
-  const getImageDataObject = (
-    pImages: IImage[],
-    pWidth: number | EImageSize
-  ): IImage => {
-    // check and exit if no images.
+  const getImageDataObject = (pImages: IImage[], pWidth: number): IImage => {
+    // check and exit if no images
     if (!pImages) return;
 
     // return available image width in array, depend of pWidth
@@ -516,18 +498,18 @@ function useResponsiveImageData(
   };
 
   const [responsiveImage, setResponsiveImage] = useState<IImage>(
-    getImageDataObject(pImages, pForceWidth)
+    getImageDataObject(pImages, pWidth)
   );
 
   useLayoutEffect(() => {
     // select a width value as reference
     // pForceWidth is a static value
     // windowSize.width is a dynamic value
-    const selectedWidth = pForceWidth || windowSize?.width;
+    const selectedWidth = pWidth || windowSize?.width;
 
     // set this value in local state
     setResponsiveImage(getImageDataObject(pImages, selectedWidth));
-  }, [pForceWidth, windowSize]);
+  }, [pWidth, windowSize]);
 
   return responsiveImage;
 }

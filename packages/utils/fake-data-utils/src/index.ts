@@ -1,4 +1,4 @@
-import { EImageSize, IImage } from "@wbe/react-responsive-image/src";
+import { IImage } from "@wbe/react-responsive-image/src";
 // component name
 const name: string = "fake-data-utils";
 //  init debug tool
@@ -61,12 +61,7 @@ class FakeDataUtils {
     pImageAPI = this.imageAPI
   ): IImage[] {
     // get breakpoint sizes
-    const imageBreakPoints = [
-      EImageSize.SMALL,
-      EImageSize.MEDIUM,
-      EImageSize.LARGE,
-      EImageSize.XLARGE
-    ];
+    const imageBreakPoints = [640, 1024, 1640, 1900];
 
     //  build array
     const fakeImageArray: IImage[] = imageBreakPoints.map(el => {
