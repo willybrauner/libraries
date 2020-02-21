@@ -5,11 +5,18 @@ Libraries is a mono-repos of front-end javascript modules for React and vanilla 
 ![Travis (.org)](https://img.shields.io/travis/willybrauner/libraries)
 ![GitHub contributors](https://img.shields.io/github/contributors/willybrauner/libraries)
 
-## Features
+## About
 
-✅ javascript modules write with typescript  
-✅ libraries standalone module  
-✅ storybook documentation
+### Features
+
+✅ Javascript modules write with typescript  
+✅ Libraries standalone module  
+✅ Storybook documentation
+
+### For who
+
+- Developers, freelancers, agencies and studios who like worked with React and Typescript.
+- Cher Ami front-end projects.
 
 ## Summary
 
@@ -70,7 +77,7 @@ do not submit a new module without using the scaffolder tool.
 Install lerna:
 
 ```shell script
-npx lerna init
+$ npx lerna init
 ```
 
 Install all dependencies:
@@ -85,19 +92,12 @@ Scaffold a new module:
 $ npm run scaffold
 ```
 
-Each module has got his own module folder and his dedicated `module.stories.tsx`
-in [storybook package](packages/storybook/stories).
-
-### About
-
-#### For who
-
-This project is addressed to developers, independants, agencies who like worked
-with React and Typescript.
+Module scaffolder will prepare a module file struture ready to use + a dedicated `module.stories.tsx`
+in [storybook package](packages/storybook/stories). 
 
 ## Credits
 
-This project is developed and maintained by [Willy Brauner](http://willybrauner.com),
+Libraries is developed and maintained by [Willy Brauner](http://willybrauner.com),
 front-end developer at [Cher Ami](https://cher-ami.tv) and as freelance.
 
 ## Licence
