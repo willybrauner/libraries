@@ -33,7 +33,7 @@ install:
   - p=$(which npm)
   - rm $p
   - ln -s /home/travis/.nvm/versions/node/v10.1.0/bin/npm $p || true
-  - npm -v
+  #- npm -v
   # move to folder
   - cd packages/storybook
   # install node dependencies
