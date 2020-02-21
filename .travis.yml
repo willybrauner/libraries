@@ -1,0 +1,38 @@
+sudo: required
+cache:
+  - npm
+
+branches:
+  only:
+    - deploy-storybook
+
+env:
+  - NODE_RELEASE=10.x
+
+# Ajouter le domaine au ficher known host de la machine virtuelle
+addons:
+  ssh_known_hosts:
+    - libraries.willybrauner.com
+
+# config SSH
+before_install:
+  - echo -e "Host ${DEPLOY_URL}ntStrictHostKeyChecking non" >> ~/.ssh/config
+  - openssl aes-256-cbc -K $encrypted_087b74a6dd92_key -iv $encrypted_087b74a6dd92_iv -in robot-id_rsa.enc -out /tmp/robot-id_rsa -d
+  - eval "$(ssh-agent -s)"
+  - sudo chmod 600 /tmp/robot-id_rsa
+  - ssh-add /tmp/robot-id_rsa
+
+install:
+  # installer node
+  - curl -sL "https://deb.nodesource.com/setup_${NODE_RELEASE}"
+  - sudo apt-get install -y nodejs
+  # aller dans le dossier
+  - cd packages/storybook
+  # installer des dépendances front
+  - npm ci
+
+script:
+  # builder les sources
+  - npm run build-storybook
+  # pousser les sources sur le serveur distant
+  - rsync --checksum -i -r -a -e ssh --omit-dir-times --quiet --delete packages/storybook/storybook-static ${SSH_USER}@${DEPLOY_URL}:${DEPLOY_FOLDER}
