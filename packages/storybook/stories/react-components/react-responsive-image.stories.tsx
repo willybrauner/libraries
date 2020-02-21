@@ -218,5 +218,3 @@ storiesOf(`react-components/${storyName}`, module)
   .add("img - forceVerticalRatio", () => <ImageForceVerticalRatio />)
   .add("background-image", () => <BackgroundImage />)
   .add("background-image - placeholder", () => <BackgroundImagePlaceholder />);
-
-// TODO add background Image test

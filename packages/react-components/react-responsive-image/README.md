@@ -1,8 +1,14 @@
 # @wbe/react-responsive-image
 
 react-responsive-image is a React component allowing to display a simple `<img />` tag or
-a `<div>` background-image who gonna use the appropriate thumb in src or url.
-This component is a wrapper of `@wbe/use-responsive-image-data`.
+a `<div />` background-image who will set the appropriate thumbnail in src or url attribute,
+according to a defined width.
+
+We should never choose how to show an image based on stylistic rendering.
+This is why this component makes the same rendering options possible, regardless of the sementic choice;
+Tag HTML image or background image.
+
+This component is a wrapper DOM rendering of `@wbe/use-responsive-image-data`.
 
 ![](https://img.shields.io/npm/v/@wbe/react-responsive-image/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/react-responsive-image.svg)
