@@ -52,8 +52,8 @@ ReactShareIcon.defaultProps = {
   customIcon: null,
   targetLink: "",
   shareText: "",
-  popUpWidth: 626,
-  popUpHeight: 436
+  popUpWidth: null,
+  popUpHeight: null
 };
 
 // prepare
@@ -111,15 +111,15 @@ function ReactShareIcon(props: IProps) {
   const socialPopups = {
     facebook: {
       url: `https://www.facebook.com/sharer/sharer.php?display=popup&u=${props?.targetLink}`,
-      width: props?.popUpWidth,
-      height: props?.popUpHeight
+      width: props?.popUpWidth || 626,
+      height: props?.popUpHeight || 436
     },
     twitter: {
       url: `https://twitter.com/intent/tweet?text=${
           props?.twitterShareText ? props?.twitterShareText : ""
       }%20${props?.targetLink}`,
-      width: props?.popUpWidth,
-      height: props?.popUpHeight
+      width: props?.popUpWidth || 626,
+      height: props?.popUpHeight || 250
     }
   };
 
