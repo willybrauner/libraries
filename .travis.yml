@@ -43,7 +43,6 @@ install:
   - ls
   # installer des dépendances front
   - npm ci
-  - npm run install:all
 
 script:
   # builder les sources
