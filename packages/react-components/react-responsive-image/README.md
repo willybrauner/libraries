@@ -40,28 +40,17 @@ const App = () => {
 };
 ```
 
-## Props
+Will returned this HTML DOM structure:
 
-### Lazyload
-
-Active lazyload option:
-
-```tsx
-<ResponsiveImage type={EImageType.IMAGE_TAG} data={thumbs} lazy={true} />
-```
-
-Set a `lazyOffset` props.
-example: -40 allow to preload image when it's top or bottom is to 40px before
-or after border window.
-
-```tsx
-<ResponsiveImage
-  type={EImageType.IMAGE_TAG}
-  data={thumbs}
-  lazy={true}
-  lazyOffset={-40}
+```html
+<img
+  class="ResponsiveImage ResponsiveImage-tagImage"
+  src="my/image/1.jpg"
+  role="img"
 />
 ```
+
+## Options
 
 ### Placeholder
 
@@ -84,12 +73,59 @@ A background-color can be set to this placeholder via `placeholderColor` props.
 />
 ```
 
+To set a placeholder, DOM structure need to returned image with additional wrapper.
+
+```html
+<div class="ResponsiveImage ResponsiveImage-tagImage ...">
+  <!-- wrapper used to set a padding bottom ratio -->
+  <div class="ResponsiveImage_wrapper" style="...">
+    <img class="ResponsiveImage_image" role="img" src="..." style="..." />
+  </div>
+</div>
+```
+
 Note: if `lazy` props is set, placeholder is automaticaly enable with default transparent
-placeholderColor.
+placeholder color.
+
+### Lazyload
+
+`ResponsiveImage` as lazyload option. A small transparent base64 image will set in `src` util
+the image is visible in window.
+
+```tsx
+<ResponsiveImage type={EImageType.IMAGE_TAG} data={thumbs} lazy={true} />
+```
+
+You can prevent image loading with `lazyOffset` props.
+example: -40 allow to preload image when it's top or bottom is to 40 pixels before
+or after border window.
+
+```tsx
+<ResponsiveImage
+  type={EImageType.IMAGE_TAG}
+  data={thumbs}
+  lazy={true}
+  lazyOffset={-40}
+/>
+```
+
+Before the element is visible in viewport, `ResponsiveImage` will returned:
+
+```html
+<div class="ResponsiveImage ResponsiveImage-tagImage ResponsiveImage-lazyload">
+  <div class="ResponsiveImage_wrapper">
+    <img
+      class="ResponsiveImage_image"
+      src="data:image/png;base64..."
+      role="img"
+    />
+  </div>
+</div>
+```
 
 ### Ratio
 
-Image ratio is automatically calc via image dimension ; But it's possible to force
+Image ratio is automatically calc via image dimension, but it's possible to force
 a custom vertical ratio via `forceVerticalRatio` props.
 
 ```tsx
@@ -104,21 +140,20 @@ a custom vertical ratio via `forceVerticalRatio` props.
 
 ### Tab props
 
-| props              | type          | description                                                                  | default value |
-| ------------------ | ------------- | ---------------------------------------------------------------------------- | ------------- |
-| classNames         | string[]      | class list                                                                   | /             |
-| type               | EImageType    | IMAGE_TAG or BACKGROUND_IMAGE                                                | /             |
-| data               | IImage[]      | array of image object                                                        | /             |
-| alt                | string        | image alt                                                                    | /             |
-| children           | ReactNode     | add children only if type is EImageType.BACKGROUND_IMAGE                     | /             |
-| lazy               | boolean       | active lazyloading                                                           | false         |
-| lazyOffset         | number        | load image at X px of top/bottom window                                      | 0             |
-| forceImageWidth    | number        | Force to display the image whose size is closest to the value provided in px | /             |
-| forceVerticalRatio | number        | force a custom vertical ratio to the image                                   | /             |
-| placeholder        | boolean       | show a placeholder behind the image calc with image dimension                | false         |
-| placeholderColor   | string        | set a background color to the placeholder                                    | transparent   |
-| backgroundPosition | number[]      | set a background position `[x, y]`                                           | /             |
-| rootStyle          | CSSProperties | style first child                                                            | /             |
-| imageStyle         | CSSProperties | style image node                                                             | /             |
-
-## returned
+| props (\* non optional) | type          | description                                                                     | default value |
+| ----------------------- | ------------- | ------------------------------------------------------------------------------- | ------------- |
+| classNames              | string[]      | class list                                                                      | /             |
+| **type** \*             | EImageType    | TAG_IMAGE / BACKGROUND_IMAGE                                                    | /             |
+| **data** \*             | IImage[]      | image object array                                                              | /             |
+| alt                     | string        | image alt attribute                                                             | /             |
+| children                | ReactNode     | add children only if type is EImageType.BACKGROUND_IMAGE                        | /             |
+| lazy                    | boolean       | active lazyloading                                                              | false         |
+| lazyOffset              | number        | load image at X pixel(s) of top/bottom window                                   | 0             |
+| forceImageWidth         | number        | force to display the image whose size is closest to the value provided in pixel | /             |
+| forceVerticalRatio      | number        | force a custom vertical ratio to the image                                      | /             |
+| placeholder             | boolean       | show a placeholder behind the image calc with image dimension                   | false         |
+| placeholderColor        | string        | set a background color to the placeholder                                       | transparent   |
+| rootStyle               | CSSProperties | style first child dom node                                                      | /             |
+| imageStyle              | CSSProperties | style image dom node                                                            | /             |
+| ariaLabel               | string / null | aria description of element                                                     | /             |
+| role                    | string        | role of element                                                                 | img           |

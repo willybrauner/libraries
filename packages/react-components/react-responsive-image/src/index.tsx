@@ -50,6 +50,10 @@ interface IProps {
   rootStyle?: CSSProperties;
   // style child element
   imageStyle?: CSSProperties;
+  // aria description of element
+  ariaLabel?: string | null;
+  // role of element
+  role?: string;
 }
 
 /**
@@ -59,7 +63,9 @@ ResponsiveImage.defaultProps = {
   placeholder: false,
   placeholderColor: "transparent",
   lazy: false,
-  lazyOffset: 0
+  lazyOffset: 0,
+  ariaLabel: null,
+  role: "img"
 };
 
 /**
@@ -67,8 +73,8 @@ ResponsiveImage.defaultProps = {
  */
 export enum EImageType {
   // <img> HTML tag
-  IMAGE_TAG = "imageTag",
-  // <div> background image
+  TAG_IMAGE = "tagImage",
+  // <div> background-image
   BACKGROUND_IMAGE = "backgroundImage"
 }
 
@@ -311,6 +317,8 @@ function ResponsiveImage(props: IProps) {
           src={requiredURL}
           alt={props?.alt}
           style={props?.imageStyle}
+          aria-label={props?.ariaLabel}
+          role={props.role}
         />
       );
     }
@@ -331,6 +339,8 @@ function ResponsiveImage(props: IProps) {
               className={`${componentName}_image`}
               src={requiredURL}
               alt={props.alt}
+              role={props.role}
+              aria-label={props?.ariaLabel}
               style={{
                 // always object fit cover the image tag
                 // in case padding ratio is bigger or smaller than the real ratio
@@ -356,6 +366,8 @@ function ResponsiveImage(props: IProps) {
           className={classBlock}
           ref={rootRef}
           children={props?.children}
+          aria-label={props?.ariaLabel}
+          role={props.role}
           style={{
             ...backgroundImageStyle(),
             ...props?.imageStyle
@@ -380,6 +392,8 @@ function ResponsiveImage(props: IProps) {
             <div
               className={`${componentName}_image`}
               children={props.children}
+              aria-label={props?.ariaLabel}
+              role={props.role}
               style={{
                 ...backgroundImageStyle(),
                 ...imageElementPosition,
@@ -417,7 +431,7 @@ function ResponsiveImage(props: IProps) {
     return null;
   }
   // if classic image DOM
-  else if (props.type === EImageType.IMAGE_TAG) {
+  else if (props.type === EImageType.TAG_IMAGE) {
     return imageTagRender();
   }
 

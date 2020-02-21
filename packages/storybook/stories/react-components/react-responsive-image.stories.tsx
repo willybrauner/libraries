@@ -25,7 +25,7 @@ export const ImageTag = () => {
         </p>
         <ResponsiveImage
           data={thumbs}
-          type={EImageType.IMAGE_TAG}
+          type={EImageType.TAG_IMAGE}
           imageStyle={{ width: "100%" }}
         />
       </section>
@@ -63,7 +63,7 @@ export const ImageTagPlaceholder = () => {
         </button>
         <ResponsiveImage
           data={thumbs}
-          type={EImageType.IMAGE_TAG}
+          type={EImageType.TAG_IMAGE}
           placeholder={true}
           placeholderColor={"pink"}
           rootStyle={{ marginTop: "1rem" }}
@@ -98,7 +98,7 @@ export const ImageTagLazy = () => {
           <ResponsiveImage
             key={i}
             data={thumbs}
-            type={EImageType.IMAGE_TAG}
+            type={EImageType.TAG_IMAGE}
             lazy={true}
             placeholder={true}
             placeholderColor={"pink"}
@@ -120,7 +120,7 @@ export const ImageTagForceWidth = () => {
       </p>
       <ResponsiveImage
         data={thumbs}
-        type={EImageType.IMAGE_TAG}
+        type={EImageType.TAG_IMAGE}
         forceImageWidth={800}
         imageStyle={{ width: "100%" }}
       />
