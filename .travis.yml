@@ -42,7 +42,6 @@ install:
   - npm ci
 
 script:
-  - ls
   # builder les sources
   #- npm run build-storybook
   # pousser les sources sur le serveur distant
