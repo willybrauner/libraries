@@ -1,6 +1,6 @@
 # Libraries
 
-Libraries is a mono-repos of front-end javascript modules.
+Libraries is a mono-repos of front-end javascript modules for React and vanilla js.
 
 ![Travis (.org)](https://img.shields.io/travis/willybrauner/libraries)
 ![GitHub contributors](https://img.shields.io/github/contributors/willybrauner/libraries)
@@ -13,7 +13,7 @@ Libraries is a mono-repos of front-end javascript modules.
 
 ## Summary
 
-Libraries is WIP! [You can check futur plan](https://github.com/willybrauner/libraries/wiki).
+Libraries is WIP! [You can check future plan](https://github.com/willybrauner/libraries/wiki).
 
 **react-components**
 
