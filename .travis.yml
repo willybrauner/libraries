@@ -45,4 +45,4 @@ script:
   # builder les sources
   #- npm run build-storybook
   # pousser les sources sur le serveur distant
-  - rsync --checksum --recursive --archive --delete --rsh "ssh -o StrictHostKeyChecking=no" packages/storybook/storybook-static ${SSH_USER}@${DEPLOY_URL}:${DEPLOY_FOLDER}
+  - rsync --checksum --recursive --archive --delete --rsh "ssh -o StrictHostKeyChecking=no" storybook-static/ ${SSH_USER}@${DEPLOY_URL}:${DEPLOY_FOLDER}
