@@ -2,7 +2,7 @@
 
 Libraries is a mono-repos of front-end javascript modules. 
 
-`packages` folder separated
+`packages` 
 
 ## How to use
 

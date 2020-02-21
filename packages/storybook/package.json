@@ -1,5 +1,5 @@
 {
-  "name": "storybook-libraries",
+  "name": "@wbe/storybook",
   "version": "0.0.26",
   "description": "Storybook of libraries mono-repos.",
   "main": "index.js",
