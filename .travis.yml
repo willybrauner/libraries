@@ -32,6 +32,7 @@ install:
   # move to folder
   - cd packages/storybook
   # install node dependencies
+  - nvm install $TRAVIS_NODE_VERSION
   - npm ci
   # build app
   - npm run build-storybook
