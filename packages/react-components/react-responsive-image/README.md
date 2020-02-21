@@ -87,6 +87,9 @@ To set a placeholder, DOM structure need to returned image with additional wrapp
 Note: if `lazy` props is set, placeholder is automaticaly enable with default transparent
 placeholder color.
 
+WARNING: `object-fit: cover` is used to get the same effect than `background-size: cover` for background-image.
+Check [can i use](https://caniuse.com/#search=object-fit) compatibility.
+
 ### Lazyload
 
 `ResponsiveImage` as lazyload option. A small transparent base64 image will set in `src` util

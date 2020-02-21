@@ -47,19 +47,13 @@ export const ImageTagPlaceholder = () => {
           dimensions and allow to define an image wrapper who take image
           dimension behind the image.
         </p>
-        <p>
-          WARNING: <code>objectFit: cover</code> is used to get the same effect
-          than
-          <code>background-size:cover</code>. check
-          https://caniuse.com/#search=object-fit
-        </p>
         <button
           onClick={() => {
             if (imageOpacity === 0) setImageOpacity(1);
             if (imageOpacity === 1) setImageOpacity(0);
           }}
         >
-          <h2>toggle image opacity to show placeholder</h2>
+          <h3>toggle image opacity to show placeholder</h3>
         </button>
         <ResponsiveImage
           data={thumbs}
@@ -128,6 +122,24 @@ export const ImageTagForceWidth = () => {
   );
 };
 
+export const ImageForceVerticalRatio = () => {
+  return (
+    <div>
+      <h2>img - force vertical ratio</h2>
+      <p>
+        ForceVertical ratio props is set to 0.9 (wrapper padding-bottom:"90%")
+      </p>
+      <ResponsiveImage
+        data={thumbs}
+        type={EImageType.TAG_IMAGE}
+        forceImageWidth={800}
+        placeholder={true}
+        forceVerticalRatio={0.9}
+      />
+    </div>
+  );
+};
+
 export const BackgroundImage = () => {
   return (
     <div>
@@ -170,7 +182,7 @@ export const BackgroundImagePlaceholder = () => {
             if (imageOpacity === 1) setImageOpacity(0);
           }}
         >
-          <h2>toggle image opacity to show placeholder</h2>
+          <h3>toggle image opacity to show placeholder</h3>
         </button>
         <ResponsiveImage
           data={thumbs}
@@ -203,6 +215,7 @@ storiesOf(`react-components/${storyName}`, module)
   .add("img - placeholder", () => <ImageTagPlaceholder />)
   .add("img - lazy", () => <ImageTagLazy />)
   .add("img - force image width", () => <ImageTagForceWidth />)
+  .add("img - forceVerticalRatio", () => <ImageForceVerticalRatio />)
   .add("background-image", () => <BackgroundImage />)
   .add("background-image - placeholder", () => <BackgroundImagePlaceholder />);
 
