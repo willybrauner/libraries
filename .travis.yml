@@ -12,9 +12,6 @@ branches:
   only:
     - deploy-storybook
 
-#env:
-#  - NODE_RELEASE=12.x
-
 # Ajouter le domaine au ficher known host de la machine virtuelle
 addons:
   ssh_known_hosts:

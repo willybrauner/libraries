@@ -2,7 +2,7 @@ import "../../global-style.css";
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/fake-data-utils/README.md";
-import FakeDataUtils from "@wbe/fake-data-utils/src";
+import FakeDataUtils from "@wbe/fake-data-utils";
 
 // set story name
 const storyName = "fake-data-utils";

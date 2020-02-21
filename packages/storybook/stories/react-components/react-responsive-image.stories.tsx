@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "../../global-style.css";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/react-responsive-image/README.md";
-import ResponsiveImage, { EImageType } from "@wbe/react-responsive-image/src";
-import FakeDataUtils from "@wbe/fake-data-utils/src";
+import ResponsiveImage, { EImageType } from "@wbe/react-responsive-image";
+import FakeDataUtils from "@wbe/fake-data-utils";
 
 // set story name
 const storyName = "react-responsive-image";
