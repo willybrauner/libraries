@@ -29,20 +29,13 @@ before_install:
   - ssh-add /tmp/deploy_rsa
 
 install:
-  # installer node
-  #- curl -sL "https://deb.nodesource.com/setup_${NODE_RELEASE}"
-  #- sudo apt-get install -y nodejs
-  #- npm install -g npm@4
-  #- npm --version
-  # aller dans le dossier
+  # move to folder
   - cd packages/storybook
-  # show repertory
-  - ls
-  # installer des dépendances front
+  # install node dependencies
   - npm ci
+  # build app
+  - npm run build-storybook
 
 script:
-  # builder les sources
-  #- npm run build-storybook
   # pousser les sources sur le serveur distant
   - rsync --checksum --recursive --archive --delete --rsh "ssh -o StrictHostKeyChecking=no" storybook-static/ ${SSH_USER}@${DEPLOY_URL}:${DEPLOY_FOLDER}
