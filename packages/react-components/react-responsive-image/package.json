@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-responsive-image",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "React responsive image with additional options.",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -17,9 +17,9 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^0.0.25",
-    "@wbe/use-is-in-viewport": "^0.0.25",
-    "@wbe/use-responsive-image-data": "^0.0.25",
+    "@wbe/use-bounding-client-rect": "^0.0.26",
+    "@wbe/use-is-in-viewport": "^0.0.26",
+    "@wbe/use-responsive-image-data": "^0.0.26",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
