@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/react": "^16.9.21",
     "@types/react-dom": "^16.9.5",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.2"
   },
   "keywords": [
     "react",
