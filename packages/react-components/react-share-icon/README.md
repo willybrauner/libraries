@@ -37,6 +37,8 @@ export const App = () => {
 | customIcon         | any or null      | Custom SVG icon                              | null                      |
 | targetLink         | string           | Link to be shared                            | ""                        |
 | twitterShareText   | string           | For Twitter, default text in the tweet       | ""                        |
+| popUpWidth         | number           | Share pop up width                           | 626                       |
+| popUpHeight        | number           | Share pop up height                          | 436                       |
 
 
 example:

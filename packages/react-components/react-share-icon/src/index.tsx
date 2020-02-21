@@ -36,6 +36,12 @@ interface IProps {
   // Share text for Twitter
   // Facebook wants input from the user itself
   twitterShareText?: string;
+
+  // Share pop up width
+  popUpWidth?: number;
+
+  // Share pop up height
+  popUpHeight?: number;
 }
 
 /**
@@ -45,7 +51,9 @@ ReactShareIcon.defaultProps = {
   target: ESocialMediaName.FACEBOOK,
   customIcon: null,
   targetLink: "",
-  shareText: ""
+  shareText: "",
+  popUpWidth: 626,
+  popUpHeight: 436
 };
 
 // prepare
@@ -59,6 +67,8 @@ function ReactShareIcon(props: IProps) {
 
   // Component root ref
   const rootRef = useRef(null);
+
+  // --------------------------------------------------------------------------- DECLARATIONS
 
   // Default SVG for Facebook Icon
   const defaultFacebookIconSVG = (
@@ -101,15 +111,15 @@ function ReactShareIcon(props: IProps) {
   const socialPopups = {
     facebook: {
       url: `https://www.facebook.com/sharer/sharer.php?display=popup&u=${props?.targetLink}`,
-      width: 626,
-      height: 436
+      width: props?.popUpWidth,
+      height: props?.popUpHeight
     },
     twitter: {
       url: `https://twitter.com/intent/tweet?text=${
           props?.twitterShareText ? props?.twitterShareText : ""
       }%20${props?.targetLink}`,
-      width: 626,
-      height: 250
+      width: props?.popUpWidth,
+      height: props?.popUpHeight
     }
   };
 
@@ -136,9 +146,9 @@ function ReactShareIcon(props: IProps) {
   useEffect(() => {
     if(props?.customIcon) {
       // Set viewbox
-      rootRef.current.setAttribute("viewBox", props.customIcon.props.viewBox);
+      rootRef.current.setAttribute("viewBox", props?.customIcon?.props?.viewBox);
       // Set inner
-      ReactDOM.render(props.customIcon.props.children, rootRef.current);
+      ReactDOM.render(props?.customIcon?.props?.children, rootRef.current);
     }
   }, []);
 
