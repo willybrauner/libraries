@@ -1,8 +1,8 @@
 sudo: required
 
-#cache:
-#  directories:
-#    - "node_modules"
+cache:
+  directories:
+    - "node_modules"
 
 language: node_js
 node_js:
@@ -10,7 +10,7 @@ node_js:
 
 branches:
   only:
-    - deploy-storybook
+    - master
 
 # Ajouter le domaine au ficher known host de la machine virtuelle
 addons:
