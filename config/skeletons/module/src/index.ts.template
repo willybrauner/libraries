@@ -1,9 +1,8 @@
 
 /**
  * %%camelCaseModuleName%%
- * @description:
  */
-function %%camelCaseModuleName%%():void {
+function %%camelCaseModuleName%%() {
 
 }
 

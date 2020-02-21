@@ -17,7 +17,7 @@ $ npm install @wbe/%%dashCaseModuleName%%
 ## How to use
 
 ```js
-import { %%camelCaseModuleName%% } from "@wbe/%%dashCaseModuleName%%;"
+import { %%camelCaseModuleName%% } from "@wbe/%%dashCaseModuleName%%"
 ```
 
 

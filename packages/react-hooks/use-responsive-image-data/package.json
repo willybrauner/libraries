@@ -1,12 +1,12 @@
 {
-  "name": "@wbe/use-is-in-viewport",
-  "version": "0.0.23",
-  "description": "Check if a specific ref element is visible in viewport.",
+  "name": "@wbe/use-responsive-image-data",
+  "version": "0.0.1",
+  "description": "This hook allow to return a specific IImage object depending of specific width value.",
   "author": "Willy Brauner",
   "license": "MIT",
   "main": "dist/index",
   "types": "dist/index",
-  "private": false,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"
@@ -17,14 +17,13 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^0.0.23",
     "@wbe/use-window-size": "^0.0.23",
-    "react": "^16.12.0"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5",
     "@types/react": "^16.9.21",
-    "debug": "^4.1.1",
+    "@types/react-dom": "^16.9.5",
     "typescript": "^3.7.5"
   },
   "keywords": [

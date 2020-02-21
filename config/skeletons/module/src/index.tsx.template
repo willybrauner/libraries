@@ -1,9 +1,13 @@
+// component name
+const componentName: string = "%%camelCaseModuleName%%";
+//  init debug tool
+const debug = require("debug")(`lib:${componentName}`);
+
 
 /**
  * %%camelCaseModuleName%%
- * @description:
  */
-function %%camelCaseModuleName%%():void {
+function %%camelCaseModuleName%%() {
 
 }
 

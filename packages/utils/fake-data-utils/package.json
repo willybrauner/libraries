@@ -1,20 +1,23 @@
 {
-  "name": "@wbe/use-window-size",
-  "version": "0.0.23",
-  "description": "",
+  "name": "@wbe/fake-data-utils",
+  "version": "0.0.1",
+  "description": "Generate fake data image/text/video allowing to test UI components",
+  "author": "Willy Brauner",
+  "license": "MIT",
   "main": "dist/index",
   "types": "dist/index",
   "private": false,
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig.json"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"
   },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "compile": "tsc -b tsconfig.json"
+  },
   "dependencies": {
+    "@wbe/react-responsive-image": "^0.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -24,13 +27,9 @@
     "typescript": "^3.7.5"
   },
   "keywords": [
-    "react",
-    "hook"
+    "react"
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "author": "Willy Brauner",
-  "license": "MIT",
-  "gitHead": "0e2b9d149f87e364f7ce6e87fda797946b8c2e92"
+  }
 }

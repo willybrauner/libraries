@@ -5,11 +5,8 @@ const config = require("../config");
 const { Files } = require("@zouloux/files");
 const changeCase = require("change-case");
 const { QuickTemplate } = require("../helpers/helper-template");
-// Some colors in the terminal @see : https://github.com/marak/colors.js/
 require("colors");
-const log = require("debug")(
-  `${require("../../package.json").name}:config:scaffold`
-);
+const debug = require("debug")(`config:scaffold`);
 
 // ----------------------------------------------------------------------------- LOGS
 
@@ -54,6 +51,14 @@ const _askDescription = (pType = "module") => {
   });
 };
 
+const _askStory = () => {
+  return Inquirer.prompt({
+    type: "confirm",
+    message: `Create a story in storybook?`,
+    name: "withStory"
+  });
+};
+
 /**
  * Ask question and scaffold a component with a specific script template
  * @returns {Promise<any>}
@@ -80,12 +85,20 @@ const moduleScaffolder = () =>
       moduleDescription = answer.moduleDescription;
     });
 
+    // Get with story response
+    let withStory = true;
+    await _askStory().then(answer => {
+      withStory = answer.withStory;
+      debug("withStory:", withStory);
+    });
+
     // component name "ComponentName" for subfolder and component
     let dashCaseModuleName = changeCase.paramCase(moduleName);
     let camelCaseModuleName = changeCase.camelCase(moduleName);
 
     // Base path of the component (no extension here)
     let modulePath = `${paths.packagesPath}/${subFolder}/${dashCaseModuleName}`;
+    let storiesPath = `${paths.storiesPath}`;
 
     // Check if component already exists
     if (Files.getFiles(`${modulePath}`).files.length > 0) {
@@ -97,14 +110,16 @@ const moduleScaffolder = () =>
      * Create File with template
      * @param filePath
      * @param templatePath: path/to/template/
-     * @param fileName ex: index
+     * @param templateFileName ex: index
+     * @param outputFileName ex: index
      * @param extension ex: ".ts"
      * @param replaceExpressions Expressions list to replace
      */
     const createFile = ({
       filePath = `${modulePath}/`,
       templatePath = `${paths.skeletonsPath}`,
-      fileName = "",
+      templateFileName = "",
+      outputFileName = "",
       extension = "",
       replaceExpressions = {
         dashCaseModuleName,
@@ -114,11 +129,11 @@ const moduleScaffolder = () =>
       }
     }) => {
       // get new file path
-      const newFilePath = `${filePath}${fileName}${extension}`;
+      const newFilePath = `${filePath}${outputFileName}${extension}`;
       // get template path
-      const templateFilePath = `${templatePath}${fileName}${extension}.template`;
+      const templateFilePath = `${templatePath}${templateFileName}${extension}.template`;
       // log them
-      log({ newFilePath, templateFilePath });
+      debug({ newFilePath, templateFilePath });
       // create file with template
       Files.new(newFilePath).write(
         QuickTemplate(
@@ -132,37 +147,62 @@ const moduleScaffolder = () =>
     createFile({
       filePath: `${modulePath}/src/`,
       templatePath: `${paths.skeletonsPath}/module/src/`,
-      fileName: "index",
+      templateFileName: "index",
+      outputFileName: "index",
       extension: subFolder.includes("react") ? ".tsx" : ".ts"
     });
     // create gitignore
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
-      fileName: ".gitignore"
+      templateFileName: ".gitignore",
+      outputFileName: ".gitignore"
     });
     // create npmignore
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
-      fileName: ".npmignore"
+      templateFileName: ".npmignore",
+      outputFileName: ".npmignore"
     });
     // create package.json
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
-      fileName: "package",
+      templateFileName: "package",
+      outputFileName: "package",
       extension: ".json"
     });
     // create readme
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
-      fileName: "README",
+      templateFileName: "README",
+      outputFileName: "README",
       extension: ".md"
     });
     // create tsconfig
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
-      fileName: "tsconfig",
+      templateFileName: "tsconfig",
+      outputFileName: "tsconfig",
       extension: ".json"
     });
+
+    if (withStory) {
+      debug(`withStory: ${withStory}, so we is create file...`);
+      // create module.stories.tsx file
+      createFile({
+        filePath: `${storiesPath}/${subFolder}/`,
+        templatePath: `${paths.skeletonsPath}/stories/`,
+        templateFileName: "stories",
+        outputFileName: `${dashCaseModuleName}.stories`,
+        extension: ".tsx"
+      });
+
+      console.log(`
+    You just create a new story in storybook module. 
+    Path: ${storiesPath}/${subFolder}/\n
+    run this command to add the new module as storybook dependance:
+    $ lerna add @wbe/${dashCaseModuleName} --scope=@wbe/storybook && lerna bootstrap \n
+      `);
+    }
 
     // Done
     showSuccess("Module created!");
