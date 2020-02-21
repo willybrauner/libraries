@@ -34,7 +34,7 @@ install:
   # install node dependencies
   - npm ci
   # build app
-  - npm run build-storybook
+  - npm run build:storybook
 
 script:
   # pousser les sources sur le serveur distant

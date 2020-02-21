@@ -1,12 +1,12 @@
 {
   "name": "@wbe/storybook",
   "version": "0.0.26",
-  "description": "Storybook libraries",
+  "description": "Storybook of libraries mono-repos.",
   "main": "index.js",
   "private": true,
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build:storybook": "build-storybook"
   },
   "author": "Willy Brauner",
   "license": "ISC",
