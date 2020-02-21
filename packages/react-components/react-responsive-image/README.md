@@ -108,7 +108,7 @@ a custom vertical ratio via `forceVerticalRatio` props.
 | ------------------ | ------------- | ---------------------------------------------------------------------------- | ------------- |
 | classNames         | string[]      | class list                                                                   | /             |
 | type               | EImageType    | IMAGE_TAG or BACKGROUND_IMAGE                                                | /             |
-| data               | IImage[]      | array of image object (check thumbs exemple)                                 | /             |
+| data               | IImage[]      | array of image object                                                        | /             |
 | alt                | string        | image alt                                                                    | /             |
 | children           | ReactNode     | add children only if type is EImageType.BACKGROUND_IMAGE                     | /             |
 | lazy               | boolean       | active lazyloading                                                           | false         |
@@ -120,3 +120,5 @@ a custom vertical ratio via `forceVerticalRatio` props.
 | backgroundPosition | number[]      | set a background position `[x, y]`                                           | /             |
 | rootStyle          | CSSProperties | style first child                                                            | /             |
 | imageStyle         | CSSProperties | style image node                                                             | /             |
+
+## returned

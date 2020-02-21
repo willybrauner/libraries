@@ -46,8 +46,6 @@ interface IProps {
   placeholder?: boolean;
   // set specific background color
   placeholderColor?: string;
-  // change css backgroundPosition
-  backgroundPosition?: number[];
   // style first child style
   rootStyle?: CSSProperties;
   // style child element
@@ -285,21 +283,6 @@ function ResponsiveImage(props: IProps) {
     [requiredURL]
   );
 
-  /**
-   * background-position style
-   */
-  const backgroundPositionStyle = useCallback(
-    (
-      pBackgroundPosition: number[] = props.backgroundPosition
-    ): CSSProperties => ({
-      // return background position
-      backgroundPosition: !!pBackgroundPosition
-        ? `${pBackgroundPosition[0]}% ${pBackgroundPosition[1]}%`
-        : null
-    }),
-    [props.backgroundPosition]
-  );
-
   // image / cover child style
   const imageElementPosition: CSSProperties = {
     display: "block",
@@ -375,7 +358,6 @@ function ResponsiveImage(props: IProps) {
           children={props?.children}
           style={{
             ...backgroundImageStyle(),
-            ...backgroundPositionStyle(),
             ...props?.imageStyle
           }}
         />
@@ -400,7 +382,6 @@ function ResponsiveImage(props: IProps) {
               children={props.children}
               style={{
                 ...backgroundImageStyle(),
-                ...backgroundPositionStyle(),
                 ...imageElementPosition,
                 ...props?.imageStyle
               }}
