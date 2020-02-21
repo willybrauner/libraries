@@ -1,6 +1,6 @@
 {
   "name": "@wbe/storybook",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Storybook libraries",
   "main": "index.js",
   "private": true,
@@ -12,13 +12,13 @@
   "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "@wbe/fake-data-utils": "^0.0.24",
-    "@wbe/react-grid-layout": "^0.0.24",
-    "@wbe/react-responsive-image": "^0.0.24",
-    "@wbe/use-bounding-client-rect": "^0.0.24",
-    "@wbe/use-is-in-viewport": "^0.0.24",
-    "@wbe/use-responsive-image-data": "^0.0.24",
-    "@wbe/use-window-size": "^0.0.24"
+    "@wbe/fake-data-utils": "^0.0.25",
+    "@wbe/react-grid-layout": "^0.0.25",
+    "@wbe/react-responsive-image": "^0.0.25",
+    "@wbe/use-bounding-client-rect": "^0.0.25",
+    "@wbe/use-is-in-viewport": "^0.0.25",
+    "@wbe/use-responsive-image-data": "^0.0.25",
+    "@wbe/use-window-size": "^0.0.25"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
