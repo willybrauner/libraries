@@ -1,4 +1,4 @@
-import { IImage } from "@wbe/react-responsive-image/src";
+import { IImage } from "@wbe/react-responsive-image";
 // component name
 const name: string = "fake-data-utils";
 //  init debug tool
