@@ -1,0 +1,39 @@
+sudo: required
+
+cache:
+  directories:
+    - "node_modules"
+
+language: node_js
+node_js:
+  - "stable"
+
+branches:
+  only:
+    - master
+
+# Ajouter le domaine au ficher known host de la machine virtuelle
+addons:
+  ssh_known_hosts:
+    - libraries.willybrauner.com
+
+# config SSH
+before_install:
+  - echo -e "Host ${DEPLOY_URL}ntStrictHostKeyChecking non" >> ~/.ssh/config
+  - openssl aes-256-cbc -K $encrypted_d6991b43c6df_key -iv $encrypted_d6991b43c6df_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - sudo chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
+
+install:
+  # move to folder
+  - cd packages/storybook
+  # install node dependencies
+  - nvm install $TRAVIS_NODE_VERSION
+  - npm ci
+  # build app
+  - npm run build-storybook
+
+script:
+  # pousser les sources sur le serveur distant
+  - rsync --checksum --recursive --archive --delete --rsh "ssh -o StrictHostKeyChecking=no" storybook-static/ ${SSH_USER}@${DEPLOY_URL}:${DEPLOY_FOLDER}

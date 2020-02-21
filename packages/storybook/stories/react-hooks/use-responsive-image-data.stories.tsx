@@ -3,10 +3,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-responsive-image-data/README.md";
 import useWindowSize from "@wbe/use-window-size";
-import FakeDataUtils from "@wbe/fake-data-utils/src";
-import useResponsiveImageData, {
-  IImage
-} from "@wbe/use-responsive-image-data/src";
+import FakeDataUtils from "@wbe/fake-data-utils";
+import useResponsiveImageData, { IImage } from "@wbe/use-responsive-image-data";
 
 // set story name
 const storyName = "use-responsive-image-data";
