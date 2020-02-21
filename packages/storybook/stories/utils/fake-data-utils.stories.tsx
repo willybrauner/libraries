@@ -53,12 +53,6 @@ storiesOf(`utils/${storyName}`, module)
       sidebar: README
     }
   })
-  .add("fake image", () => <FakeDataImage />, {
-    info: README
-  })
-  .add("fake text", () => <FakeText />, {
-    info: README
-  })
-  .add("fake video", () => <FakeVideo />, {
-    info: README
-  });
+  .add("fake image", () => <FakeDataImage />)
+  .add("fake text", () => <FakeText />)
+  .add("fake video", () => <FakeVideo />);

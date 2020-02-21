@@ -1,17 +1,29 @@
-import { addParameters, addDecorator, configure } from "@storybook/react";
-// @ts-ignore
-import theme from "./theme";
 // @ts-ignore
 import { addReadme } from "storybook-readme";
-
+// add readme
 addDecorator(addReadme);
+import { addParameters, addDecorator, configure } from "@storybook/react";
+import { create } from "@storybook/theming";
 
 addParameters({
   options: {
     /**
      * Load theme
      */
-    theme,
+    theme: create({
+      base: "light",
+      brandTitle: "@wbe/libraries",
+      brandUrl: null,
+      brandImage: null
+    }),
+
+    /**
+     * Readme addon config
+     */
+    readme: {
+      //codeTheme: 'darcula',
+      codeTheme: "github"
+    },
 
     /**
      * show story component as full screen
@@ -35,11 +47,6 @@ addParameters({
     panelPosition: "right",
     /**
      * sorts stories
-     * @type {Boolean}
-     */
-    sortStoriesByKind: false,
-    /**
-     * sidebar tree animations
      * @type {Boolean}
      */
     sidebarAnimations: true,

@@ -4,11 +4,12 @@ import GridLayout from "@wbe/react-grid-layout";
 import README from "@wbe/react-grid-layout/README.md";
 import "../../global-style.css";
 const storyName = "react-grid-layout";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
 
 /**
  * Demo
  */
-export const App = ({ gutterSize }: { gutterSize: number }) => {
+const App = ({ gutter }: { gutter: number }) => {
   // show grid state
   const [showGrid, setShowGrid] = useState(true);
 
@@ -24,15 +25,20 @@ export const App = ({ gutterSize }: { gutterSize: number }) => {
 
   return (
     <div className="App">
+      {showGrid && (
+        <GridLayout
+          columnsNumber={number("columnNumber", 6)}
+          gutterSize={number("gutterSize", gutter)}
+          maxWidth={number("maxWidth", 1024)}
+          color={text("color", "rgba(255, 0, 0, 0.14)")}
+        />
+      )}
       <div className="App_wrapper" style={css.wrapper}>
         <h1 className="App_title" style={css.title}>
           React Grid Layout Component
         </h1>
         <p>Just press "G Key" on your keyboard to toggle the grid. 💪</p>
       </div>
-      {showGrid && (
-        <GridLayout columnsNumber={6} gutterSize={gutterSize} maxWidth={1024} />
-      )}
     </div>
   );
 };
@@ -58,5 +64,6 @@ storiesOf(`react-components/${storyName}`, module)
       sidebar: README
     }
   })
-  .add("basic example", () => <App gutterSize={20} />)
-  .add("column line", () => <App gutterSize={0} />);
+  .addDecorator(withKnobs)
+  .add("basic example", () => <App gutter={20} />)
+  .add("column line", () => <App gutter={0} />);
