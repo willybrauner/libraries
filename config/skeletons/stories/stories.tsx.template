@@ -10,7 +10,7 @@ const storyName = "%%dashCaseModuleName%%";
 /**
  * Demo
  */
-export const App = () => {
+const App = () => {
   return (
     <div>
       {storyName}

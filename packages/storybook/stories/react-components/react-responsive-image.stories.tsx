@@ -14,7 +14,7 @@ const thumbs = FakeDataUtils.instance.getResponsiveImageData(16 / 9);
 /**
  * Demo
  */
-export const ImageTag = () => {
+const ImageTag = () => {
   return (
     <div>
       <section>
@@ -33,7 +33,7 @@ export const ImageTag = () => {
   );
 };
 
-export const ImageTagPlaceholder = () => {
+const ImageTagPlaceholder = () => {
   // define image opacity
   const [imageOpacity, setImageOpacity] = useState(1);
 
@@ -73,7 +73,7 @@ export const ImageTagPlaceholder = () => {
   );
 };
 
-export const ImageTagLazy = () => {
+const ImageTagLazy = () => {
   return (
     <div>
       <h2>img - lazyload</h2>
@@ -104,7 +104,7 @@ export const ImageTagLazy = () => {
   );
 };
 
-export const ImageTagForceWidth = () => {
+const ImageTagForceWidth = () => {
   return (
     <div>
       <h2>img - force by width</h2>
@@ -122,7 +122,7 @@ export const ImageTagForceWidth = () => {
   );
 };
 
-export const ImageForceVerticalRatio = () => {
+const ImageForceVerticalRatio = () => {
   return (
     <div>
       <h2>img - force vertical ratio</h2>
@@ -140,7 +140,7 @@ export const ImageForceVerticalRatio = () => {
   );
 };
 
-export const BackgroundImage = () => {
+const BackgroundImage = () => {
   return (
     <div>
       <section>
@@ -163,7 +163,7 @@ export const BackgroundImage = () => {
   );
 };
 
-export const BackgroundImagePlaceholder = () => {
+const BackgroundImagePlaceholder = () => {
   // define image opacity
   const [imageOpacity, setImageOpacity] = useState(1);
   return (
