@@ -29,17 +29,12 @@ before_install:
   - ssh-add /tmp/deploy_rsa
 
 install:
-  - npm i -g npm@6.1.0
-  - p=$(which npm)
-  - rm $p
-  - ln -s /home/travis/.nvm/versions/node/v10.1.0/bin/npm $p || true
-  #- npm -v
   # move to folder
   - cd packages/storybook
   # install node dependencies
   - npm ci
   # build app
-  - npm run build:storybook
+  - npm run build-storybook
 
 script:
   # pousser les sources sur le serveur distant
