@@ -31,7 +31,7 @@ install:
   # install appropriate npm version
   - nvm install $TRAVIS_NODE_VERSION
   # install node dependencies
-  - npm ci
+  - npm install
   # build app
   - npm run build-storybook
 
