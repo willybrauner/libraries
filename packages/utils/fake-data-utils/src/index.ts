@@ -36,17 +36,15 @@ class FakeDataUtils {
 
   // Text API TODO
 
-  /**
-   * Get random value
-   * @param min
-   * @param max
-   */
-  static randomIntFromInterval(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+  // --------------------------------------------------------------------------- UTILS
 
-  static get randomId() {
-    return FakeDataUtils.randomIntFromInterval(1, 200);
+  /**
+   * Get random value between min and max
+   * @param pMin
+   * @param pMax
+   */
+  static randomIntFromInterval(pMin: number, pMax: number) {
+    return Math.floor(Math.random() * (pMax - pMin + 1) + pMin);
   }
 
   // --------------------------------------------------------------------------- PUBLIC API
@@ -54,12 +52,8 @@ class FakeDataUtils {
   /**
    * @name getResponsiveImageData
    * @param pRatio
-   * @param pImageAPI
    */
-  public getResponsiveImageData(
-    pRatio: number = 4 / 3,
-    pImageAPI = this.imageAPI
-  ): IImage[] {
+  public getResponsiveImageData(pRatio: number = 4 / 3): IImage[] {
     // get breakpoint sizes
     const imageBreakPoints = [640, 1024, 1640, 1900];
 
@@ -74,16 +68,15 @@ class FakeDataUtils {
       // build url
       const buildURL = [
         // API
-        pImageAPI,
+        this.imageAPI,
+        // random id
         "/id/",
-        FakeDataUtils.randomId,
+        FakeDataUtils.randomIntFromInterval(1, 200),
         // size
         "/",
         imageSize.width,
         "/",
         imageSize.height
-        // random id
-        //`?random=${randomId}`
       ].join("");
 
       // return build URL
