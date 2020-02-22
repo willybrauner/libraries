@@ -11,7 +11,7 @@
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/%%dashCaseModuleName%%
+$ npm install -s @wbe/%%dashCaseModuleName%%
 ```
 
 ## How to use

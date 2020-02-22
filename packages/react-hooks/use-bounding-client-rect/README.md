@@ -11,7 +11,7 @@ This React hook allow to get dynamically `getBoundClientRect` of any React Ref.
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/use-bounding-client-rect
+$ npm install -s @wbe/use-bounding-client-rect
 ```
 
 ## How to use

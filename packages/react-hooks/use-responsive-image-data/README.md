@@ -11,7 +11,7 @@ This hook allow to get image object whose width is closest to the value provided
 ## Installation
 
 ```shell script
-$ npm install @wbe/use-responsive-image-data
+$ npm install -s @wbe/use-responsive-image-data
 ```
 
 ## How to use
@@ -19,7 +19,7 @@ $ npm install @wbe/use-responsive-image-data
 Basic usage:
 
 ```jsx
-import { useResponsiveImageData, IImage } from "@wbe/use-responsive-image-data";
+import useResponsiveImageData, { IImage } from "@wbe/use-responsive-image-data";
 
 const thumbs: IImage[] = [
   {

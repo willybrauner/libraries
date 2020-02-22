@@ -52,7 +52,7 @@ $ npm install -s @wbe/react-responsive-image
 ```
 
 ```tsx
-import reactResponsiveImage from "@wbe/react-responsive-image";
+import ResponsiveImage from "@wbe/react-responsive-image";
 ```
 
 ### Install libraries standelone package

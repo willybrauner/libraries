@@ -11,11 +11,11 @@ Generate fake data image/text/video allowing to test UI components
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/fake-data-utils
+$ npm install -s @wbe/fake-data-utils
 ```
 
 ## How to use
 
 ```js
-import fakeDataGenerator from "@wbe/fake-data-utils";
+import fakeDataUtils from "@wbe/fake-data-utils";
 ```

@@ -11,7 +11,7 @@ This package is standalone repos who embarks every modules of [libraries](https:
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/libraries
+$ npm install -s @wbe/libraries
 ```
 
 ## How to use

@@ -11,7 +11,7 @@ This React hook allow to check if a specific ref element is visible in viewport.
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/use-is-in-viewport
+$ npm install -s @wbe/use-is-in-viewport
 ```
 
 ## How to use

@@ -13,12 +13,10 @@ This component allow to display a simple fixed grid layout on front of your reac
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/react-grid-layout
+$ npm install -s @wbe/react-grid-layout
 ```
 
 ## How to use
-
-Import `<GridLayout />` component anywhere.
 
 ```jsx
 import GridLayout from "@wbe/react-grid-layout";

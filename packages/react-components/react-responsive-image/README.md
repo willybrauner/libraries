@@ -19,7 +19,7 @@ This component is a wrapper DOM rendering of `@wbe/use-responsive-image-data`.
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/react-responsive-image
+$ npm install -s @wbe/react-responsive-image
 ```
 
 ## How to use
@@ -27,7 +27,7 @@ $ npm install -S @wbe/react-responsive-image
 Basic usage return a responsive image with `<img />` tag:
 
 ```tsx
-import reactResponsiveImage from "@wbe/react-responsive-image";
+import ResponsiveImage -s from "@wbe/react-responsive-image";
 
 const thumbs = [
   {

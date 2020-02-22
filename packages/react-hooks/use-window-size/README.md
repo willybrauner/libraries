@@ -11,7 +11,7 @@ This React hook allow to get dynamically window dimensions.
 ## Installation
 
 ```shell script
-$ npm install -S @wbe/use-window-size
+$ npm install -s @wbe/use-window-size
 ```
 
 ## How to use
