@@ -7,7 +7,8 @@
     "reset": "lerna clean && rm -rf packages/**/package-lock.json && rm -rf packages/**/**/package-lock.json && lerna bootstrap",
     "scaffold": "node ./config/tasks/scaffold.js",
     "publish:all": "lerna bootstrap && lerna run compile && lerna publish",
-    "prettier": "prettier --write '*/**/**/**/*.{js,jsx,ts,tsx,css,json,md}'"
+    "prettier": "prettier --write '*/**/**/**/*.{js,jsx,ts,tsx,css,json,md}'",
+    "storybook": "cd packages/storybook && npm run storybook"
   },
   "devDependencies": {
     "@zouloux/files": "^0.6.0",
