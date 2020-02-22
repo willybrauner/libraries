@@ -1,8 +1,8 @@
 sudo: required
 
-cache:
-  directories:
-    - "node_modules"
+#cache:
+#  directories:
+#    - "node_modules"
 
 language: node_js
 node_js:
@@ -11,6 +11,7 @@ node_js:
 branches:
   only:
     - master
+    - fix-travis-ci
 
 # Ajouter le domaine au ficher known host de la machine virtuelle
 addons:
@@ -29,7 +30,7 @@ install:
   # move to folder
   - cd packages/storybook
   # install node dependencies
-  - nvm install $TRAVIS_NODE_VERSION
+  # - nvm install $TRAVIS_NODE_VERSION
   - npm ci
   # build app
   - npm run build-storybook
