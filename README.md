@@ -1,4 +1,4 @@
-# Libraries
+# 📦 Libraries
 
 Libraries is a mono-repos of front-end javascript modules for React and vanilla js.
 
@@ -12,11 +12,6 @@ Libraries is a mono-repos of front-end javascript modules for React and vanilla 
 ✅ Javascript modules write with typescript  
 ✅ Libraries standalone module  
 ✅ Storybook documentation
-
-### For who
-
-- Developers, freelancers, agencies and studios who like worked with React and Typescript.
-- Cher Ami front-end projects.
 
 ## Summary
 
