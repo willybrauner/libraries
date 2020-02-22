@@ -1,6 +1,6 @@
 {
   "name": "@wbe/fake-data-utils",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "Generate fake data image/text/video allowing to test UI components",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wbe/react-responsive-image": "^0.0.26"
+    "@wbe/react-responsive-image": "^0.0.27"
   },
   "devDependencies": {
     "typescript": "^3.8.2"
