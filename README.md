@@ -9,7 +9,7 @@ Libraries is a mono-repos of front-end javascript modules for React and vanilla 
 
 ### Features
 
-✅ Javascript modules write with typescript  
+✅ Javascript modules written with typescript  
 ✅ Libraries standalone module  
 ✅ Storybook documentation
 
@@ -51,12 +51,20 @@ Each modules can be imported separately like this:
 $ npm install -s @wbe/react-responsive-image
 ```
 
+```tsx
+import reactResponsiveImage from "@wbe/react-responsive-image";
+```
+
 ### Install libraries standelone package
 
 All modules are imported in a single one package [libraries](packages/libraries).
 
 ```shell script
 $ npm install -s @wbe/libraries
+```
+
+```tsx
+import { react-responsive-image } from "@wbe/libraries";
 ```
 
 ## Documentation
@@ -72,7 +80,7 @@ do not submit a new module without using the scaffolder tool.
 Clone the repos and move to repos folder:
 
 ```shell script
-$ git clone git@github.com:willybrauner/libraries.git libraries && cd libraries 
+$ git clone git@github.com:willybrauner/libraries.git libraries && cd libraries
 ```
 
 Install all dependencies:
@@ -88,7 +96,7 @@ $ npm run scaffold
 ```
 
 Module scaffolder will prepare a module file struture ready to use + a dedicated `module.stories.tsx`
-in [storybook package](packages/storybook/stories). 
+in [storybook package](packages/storybook/stories).
 
 ## Credits
 

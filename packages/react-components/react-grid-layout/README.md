@@ -21,7 +21,6 @@ $ npm install -S @wbe/react-grid-layout
 Import `<GridLayout />` component anywhere.
 
 ```jsx
-// ...
 import GridLayout from "@wbe/react-grid-layout";
 
 export const App = () => {

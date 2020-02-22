@@ -11,13 +11,13 @@
 ## Installation
 
 ```shell script
-$ npm install @wbe/%%dashCaseModuleName%%
+$ npm install -S @wbe/%%dashCaseModuleName%%
 ```
 
 ## How to use
 
 ```js
-import { %%camelCaseModuleName%% } from "@wbe/%%dashCaseModuleName%%"
+import %%camelCaseModuleName%% from "@wbe/%%dashCaseModuleName%%"
 ```
 
 
