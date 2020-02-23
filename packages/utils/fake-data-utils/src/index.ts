@@ -5,6 +5,15 @@ const name: string = "fake-data-utils";
 const debug = require("debug")(`lib:${name}`);
 
 /**
+ * Video Type
+ */
+enum EVideoType {
+  YOUTUBE,
+  VIMEO,
+  NATIVE
+}
+
+/**
  * @name FakeDataUtils
  * @description Generate fake data to simulate content
  */
@@ -30,9 +39,10 @@ class FakeDataUtils {
   // --------------------------------------------------------------------------- LOCAL
 
   // API image
-  private imageAPI = "https://picsum.photos";
+  private imageApi = "https://picsum.photos";
 
   // Video API TODO
+  private videoApi = "";
 
   // Text API TODO
 
@@ -48,6 +58,20 @@ class FakeDataUtils {
   }
 
   // --------------------------------------------------------------------------- PUBLIC API
+
+  /**
+   *
+   * @param pVideoType
+   */
+  // public getVideoUrl(pVideoType: EVideoType): string {
+  //   if (EVideoType === EVideoType.YOUTUBE) {
+  //
+  //   }
+  //   if (EVideoType === EVideoType.VIMEO) {
+  //   }
+  //   if (EVideoType === EVideoType.NATIVE) {
+  //   }
+  // }
 
   /**
    * @name getResponsiveImageData
@@ -68,7 +92,7 @@ class FakeDataUtils {
       // build url
       const buildURL = [
         // API
-        this.imageAPI,
+        this.imageApi,
         // random id
         "/id/",
         FakeDataUtils.randomIntFromInterval(1, 200),

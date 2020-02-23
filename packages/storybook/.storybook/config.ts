@@ -12,7 +12,7 @@ addParameters({
      */
     theme: create({
       base: "light",
-      brandTitle: "@wbe/libraries",
+      brandTitle: "📦 Libraries",
       brandUrl: null,
       brandImage: null
     }),

@@ -17,7 +17,6 @@ $ npm install -s @wbe/use-window-size
 ## How to use
 
 ```jsx
-// ...
 import useWindowSize from "@wbe/use-window-size";
 
 const App = () => {
