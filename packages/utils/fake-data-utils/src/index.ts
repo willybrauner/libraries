@@ -26,30 +26,13 @@ export enum ETextType {
  * @description Generate fake data to simulate content
  */
 class FakeDataUtils {
-  // --------------------------------------------------------------------------- SINGLETON
-
-  // Singleton
-  protected static __instance: FakeDataUtils;
-
-  /**
-   * Get FakeDataUtils singleton instance.
-   */
-  static get instance() {
-    // Create instance
-    if (FakeDataUtils.__instance == null) {
-      FakeDataUtils.__instance = new FakeDataUtils();
-    }
-    // Return singleton instance
-    return FakeDataUtils.__instance;
-  }
-
   // --------------------------------------------------------------------------- DATAS
 
   // image API
-  private _imageApi = "https://picsum.photos";
+  private static imageApi = "https://picsum.photos";
 
   // Collection of NPR tiny desk concert youtube video Ids
-  private _youtubeIds = [
+  private static youtubeIds = [
     "gxlA6JB3Z6w",
     "ferZnZ0_rSM",
     "qYPQ0EUmbTs",
@@ -68,7 +51,7 @@ class FakeDataUtils {
   ];
 
   // Collection of skate and snowboad vimeo video Ids
-  private _vimeoIds = [
+  private static vimeoIds = [
     "142320599",
     "17363035",
     "36168588",
@@ -86,34 +69,27 @@ class FakeDataUtils {
   ];
 
   // Collection of native video urls
-  private _nativeVideosUrl = [
+  private static nativeVideosUrl = [
     "https://cher-ami.tv/user/pages/02.works/12.le-bon-marche/SCENE_1.mp4"
   ];
 
-  // Text API
-  // private _textApi = "http://skateipsum.com";
-
-  /**
-   *
-   */
-  static getRandomLoremSentence = () =>
-    FakeDataUtils.randomValueFromArray([
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Donec egestas lacus et porta congue.",
-      "Proin semper mauris et hendrerit euismod.",
-      "Aenean bibendum nunc a nunc aliquam vulputate vitae in nisi.",
-      "Nam faucibus ipsum condimentum, lobortis ante quis, tempus nunc.",
-      "Vivamus vulputate nisi nec metus pulvinar scelerisque non in ex.",
-      "Duis quis eros vel metus vehicula tristique eu id ipsum.",
-      "In ac nisi pharetra sem efficitur placerat.",
-      "Nam finibus turpis at quam pulvinar, et elementum ante pharetra.",
-      "Sed vel massa lacinia dolor lacinia molestie.",
-      "Curabitur fermentum ante id mi tristique commodo.",
-      "Aliquam at mi eu orci ultrices dignissim ut vel sem.",
-      "Pellentesque iaculis odio vel leo venenatis, ut vehicula mauris varius.",
-      "Etiam ac risus eget odio hendrerit iaculis non ac libero.",
-      "Curabitur in augue in urna ultrices porta."
-    ]);
+  private static lorem = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Donec egestas lacus et porta congue.",
+    "Proin semper mauris et hendrerit euismod.",
+    "Aenean bibendum nunc a nunc aliquam vulputate vitae in nisi.",
+    "Nam faucibus ipsum condimentum, lobortis ante quis, tempus nunc.",
+    "Vivamus vulputate nisi nec metus pulvinar scelerisque non in ex.",
+    "Duis quis eros vel metus vehicula tristique eu id ipsum.",
+    "In ac nisi pharetra sem efficitur placerat.",
+    "Nam finibus turpis at quam pulvinar, et elementum ante pharetra.",
+    "Sed vel massa lacinia dolor lacinia molestie.",
+    "Curabitur fermentum ante id mi tristique commodo.",
+    "Aliquam at mi eu orci ultrices dignissim ut vel sem.",
+    "Pellentesque iaculis odio vel leo venenatis, ut vehicula mauris varius.",
+    "Etiam ac risus eget odio hendrerit iaculis non ac libero.",
+    "Curabitur in augue in urna ultrices porta."
+  ];
 
   // --------------------------------------------------------------------------- UTILS
 
@@ -122,14 +98,14 @@ class FakeDataUtils {
    * @param pMin
    * @param pMax
    */
-  static randomIntFromInterval(pMin: number, pMax: number) {
+  private static randomIntFromInterval(pMin: number, pMax: number) {
     return Math.floor(Math.random() * (pMax - pMin + 1) + pMin);
   }
 
   /**
    * Get random Value from array
    */
-  static randomValueFromArray(pArray: any[]): any {
+  private static randomValueFromArray(pArray: any[]): any {
     return pArray[Math.floor(Math.random() * pArray.length)];
   }
 
@@ -140,7 +116,7 @@ class FakeDataUtils {
    * @param pRatio
    * @return {IImage[]} return a array of IImage
    */
-  public getResponsiveImageData(pRatio: number = 4 / 3): IImage[] {
+  public static getResponsiveImageData(pRatio: number = 4 / 3): IImage[] {
     // get breakpoint sizes // TODO need to be injected
     const imageBreakPoints = [640, 1024, 1640, 1900];
     //  build array
@@ -153,7 +129,7 @@ class FakeDataUtils {
       // build url
       const buildURL = [
         // API
-        this._imageApi,
+        this.imageApi,
         // random id
         "/id/",
         FakeDataUtils.randomIntFromInterval(1, 200),
@@ -182,29 +158,29 @@ class FakeDataUtils {
    * @return {string} video URL
    */
   // prettier-ignore
-  public getVideoUrl(
+  public static getVideoUrl(
     pVideoType: EVideoType,
-    pYoutubeId: string = FakeDataUtils.randomValueFromArray(this._youtubeIds),
-    pVimeoId: string = FakeDataUtils.randomValueFromArray(this._vimeoIds)
+    pYoutubeId: string = FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds),
+    pVimeoId: string = FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds)
   ): string {
 
     // if is youtube
     if (pVideoType === EVideoType.YOUTUBE) {
-      const url = `https://youtu.be/${FakeDataUtils.randomValueFromArray(this._youtubeIds)}`;
+      const url = `https://youtu.be/${FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds)}`;
       debug("random youtube url", url);
       return url;
     }
 
     // if is vimeo
     if (pVideoType === EVideoType.VIMEO) {
-      const url = `https://vimeo.com/${FakeDataUtils.randomValueFromArray(this._vimeoIds)}`;
+      const url = `https://vimeo.com/${FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds)}`;
       debug("random vimeo url", url);
       return url;
     }
 
     // if is native
     if (pVideoType === EVideoType.NATIVE) {
-      const url = FakeDataUtils.randomValueFromArray(this._nativeVideosUrl);
+      const url = FakeDataUtils.randomValueFromArray(FakeDataUtils.nativeVideosUrl);
       debug("random native video url", url);
       return url;
     }
@@ -215,40 +191,44 @@ class FakeDataUtils {
    * @param pVideoType
    * @return {string} video ID
    */
-  public getVideoId(pVideoType: EVideoType.YOUTUBE | EVideoType.VIMEO): string {
+  public static getVideoId(
+    pVideoType: EVideoType.YOUTUBE | EVideoType.VIMEO
+  ): string {
     if (pVideoType === EVideoType.YOUTUBE) {
-      const id = FakeDataUtils.randomValueFromArray(this._youtubeIds);
+      const id = FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds);
       debug("random youtube id", id);
       return id;
     }
     if (pVideoType === EVideoType.VIMEO) {
-      const id = FakeDataUtils.randomValueFromArray(this._vimeoIds);
+      const id = FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds);
       debug("random viemo id", id);
       return id;
     }
   }
 
   /**
-   * Générer un faux titre depuis les "lorem ipsum", avec un nombre de caractères max
+   * Get Title
+   * @return {string}
    */
-  static getRandomTitle = (pMaxWords = Number.POSITIVE_INFINITY) =>
-    FakeDataUtils.getRandomLoremSentence()
+  public static getTitle(pMaxWords = Number.POSITIVE_INFINITY): string {
+    return FakeDataUtils.randomValueFromArray(FakeDataUtils.lorem)
       .split(" ")
       .map((el: any, i: number) => (i > pMaxWords ? null : el))
       .filter((el: any) => el != null)
       .join(" ");
+  }
 
-  /**
-   * Get Text
-   * @param pType type of text
-   * @param pLength Size of text
-   * @return {string} text
-   */
-  public getText(
-    pType: ETextType = ETextType.BRUT,
-    pLength: number = 1
-  ): string {
-    return "";
+  // TODO en cours
+  public static getText(pMaxSentences = Number.POSITIVE_INFINITY): string {
+    return FakeDataUtils.randomValueFromArray(FakeDataUtils.lorem)
+      .split(" ")
+      .map((el: any, i: number) => {
+        if (el >= 0 && el < pMaxSentences) {
+          debug("edlkedldk", el);
+        }
+      })
+      .filter((el: any) => el)
+      .join(" ");
   }
 }
 
