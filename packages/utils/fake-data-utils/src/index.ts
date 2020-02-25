@@ -93,6 +93,28 @@ class FakeDataUtils {
   // Text API
   // private _textApi = "http://skateipsum.com";
 
+  /**
+   *
+   */
+  static getRandomLoremSentence = () =>
+    FakeDataUtils.randomValueFromArray([
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Donec egestas lacus et porta congue.",
+      "Proin semper mauris et hendrerit euismod.",
+      "Aenean bibendum nunc a nunc aliquam vulputate vitae in nisi.",
+      "Nam faucibus ipsum condimentum, lobortis ante quis, tempus nunc.",
+      "Vivamus vulputate nisi nec metus pulvinar scelerisque non in ex.",
+      "Duis quis eros vel metus vehicula tristique eu id ipsum.",
+      "In ac nisi pharetra sem efficitur placerat.",
+      "Nam finibus turpis at quam pulvinar, et elementum ante pharetra.",
+      "Sed vel massa lacinia dolor lacinia molestie.",
+      "Curabitur fermentum ante id mi tristique commodo.",
+      "Aliquam at mi eu orci ultrices dignissim ut vel sem.",
+      "Pellentesque iaculis odio vel leo venenatis, ut vehicula mauris varius.",
+      "Etiam ac risus eget odio hendrerit iaculis non ac libero.",
+      "Curabitur in augue in urna ultrices porta."
+    ]);
+
   // --------------------------------------------------------------------------- UTILS
 
   /**
@@ -205,6 +227,16 @@ class FakeDataUtils {
       return id;
     }
   }
+
+  /**
+   * Générer un faux titre depuis les "lorem ipsum", avec un nombre de caractères max
+   */
+  static getRandomTitle = (pMaxWords = Number.POSITIVE_INFINITY) =>
+    FakeDataUtils.getRandomLoremSentence()
+      .split(" ")
+      .map((el: any, i: number) => (i > pMaxWords ? null : el))
+      .filter((el: any) => el != null)
+      .join(" ");
 
   /**
    * Get Text
