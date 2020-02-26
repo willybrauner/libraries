@@ -1,7 +1,7 @@
 {
-  "name": "@wbe/use-document-scrolltop",
+  "name": "@wbe/use-document-scroll-top",
   "version": "0.0.1",
-  "description": "Get dynamic current document scrolltop.",
+  "description": "Get dynamic current document scrollTop.",
   "author": "Willy Brauner",
   "license": "MIT",
   "main": "dist/index",

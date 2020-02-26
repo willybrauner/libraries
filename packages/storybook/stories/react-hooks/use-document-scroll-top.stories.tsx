@@ -1,13 +1,11 @@
 import "../../global-style.css";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import README from "@wbe/use-document-scrolltop/README.md";
-import useDocumentScrollTop from "@wbe/use-document-scrolltop";
-// @ts-ignore
-// import your module from src
+import README from "@wbe/use-document-scroll-top/README.md";
+import useDocumentScrollTop from "../../../react-hooks/use-document-scroll-top";
 
 // set story name
-const storyName = "use-document-scrolltop";
+const storyName = "use-document-scroll-top";
 
 /**
  * Demo
