@@ -23,9 +23,10 @@
     "typescript": "^3.8.2"
   },
   "keywords": [
-    "react"
+    "utils"
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "6685e8d20f475c4fbd0ef670700a6f71add3a09e"
 }
