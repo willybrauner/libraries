@@ -14,14 +14,6 @@ export enum EVideoType {
 }
 
 /**
- * Text Type
- */
-export enum ETextType {
-  BRUT = "text",
-  HTML = "HTML"
-}
-
-/**
  * @name FakeDataUtils
  * @description Generate fake data to simulate content
  */
@@ -104,23 +96,52 @@ class FakeDataUtils {
 
   /**
    * Get random Value from array
+   * @param pArray: array we pick a random value
    */
   private static randomValueFromArray(pArray: any[]): any {
     return pArray[Math.floor(Math.random() * pArray.length)];
+  }
+
+  /**
+   * Shuffle an indexed array.
+   * Source : https://bost.ocks.org/mike/shuffle/
+   * @param pArray The indexed array to shuffle.
+   * @return Original instance of array with same elements at other indexes
+   */
+  private static shuffleArray(pArray: any[]): any[] {
+    let currentIndex = pArray.length;
+    let temporaryValue;
+    let randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = pArray[currentIndex];
+      pArray[currentIndex] = pArray[randomIndex];
+      pArray[randomIndex] = temporaryValue;
+    }
+
+    return pArray;
   }
 
   // --------------------------------------------------------------------------- PUBLIC API
 
   /**
    * Get Responsive Image Data
-   * @param pRatio
+   * @param {number} pRatio: Image ratio
+   * @param {number[]} pBeakpoints: Breakpoints list
    * @return {IImage[]} return a array of IImage
    */
-  public static getResponsiveImageData(pRatio: number = 4 / 3): IImage[] {
-    // get breakpoint sizes // TODO need to be injected
-    const imageBreakPoints = [640, 1024, 1640, 1900];
+  public static getResponsiveImageData(
+    pRatio: number = 4 / 3,
+    pBeakpoints: number[] = [640, 1024, 1440, 1920]
+  ): IImage[] {
     //  build array
-    const fakeImageArray: IImage[] = imageBreakPoints.map(el => {
+    const fakeImageArray: IImage[] = pBeakpoints.map(el => {
       // get image size depend of el
       const imageSize = {
         width: el,
@@ -157,30 +178,32 @@ class FakeDataUtils {
    * @param pVimeoId
    * @return {string} video URL
    */
-  // prettier-ignore
   public static getVideoUrl(
     pVideoType: EVideoType,
-    pYoutubeId: string = FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds),
-    pVimeoId: string = FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds)
+    pYoutubeId: string = FakeDataUtils.randomValueFromArray(
+      FakeDataUtils.youtubeIds
+    ),
+    pVimeoId: string = FakeDataUtils.randomValueFromArray(
+      FakeDataUtils.vimeoIds
+    )
   ): string {
-
     // if is youtube
     if (pVideoType === EVideoType.YOUTUBE) {
-      const url = `https://youtu.be/${FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds)}`;
+      const url = `https://youtu.be/${pYoutubeId}`;
       debug("random youtube url", url);
       return url;
     }
-
     // if is vimeo
     if (pVideoType === EVideoType.VIMEO) {
-      const url = `https://vimeo.com/${FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds)}`;
+      const url = `https://vimeo.com/${pVimeoId}`;
       debug("random vimeo url", url);
       return url;
     }
-
     // if is native
     if (pVideoType === EVideoType.NATIVE) {
-      const url = FakeDataUtils.randomValueFromArray(FakeDataUtils.nativeVideosUrl);
+      const url = FakeDataUtils.randomValueFromArray(
+        FakeDataUtils.nativeVideosUrl
+      );
       debug("random native video url", url);
       return url;
     }
@@ -208,27 +231,64 @@ class FakeDataUtils {
 
   /**
    * Get Title
-   * @return {string}
+   * @param {number} pWords: number of words we want to compose the title
+   * @return {string} the title
    */
-  public static getTitle(pMaxWords = Number.POSITIVE_INFINITY): string {
-    return FakeDataUtils.randomValueFromArray(FakeDataUtils.lorem)
-      .split(" ")
-      .map((el: any, i: number) => (i > pMaxWords ? null : el))
-      .filter((el: any) => el != null)
-      .join(" ");
+  public static getTitle(pWords: number = 1): string {
+    // get lorem text array
+    const lorem: string[] = FakeDataUtils.lorem;
+
+    // register title text
+    const title =
+      // get a random value from array
+      FakeDataUtils.randomValueFromArray(lorem)
+        // split each spaces to get words
+        .split(" ")
+        // map each words and keep if only right number
+        .map((el: any, i: number) => (i <= pWords - 1 ? el : null))
+        // remove null values
+        .filter((v: any) => v)
+        // join result as string
+        .join(" ");
+
+    debug("getTitle", title);
+    // return title result
+    return title;
   }
 
-  // TODO en cours
-  public static getText(pMaxSentences = Number.POSITIVE_INFINITY): string {
-    return FakeDataUtils.randomValueFromArray(FakeDataUtils.lorem)
-      .split(" ")
-      .map((el: any, i: number) => {
-        if (el >= 0 && el < pMaxSentences) {
-          debug("edlkedldk", el);
-        }
-      })
-      .filter((el: any) => el)
-      .join(" ");
+  /**
+   * Get regular text
+   * @param {number} pSentencies: number of sentencies we want to compose the text
+   * @return {string} the text
+   */
+  public static getText(pSentencies: number = 1): string {
+    // get lorem text array
+    const lorem: string[] = FakeDataUtils.lorem;
+    // register text
+    const text =
+      // shuffle lorem array
+      FakeDataUtils.shuffleArray(lorem)
+        // map all sentencies
+        .map((el: any, i: number) =>
+          // keep only right sentencies number
+          i <= pSentencies - 1 ? el : null
+        )
+        // remove null values
+        .filter(v => v)
+        // join results as string
+        .join(" ");
+
+    // return text result
+    return text;
+  }
+
+  /**
+   * Get HTML text
+   * @param pLength
+   * TODO
+   */
+  public static getHtml(pLength: number = 1): string {
+    return "";
   }
 }
 

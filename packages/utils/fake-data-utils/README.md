@@ -27,6 +27,7 @@ import fakeDataUtils from "@wbe/fake-data-utils";
 - [getResponsiveImageData](#getResponsiveImageData)
 - [getVideoUrl](#getVideoUrl)
 - [getVideoId](#getVideoId)
+- [getTitle](#getTitle)
 - [getText](#getText)
 
 ### <a name="getResponsiveImageData"></a>getResponsiveImageData
@@ -34,12 +35,13 @@ import fakeDataUtils from "@wbe/fake-data-utils";
 Get an array of random IImage objects.
 
 ```tsx
-getResponsiveImageData(pRatio);
+getResponsiveImageData(pRatio, pBreakpoints);
 ```
 
 #### Parameters
 
 - `pRatio (number)`: Image ratio - default: `4 / 3`
+- `pBreakpoints (number[])`: Breakpoints list - default: `[640, 1024, 1440, 1920]`
 
 #### Returns
 
@@ -49,9 +51,7 @@ getResponsiveImageData(pRatio);
 
 ```tsx
 // will returned an array of IImage object with 16/9 ratio
-const fakeResponsiveImageData = FakeDataUtils.instance.getResponsiveImageData(
-  16 / 9
-);
+const responsiveImageData = FakeDataUtils.getResponsiveImageData(16 / 9);
 ```
 
 ### <a name="getVideoUrl"></a>getVideoUrl
@@ -76,7 +76,7 @@ getVideoUrl(pVideoType, pYoutubeId, pVimeoId);
 
 ```tsx
 // will returned a random youtube url
-const fakeYoutubeUrl = FakeDataUtils.instance.getVideoUrl(EVideoType.YOUTUBE);
+const youtubeUrl = FakeDataUtils.getVideoUrl(EVideoType.YOUTUBE);
 ```
 
 ### <a name="getVideoId"></a>getVideoId
@@ -99,5 +99,51 @@ getVideoId(pVideoType);
 
 ```tsx
 // will returned a random vimeo id
-const fakeVimeoUrl = FakeDataUtils.instance.getVideoId(EVideoType.VIMEO);
+const vimeoUrl = FakeDataUtils.getVideoId(EVideoType.VIMEO);
+```
+
+### <a name="getTitle"></a>getTitle
+
+Get a random title.
+
+```tsx
+getTitle(pWords);
+```
+
+#### Parameters
+
+- `pWords (number)`: Number of words - default: `1`
+
+#### Returns
+
+`(string)`: title
+
+#### Example
+
+```tsx
+// will returned two random words
+const title = FakeDataUtils.getTitle(2);
+```
+
+### <a name="getText"></a>getText
+
+Get random text.
+
+```tsx
+getText(pSentencies);
+```
+
+#### Parameters
+
+- `pSentencies (number)`: Number of sentencies - default: `1`
+
+#### Returns
+
+`(string)`: text
+
+#### Example
+
+```tsx
+// will returned four random sentencies
+const text = FakeDataUtils.getText(4);
 ```
