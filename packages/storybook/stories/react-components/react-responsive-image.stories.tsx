@@ -9,7 +9,7 @@ import FakeDataUtils from "@wbe/fake-data-utils";
 const storyName = "react-responsive-image";
 
 // get fake thumbs array
-const thumbs = FakeDataUtils.instance.getResponsiveImageData(16 / 9);
+const thumbs = FakeDataUtils.getResponsiveImageData(16 / 9);
 
 /**
  * Demo
@@ -87,7 +87,7 @@ const ImageTagLazy = () => {
       </p>
       {new Array(50).fill(null).map((el, i) => {
         // get thumbs per iteration
-        const thumbs = FakeDataUtils.instance.getResponsiveImageData(16 / 9);
+        const thumbs = FakeDataUtils.getResponsiveImageData(16 / 9);
         return (
           <ResponsiveImage
             key={i}

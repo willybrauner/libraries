@@ -13,7 +13,7 @@ const storyName = "use-responsive-image-data";
  * Demo
  */
 // get fake thumbs array
-const thumbs = FakeDataUtils.instance.getResponsiveImageData(16 / 9);
+const thumbs = FakeDataUtils.getResponsiveImageData(16 / 9);
 
 export const App = () => {
   // get current width

@@ -1,7 +1,5 @@
 // @ts-ignore
 import { addReadme } from "storybook-readme";
-// add readme
-addDecorator(addReadme);
 import { addParameters, addDecorator, configure } from "@storybook/react";
 import { create } from "@storybook/theming";
 
@@ -12,7 +10,7 @@ addParameters({
      */
     theme: create({
       base: "light",
-      brandTitle: "@wbe/libraries",
+      brandTitle: "📦 Libraries",
       brandUrl: null,
       brandImage: null
     }),
@@ -21,8 +19,8 @@ addParameters({
      * Readme addon config
      */
     readme: {
-      //codeTheme: 'darcula',
-      codeTheme: "github"
+      codeTheme: "darcula"
+      //codeTheme: "github"
     },
 
     /**
@@ -62,6 +60,9 @@ addParameters({
     isToolshown: true
   }
 });
+
+// add readme
+addDecorator(addReadme);
 
 configure(
   // @ts-ignore

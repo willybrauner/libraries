@@ -25,7 +25,7 @@ import useBoundingClientRect from "@wbe/use-window-size";
 const App = () => {
   // get ref
   const rootRef = useRef();
-  // get window size
+  // get ref properties
   const refRect = useBoundingClientRect(rootRef);
 
   return (
