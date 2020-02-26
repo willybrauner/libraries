@@ -14,6 +14,7 @@
     "@wbe/react-grid-layout": "^0.0.28",
     "@wbe/react-responsive-image": "^0.0.28",
     "@wbe/use-bounding-client-rect": "^0.0.28",
+    "@wbe/use-document-scrolltop": "^0.0.1",
     "@wbe/use-is-in-viewport": "^0.0.28",
     "@wbe/use-responsive-image-data": "^0.0.28",
     "@wbe/use-window-size": "^0.0.28"
