@@ -42,7 +42,7 @@ const thumbs = [
   }
 ];
 const App = () => {
-  return <ResponsiveImage type={EImageType.IMAGE_TAG} data={thumbs} />;
+  return <ResponsiveImage type={EImageType.TAG_IMAGE} data={thumbs} />;
 };
 ```
 
@@ -65,7 +65,7 @@ ratio size is calc via image dimensions and allow to define an image wrapper
 who take image dimension.
 
 ```tsx
-<ResponsiveImage type={EImageType.IMAGE_TAG} data={thumbs} placeholder={true} />
+<ResponsiveImage type={EImageType.TAG_IMAGE} data={thumbs} placeholder={true} />
 ```
 
 A background-color can be set to this placeholder via `placeholderColor` props.
@@ -102,7 +102,7 @@ Check [can i use](https://caniuse.com/#search=object-fit) compatibility.
 the image is visible in window.
 
 ```tsx
-<ResponsiveImage type={EImageType.IMAGE_TAG} data={thumbs} lazy={true} />
+<ResponsiveImage type={EImageType.TAG_IMAGE} data={thumbs} lazy={true} />
 ```
 
 You can prevent image loading with `lazyOffset` props.
@@ -111,7 +111,7 @@ or after border window.
 
 ```tsx
 <ResponsiveImage
-  type={EImageType.IMAGE_TAG}
+  type={EImageType.TAG_IMAGE}
   data={thumbs}
   lazy={true}
   lazyOffset={-40}
@@ -139,7 +139,7 @@ a custom vertical ratio via `forceVerticalRatio` props.
 
 ```tsx
 <ResponsiveImage
-  type={EImageType.IMAGE_TAG}
+  type={EImageType.TAG_IMAGE}
   data={thumbs}
   placeholder={true}
   placeholderColor={"#EEE"}
