@@ -20,5 +20,9 @@ $ npm install -s @wbe/%%dashCaseModuleName%%
 import %%camelCaseModuleName%% from "@wbe/%%dashCaseModuleName%%"
 ```
 
+## example
 
+## Parameters / Props
+
+## Returns
 
