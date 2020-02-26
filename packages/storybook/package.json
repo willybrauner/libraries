@@ -1,6 +1,6 @@
 {
   "name": "@wbe/storybook",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Storybook of libraries mono-repos.",
   "private": true,
   "scripts": {
@@ -10,14 +10,14 @@
   "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "@wbe/fake-data-utils": "^0.0.28",
-    "@wbe/react-grid-layout": "^0.0.28",
-    "@wbe/react-responsive-image": "^0.0.28",
-    "@wbe/use-bounding-client-rect": "^0.0.28",
-    "@wbe/use-document-scroll-top": "^0.0.1",
-    "@wbe/use-is-in-viewport": "^0.0.28",
-    "@wbe/use-responsive-image-data": "^0.0.28",
-    "@wbe/use-window-size": "^0.0.28"
+    "@wbe/fake-data-utils": "^0.0.29",
+    "@wbe/react-grid-layout": "^0.0.29",
+    "@wbe/react-responsive-image": "^0.0.29",
+    "@wbe/use-bounding-client-rect": "^0.0.29",
+    "@wbe/use-document-scroll-top": "^0.0.29",
+    "@wbe/use-is-in-viewport": "^0.0.29",
+    "@wbe/use-responsive-image-data": "^0.0.29",
+    "@wbe/use-window-size": "^0.0.29"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
