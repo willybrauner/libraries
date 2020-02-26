@@ -10,7 +10,7 @@
   "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "@wbe/fake-data-utils": "^0.0.27",
+    "@wbe/fake-data-utils": "^0.0.28",
     "@wbe/react-grid-layout": "^0.0.28",
     "@wbe/react-responsive-image": "^0.0.28",
     "@wbe/use-bounding-client-rect": "^0.0.28",
