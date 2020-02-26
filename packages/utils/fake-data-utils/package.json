@@ -17,7 +17,7 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wbe/react-responsive-image": "^0.0.27"
+    "@wbe/react-responsive-image": "^0.0.28"
   },
   "devDependencies": {
     "typescript": "^3.8.2"
