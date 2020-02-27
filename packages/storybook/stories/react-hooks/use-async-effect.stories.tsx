@@ -2,7 +2,6 @@ import "../../global-style.css";
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-async-effect/README.md";
-// import your module from src
 import { useAsyncEffect, useAsyncLayoutEffect } from "@wbe/use-async-effect";
 
 // set story name
