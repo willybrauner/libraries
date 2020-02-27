@@ -17,6 +17,7 @@
     "@wbe/fake-data-utils": "^0.0.27",
     "@wbe/react-grid-layout": "^0.0.29",
     "@wbe/react-responsive-image": "^0.0.29",
+    "@wbe/use-async-effect": "^0.0.1",
     "@wbe/use-bounding-client-rect": "^0.0.29",
     "@wbe/use-is-in-viewport": "^0.0.29",
     "@wbe/use-responsive-image-data": "^0.0.29",
