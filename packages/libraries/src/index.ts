@@ -12,11 +12,12 @@ export { default as ResponsiveImage, EImageType, IImage } from "@wbe/react-respo
 /**
  * react-hooks
  */
+export { useAsyncEffect, useAsyncLayoutEffect } from "@wbe/use-async-effect";
 export { default as useBoundingClientRect, EListener } from "@wbe/use-bounding-client-rect";
-export { default as useWindowSize, IWindowSize } from "@wbe/use-window-size";
+export { default as useDocumentScrollTop } from "@wbe/use-document-scroll-top";
 export { default as useIsInViewport } from "@wbe/use-is-in-viewport";
 export { default as useResponsiveImageData } from "@wbe/use-responsive-image-data";
-export { useAsyncEffect, useAsyncLayoutEffect } from "@wbe/use-async-effect";
+export { default as useWindowSize, IWindowSize } from "@wbe/use-window-size";
 
 /**
  * utils
