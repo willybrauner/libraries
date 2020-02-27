@@ -1,6 +1,6 @@
 {
   "name": "@wbe/use-responsive-image-data",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "This hook allow to return a specific IImage object depending of specific width value.",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "@wbe/use-window-size": "^0.0.29",
+    "@wbe/use-window-size": "^0.0.30",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
