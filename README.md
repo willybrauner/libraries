@@ -24,7 +24,9 @@ Libraries is WIP! [You can check future plan](https://github.com/willybrauner/li
 
 **react-hooks**
 
+- [use-async-effect](packages/react-hooks/use-async-effect)
 - [use-bounding-client-rect](packages/react-hooks/use-bounding-client-rect)
+- [use-document-scroll-top](packages/react-hooks/use-document-scroll-top)
 - [use-is-in-viewport](packages/react-hooks/use-is-in-viewport)
 - [use-responsive-image-data](packages/react-hooks/use-responsive-image-data)
 - [use-window-size](packages/react-hooks/use-window-size)
