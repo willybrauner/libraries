@@ -24,4 +24,4 @@ import { GridLayout } from "@wbe/libraries";
 
 ## Availables modules
 
-Check [storybook](https://github.com/willybrauner/libraries/packages/storybook/).
+Check [storybook](https://github.com/willybrauner/libraries/storybook/).

@@ -27,7 +27,7 @@ before_install:
 
 install:
   # move to folder
-  - cd packages/storybook
+  - cd storybook
   # install appropriate npm version
   - nvm install $TRAVIS_NODE_VERSION
   # install node dependencies

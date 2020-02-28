@@ -96,7 +96,7 @@ $ npm run scaffold
 ```
 
 Module scaffolder will prepare a module file struture ready to use + a dedicated `module.stories.tsx`
-in [storybook package](packages/storybook/stories).
+in [storybook package](storybook/stories).
 
 ## Credits
 
