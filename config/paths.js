@@ -8,5 +8,5 @@ module.exports = {
   // packages path
   packagesPath: appRoot.resolve("packages"),
   //
-  storiesPath: appRoot.resolve("packages/storybook/stories")
+  storiesPath: appRoot.resolve("storybook/stories")
 };

@@ -24,9 +24,6 @@
     "@wbe/use-responsive-image-data": "^0.0.30",
     "@wbe/use-window-size": "^0.0.30"
   },
-  "devDependencies": {
-    "typescript": "^3.8.2"
-  },
   "keywords": [
     "react",
     "libraries",

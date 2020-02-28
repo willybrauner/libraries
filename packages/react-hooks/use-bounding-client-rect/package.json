@@ -2,6 +2,8 @@
   "name": "@wbe/use-bounding-client-rect",
   "version": "0.0.30",
   "description": "Get dynamically bounding client rect",
+  "author": "Willy Brauner",
+  "license": "MIT",
   "main": "dist/index",
   "types": "dist/index",
   "private": false,
@@ -16,13 +18,10 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.22",
-    "@types/react-dom": "^16.9.5",
-    "typescript": "^3.8.2"
+    "@types/react": "^16.9.23"
   },
   "keywords": [
     "react",
@@ -31,7 +30,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "Willy Brauner",
-  "license": "MIT",
   "gitHead": "6685e8d20f475c4fbd0ef670700a6f71add3a09e"
 }
