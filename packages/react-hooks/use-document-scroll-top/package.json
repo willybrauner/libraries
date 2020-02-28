@@ -17,16 +17,14 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
-    "typescript": "^3.7.3"
+    "@types/react": "^16.9.23"
   },
   "keywords": [
-    "react"
+    "react",
+    "hook"
   ],
   "publishConfig": {
     "access": "public"

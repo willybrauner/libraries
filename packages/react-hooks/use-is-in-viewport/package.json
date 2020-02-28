@@ -19,16 +19,14 @@
   "dependencies": {
     "@wbe/use-bounding-client-rect": "^0.0.30",
     "@wbe/use-window-size": "^0.0.30",
-    "react": "^16.12.0"
+    "react": "^16.13.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5",
-    "@types/react": "^16.9.22",
-    "debug": "^4.1.1",
-    "typescript": "^3.8.2"
+    "@types/react": "^16.9.23"
   },
   "keywords": [
-    "react"
+    "react",
+    "hook"
   ],
   "publishConfig": {
     "access": "public"

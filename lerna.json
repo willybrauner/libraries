@@ -3,8 +3,8 @@
     "packages/libraries/",
     "packages/react-components/*",
     "packages/react-hooks/*",
-    "packages/storybook/",
-    "packages/utils/*"
+    "packages/utils/*",
+    "storybook/"
   ],
   "version": "0.0.30"
 }

@@ -18,16 +18,14 @@
   },
   "dependencies": {
     "@wbe/use-window-size": "^0.0.30",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.22",
-    "@types/react-dom": "^16.9.5",
-    "typescript": "^3.8.2"
+    "@types/react": "^16.9.23"
   },
   "keywords": [
-    "react"
+    "react",
+    "hook"
   ],
   "publishConfig": {
     "access": "public"

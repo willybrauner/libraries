@@ -19,9 +19,6 @@
   "dependencies": {
     "@wbe/react-responsive-image": "^0.0.30"
   },
-  "devDependencies": {
-    "typescript": "^3.8.2"
-  },
   "keywords": [
     "utils"
   ],
