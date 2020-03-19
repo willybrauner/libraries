@@ -1,8 +1,17 @@
-import React, { useRef } from "react";
+import React, { CSSProperties, useRef } from "react";
 import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
 import useWindowSize from "@wbe/use-window-size";
+
+// component name
+const component: string = "GridLayout";
+const debug = require("debug")(`lib:GridLayout`);
+
+export enum EGridOrientation {
+  VERTIVAL,
+  HORIZONTAL
+}
 
 interface IProps {
   /**
@@ -14,7 +23,7 @@ interface IProps {
    * Gutter size between Column (px value)
    * if 0 is return, a 1px "grid line" will be display
    */
-  gutterSize?: number;
+  gutterSize?: number | string;
 
   /**
    * Set custom grid color
@@ -22,9 +31,20 @@ interface IProps {
   color?: string;
 
   /**
-   *  Set a max-width to the all grid (px value)
+   * Set a max-width to the all grid (px value by default)
+   * Can accept string like '90vw'
    */
-  maxWidth?: number | null;
+  maxWidth?: number | string | null;
+
+  // /**
+  //  * Center the grid in viewport
+  //  */
+  // center?: boolean;
+  //
+  // /**
+  //  * Orientation
+  //  */
+  // orientation?: EGridOrientation;
 }
 
 GridLayout.defaultProps = {
@@ -33,10 +53,9 @@ GridLayout.defaultProps = {
   showGridByDefault: false,
   color: "rgba(255, 0, 0, 0.14)",
   maxWidth: null
+  // center: true,
+  // orientation: EGridOrientation.VERTIVAL
 } as IProps;
-
-// component name
-const component: string = "GridLayout";
 
 /**
  * @name GridLayout
@@ -44,7 +63,7 @@ const component: string = "GridLayout";
  * @constructor
  */
 function GridLayout(props: IProps) {
-  // --------------------------------------------------------------------------- WINDOW SIZE
+  // --------------------------------------------------------------------------- INIT
 
   // Get root ref
   const rootRef = useRef<HTMLDivElement>(null);
@@ -53,7 +72,41 @@ function GridLayout(props: IProps) {
     rootRef,
     EListener.ON_SCROLL_AND_RESIZE
   );
+  // get dynamic window size
   const windowSize = useWindowSize();
+
+  // --------------------------------------------------------------------------- TEST TYPE
+
+  /**
+   * Test if is there only number in string
+   * ex "20" return true
+   * ex "20px" return false
+   * @param pValue
+   * @return {boolean}
+   */
+  const isThereOnlyNumberInString = (pValue: string): boolean => {
+    const reg = /^\d+$/;
+    return reg.test(pValue);
+  };
+
+  /**
+   * Check if a string contain only number
+   * If it's true, add px at the end
+   * @return a string with px unit by default of
+   */
+  const fixUnit = (pValue: string | number): string => {
+    // exit
+    if (pValue === null) return;
+
+    // if is a string
+    if (typeof pValue === "string") {
+      return isThereOnlyNumberInString(pValue) ? `${pValue}px` : pValue;
+    }
+    // if is number
+    else if (typeof pValue === "number") {
+      return `${pValue}px`;
+    }
+  };
 
   // --------------------------------------------------------------------------- COLUMN STYLE
 
@@ -62,23 +115,53 @@ function GridLayout(props: IProps) {
    * @param pMaxWidth
    * @param pWindowWidth
    */
-  const rootStyle = (pMaxWidth: number, pWindowWidth: number) => {
-    // check
+  const rootStyle = (
+    pMaxWidth = props.maxWidth,
+    pWindowWidth = windowSize?.width
+  ): CSSProperties | null => {
     if (
       // if max width is null
-      pMaxWidth == null ||
-      // or if max-width is bigger than window width
-      pMaxWidth > pWindowWidth
+      pMaxWidth === null ||
+      // or if max-width is a number & is bigger than window width
+      (typeof pMaxWidth === "number" && pMaxWidth > pWindowWidth)
     ) {
       // do not continue
-      return;
+      return null;
     }
     // return style for root element
     return {
       marginLeft: "auto",
       marginRight: "auto",
-      maxWidth: pMaxWidth
+      maxWidth: fixUnit(pMaxWidth)
     };
+  };
+
+  /**
+   * Select size container reference
+   * @param pWindow
+   * @param pMaxWidth
+   * @param pRootRect
+   */
+  const selectSizeContainerReference = ({
+    pMaxWidth = props?.maxWidth,
+    pWindow = windowSize,
+    pRootRect = rootRect
+  }) => {
+    // cas max width is a string
+    if (typeof pMaxWidth === "string") {
+      return pRootRect?.width;
+    }
+    // case max width is a number or null
+    else if (typeof pMaxWidth === "number" || pMaxWidth === null) {
+      return (
+        // if screen is smaller than max width
+        pWindow?.width > pMaxWidth
+          ? // ref is element size
+            pRootRect?.width
+          : // else, if screen is bigger than max width, ref is window width
+            pWindow?.width
+      );
+    }
   };
 
   /**
@@ -89,28 +172,33 @@ function GridLayout(props: IProps) {
    * @param pColor
    * @param pIndex
    */
-  const columnStyle = (
-    pWidth: number,
-    pColumnNumber: number,
-    pGutter: number,
-    pColor: string,
-    pIndex: number
-  ) => {
+  const columnStyle = ({
+    pIndex,
+    pWidth = selectSizeContainerReference({}),
+    pColumnNumber = props.columnsNumber,
+    pGutterSize = props.gutterSize,
+    pColor = props.color
+  }: {
+    pIndex: number;
+    pWidth?: number;
+    pColumnNumber?: number;
+    pGutterSize?: number | string;
+    pColor?: string;
+  }): CSSProperties => {
     // if there is no gutter, we apply pColor on border right
-    if (pGutter === 0) {
+    if (pGutterSize === 0 || fixUnit(pGutterSize) === "0px") {
       return {
-        width: pWidth / pColumnNumber,
-        borderRight:
-          pIndex + 1 === pColumnNumber
-            ? // return no border
-              null
-            : `${pColor} 1px solid`
+        // prettier-ignore
+        width: `calc(${fixUnit(pWidth)} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
+        borderLeft: `${pColor} 1px solid`,
+        borderRight: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
       };
-
-      // if a gutter size is set, we use this gutter and apply color on gutter background
+      // if a gutter size is set, we use this gutter
+      // and apply color on gutter background
     } else {
       return {
-        width: pWidth / pColumnNumber - pGutter + pGutter / pColumnNumber,
+        // prettier-ignore
+        width: `calc(${fixUnit(pWidth)} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
         backgroundColor: pColor
       };
     }
@@ -118,13 +206,12 @@ function GridLayout(props: IProps) {
 
   // --------------------------------------------------------------------------- RENDER
 
-  // return Grid Layout DOM if state is set to true
   return (
     <div
       className={component}
       style={{
         ...css.root,
-        ...rootStyle(props.maxWidth, windowSize?.width)
+        ...rootStyle()
       }}
       ref={rootRef}
     >
@@ -135,15 +222,7 @@ function GridLayout(props: IProps) {
             key={i}
             style={{
               ...css.column,
-              ...columnStyle(
-                windowSize?.width > props?.maxWidth
-                  ? rootRect && rootRect.width
-                  : windowSize?.width,
-                props.columnsNumber,
-                props.gutterSize,
-                props.color,
-                i
-              )
+              ...columnStyle({ pIndex: i })
             }}
           />
         ))}
@@ -157,7 +236,7 @@ function GridLayout(props: IProps) {
 /**
  * Define DOM elements style
  */
-const css: any = {
+const css: { [x: string]: CSSProperties } = {
   root: {
     position: "fixed",
     top: "0",
