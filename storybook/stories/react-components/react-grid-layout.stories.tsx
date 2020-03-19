@@ -6,7 +6,7 @@ import GridLayout from "../../../packages/react-components/react-grid-layout/src
 import README from "@wbe/react-grid-layout/README.md";
 import "../../global-style.css";
 const storyName = "react-grid-layout";
-import { withKnobs, text, number } from "@storybook/addon-knobs";
+import { withKnobs, text, number, boolean } from "@storybook/addon-knobs";
 
 /**
  * Demo
@@ -33,6 +33,7 @@ const App = ({ gutter }: { gutter: number }) => {
           gutterSize={number("gutterSize", gutter)}
           maxWidth={number("maxWidth", 1024)}
           color={text("color", "rgba(255, 0, 0, 0.14)")}
+          center={boolean("center", true)}
         />
       )}
       <div className="App_wrapper" style={css.wrapper}>

@@ -36,10 +36,10 @@ interface IProps {
    */
   maxWidth?: number | string | null;
 
-  // /**
-  //  * Center the grid in viewport
-  //  */
-  // center?: boolean;
+  /**
+   * Center the grid in viewport
+   */
+  center?: boolean;
   //
   // /**
   //  * Orientation
@@ -52,8 +52,8 @@ GridLayout.defaultProps = {
   gutterSize: 20,
   showGridByDefault: false,
   color: "rgba(255, 0, 0, 0.14)",
-  maxWidth: null
-  // center: true,
+  maxWidth: null,
+  center: true
   // orientation: EGridOrientation.VERTIVAL
 } as IProps;
 
@@ -114,10 +114,12 @@ function GridLayout(props: IProps) {
    * Set root DOM element style
    * @param pMaxWidth
    * @param pWindowWidth
+   * @param pCenter
    */
   const rootStyle = (
     pMaxWidth = props.maxWidth,
-    pWindowWidth = windowSize?.width
+    pWindowWidth = windowSize?.width,
+    pCenter = props.center
   ): CSSProperties | null => {
     if (
       // if max width is null
@@ -130,8 +132,8 @@ function GridLayout(props: IProps) {
     }
     // return style for root element
     return {
-      marginLeft: "auto",
-      marginRight: "auto",
+      marginLeft: pCenter && "auto",
+      marginRight: pCenter && "auto",
       maxWidth: fixUnit(pMaxWidth)
     };
   };
