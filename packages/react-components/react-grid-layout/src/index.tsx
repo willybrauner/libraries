@@ -2,14 +2,14 @@ import React, { CSSProperties, useRef } from "react";
 import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
-import useWindowSize from "@wbe/use-window-size";
+import useWindowSize, { IWindowSize } from "@wbe/use-window-size";
 
-// component name
+// init
 const component: string = "GridLayout";
-const debug = require("debug")(`lib:GridLayout`);
+const debug = require("debug")(`lib:${component}`);
 
-export enum EGridOrientation {
-  VERTIVAL,
+export enum EOrientation {
+  VERTICAL,
   HORIZONTAL
 }
 
@@ -31,20 +31,20 @@ interface IProps {
   color?: string;
 
   /**
-   * Set a max-width to the all grid (px value by default)
+   * Set a max size to the all grid (px value by default)
    * Can accept string like '90vw'
    */
-  maxWidth?: number | string | null;
+  maxSize?: number | string | null;
 
   /**
    * Center the grid in viewport
    */
   center?: boolean;
-  //
-  // /**
-  //  * Orientation
-  //  */
-  // orientation?: EGridOrientation;
+
+  /**
+   * Grid Orientation
+   */
+  orientation?: EOrientation;
 }
 
 GridLayout.defaultProps = {
@@ -52,10 +52,17 @@ GridLayout.defaultProps = {
   gutterSize: 20,
   showGridByDefault: false,
   color: "rgba(255, 0, 0, 0.14)",
-  maxWidth: null,
-  center: true
-  // orientation: EGridOrientation.VERTIVAL
+  maxSize: null,
+  center: true,
+
+  // FIXME remettre en vertical
+  orientation: EOrientation.HORIZONTAL
 } as IProps;
+
+enum ESizeObject {
+  WINDOW_SIZE,
+  ROOT_RECT
+}
 
 /**
  * @name GridLayout
@@ -75,7 +82,7 @@ function GridLayout(props: IProps) {
   // get dynamic window size
   const windowSize = useWindowSize();
 
-  // --------------------------------------------------------------------------- TEST TYPE
+  // --------------------------------------------------------------------------- TEST TYPE / UNIT
 
   /**
    * Test if is there only number in string
@@ -108,103 +115,205 @@ function GridLayout(props: IProps) {
     }
   };
 
-  // --------------------------------------------------------------------------- COLUMN STYLE
+  // --------------------------------------------------------------------------- SIZE
+
+  /**
+   * Select Size reference depend of orientation
+   * @param pSelectObject
+   * @param pOrientation
+   * @param pSizeObject
+   * @param pWindowSize
+   * @param pRootRect
+   * @return object.width or object.height
+   */
+  const sizeReference = ({
+    pSelectObject,
+    pOrientation = props.orientation,
+    pWindowSize = windowSize,
+    pRootRect = rootRect
+  }: {
+    pSelectObject: ESizeObject;
+    pOrientation?: EOrientation;
+    pWindowSize?: IWindowSize;
+    pRootRect?: ClientRect | DOMRect;
+  }): number => {
+    // create object ref
+    let objectRef;
+    // select object ref
+    if (pSelectObject === ESizeObject.WINDOW_SIZE) objectRef = pWindowSize;
+    else if (pSelectObject === ESizeObject.ROOT_RECT) objectRef = pRootRect;
+
+    // select object key depend of orientation
+    if (pOrientation === EOrientation.VERTICAL) return objectRef?.width;
+    else if (pOrientation === EOrientation.HORIZONTAL) return objectRef?.height;
+  };
+
+  /**
+   * Select container size reference
+   * TODO pas très clair pourquoi pas le meme traitement que pMax soit un string ou non :/
+   * @param pMaxSize
+   */
+  const containerSizeReference = (pMaxSize = props?.maxSize): number => {
+    // cas max size is a string
+    if (typeof pMaxSize === "string") {
+      return sizeReference({ pSelectObject: ESizeObject.ROOT_RECT });
+    }
+    // case max width is a number or null
+    else if (typeof pMaxSize === "number" || pMaxSize === null) {
+      return (
+        // if screen is smaller than max width
+        sizeReference({ pSelectObject: ESizeObject.WINDOW_SIZE }) > pMaxSize
+          ? // ref is element size
+            sizeReference({ pSelectObject: ESizeObject.ROOT_RECT })
+          : // else, if screen is bigger than max width, ref is window width
+            sizeReference({ pSelectObject: ESizeObject.WINDOW_SIZE })
+      );
+    }
+  };
+
+  // --------------------------------------------------------------------------- STYLE
 
   /**
    * Set root DOM element style
-   * @param pMaxWidth
-   * @param pWindowWidth
+   * @param pMaxSize
    * @param pCenter
+   * @param pOrientation
    */
   const rootStyle = (
-    pMaxWidth = props.maxWidth,
-    pWindowWidth = windowSize?.width,
-    pCenter = props.center
+    pMaxSize = props.maxSize,
+    pCenter = props.center,
+    pOrientation = props.orientation
   ): CSSProperties | null => {
     if (
       // if max width is null
-      pMaxWidth === null ||
+      pMaxSize === null ||
       // or if max-width is a number & is bigger than window width
-      (typeof pMaxWidth === "number" && pMaxWidth > pWindowWidth)
+      (typeof pMaxSize === "number" &&
+        pMaxSize > sizeReference({ pSelectObject: ESizeObject.WINDOW_SIZE }))
     ) {
       // do not continue
       return null;
     }
     // return style for root element
     return {
-      marginLeft: pCenter && "auto",
-      marginRight: pCenter && "auto",
-      maxWidth: fixUnit(pMaxWidth)
+      marginLeft:
+        pOrientation === EOrientation.VERTICAL && pCenter ? "auto" : null,
+      marginRight:
+        pOrientation === EOrientation.VERTICAL && pCenter ? "auto" : null,
+
+      // TODO positionner le container si center en HORIZONTAL sur l'axe vertical
+      // TODO CONTINUER ICI
+
+      // prettier-ignore
+      ...(pOrientation === EOrientation.VERTICAL
+        ? {maxWidth: fixUnit(pMaxSize)}
+        : {}
+      ),
+      // prettier-ignore
+      ...(pOrientation === EOrientation.HORIZONTAL
+        ? {maxHeight: fixUnit(pMaxSize)}
+        : {}
+      )
     };
   };
 
   /**
-   * Select size container reference
-   * @param pWindow
-   * @param pMaxWidth
-   * @param pRootRect
-   */
-  const selectSizeContainerReference = ({
-    pMaxWidth = props?.maxWidth,
-    pWindow = windowSize,
-    pRootRect = rootRect
-  }) => {
-    // cas max width is a string
-    if (typeof pMaxWidth === "string") {
-      return pRootRect?.width;
-    }
-    // case max width is a number or null
-    else if (typeof pMaxWidth === "number" || pMaxWidth === null) {
-      return (
-        // if screen is smaller than max width
-        pWindow?.width > pMaxWidth
-          ? // ref is element size
-            pRootRect?.width
-          : // else, if screen is bigger than max width, ref is window width
-            pWindow?.width
-      );
-    }
-  };
-
-  /**
    * Set column style, depend of props
+   * @param pIndex
    * @param pWidth
    * @param pColumnNumber
-   * @param pGutter
+   * @param pGutterSize
    * @param pColor
-   * @param pIndex
    */
   const columnStyle = ({
     pIndex,
-    pWidth = selectSizeContainerReference({}),
     pColumnNumber = props.columnsNumber,
     pGutterSize = props.gutterSize,
     pColor = props.color
   }: {
     pIndex: number;
-    pWidth?: number;
     pColumnNumber?: number;
     pGutterSize?: number | string;
     pColor?: string;
   }): CSSProperties => {
     // if there is no gutter, we apply pColor on border right
     if (pGutterSize === 0 || fixUnit(pGutterSize) === "0px") {
-      return {
-        // prettier-ignore
-        width: `calc(${fixUnit(pWidth)} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
-        borderLeft: `${pColor} 1px solid`,
-        borderRight: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
-      };
+      // vertical
+      if (props.orientation === EOrientation.VERTICAL) {
+        return {
+          // prettier-ignore
+          width: `calc(${fixUnit(containerSizeReference())} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
+          borderLeft: `${pColor} 1px solid`,
+          borderRight: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
+        };
+      }
+
+      if (props.orientation === EOrientation.HORIZONTAL) {
+      }
+
       // if a gutter size is set, we use this gutter
       // and apply color on gutter background
     } else {
+      // define key orientation
+      const key =
+        props.orientation === EOrientation.VERTICAL ? "width" : "height";
+
       return {
         // prettier-ignore
-        width: `calc(${fixUnit(pWidth)} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
+        [key]: `calc(${fixUnit(containerSizeReference())} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
         backgroundColor: pColor
       };
     }
   };
+
+  // --------------------------------------------------------------------------- CSS
+
+  /**
+   * Define DOM elements style
+   */
+  const vertivalCss: { [x: string]: CSSProperties } = {
+    root: {
+      position: "fixed",
+      top: "0",
+      bottom: "0",
+      left: "0",
+      right: "0"
+    },
+    columns: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      justifyContent: "space-between",
+      width: "100%"
+    },
+    column: {
+      height: "100vh"
+    }
+  };
+
+  const horizontalCss: { [x: string]: CSSProperties } = {
+    root: {
+      position: "fixed",
+      top: "0",
+      bottom: "0",
+      left: "0",
+      right: "0"
+    },
+    columns: {
+      display: "flex",
+      flexDirection: "column",
+      flexWrap: "nowrap",
+      justifyContent: "space-between",
+      height: "100%"
+    },
+    column: {
+      width: "100vw"
+    }
+  };
+
+  // css state
+  const css =
+    props.orientation === EOrientation.VERTICAL ? vertivalCss : horizontalCss;
 
   // --------------------------------------------------------------------------- RENDER
 
@@ -232,29 +341,5 @@ function GridLayout(props: IProps) {
     </div>
   );
 }
-
-// ----------------------------------------------------------------------------- CSS
-
-/**
- * Define DOM elements style
- */
-const css: { [x: string]: CSSProperties } = {
-  root: {
-    position: "fixed",
-    top: "0",
-    bottom: "0",
-    left: "0",
-    right: "0"
-  },
-  columns: {
-    display: "flex",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    width: "100%"
-  },
-  column: {
-    height: "100vh"
-  }
-};
 
 export { GridLayout as default };

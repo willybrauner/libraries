@@ -31,7 +31,7 @@ const App = ({ gutter }: { gutter: number }) => {
         <GridLayout
           columnsNumber={number("columnNumber", 6)}
           gutterSize={number("gutterSize", gutter)}
-          maxWidth={number("maxWidth", 1024)}
+          maxSize={text("maxSize", "1024px")}
           color={text("color", "rgba(255, 0, 0, 0.14)")}
           center={boolean("center", true)}
         />
