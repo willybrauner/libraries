@@ -9,8 +9,8 @@ const component: string = "GridLayout";
 const debug = require("debug")(`lib:${component}`);
 
 export enum EOrientation {
-  VERTICAL,
-  HORIZONTAL
+  VERTICAL = "vertical",
+  HORIZONTAL = "horizontal"
 }
 
 interface IProps {
@@ -54,9 +54,7 @@ GridLayout.defaultProps = {
   color: "rgba(255, 0, 0, 0.14)",
   maxSize: null,
   center: true,
-
-  // FIXME remettre en vertical
-  orientation: EOrientation.HORIZONTAL
+  orientation: EOrientation.VERTICAL
 } as IProps;
 
 enum ESizeObject {
@@ -91,15 +89,20 @@ function GridLayout(props: IProps) {
    * @param pValue
    * @return {boolean}
    */
-  const isThereOnlyNumberInString = (pValue: string): boolean => {
+  const thereIsOnlyNumberInString = (pValue: string): boolean => {
     const reg = /^\d+$/;
     return reg.test(pValue);
   };
 
   /**
-   * Check if a string contain only number
-   * If it's true, add px at the end
-   * @return a string with px unit by default of
+   * FixUnit
+   * Check value Type
+   * if it's a number, return a `${number}px` as string
+   * if it's a string:
+   *  - contain only number (ex: "20"): returns "20px" with px as default unit
+   *  - contain NOT only number (ex: "20vw"): returns "20vw"
+   *  (this function not convert unit, it suppose other part of string is the right unit)
+   * @return {string}
    */
   const fixUnit = (pValue: string | number): string => {
     // exit
@@ -107,7 +110,7 @@ function GridLayout(props: IProps) {
 
     // if is a string
     if (typeof pValue === "string") {
-      return isThereOnlyNumberInString(pValue) ? `${pValue}px` : pValue;
+      return thereIsOnlyNumberInString(pValue) ? `${pValue}px` : pValue;
     }
     // if is number
     else if (typeof pValue === "number") {
@@ -118,7 +121,14 @@ function GridLayout(props: IProps) {
   // --------------------------------------------------------------------------- SIZE
 
   /**
-   * Select Size reference depend of orientation
+   * Select a reference object (windowSize or rootRect) + a reference property (width or height)
+   * It depend of orientation.
+   *
+   * ex:
+   * If "pSelectObject" is set to ESizeObject.WINDOW_SIZE (it select windowSize Object)
+   * and orientation is vertical (select width properties)
+   * it returns: windowSize.width
+   *
    * @param pSelectObject
    * @param pOrientation
    * @param pSizeObject
@@ -148,73 +158,85 @@ function GridLayout(props: IProps) {
     else if (pOrientation === EOrientation.HORIZONTAL) return objectRef?.height;
   };
 
-  /**
-   * Select container size reference
-   * TODO pas très clair pourquoi pas le meme traitement que pMax soit un string ou non :/
-   * @param pMaxSize
-   */
-  const containerSizeReference = (pMaxSize = props?.maxSize): number => {
-    // cas max size is a string
-    if (typeof pMaxSize === "string") {
-      return sizeReference({ pSelectObject: ESizeObject.ROOT_RECT });
-    }
-    // case max width is a number or null
-    else if (typeof pMaxSize === "number" || pMaxSize === null) {
-      return (
-        // if screen is smaller than max width
-        sizeReference({ pSelectObject: ESizeObject.WINDOW_SIZE }) > pMaxSize
-          ? // ref is element size
-            sizeReference({ pSelectObject: ESizeObject.ROOT_RECT })
-          : // else, if screen is bigger than max width, ref is window width
-            sizeReference({ pSelectObject: ESizeObject.WINDOW_SIZE })
-      );
-    }
-  };
-
   // --------------------------------------------------------------------------- STYLE
 
   /**
    * Set root DOM element style
    * @param pMaxSize
    * @param pCenter
+   * @param pWindowSize
    * @param pOrientation
    */
   const rootStyle = (
     pMaxSize = props.maxSize,
     pCenter = props.center,
+    pWindowSize = windowSize,
     pOrientation = props.orientation
-  ): CSSProperties | null => {
-    if (
-      // if max width is null
-      pMaxSize === null ||
-      // or if max-width is a number & is bigger than window width
-      (typeof pMaxSize === "number" &&
-        pMaxSize > sizeReference({ pSelectObject: ESizeObject.WINDOW_SIZE }))
-    ) {
-      // do not continue
-      return null;
+  ): CSSProperties => {
+    // check if we are in strech view
+    let isStrech = pWindowSize?.height < pMaxSize;
+
+    if (pOrientation === EOrientation.VERTICAL) {
+      return {
+        position: "fixed",
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+        marginLeft: pCenter ? "auto" : null,
+        marginRight: pCenter ? "auto" : null,
+        maxWidth: fixUnit(pMaxSize)
+      };
     }
-    // return style for root element
-    return {
-      marginLeft:
-        pOrientation === EOrientation.VERTICAL && pCenter ? "auto" : null,
-      marginRight:
-        pOrientation === EOrientation.VERTICAL && pCenter ? "auto" : null,
 
-      // TODO positionner le container si center en HORIZONTAL sur l'axe vertical
-      // TODO CONTINUER ICI
+    if (pOrientation === EOrientation.HORIZONTAL) {
+      return {
+        position: "fixed",
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+        marginTop:
+          // if is Center mode
+          pCenter
+            ? // if is strech version
+              isStrech
+              ? // no margin top
+                "0"
+              : // if not strech, we need to center the container with margin top calc
+                `calc((${pWindowSize.height}px - ${fixUnit(pMaxSize)}) / 2)`
+            : // if no center mode, there is no margin-top
+              null,
+        maxHeight: fixUnit(pMaxSize)
+      };
+    }
+  };
 
-      // prettier-ignore
-      ...(pOrientation === EOrientation.VERTICAL
-        ? {maxWidth: fixUnit(pMaxSize)}
-        : {}
-      ),
-      // prettier-ignore
-      ...(pOrientation === EOrientation.HORIZONTAL
-        ? {maxHeight: fixUnit(pMaxSize)}
-        : {}
-      )
-    };
+  /**
+   * Colums list
+   * @param pOrientation
+   */
+  const columnsListStyle = ({
+    pOrientation = props.orientation
+  } = {}): CSSProperties => {
+    if (pOrientation === EOrientation.VERTICAL) {
+      return {
+        display: "flex",
+        flexWrap: "nowrap",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%"
+      };
+    }
+    if (pOrientation === EOrientation.HORIZONTAL) {
+      return {
+        display: "flex",
+        flexWrap: "nowrap",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%"
+      };
+    }
   };
 
   /**
@@ -236,105 +258,68 @@ function GridLayout(props: IProps) {
     pGutterSize?: number | string;
     pColor?: string;
   }): CSSProperties => {
-    // if there is no gutter, we apply pColor on border right
+    // calc Width and height value
+    // prettier ignore
+    const widthHeightCalc = `calc(
+        ${fixUnit(sizeReference({ pSelectObject: ESizeObject.ROOT_RECT }))} 
+        / ${pColumnNumber} 
+        - ${fixUnit(pGutterSize)}
+      )`;
+
+    /**
+     * One Column style if the NO gutterSize
+     * We show only a simple line
+     */
     if (pGutterSize === 0 || fixUnit(pGutterSize) === "0px") {
-      // vertical
       if (props.orientation === EOrientation.VERTICAL) {
         return {
-          // prettier-ignore
-          width: `calc(${fixUnit(containerSizeReference())} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
+          width: widthHeightCalc,
+          height: "100vh",
           borderLeft: `${pColor} 1px solid`,
           borderRight: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
+        };
+      } else if (props.orientation === EOrientation.HORIZONTAL) {
+        return {
+          height: widthHeightCalc,
+          width: "100vw",
+          borderTop: `${pColor} 1px solid`,
+          borderBottom: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
+        };
+      }
+
+      /**
+       * One Column grid style if there is a gutterSize
+       * Wz apply background-color on the column
+       */
+    } else {
+      if (props.orientation === EOrientation.VERTICAL) {
+        return {
+          width: widthHeightCalc,
+          height: "100vh",
+          backgroundColor: pColor
         };
       }
 
       if (props.orientation === EOrientation.HORIZONTAL) {
+        return {
+          height: widthHeightCalc,
+          width: "100vw",
+          backgroundColor: pColor
+        };
       }
-
-      // if a gutter size is set, we use this gutter
-      // and apply color on gutter background
-    } else {
-      // define key orientation
-      const key =
-        props.orientation === EOrientation.VERTICAL ? "width" : "height";
-
-      return {
-        // prettier-ignore
-        [key]: `calc(${fixUnit(containerSizeReference())} / ${pColumnNumber} - ${fixUnit(pGutterSize)})`,
-        backgroundColor: pColor
-      };
     }
   };
-
-  // --------------------------------------------------------------------------- CSS
-
-  /**
-   * Define DOM elements style
-   */
-  const vertivalCss: { [x: string]: CSSProperties } = {
-    root: {
-      position: "fixed",
-      top: "0",
-      bottom: "0",
-      left: "0",
-      right: "0"
-    },
-    columns: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "nowrap",
-      justifyContent: "space-between",
-      width: "100%"
-    },
-    column: {
-      height: "100vh"
-    }
-  };
-
-  const horizontalCss: { [x: string]: CSSProperties } = {
-    root: {
-      position: "fixed",
-      top: "0",
-      bottom: "0",
-      left: "0",
-      right: "0"
-    },
-    columns: {
-      display: "flex",
-      flexDirection: "column",
-      flexWrap: "nowrap",
-      justifyContent: "space-between",
-      height: "100%"
-    },
-    column: {
-      width: "100vw"
-    }
-  };
-
-  // css state
-  const css =
-    props.orientation === EOrientation.VERTICAL ? vertivalCss : horizontalCss;
 
   // --------------------------------------------------------------------------- RENDER
 
   return (
-    <div
-      className={component}
-      style={{
-        ...css.root,
-        ...rootStyle()
-      }}
-      ref={rootRef}
-    >
-      <div className={`${component}_columns`} style={css.columns}>
+    <div className={component} ref={rootRef} style={rootStyle()}>
+      <div className={`${component}_columns`} style={columnsListStyle()}>
         {new Array(props.columnsNumber).fill(null).map((e, i) => (
           <span
-            className={`${component}_column`}
             key={i}
-            style={{
-              ...css.column,
-              ...columnStyle({ pIndex: i })
-            }}
+            className={`${component}_column`}
+            style={columnStyle({ pIndex: i })}
           />
         ))}
       </div>
