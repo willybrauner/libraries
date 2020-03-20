@@ -261,10 +261,13 @@ function GridLayout(props: IProps) {
     // calc Width and height value
     // prettier ignore
     const widthHeightCalc = `calc(
-        ${fixUnit(sizeReference({ pSelectObject: ESizeObject.ROOT_RECT }))} 
-        / ${pColumnNumber} 
+        (
+          ${fixUnit(sizeReference({ pSelectObject: ESizeObject.ROOT_RECT }))} 
+          / ${pColumnNumber}
+        ) 
         - ${fixUnit(pGutterSize)}
-      )`;
+        + ${fixUnit(pGutterSize)} / ${pColumnNumber}
+    )`;
 
     /**
      * One Column style if the NO gutterSize
