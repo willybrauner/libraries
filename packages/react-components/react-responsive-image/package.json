@@ -20,8 +20,8 @@
     "@wbe/use-bounding-client-rect": "^0.0.30",
     "@wbe/use-is-in-viewport": "^0.0.30",
     "@wbe/use-responsive-image-data": "^0.0.30",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.23",

@@ -34,12 +34,14 @@ export const App = () => {
 
 [GridLayout component](src/index.tsx) contains default props, you can overwrite as you need:
 
-| props         | type   | description                         | default value         |
-| ------------- | ------ | ----------------------------------- | --------------------- |
-| columnsNumber | number | Number of columns                   | 12                    |
-| gutterSize    | number | Size of gutter between columns (px) | 20                    |
-| color         | string | Set custom column Grid              | rgba(255, 0, 0, 0.14) |
-| maxWidth      | number | Set a max width on the container    | null                  |
+| props           | type                 | description                                             | default value           |
+| --------------- | -------------------- | ------------------------------------------------------- | ----------------------- |
+| `columnsNumber` | `number`             | Number of columns                                       | `12`                    |
+| `gutterSize`    | `number/string`      | Size of gutter between columns (`px` as default unit)   | `20`                    |
+| `maxSize`       | `number/string/null` | Set a max width on the container (`px` as default unit) | `null`                  |
+| `center`        | `boolean`            | Center the grid in viewport                             | `true`                  |
+| `orientation`   | `EOrientation`       | Choose grid orientation                                 | `EOrientation.VERTICAL` |
+| `color`         | `string`             | Set custom column Grid                                  | `rgba(255, 0, 0, 0.14)` |
 
 example:
 

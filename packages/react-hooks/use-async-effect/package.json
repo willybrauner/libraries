@@ -17,7 +17,7 @@
     "compile": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "react": "^16.13.0"
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.23"
