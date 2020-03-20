@@ -1,13 +1,8 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import { storiesOf } from "@storybook/react";
-//import GridLayout from "@wbe/react-grid-layout";
-// @ts-ignore
-import GridLayout, {
-  EOrientation
-} from "../../../packages/react-components/react-grid-layout/src/index";
+import GridLayout, { EOrientation } from "@wbe/react-grid-layout";
 import README from "@wbe/react-grid-layout/README.md";
 import "../../global-style.css";
-const storyName = "react-grid-layout";
 import {
   withKnobs,
   text,
@@ -16,6 +11,7 @@ import {
   optionsKnob as options
 } from "@storybook/addon-knobs";
 
+const storyName = "react-grid-layout";
 /**
  * Demo
  */
