@@ -1,6 +1,6 @@
 {
   "name": "@wbe/storybook",
-  "version": "0.0.30",
+  "version": "1.0.0-alpha.0",
   "description": "Storybook of libraries mono-repos.",
   "private": true,
   "scripts": {
@@ -10,15 +10,15 @@
   "author": "Willy Brauner",
   "license": "ISC",
   "dependencies": {
-    "@wbe/fake-data-utils": "^0.0.30",
-    "@wbe/react-grid-layout": "^0.0.30",
-    "@wbe/react-responsive-image": "^0.0.30",
-    "@wbe/use-async-effect": "^0.0.30",
-    "@wbe/use-bounding-client-rect": "^0.0.30",
-    "@wbe/use-document-scroll-top": "^0.0.30",
-    "@wbe/use-is-in-viewport": "^0.0.30",
-    "@wbe/use-responsive-image-data": "^0.0.30",
-    "@wbe/use-window-size": "^0.0.30"
+    "@wbe/fake-data-utils": "^1.0.0-alpha.0",
+    "@wbe/react-grid-layout": "^1.0.0-alpha.0",
+    "@wbe/react-responsive-image": "^1.0.0-alpha.0",
+    "@wbe/use-async-effect": "^1.0.0-alpha.0",
+    "@wbe/use-bounding-client-rect": "^1.0.0-alpha.0",
+    "@wbe/use-document-scroll-top": "^1.0.0-alpha.0",
+    "@wbe/use-is-in-viewport": "^1.0.0-alpha.0",
+    "@wbe/use-responsive-image-data": "^1.0.0-alpha.0",
+    "@wbe/use-window-size": "^1.0.0-alpha.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.17",
