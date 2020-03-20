@@ -1,8 +1,17 @@
-import React, { useRef } from "react";
+import React, { CSSProperties, useRef } from "react";
 import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
-import useWindowSize from "@wbe/use-window-size";
+import useWindowSize, { IWindowSize } from "@wbe/use-window-size";
+
+// init
+const component: string = "GridLayout";
+const debug = require("debug")(`lib:${component}`);
+
+export enum EOrientation {
+  VERTICAL = "vertical",
+  HORIZONTAL = "horizontal"
+}
 
 interface IProps {
   /**
@@ -14,7 +23,7 @@ interface IProps {
    * Gutter size between Column (px value)
    * if 0 is return, a 1px "grid line" will be display
    */
-  gutterSize?: number;
+  gutterSize?: number | string;
 
   /**
    * Set custom grid color
@@ -22,9 +31,20 @@ interface IProps {
   color?: string;
 
   /**
-   *  Set a max-width to the all grid (px value)
+   * Set a max size to the all grid (px value by default)
+   * Can accept string like '90vw'
    */
-  maxWidth?: number | null;
+  maxSize?: number | string | null;
+
+  /**
+   * Center the grid in viewport
+   */
+  center?: boolean;
+
+  /**
+   * Grid Orientation
+   */
+  orientation?: EOrientation;
 }
 
 GridLayout.defaultProps = {
@@ -32,11 +52,15 @@ GridLayout.defaultProps = {
   gutterSize: 20,
   showGridByDefault: false,
   color: "rgba(255, 0, 0, 0.14)",
-  maxWidth: null
+  maxSize: null,
+  center: true,
+  orientation: EOrientation.VERTICAL
 } as IProps;
 
-// component name
-const component: string = "GridLayout";
+enum ESizeObject {
+  WINDOW_SIZE,
+  ROOT_RECT
+}
 
 /**
  * @name GridLayout
@@ -44,7 +68,7 @@ const component: string = "GridLayout";
  * @constructor
  */
 function GridLayout(props: IProps) {
-  // --------------------------------------------------------------------------- WINDOW SIZE
+  // --------------------------------------------------------------------------- INIT
 
   // Get root ref
   const rootRef = useRef<HTMLDivElement>(null);
@@ -53,127 +77,254 @@ function GridLayout(props: IProps) {
     rootRef,
     EListener.ON_SCROLL_AND_RESIZE
   );
+  // get dynamic window size
   const windowSize = useWindowSize();
 
-  // --------------------------------------------------------------------------- COLUMN STYLE
+  // --------------------------------------------------------------------------- TEST TYPE / UNIT
+
+  /**
+   * Test if is there only number in string
+   * ex "20" return true
+   * ex "20px" return false
+   * @param pValue
+   * @return {boolean}
+   */
+  const thereIsOnlyNumberInString = (pValue: string): boolean => {
+    const reg = /^\d+$/;
+    return reg.test(pValue);
+  };
+
+  /**
+   * FixUnit
+   * Check value Type
+   * if it's a number, return a `${number}px` as string
+   * if it's a string:
+   *  - contain only number (ex: "20"): returns "20px" with px as default unit
+   *  - contain NOT only number (ex: "20vw"): returns "20vw"
+   *  (this function not convert unit, it suppose other part of string is the right unit)
+   * @return {string}
+   */
+  const fixUnit = (pValue: string | number): string => {
+    // exit
+    if (pValue === null) return;
+
+    // if is a string
+    if (typeof pValue === "string") {
+      return thereIsOnlyNumberInString(pValue) ? `${pValue}px` : pValue;
+    }
+    // if is number
+    else if (typeof pValue === "number") {
+      return `${pValue}px`;
+    }
+  };
+
+  // --------------------------------------------------------------------------- SIZE
+
+  /**
+   * Select a reference object (windowSize or rootRect) + a reference property (width or height)
+   * It depend of orientation.
+   *
+   * ex:
+   * If "pSelectObject" is set to ESizeObject.WINDOW_SIZE (it select windowSize Object)
+   * and orientation is vertical (select width properties)
+   * it returns: windowSize.width
+   *
+   * @param pSelectObject
+   * @param pOrientation
+   * @param pSizeObject
+   * @param pWindowSize
+   * @param pRootRect
+   * @return object.width or object.height
+   */
+  const sizeReference = ({
+    pSelectObject,
+    pOrientation = props.orientation,
+    pWindowSize = windowSize,
+    pRootRect = rootRect
+  }: {
+    pSelectObject: ESizeObject;
+    pOrientation?: EOrientation;
+    pWindowSize?: IWindowSize;
+    pRootRect?: ClientRect | DOMRect;
+  }): number => {
+    // create object ref
+    let objectRef;
+    // select object ref
+    if (pSelectObject === ESizeObject.WINDOW_SIZE) objectRef = pWindowSize;
+    else if (pSelectObject === ESizeObject.ROOT_RECT) objectRef = pRootRect;
+
+    // select object key depend of orientation
+    if (pOrientation === EOrientation.VERTICAL) return objectRef?.width;
+    else if (pOrientation === EOrientation.HORIZONTAL) return objectRef?.height;
+  };
+
+  // --------------------------------------------------------------------------- STYLE
 
   /**
    * Set root DOM element style
-   * @param pMaxWidth
-   * @param pWindowWidth
+   * @param pMaxSize
+   * @param pCenter
+   * @param pWindowSize
+   * @param pOrientation
    */
-  const rootStyle = (pMaxWidth: number, pWindowWidth: number) => {
-    // check
-    if (
-      // if max width is null
-      pMaxWidth == null ||
-      // or if max-width is bigger than window width
-      pMaxWidth > pWindowWidth
-    ) {
-      // do not continue
-      return;
+  const rootStyle = (
+    pMaxSize = props.maxSize,
+    pCenter = props.center,
+    pWindowSize = windowSize,
+    pOrientation = props.orientation
+  ): CSSProperties => {
+    // check if we are in strech view
+    let isStrech = pWindowSize?.height < pMaxSize;
+
+    if (pOrientation === EOrientation.VERTICAL) {
+      return {
+        position: "fixed",
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+        marginLeft: pCenter ? "auto" : null,
+        marginRight: pCenter ? "auto" : null,
+        maxWidth: fixUnit(pMaxSize)
+      };
     }
-    // return style for root element
-    return {
-      marginLeft: "auto",
-      marginRight: "auto",
-      maxWidth: pMaxWidth
-    };
+
+    if (pOrientation === EOrientation.HORIZONTAL) {
+      return {
+        position: "fixed",
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+        marginTop:
+          // if is Center mode
+          pCenter
+            ? // if is strech version
+              isStrech
+              ? // no margin top
+                "0"
+              : // if not strech, we need to center the container with margin top calc
+                `calc((${pWindowSize.height}px - ${fixUnit(pMaxSize)}) / 2)`
+            : // if no center mode, there is no margin-top
+              null,
+        maxHeight: fixUnit(pMaxSize)
+      };
+    }
+  };
+
+  /**
+   * Colums list
+   * @param pOrientation
+   */
+  const columnsListStyle = ({
+    pOrientation = props.orientation
+  } = {}): CSSProperties => {
+    if (pOrientation === EOrientation.VERTICAL) {
+      return {
+        display: "flex",
+        flexWrap: "nowrap",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%"
+      };
+    }
+    if (pOrientation === EOrientation.HORIZONTAL) {
+      return {
+        display: "flex",
+        flexWrap: "nowrap",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%"
+      };
+    }
   };
 
   /**
    * Set column style, depend of props
+   * @param pIndex
    * @param pWidth
    * @param pColumnNumber
-   * @param pGutter
+   * @param pGutterSize
    * @param pColor
-   * @param pIndex
    */
-  const columnStyle = (
-    pWidth: number,
-    pColumnNumber: number,
-    pGutter: number,
-    pColor: string,
-    pIndex: number
-  ) => {
-    // if there is no gutter, we apply pColor on border right
-    if (pGutter === 0) {
-      return {
-        width: pWidth / pColumnNumber,
-        borderRight:
-          pIndex + 1 === pColumnNumber
-            ? // return no border
-              null
-            : `${pColor} 1px solid`
-      };
+  const columnStyle = ({
+    pIndex,
+    pColumnNumber = props.columnsNumber,
+    pGutterSize = props.gutterSize,
+    pColor = props.color
+  }: {
+    pIndex: number;
+    pColumnNumber?: number;
+    pGutterSize?: number | string;
+    pColor?: string;
+  }): CSSProperties => {
+    // calc Width and height value
+    // prettier ignore
+    const widthHeightCalc = `calc(
+        ${fixUnit(sizeReference({ pSelectObject: ESizeObject.ROOT_RECT }))} 
+        / ${pColumnNumber} 
+        - ${fixUnit(pGutterSize)}
+      )`;
 
-      // if a gutter size is set, we use this gutter and apply color on gutter background
+    /**
+     * One Column style if the NO gutterSize
+     * We show only a simple line
+     */
+    if (pGutterSize === 0 || fixUnit(pGutterSize) === "0px") {
+      if (props.orientation === EOrientation.VERTICAL) {
+        return {
+          width: widthHeightCalc,
+          height: "100vh",
+          borderLeft: `${pColor} 1px solid`,
+          borderRight: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
+        };
+      } else if (props.orientation === EOrientation.HORIZONTAL) {
+        return {
+          height: widthHeightCalc,
+          width: "100vw",
+          borderTop: `${pColor} 1px solid`,
+          borderBottom: pIndex === pColumnNumber - 1 && `${pColor} 1px solid`
+        };
+      }
+
+      /**
+       * One Column grid style if there is a gutterSize
+       * Wz apply background-color on the column
+       */
     } else {
-      return {
-        width: pWidth / pColumnNumber - pGutter + pGutter / pColumnNumber,
-        backgroundColor: pColor
-      };
+      if (props.orientation === EOrientation.VERTICAL) {
+        return {
+          width: widthHeightCalc,
+          height: "100vh",
+          backgroundColor: pColor
+        };
+      }
+
+      if (props.orientation === EOrientation.HORIZONTAL) {
+        return {
+          height: widthHeightCalc,
+          width: "100vw",
+          backgroundColor: pColor
+        };
+      }
     }
   };
 
   // --------------------------------------------------------------------------- RENDER
 
-  // return Grid Layout DOM if state is set to true
   return (
-    <div
-      className={component}
-      style={{
-        ...css.root,
-        ...rootStyle(props.maxWidth, windowSize?.width)
-      }}
-      ref={rootRef}
-    >
-      <div className={`${component}_columns`} style={css.columns}>
+    <div className={component} ref={rootRef} style={rootStyle()}>
+      <div className={`${component}_columns`} style={columnsListStyle()}>
         {new Array(props.columnsNumber).fill(null).map((e, i) => (
           <span
-            className={`${component}_column`}
             key={i}
-            style={{
-              ...css.column,
-              ...columnStyle(
-                windowSize?.width > props?.maxWidth
-                  ? rootRect && rootRect.width
-                  : windowSize?.width,
-                props.columnsNumber,
-                props.gutterSize,
-                props.color,
-                i
-              )
-            }}
+            className={`${component}_column`}
+            style={columnStyle({ pIndex: i })}
           />
         ))}
       </div>
     </div>
   );
 }
-
-// ----------------------------------------------------------------------------- CSS
-
-/**
- * Define DOM elements style
- */
-const css: any = {
-  root: {
-    position: "fixed",
-    top: "0",
-    bottom: "0",
-    left: "0",
-    right: "0"
-  },
-  columns: {
-    display: "flex",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    width: "100%"
-  },
-  column: {
-    height: "100vh"
-  }
-};
 
 export { GridLayout as default };

@@ -1,11 +1,17 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import { storiesOf } from "@storybook/react";
-import GridLayout from "@wbe/react-grid-layout";
+import GridLayout, { EOrientation } from "@wbe/react-grid-layout";
 import README from "@wbe/react-grid-layout/README.md";
 import "../../global-style.css";
-const storyName = "react-grid-layout";
-import { withKnobs, text, number } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  text,
+  number,
+  boolean,
+  optionsKnob as options
+} from "@storybook/addon-knobs";
 
+const storyName = "react-grid-layout";
 /**
  * Demo
  */
@@ -27,9 +33,21 @@ const App = ({ gutter }: { gutter: number }) => {
     <div className="App">
       {showGrid && (
         <GridLayout
+          orientation={options(
+            "orientation",
+            {
+              vertical: EOrientation.VERTICAL,
+              horizontal: EOrientation.HORIZONTAL
+            },
+            EOrientation.VERTICAL,
+            {
+              display: "select"
+            }
+          )}
           columnsNumber={number("columnNumber", 6)}
           gutterSize={number("gutterSize", gutter)}
-          maxWidth={number("maxWidth", 1024)}
+          maxSize={text("maxSize", "1024")}
+          center={boolean("center", true)}
           color={text("color", "rgba(255, 0, 0, 0.14)")}
         />
       )}
