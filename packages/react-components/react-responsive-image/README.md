@@ -27,7 +27,7 @@ $ npm install -s @wbe/react-responsive-image
 Basic usage return a responsive image with `<img />` tag:
 
 ```tsx
-import ResponsiveImage -s from "@wbe/react-responsive-image";
+import ResponsiveImage from "@wbe/react-responsive-image";
 
 const thumbs = [
   {
