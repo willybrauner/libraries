@@ -72,7 +72,7 @@ import { react-responsive-image } from "@wbe/libraries";
 ## Documentation
 
 All modules documentations are available on
-[libraries.willybrauner.com](http://libraries.willybrauner.com)
+[libraries.willybrauner.com](https://libraries.willybrauner.com)
 
 ## Contribute
 
@@ -102,7 +102,7 @@ in [storybook package](storybook/stories).
 
 ## Credits
 
-Libraries is developed and maintained by [Willy Brauner](http://willybrauner.com),
+Libraries is developed and maintained by [Willy Brauner](https://willybrauner.com),
 front-end developer at [Cher Ami](https://cher-ami.tv) and as freelance.
 
 ## Licence
