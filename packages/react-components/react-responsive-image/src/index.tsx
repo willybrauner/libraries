@@ -1,7 +1,7 @@
+require("intersection-observer");
 import React, {
   CSSProperties,
   ReactNode,
-  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -10,8 +10,8 @@ import React, {
 import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
-import useIsInViewport from "@wbe/use-is-in-viewport";
 import useResponsiveImageData from "@wbe/use-responsive-image-data";
+import Observer from "@researchgate/react-intersection-observer";
 
 // ----------------------------------------------------------------------------- CONFIG
 
@@ -37,6 +37,7 @@ interface IProps {
   lazy?: boolean;
   // load image at Xpx of top/bottom window
   // ex: -40 allow to preload image when it's top or bottom is to 40px before or after border window
+  // FIXME Do not work rightnow with intersection observer - need to configure it
   lazyOffset?: number;
   // Force to display the image whose size is closest to the value provided in px
   forceImageWidth?: number;
@@ -85,7 +86,6 @@ export interface IImage {
   url: string;
   width?: number;
   height?: number;
-  ratio?: number;
 }
 
 // transparent image URL
@@ -103,10 +103,7 @@ function ResponsiveImage(props: IProps) {
   // get root ref
   const rootRef = useRef(null);
   // get root rect
-  const rootRect = useBoundingClientRect(
-    rootRef,
-    EListener.ON_SCROLL_AND_RESIZE
-  );
+  const rootRect = useBoundingClientRect(rootRef, EListener.ON_RESIZE);
 
   // --------------------------------------------------------------------------- SELECT IMAGE
 
@@ -114,12 +111,10 @@ function ResponsiveImage(props: IProps) {
    * Select responsive image
    */
   const responsiveImage = useResponsiveImageData(
-    props.data,
-    !!props.forceImageWidth
-      ? // select force image width props value as width reference
-        props.forceImageWidth
-      : // else, select component root as width reference
-        rootRect && rootRect.width
+    props?.data,
+    // select force image width props value as width reference
+    // else, select component root as width reference
+    props?.forceImageWidth || rootRect?.width
   );
 
   // init separatly url of this object
@@ -132,19 +127,13 @@ function ResponsiveImage(props: IProps) {
   useLayoutEffect(() => {
     // exit if no data is set by props
     if (!props?.data) return;
-
-    debug(
-      "useResponsiveImageData hook return image data object",
-      responsiveImage
-    );
-
     // set required URL
     setRequiredURL(
       // if lazy is active
       props.lazy
         ? // set transparent image URL
           transparentImageUrl
-        : // else, set automaticaly the image url
+        : // else, set automaticaly the image URL
           responsiveImage?.url
     );
   }, [responsiveImage]);
@@ -153,11 +142,24 @@ function ResponsiveImage(props: IProps) {
 
   // checker si l'image est preloaded ou non
   let [imageIsPreLoaded, setImageIsPreLoaded] = useState<boolean>(false);
+
   // checker le composant est dans le window
-  const isInViewport = useIsInViewport(rootRef, false, props.lazyOffset);
+  const [isInViewport, setIsInViewPort] = useState<boolean>(false);
 
   /**
-   * Listen "isInViewPort" state
+   * Il element is in viewport, set in state
+   * @param event
+   * @param unobserve
+   */
+  const handleIsInViewport = (event: any, unobserve: any): void => {
+    if (event.isIntersecting) {
+      setIsInViewPort(true);
+      unobserve();
+    }
+  };
+
+  /**
+   * Preload image
    * Only about lazy image
    */
   useEffect(() => {
@@ -175,13 +177,13 @@ function ResponsiveImage(props: IProps) {
         // preload : Create void image tag
         const $img = document.createElement("img");
         // set src attribute to start loading
-        $img.src = responsiveImage.url;
+        $img.src = responsiveImage?.url;
         // show error
-        if (!$img) throw new Error("preloadImage lazy // error");
+        if (!$img) {
+          throw new Error("PreloadImage $img element doesn't exist.");
+        }
         // The image is not loaded, attach handler
-        $img.onload = function() {
-          preloadedHandler();
-        };
+        $img.addEventListener("load", preloadedHandler);
       }
     }
     // else, image isn't visible in viewport
@@ -193,7 +195,7 @@ function ResponsiveImage(props: IProps) {
       // kill listener
       window.removeEventListener("load", preloadedHandler);
     };
-  }, [isInViewport, imageIsPreLoaded, responsiveImage?.url]);
+  }, [isInViewport, imageIsPreLoaded, responsiveImage]);
 
   /**
    * Listen ImageIsPreLoaded state
@@ -222,72 +224,62 @@ function ResponsiveImage(props: IProps) {
    * @param pCustomRatio
    */
 
-  const verticalRatio = useCallback(
-    (
-      pResponsiveImage: IImage = responsiveImage,
-      pCustomRatio: number = props.forceVerticalRatio
-    ): number => {
-      // check
-      if (!pResponsiveImage) return;
+  const verticalRatio = (
+    pResponsiveImage: IImage = responsiveImage,
+    pCustomRatio: number = props.forceVerticalRatio
+  ): number => {
+    // check
+    if (!pResponsiveImage) return;
 
-      // if fix vertical ratio is set
-      if (!!pCustomRatio) {
-        return pCustomRatio;
-      }
-      // else if responsive image as ratio
-      else if (!!pResponsiveImage.ratio) {
-        return pResponsiveImage.ratio;
-      }
-      // else if image as dimensions, calc ratio
-      else if (!!pResponsiveImage.width && !!pResponsiveImage.height) {
-        return pResponsiveImage.height / pResponsiveImage.width;
-      }
-      // else, there is no rato and no dimension
-      else {
-        return null;
-      }
-    },
-    [responsiveImage, props.forceVerticalRatio]
-  );
+    // if fix vertical ratio is set
+    if (pCustomRatio) {
+      return pCustomRatio;
+    }
+    // else if image as dimensions, calc ratio
+    else if (pResponsiveImage?.width && pResponsiveImage?.height) {
+      return pResponsiveImage.height / pResponsiveImage.width;
+    }
+    // else, there is no rato and no dimension
+    else {
+      return null;
+    }
+  };
 
   /**
    * Background Color
    * Set color behind image
    * @param pBackgroundColor
    */
-  const backgroundColorStyle = useCallback(
-    (pBackgroundColor: string = props.placeholderColor): CSSProperties => ({
-      backgroundColor: !!pBackgroundColor ? pBackgroundColor : null
-    }),
-    [props.placeholderColor]
-  );
+  const backgroundColorStyle = (
+    pBackgroundColor: string = props?.placeholderColor
+  ): CSSProperties => ({
+    backgroundColor: pBackgroundColor ? pBackgroundColor : null
+  });
 
   /**
    * Padding ratio style
    * TODO revoir
    */
-  const paddingRatioStyle = useCallback(
-    (pRatio: number | null = verticalRatio()): CSSProperties => {
-      return {
-        // Padding ratio set to wrapper about to show background behind image
-        paddingBottom:
-          // If a custom ratio exist
-          !!pRatio ? `${Math.round(pRatio * 100)}%` : null
-      };
-    },
-    [verticalRatio]
-  );
+  const paddingRatioStyle = (
+    pRatio: number | null = verticalRatio()
+  ): CSSProperties => {
+    return {
+      // Padding ratio set to wrapper about to show background behind image
+      paddingBottom:
+        // If a custom ratio exist
+        pRatio ? `${Math.round(pRatio * 100)}%` : null
+    };
+  };
 
   /**
    * background-image style
    */
-  const backgroundImageStyle = useCallback(
-    (pRequiredURL: string = requiredURL): CSSProperties => ({
-      // return background image
-      backgroundImage: !!pRequiredURL ? `url("${pRequiredURL}")` : null
-    }),
-    [requiredURL]
-  );
+  const backgroundImageStyle = (
+    pRequiredURL: string = requiredURL
+  ): CSSProperties => ({
+    // return background image
+    backgroundImage: !!pRequiredURL ? `url("${pRequiredURL}")` : null
+  });
 
   // image / cover child style
   const imageElementPosition: CSSProperties = {
@@ -413,11 +405,11 @@ function ResponsiveImage(props: IProps) {
     // image type class
     `${componentName}-${props.type}`,
     // lazy class
-    props.lazy
-      ? `${componentName}-${imageIsPreLoaded ? "lazyloaded" : "lazyload"}`
-      : "",
+    props?.lazy &&
+      `${componentName}-${imageIsPreLoaded ? "lazyloaded" : "lazyload"}`,
+
     // placeholderColor class
-    props.placeholderColor ? `${componentName}-placeholderColor` : "",
+    props?.placeholder && `${componentName}-placeholder`,
     // props class
     ...(props?.classNames ? props.classNames : [])
   ]
@@ -432,16 +424,19 @@ function ResponsiveImage(props: IProps) {
   }
   // if classic image DOM
   else if (props.type === EImageType.TAG_IMAGE) {
-    return imageTagRender();
+    return (
+      <Observer onChange={handleIsInViewport}>{imageTagRender()}</Observer>
+    );
   }
 
   // if Background image on div
   else if (props.type === EImageType.BACKGROUND_IMAGE) {
-    return backgroundImageRender();
+    return (
+      <Observer onChange={handleIsInViewport}>
+        {backgroundImageRender()}
+      </Observer>
+    );
   }
 }
 
-// ----------------------------------------------------------------------------- HOOK
-
-// final export
 export { ResponsiveImage as default };
