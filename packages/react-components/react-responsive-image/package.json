@@ -21,12 +21,13 @@
     "@wbe/use-bounding-client-rect": "^1.0.0-alpha.0",
     "@wbe/use-responsive-image-data": "^1.0.0-alpha.0",
     "intersection-observer": "^0.10.0",
+    "npm-check-updates": "^4.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.23",
-    "@types/react-dom": "^16.9.5"
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6"
   },
   "keywords": [
     "react",
