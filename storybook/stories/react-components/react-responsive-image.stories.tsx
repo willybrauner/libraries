@@ -202,6 +202,35 @@ const BackgroundImagePlaceholder = () => {
   );
 };
 
+const ImageLazyCallBack = () => {
+  const callBack = () => {
+    console.log("Image Lazy is loaded");
+    setIsLoaded(true);
+  };
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  return (
+    <div>
+      <section>
+        <h2>{"background-image - callback"}</h2>
+        <p>Image is loaded: {`${isLoaded}`}</p>
+        <ResponsiveImage
+          data={thumbs}
+          type={EImageType.TAG_IMAGE}
+          lazy={true}
+          placeholder={true}
+          placeholderColor={"pink"}
+          rootStyle={{ marginTop: "1rem" }}
+          imageStyle={{
+            display: "block",
+            width: "100%"
+          }}
+          lazyCallBack={() => callBack()}
+        />
+      </section>
+    </div>
+  );
+};
+
 /**
  * Config
  */
@@ -214,6 +243,7 @@ storiesOf(`react-components/${storyName}`, module)
   .add("img", () => <ImageTag />)
   .add("img - placeholder", () => <ImageTagPlaceholder />)
   .add("img - lazy", () => <ImageTagLazy />)
+  .add("img - callBack", () => <ImageLazyCallBack />)
   .add("img - force image width", () => <ImageTagForceWidth />)
   .add("img - forceVerticalRatio", () => <ImageForceVerticalRatio />)
   .add("background-image", () => <BackgroundImage />)

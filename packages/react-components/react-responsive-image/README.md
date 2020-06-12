@@ -158,6 +158,7 @@ a custom vertical ratio via `forceVerticalRatio` props.
 | children                | ReactNode     | add children only if type is EImageType.BACKGROUND_IMAGE                        | /             |
 | lazy                    | boolean       | active lazyloading                                                              | false         |
 | lazyOffset              | number        | load image at X pixel(s) of top/bottom window                                   | 0             |
+| lazyCallBack            | boolean       | execute function when image is loaded                                           | /             |
 | forceImageWidth         | number        | force to display the image whose size is closest to the value provided in pixel | /             |
 | forceVerticalRatio      | number        | force a custom vertical ratio to the image                                      | /             |
 | placeholder             | boolean       | show a placeholder behind the image calc with image dimension                   | false         |

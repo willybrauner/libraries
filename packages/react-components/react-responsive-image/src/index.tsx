@@ -39,6 +39,8 @@ interface IProps {
   // ex: -40 allow to preload image when it's top or bottom is to 40px before or after border window
   // FIXME Do not work rightnow with intersection observer - need to configure it
   lazyOffset?: number;
+  // execute a function when lazy image is loaded
+  lazyCallBack?: () => void;
   // Force to display the image whose size is closest to the value provided in px
   forceImageWidth?: number;
   // force a custom vertical ratio : vertical ratio = height / width
@@ -168,6 +170,7 @@ function ResponsiveImage(props: IProps) {
      */
     const preloadedHandler = () => {
       setImageIsPreLoaded(true);
+      props?.lazyCallBack?.();
     };
 
     // if image is lazy and in viewport
