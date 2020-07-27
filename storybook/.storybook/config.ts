@@ -42,7 +42,7 @@ addParameters({
      * where to show the addon panel
      * @type {('bottom'|'right')}
      */
-    panelPosition: "right",
+    panelPosition: "bottom",
     /**
      * sorts stories
      * @type {Boolean}
