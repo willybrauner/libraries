@@ -1,5 +1,4 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
-//import { useIsInViewport } from "../../common/lib/react-hooks/useIsInViewport";
 
 /**
  * Type of video
@@ -96,7 +95,7 @@ function VideoPlayer(props: IProps) {
 
     //let Vimeo = require("@vimeo/player");
     let Vimeo = require("@vimeo/player");
-    debug(" --------- Vimeo", Vimeo);
+
     // keep new instance in ref
     vimeoPlayer.current = new Vimeo.Player(rootRef.current);
   }, [props.type]);
@@ -204,8 +203,6 @@ function VideoPlayer(props: IProps) {
   if (props?.type === EVideoType.VIMEO) {
     // exit if ID is missing
     if (!videoSrc) return null;
-
-    //debug("videoSrc", videoSrc);
 
     return (
       <iframe
