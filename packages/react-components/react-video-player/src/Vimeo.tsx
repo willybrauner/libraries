@@ -16,50 +16,51 @@ interface IProps {
   muted?: boolean;
   autoPlay?: boolean;
   loop?: boolean;
+
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
 }
 
+Vimeo.defaultProps = {
+  muted: false,
+  autoPlay: false,
+  loop: false
+};
+
 /**
- * Vimeo
+ * Vimeo player using SDK
+ * @doc: https://developer.vimeo.com/player/sdk/basics
  * @param props
  * @constructor
  */
-const Vimeo = (props: IProps) => {
+function Vimeo(props: IProps) {
   const rootRef = useRef(null);
-  // Video ID for Youtube and Vimeo
-  const [videoSrc, setVideoSrc] = useState<string>(null);
 
   const [player, setPlayer] = useState<Player>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   // ---------------------------------------------------------------------------
 
+  /**
+   * Extract id from URL
+   * @param url
+   * return {string} vimeo ID
+   */
   const getIdFromUrl = (url: string): string => {
     const regExp = /(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/;
     const match = url?.match(regExp);
     return match?.[4] ?? null;
   };
 
-  // const vimeoSrcBuilder = (id: string): string =>
-  //   [`https://player.vimeo.com/video/`, id].join("");
-  //
-  // useEffect(() => {
-  //   // parse and prepare URL
-  //   const id = vimeoUrlParser(props.url);
-  //   const src = vimeoSrcBuilder(id);
-  //   setVideoSrc(src);
-  // }, [props.url]);
-
   /**
-   * use Vimeo SDK
-   * @doc: https://developer.vimeo.com/player/sdk/basics
+   * use Vimeo SDK and bind events
    */
   const initPlayer = (): void => {
+    if (!props.url) return;
+
     // Create player
     const player = new Player("vimeo", {
-      //id: props.id,
       url: `https://vimeo.com/${getIdFromUrl(props.url)}`,
       loop: props.loop,
       muted: props.muted,
@@ -70,16 +71,8 @@ const Vimeo = (props: IProps) => {
     player.on("play", onPlayHandler);
     player.on("pause", onPauseHandler);
     player.on("ended", onEndedHandler);
-
     setPlayer(player);
   };
-
-  /**
-   * TODO continuer ici
-   */
-  useEffect(() => {
-    initPlayer();
-  }, []);
 
   /**
    * Unbind events
@@ -88,23 +81,69 @@ const Vimeo = (props: IProps) => {
     player?.off("play", onPlayHandler);
     player?.off("pause", onPauseHandler);
     player?.off("ended", onEndedHandler);
-
     player?.destroy();
+    setPlayer(null);
   };
+
+  /**
+   * Init
+   */
+  useEffect(() => {
+    // if no url, unload current player if exist and exit.
+    if (!props.url) {
+      player?.unload();
+      return;
+    }
+
+    // init player if this is first load or inject new ID
+    !player ? initPlayer() : player.loadVideo(getIdFromUrl(props.url));
+
+    // on unmount, destroy
+    if (player) return destroyPlayer;
+  }, [props.url, player]);
+
+  /**
+   * Listen PlayState
+   */
+  useEffect(() => {
+    if (!player) return;
+    if (props.playState === EVideoPlayState.PLAY && !isPlaying) {
+      player.play();
+    }
+    if (props.playState === EVideoPlayState.PAUSE && isPlaying) {
+      player.pause();
+    }
+  }, [props.playState, player]);
+
+  /**
+   * Listen Muted
+   */
+  useEffect(() => {
+    if (!player) return;
+    player.setMuted(props.muted);
+  }, [props.muted, player]);
+
+  /**
+   * Listen Loop
+   */
+  useEffect(() => {
+    if (!player) return;
+    player.setMuted(props.loop);
+  }, [props.loop, player]);
 
   const onPlayHandler = () => {
     setIsPlaying(true);
-    props?.onPlay();
+    props?.onPlay?.();
   };
 
   const onPauseHandler = () => {
     setIsPlaying(false);
-    props?.onPause();
+    props?.onPause?.();
   };
 
   const onEndedHandler = () => {
     setIsPlaying(false);
-    props?.onEnded();
+    props?.onEnded?.();
   };
 
   // --------------------------------------------------------------------------- RENDER
@@ -112,12 +151,11 @@ const Vimeo = (props: IProps) => {
   return (
     <div
       className={[componentName, props.className].filter(e => e).join("")}
+      id="vimeo"
       ref={rootRef}
       style={props.style}
-    >
-      <div className={`Vimeo_vimeo`} id="vimeo" />
-    </div>
+    />
   );
-};
+}
 
 export { Vimeo };

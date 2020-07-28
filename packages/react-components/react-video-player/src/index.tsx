@@ -168,7 +168,14 @@ function VideoPlayer(props: IProps) {
    * Vimeo render
    */
   if (props?.type === EVideoType.VIMEO) {
-    return <Vimeo className={"URL"} url={props.url} />;
+    return (
+      <Vimeo
+        className={"URL"}
+        url={props.url}
+        playState={props.playState}
+        style={{ width: "300px" }}
+      />
+    );
   }
 }
 
