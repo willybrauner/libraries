@@ -1,4 +1,5 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import { Vimeo } from "./Vimeo";
 
 /**
  * Type of video
@@ -14,8 +15,7 @@ export enum EVideoType {
  */
 export enum EVideoPlayState {
   PAUSE,
-  PLAY,
-  INITIAL
+  PLAY
 }
 
 /**
@@ -27,15 +27,12 @@ interface IProps {
   type: EVideoType;
   // Video url
   url: string;
-  // Show player controls (needs a pro account for Vimeo)
-  // Was not yet tested with a vimeo pro account
-  showControls?: boolean;
-  // Auto play the video on iframe show
-  autoplay?: boolean;
   // Use this to pause / resume video
   playState?: EVideoPlayState;
-  // Stop video playing on out of viewport
-  playOnlyInViewport?: boolean;
+  // Auto play the video on iframe show
+  autoplay?: boolean;
+  // Show player controls (needs a pro account for Vimeo)
+  showControls?: boolean;
   // style nodes
   style?: CSSProperties;
 }
@@ -46,8 +43,7 @@ interface IProps {
 VideoPlayer.defaultProps = {
   showControls: true,
   autoplay: false,
-  playState: EVideoPlayState.INITIAL,
-  playOnlyInViewport: true
+  playState: EVideoPlayState.PAUSE
 };
 
 const componentName: string = "VideoPlayer";
@@ -64,41 +60,6 @@ function VideoPlayer(props: IProps) {
   // Video ID for Youtube and Vimeo
   const [videoSrc, setVideoSrc] = useState<string>(null);
 
-  // --------------------------------------------------------------------------- VIMEO
-
-  const vimeoUrlParser = (url: string): string => {
-    const regExp = /(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/;
-    const match = url?.match(regExp);
-    return match?.[4] ?? null;
-  };
-
-  const vimeoSrcBuilder = (id: string): string =>
-    [`https://player.vimeo.com/video/`, id].join("");
-
-  useEffect(() => {
-    if (props.type !== EVideoType.VIMEO) return;
-    // parse and prepare URL
-    const id = vimeoUrlParser(props.url);
-    const src = vimeoSrcBuilder(id);
-    setVideoSrc(src);
-  }, [props.type, props.url]);
-
-  /**
-   * use Vimeo SDK
-   * @doc: https://developer.vimeo.com/player/sdk/basics
-   */
-  // keep vimeo player lib instance in this ref
-  const vimeoPlayer = useRef<any>(null);
-
-  useEffect(() => {
-    if (props.type !== EVideoType.VIMEO || !rootRef.current) return;
-
-    //let Vimeo = require("@vimeo/player");
-    let Vimeo = require("@vimeo/player");
-
-    // keep new instance in ref
-    vimeoPlayer.current = new Vimeo.Player(rootRef.current);
-  }, [props.type]);
   // --------------------------------------------------------------------------- YOUTUBE
 
   const youtubeUrlParser = (url: string): string | null => {
@@ -159,7 +120,13 @@ function VideoPlayer(props: IProps) {
 
   // --------------------------------------------------------------------------- FINAL RENDER
 
-  const className = `VideoPlayer VideoPlayer-${props.type}`;
+  const className = [
+    `VideoPlayer`,
+    `VideoPlayer-${props.type}`,
+    props.className
+  ]
+    .filter(e => e)
+    .join(" ");
 
   /**
    * Native Render
@@ -201,22 +168,7 @@ function VideoPlayer(props: IProps) {
    * Vimeo render
    */
   if (props?.type === EVideoType.VIMEO) {
-    // exit if ID is missing
-    if (!videoSrc) return null;
-
-    return (
-      <iframe
-        ref={rootRef}
-        className={className}
-        src={videoSrc}
-        frameBorder="0"
-        // @ts-ignore
-        webkitallowfullscreen="true"
-        mozallowfullscreen="true"
-        allowFullScreen
-        style={props?.style}
-      />
-    );
+    return <Vimeo className={"URL"} url={props.url} />;
   }
 }
 
