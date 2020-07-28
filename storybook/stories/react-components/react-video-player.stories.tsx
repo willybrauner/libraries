@@ -3,13 +3,16 @@ import React, { useMemo, useState } from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/react-video-player/README.md";
 // @ts-ignore
-import VideoPlayer, {
-  EVideoPlayState,
-  EVideoType
-} from "../../../packages/react-components/react-video-player/src/index";
 import FakeDataUtils, {
+  EVideoType,
   EVideoType as DataEVideoType
 } from "@wbe/fake-data-utils";
+// @ts-ignore
+import { VimeoVideo } from "../../../packages/react-components/react-video-player/src/VimeoVideo";
+// @ts-ignore
+import { NativeVideo } from "../../../packages/react-components/react-video-player/src/NativeVideo";
+// @ts-ignore
+import { YoutubeVideo } from "../../../packages/react-components/react-video-player/src/YoutubeVideo";
 
 // set story name
 const storyName = "react-video-player";
@@ -21,34 +24,71 @@ storiesOf(`react-components/${storyName}`, module)
       sidebar: README
     }
   })
-  // .add("youtube", () => (
-  //   <VideoPlayer
-  //     type={EVideoType.YOUTUBE}
-  //     url={`https://youtu.be/${FakeDataUtils.getVideoId(
-  //       DataEVideoType.YOUTUBE
-  //     )}`}
-  //   />
-  // ))
-  .add("vimeo", () => {
-    const [play, setPlay] = useState(false);
-    const url = useMemo(
-      () =>
-        `https://vimeo.com/${FakeDataUtils.getVideoId(DataEVideoType.VIMEO)}`,
-      []
-    );
+  .add("native", () => {
+    const [playing, setPlaying] = useState<boolean>(false);
+    const url =
+      "https://cher-ami.tv/user/pages/02.works/01.ifas-art-of-comics/1_BLOC_VIDEO.mp4";
 
     return (
       <>
-        <button onClick={() => setPlay(!play)}>
-          {play ? "pause" : "play"}
+        <button onClick={() => setPlaying(!playing)}>
+          {playing ? "pause" : "play"}
         </button>
-
-        <VideoPlayer
-          className={"Stories_videoPlayer"}
-          type={EVideoType.VIMEO}
+        <NativeVideo
+          className={`${storyName}_ native`}
           url={url}
-          playState={play ? EVideoPlayState.PLAY : EVideoPlayState.PAUSE}
-          showControls={false}
+          playing={playing}
+          onPause={() => debug("pause callback")}
+          onPlay={() => debug("play callback")}
+          onEnded={() => debug("ended callback")}
+        />
+      </>
+    );
+  })
+
+  .add("vimeo", () => {
+    const [playing, setPlaying] = useState<boolean>(false);
+    const url = useMemo(() => {
+      return `https://vimeo.com/${FakeDataUtils.getVideoId(
+        DataEVideoType.VIMEO
+      )}`;
+    }, []);
+    return (
+      <>
+        <button onClick={() => setPlaying(!playing)}>
+          {playing ? "pause" : "play"}
+        </button>
+        <VimeoVideo
+          className={`${storyName}_vimeo`}
+          url={url}
+          playing={playing}
+          onPause={() => debug("pause callback")}
+          onPlay={() => debug("play callback")}
+          onEnded={() => debug("ended callback")}
+        />
+      </>
+    );
+  })
+
+  .add("youtube", () => {
+    const [playing, setPlaying] = useState<boolean>(false);
+    const url = useMemo(() => {
+      return `https://youtu.be/${FakeDataUtils.getVideoId(
+        DataEVideoType.YOUTUBE
+      )}`;
+    }, []);
+    return (
+      <>
+        <button onClick={() => setPlaying(!playing)}>
+          {playing ? "pause" : "play"}
+        </button>
+        <YoutubeVideo
+          className={`${storyName}_youtube`}
+          url={url}
+          playing={playing}
+          // onPause={() => debug("pause callback")}
+          // onPlay={() => debug("play callback")}
+          // onEnded={() => debug("ended callback")}
         />
       </>
     );
