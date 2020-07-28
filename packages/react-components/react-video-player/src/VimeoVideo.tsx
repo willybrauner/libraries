@@ -1,31 +1,43 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import { EVideoPlayState } from "./index";
 // @ts-ignore
 import Player from "@vimeo/player";
 
-const componentName: string = "Vimeo";
+const componentName: string = "VimeoVideo";
 const debug = require("debug")(`lib:${componentName}`);
 
 interface IProps {
   className: string;
   url: string;
-  playState?: EVideoPlayState;
-
+  playing: boolean;
   style?: CSSProperties;
 
-  muted?: boolean;
+  // Player Parameters
+  // @doc https://vimeo.zendesk.com/hc/en-us/articles/360001494447-Using-Player-Parameters
+
+  // Video must be hosted by a Plus account or higher
+  showControls?: boolean;
   autoPlay?: boolean;
   loop?: boolean;
+  muted?: boolean;
+  autoPause?: boolean;
+  playsInline?: boolean;
+
+  allowFullScreen?: boolean;
 
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
 }
 
-Vimeo.defaultProps = {
-  muted: false,
+VimeoVideo.defaultProps = {
   autoPlay: false,
-  loop: false
+  showControls: false,
+  loop: false,
+  muted: false,
+  autoPause: true,
+  playsInline: true,
+  allowFullScreen: true,
+  style: { width: "auto", height: "auto" }
 };
 
 /**
@@ -34,13 +46,9 @@ Vimeo.defaultProps = {
  * @param props
  * @constructor
  */
-function Vimeo(props: IProps) {
+function VimeoVideo(props: IProps) {
   const rootRef = useRef(null);
-
   const [player, setPlayer] = useState<Player>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
-  // ---------------------------------------------------------------------------
 
   /**
    * Extract id from URL
@@ -54,18 +62,36 @@ function Vimeo(props: IProps) {
   };
 
   /**
+   * Build src
+   * @param id
+   */
+  const srcBuilder = (id: string = getIdFromUrl(props.url)): string =>
+    [
+      `https://player.vimeo.com/video/`,
+      id,
+      `?`,
+      `autoplay=${props?.autoPlay}`,
+      `&`,
+      `controls=${props?.showControls}`,
+      `&`,
+      `loop=${props?.loop}`,
+      `&`,
+      `muted=${props?.muted}`,
+      `&`,
+      `autopause=${props?.autoPause}`,
+      `&`,
+      `playsinline=${props?.playsInline}`
+    ].join("");
+
+  /**
    * use Vimeo SDK and bind events
    */
   const initPlayer = (): void => {
     if (!props.url) return;
 
     // Create player
-    const player = new Player("vimeo", {
-      url: `https://vimeo.com/${getIdFromUrl(props.url)}`,
-      loop: props.loop,
-      muted: props.muted,
-      autoplay: props.autoPlay
-    });
+    const player = new Player(rootRef.current);
+    debug("player instance", player);
 
     // bind events
     player.on("play", onPlayHandler);
@@ -81,81 +107,54 @@ function Vimeo(props: IProps) {
     player?.off("play", onPlayHandler);
     player?.off("pause", onPauseHandler);
     player?.off("ended", onEndedHandler);
-    player?.destroy();
-    setPlayer(null);
   };
 
   /**
    * Init
    */
   useEffect(() => {
-    // if no url, unload current player if exist and exit.
-    if (!props.url) {
-      player?.unload();
-      return;
-    }
-
-    // init player if this is first load or inject new ID
-    !player ? initPlayer() : player.loadVideo(getIdFromUrl(props.url));
-
-    // on unmount, destroy
+    initPlayer();
+    // destroy on unmount
     if (player) return destroyPlayer;
-  }, [props.url, player]);
+  }, [props.url]);
 
   /**
    * Listen PlayState
    */
   useEffect(() => {
     if (!player) return;
-    if (props.playState === EVideoPlayState.PLAY && !isPlaying) {
-      player.play();
-    }
-    if (props.playState === EVideoPlayState.PAUSE && isPlaying) {
-      player.pause();
-    }
-  }, [props.playState, player]);
-
-  /**
-   * Listen Muted
-   */
-  useEffect(() => {
-    if (!player) return;
-    player.setMuted(props.muted);
-  }, [props.muted, player]);
-
-  /**
-   * Listen Loop
-   */
-  useEffect(() => {
-    if (!player) return;
-    player.setMuted(props.loop);
-  }, [props.loop, player]);
+    debug("props.playing", props.playing);
+    props.playing ? player.play() : player.pause();
+  }, [props.playing]);
 
   const onPlayHandler = () => {
-    setIsPlaying(true);
+    debug("play");
     props?.onPlay?.();
   };
 
   const onPauseHandler = () => {
-    setIsPlaying(false);
+    debug("pause");
     props?.onPause?.();
   };
 
   const onEndedHandler = () => {
-    setIsPlaying(false);
+    debug("ended");
     props?.onEnded?.();
   };
 
-  // --------------------------------------------------------------------------- RENDER
-
   return (
-    <div
-      className={[componentName, props.className].filter(e => e).join("")}
-      id="vimeo"
+    <iframe
       ref={rootRef}
-      style={props.style}
+      className={[componentName, props.className].filter(e => e).join(" ")}
+      src={srcBuilder()}
+      frameBorder="0"
+      style={props?.style}
+      // @ts-ignore
+      webkitallowfullscreen={props.allowFullScreen}
+      mozallowfullscreen={props.allowFullScreen}
+      allowFullScreen={props.allowFullScreen}
     />
   );
 }
 
-export { Vimeo };
+export { VimeoVideo };
