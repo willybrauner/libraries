@@ -270,7 +270,7 @@ function ResponsiveImage(props: IProps) {
       // Padding ratio set to wrapper about to show background behind image
       paddingBottom:
         // If a custom ratio exist
-        pRatio ? `${Math.round(pRatio * 100)}%` : null
+        pRatio ? `${(pRatio * 100).toFixed(3)}%` : null
     };
   };
 
