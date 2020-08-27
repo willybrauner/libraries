@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-grid-layout",
-  "version": "1.1.0-alpha.0",
+  "version": "1.2.0",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
@@ -16,8 +16,8 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^1.1.0-alpha.0",
-    "@wbe/use-window-size": "^1.1.0-alpha.0",
+    "@wbe/use-bounding-client-rect": "^1.2.0",
+    "@wbe/use-window-size": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
