@@ -35,7 +35,7 @@ storiesOf(`react-components/${storyName}`, module)
           {playing ? "pause" : "play"}
         </button>
         <NativeVideo
-          className={`${storyName}_ native`}
+          className={`${storyName}_native`}
           url={url}
           playing={playing}
           onPause={() => debug("pause callback")}

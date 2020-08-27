@@ -10,27 +10,15 @@ export enum EVideoType {
 }
 
 /**
- * Play state of the video
- */
-export enum EVideoPlayState {
-  PAUSE,
-  PLAY
-}
-
-/**
  * Props
  */
 interface IProps {
   className?: string;
-  // Video Type
   type: EVideoType;
-  // Video url
   url: string;
   // Use this to pause / resume video
-  playing: boolean;
-  // Auto play the video on iframe show
-  autoplay?: boolean;
-  // Show player controls (needs a pro account for Vimeo)
+  playing?: boolean;
+  autoPlay?: boolean;
   showControls?: boolean;
   // style nodes
   style?: CSSProperties;
@@ -40,9 +28,9 @@ interface IProps {
  * Default props
  */
 VideoPlayer.defaultProps = {
+  playing: true,
   showControls: true,
-  autoplay: false,
-  playState: EVideoPlayState.PAUSE
+  autoplay: false
 };
 
 const componentName: string = "VideoPlayer";
