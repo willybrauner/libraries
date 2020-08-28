@@ -3,30 +3,55 @@ const componentName: string = "YoutubeVideo";
 const debug = require("debug")(`lib:${componentName}`);
 
 /**
- * Props
+ * YoutubeVideo Props
  */
 interface IProps {
+  /**
+   * Add className to component root
+   */
   className?: string;
-  url: string;
+
+  /**
+   * Inquire video URL
+   */
+  url?: string;
+
+  /**
+   * Inquire video ID
+   * TODO + throw error if no URL and not ID
+   */
+  id?: string;
+
+  /**
+   * Play, pause, resume video
+   */
   playing: boolean;
+
+  /**
+   * Add root component style
+   */
   style?: CSSProperties;
 
-  // @doc: https://developers.google.com/youtube/iframe_api_reference
-
+  /**
+   * TODO TEST
+   * @doc: https://developers.google.com/youtube/iframe_api_reference
+   */
   showControls?: boolean;
+
+  /**
+   * TODO TEST
+   */
   autoPlay?: boolean;
 }
 
 YoutubeVideo.defaultProps = {
   showControls: true,
-  autoPlay: false,
-  style: { width: "auto", height: "auto" }
+  autoPlay: false
 };
 
 /**
  * YoutubeVideo
  * @param props
- * @constructor
  */
 function YoutubeVideo(props: IProps) {
   const rootRef = useRef(null);

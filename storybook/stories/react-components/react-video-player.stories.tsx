@@ -1,7 +1,7 @@
 import "../../global-style.css";
 import React, { useMemo, useState } from "react";
 import { storiesOf } from "@storybook/react";
-import README from "@wbe/react-video-player/README.md";
+//import README from "@wbe/react-video-player/README.md";
 // @ts-ignore
 import FakeDataUtils, {
   EVideoType,
@@ -21,13 +21,15 @@ const debug = require("debug")(`lib:${storyName}`);
 storiesOf(`react-components/${storyName}`, module)
   .addParameters({
     readme: {
-      sidebar: README
+      //   sidebar: README
     }
   })
   .add("native", () => {
     const [playing, setPlaying] = useState<boolean>(false);
+
+    // TODO updater la liste de fake data utils
     const url =
-      "https://cher-ami.tv/user/pages/02.works/01.ifas-art-of-comics/1_BLOC_VIDEO.mp4";
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
 
     return (
       <>

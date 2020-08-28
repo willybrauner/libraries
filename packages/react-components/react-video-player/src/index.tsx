@@ -4,32 +4,102 @@ import React, { CSSProperties } from "react";
  * Type of video
  */
 export enum EVideoType {
-  YOUTUBE = "youtube",
+  NATIVE = "native",
   VIMEO = "vimeo",
-  NATIVE = "native"
+  YOUTUBE = "youtube"
 }
 
 /**
- * Props
+ * VideoPlayer Props
  */
 interface IProps {
-  className?: string;
+  /**
+   * Choose video type <native | vimeo | youtube>
+   */
   type: EVideoType;
-  url: string;
-  // Use this to pause / resume video
-  playing?: boolean;
-  autoPlay?: boolean;
+
+  /**
+   * Add className to component root
+   * @type all
+   */
+  className?: string;
+
+  /**
+   * Inquire video URL
+   * @type all
+   */
+  url?: string;
+
+  /**
+   * Inquire video ID
+   * TODO + throw error if no URL and not ID
+   */
+  id?: string;
+
+  /**
+   * Play, pause, resume video
+   * @type all
+   */
+  playing: boolean;
+
+  /**
+   * Vimeo: must be hosted by a Plus account or higher
+   * Youtube: TODO check
+   * @type NATIVE | VIMEO (Plus account)
+   */
   showControls?: boolean;
-  // style nodes
-  style?: CSSProperties;
+
+  /**
+   * Autoplay video on init
+   * native: playsInline and muted props need to be true
+   * vimeo: muted props need to be true
+   * youtube: TODO check
+   * @type NATIVE | VIMEO
+   */
+  autoPlay?: boolean;
+
+  /**
+   * @type NATIVE | VIMEO
+   */
+  loop?: boolean;
+
+  /**
+   * @type NATIVE | VIMEO
+   */
+  muted?: boolean;
+
+  /**
+   * @type NATIVE
+   */
+  playsInline?: boolean;
+
+  /**
+   * Execute function on play state callback
+   * @type NATIVE | VIMEO
+   */
+  onPlay?: () => void;
+
+  /**
+   * Execute function on pause state callback
+   * @type NATIVE | VIMEO
+   */
+  onPause?: () => void;
+
+  /**
+   * Execute function on ended state callback
+   * @type NATIVE | VIMEO
+   */
+  onEnded?: () => void;
 }
 
 /**
  * Default props
  */
 VideoPlayer.defaultProps = {
-  playing: true,
+  autoPlay: false,
   showControls: true,
+  loop: false,
+  muted: false,
   autoplay: false
 };
 
@@ -55,15 +125,15 @@ function VideoPlayer(props: IProps) {
   }
 
   /**
-   * Youtube Render
-   */
-  if (props?.type === EVideoType.YOUTUBE) {
-  }
-
-  /**
    * Vimeo render
    */
   if (props?.type === EVideoType.VIMEO) {
+  }
+
+  /**
+   * Youtube Render
+   */
+  if (props?.type === EVideoType.YOUTUBE) {
   }
 }
 

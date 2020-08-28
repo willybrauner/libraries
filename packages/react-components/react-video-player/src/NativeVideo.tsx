@@ -3,25 +3,74 @@ const componentName: string = "NativeVideo";
 const debug = require("debug")(`lib:${componentName}`);
 
 /**
- * Props
+ * NativeVideo Props
  */
 interface IProps {
+  /**
+   * Add className to component root
+   */
   className?: string;
+
+  /**
+   * Inquire video URL
+   */
   url: string;
+
+  /**
+   * Play, pause, resume video
+   */
   playing: boolean;
+
+  /**
+   * Add root component style
+   */
   style?: CSSProperties;
 
+  /**
+   * @default true
+   */
   showControls?: boolean;
+
+  /**
+   * Autoplay works only if muted is set to true
+   * @default false
+   */
   autoPlay?: boolean;
+
+  /**
+   * @default false
+   */
   loop?: boolean;
+
+  /**
+   * @default false
+   */
   muted?: boolean;
 
+  /**
+   * @default true
+   */
   playsInline?: boolean;
-  poster?: string;
 
+  /**
+   * Execute function on play state callback
+   */
   onPlay?: () => void;
+
+  /**
+   * Execute function on pause state callback
+   */
   onPause?: () => void;
+
+  /**
+   * Execute function on ended state callback
+   */
   onEnded?: () => void;
+
+  /**
+   * Add image as poster on video
+   */
+  poster?: string;
 }
 
 NativeVideo.defaultProps = {
@@ -29,14 +78,13 @@ NativeVideo.defaultProps = {
   autoPlay: false,
   loop: false,
   muted: false,
-  playsInline: true,
-  style: { width: "100%", height: "auto" }
+  playsInline: true
 };
 
 /**
  * NativePlayer
+ * @doc https://developer.mozilla.org/fr/docs/Web/HTML/Element/video
  * @param props
- * @constructor
  */
 function NativeVideo(props: IProps) {
   const rootRef = useRef(null);
