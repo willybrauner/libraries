@@ -25,16 +25,16 @@ interface IProps {
   className?: string;
 
   /**
+   * Inquire video ID
+   * @type VIMEO | YOUTUBE
+   */
+  id?: string;
+
+  /**
    * Inquire video URL
    * @type all
    */
   url?: string;
-
-  /**
-   * Inquire video ID
-   * TODO + throw error if no URL and not ID
-   */
-  id?: string;
 
   /**
    * Play, pause, resume video
@@ -43,9 +43,10 @@ interface IProps {
   play: boolean;
 
   /**
+   * Show controls on video
+   * @type NATIVE | VIMEO (Plus account)
    * Vimeo: must be hosted by a Plus account or higher
    * Youtube: TODO check
-   * @type NATIVE | VIMEO (Plus account)
    */
   showControls?: boolean;
 

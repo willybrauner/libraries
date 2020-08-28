@@ -1,4 +1,10 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, {
+  CSSProperties,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 // @ts-ignore
 import Player from "@vimeo/player";
 const componentName: string = "VimeoVideo";
@@ -14,15 +20,14 @@ interface IProps {
   className: string;
 
   /**
+   * Inquire video ID
+   */
+  id?: string;
+
+  /**
    * Inquire video URL
    */
   url?: string;
-
-  /**
-   * Inquire video ID
-   * TODO + throw error if no URL and not ID
-   */
-  id?: string;
 
   /**
    * Play, pause, resume video
@@ -88,7 +93,7 @@ VimeoVideo.defaultProps = {
 };
 
 /**
- * Vimeo player using SDK
+ * Vimeo video player using SDK
  * @doc: https://developer.vimeo.com/player/sdk/basics
  * @param props
  */
@@ -102,22 +107,38 @@ function VimeoVideo(props: IProps) {
    * @param url
    * return {string} vimeo ID
    */
-  const getIdFromUrl = (url: string): string => {
+  const getIdFromUrl = useMemo((): string => {
+    if (!props?.url) return;
     const regExp = /(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/;
-    const match = url?.match(regExp);
+    const match = props?.url?.match(regExp);
     return match?.[4] ?? null;
-  };
+  }, [props?.url]);
+
+  /**
+   * Select ID from id props or url prod, depends on who inquired
+   */
+  const [selectedId, setSelectedId] = useState<string>(
+    props?.id || getIdFromUrl
+  );
+  useEffect(() => {
+    setSelectedId(props?.id || getIdFromUrl);
+  }, [props?.id, props?.url]);
 
   /**
    * use Vimeo SDK and bind events
    */
   const initPlayer = (): void => {
-    if (!props.url) return;
+    debug(selectedId);
+
+    if (!selectedId) {
+      throw new Error(
+        "No ID and no URL found in props; Component need one of these props."
+      );
+    }
 
     // Create player
-    // Create player
     const player = new Player("vimeo", {
-      url: `https://vimeo.com/${getIdFromUrl(props.url)}`,
+      url: `https://vimeo.com/${selectedId}`,
       loop: props.loop,
       muted: props.muted,
       autoplay: props.autoPlay
@@ -147,18 +168,18 @@ function VimeoVideo(props: IProps) {
    * Init
    */
   useEffect(() => {
-    // if no url, unload current player if exist and exit.
-    if (!props.url) {
+    // if no id, unload current player if exist and exit.
+    if (!selectedId) {
       player?.unload();
       return;
     }
 
     // init player if this is first load or inject new ID
-    !player ? initPlayer() : player.loadVideo(getIdFromUrl(props.url));
+    !player ? initPlayer() : player.loadVideo(selectedId);
 
     // destroy on unmount
     if (player) return destroyPlayer;
-  }, [props.url]);
+  }, [selectedId]);
 
   /**
    * Listen PlayState

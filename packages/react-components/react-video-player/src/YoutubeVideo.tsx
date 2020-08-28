@@ -1,4 +1,10 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, {
+  CSSProperties,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 const componentName: string = "YoutubeVideo";
 const debug = require("debug")(`lib:${componentName}`);
 
@@ -12,15 +18,14 @@ interface IProps {
   className?: string;
 
   /**
+   * Inquire video ID
+   */
+  id?: string;
+
+  /**
    * Inquire video URL
    */
   url?: string;
-
-  /**
-   * Inquire video ID
-   * TODO + throw error if no URL and not ID
-   */
-  id?: string;
 
   /**
    * Play, pause, resume video
@@ -59,27 +64,44 @@ function YoutubeVideo(props: IProps) {
 
   // --------------------------------------------------------------------------- YOUTUBE
 
-  const getIdFromUrl = (url: string): string | null => {
+  const getIdFromUrl = useMemo((): string | null => {
+    if (!props?.url) return;
     const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-    const match = url?.match(regExp);
+    const match = props?.url?.match(regExp);
     return match?.[1] ?? null;
-  };
+  }, [props?.url]);
 
-  const srcBuilder = (id: string = getIdFromUrl(props.url)): string =>
-    [
+  /**
+   * Select ID from id props or url prod, depends on who inquired
+   */
+  const [selectedId, setSelectedId] = useState<string>(
+    props?.id || getIdFromUrl
+  );
+  useEffect(() => {
+    setSelectedId(props?.id || getIdFromUrl);
+  }, [props?.id, props?.url]);
+
+  const srcBuilder = useMemo((): string => {
+    if (!selectedId) {
+      debug(`No selectedId, Can't build URL, return.`);
+      return;
+    }
+
+    return [
       `https://www.youtube.com/embed/`,
-      id,
+      selectedId,
       `?`,
       `autoplay=${props?.autoPlay ? 1 : 0}`,
       `&`,
       `controls=${props?.showControls ? 1 : 0}`
     ].join("");
+  }, [selectedId]);
 
   /**
    * Prepare src URL
    */
   useEffect(() => {
-    setVideoSrc(srcBuilder());
+    setVideoSrc(srcBuilder);
   }, [props.url, props.autoPlay, props.showControls]);
 
   return (

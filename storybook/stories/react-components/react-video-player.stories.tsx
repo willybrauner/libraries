@@ -62,6 +62,7 @@ storiesOf(`react-components/${storyName}`, module)
         </button>
         <VimeoVideo
           className={`${storyName}_vimeo`}
+          id={FakeDataUtils.getVideoId(DataEVideoType.VIMEO)}
           url={url}
           play={play}
           onPause={() => debug("pause callback")}
@@ -74,6 +75,7 @@ storiesOf(`react-components/${storyName}`, module)
 
   .add("youtube", () => {
     const [play, setPlay] = useState<boolean>(false);
+
     const url = useMemo(() => {
       return `https://youtu.be/${FakeDataUtils.getVideoId(
         DataEVideoType.YOUTUBE
@@ -86,6 +88,7 @@ storiesOf(`react-components/${storyName}`, module)
         </button>
         <YoutubeVideo
           className={`${storyName}_youtube`}
+          id={FakeDataUtils.getVideoId(DataEVideoType.YOUTUBE)}
           url={url}
           play={play}
           // onPause={() => debug("pause callback")}
