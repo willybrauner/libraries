@@ -13,11 +13,6 @@ const debug = require("debug")(`lib:${componentName}`);
  */
 interface IProps {
   /**
-   * Add className to component root
-   */
-  className?: string;
-
-  /**
    * Inquire video ID
    */
   id?: string;
@@ -47,6 +42,11 @@ interface IProps {
    * TODO TEST
    */
   autoPlay?: boolean;
+
+  /**
+   * Add className to component root
+   */
+  className?: string;
 }
 
 YoutubeVideo.defaultProps = {

@@ -15,11 +15,6 @@ const debug = require("debug")(`lib:${componentName}`);
  */
 interface IProps {
   /**
-   * Add className to component root
-   */
-  className: string;
-
-  /**
    * Inquire video ID
    */
   id?: string;
@@ -40,7 +35,7 @@ interface IProps {
   style?: CSSProperties;
 
   /**
-   * Show control on video
+   * Show controls on video
    * Must be hosted by a Plus account or higher
    */
   showControls?: boolean;
@@ -82,6 +77,11 @@ interface IProps {
    * Execute function on ended state callback
    */
   onEnded?: () => void;
+
+  /**
+   * Add className to component root
+   */
+  className: string;
 }
 
 VimeoVideo.defaultProps = {

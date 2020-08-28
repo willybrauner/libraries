@@ -7,11 +7,6 @@ const debug = require("debug")(`lib:${componentName}`);
  */
 interface IProps {
   /**
-   * Add className to component root
-   */
-  className?: string;
-
-  /**
    * Inquire video URL
    */
   url: string;
@@ -27,6 +22,7 @@ interface IProps {
   style?: CSSProperties;
 
   /**
+   * Show controls on video
    * @default true
    */
   showControls?: boolean;
@@ -68,9 +64,21 @@ interface IProps {
   onEnded?: () => void;
 
   /**
+   * Execute function on canplay state callback
+   * "The canplay event is fired when the user agent can play the media [...]"
+   * @doc https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplay_event
+   */
+  onCanPlay?: () => void;
+
+  /**
    * Add image as poster on video
    */
   poster?: string;
+
+  /**
+   * Add className to component root
+   */
+  className?: string;
 }
 
 NativeVideo.defaultProps = {
@@ -107,10 +115,12 @@ function NativeVideo(props: IProps) {
     rootRef.current?.addEventListener("play", onPlayHandler);
     rootRef.current?.addEventListener("pause", onPauseHandler);
     rootRef.current?.addEventListener("ended", onEndedHandler);
+    rootRef.current?.addEventListener("canplay", onCanPlayHandler);
     return () => {
       rootRef.current?.removeEventListener("play", onPlayHandler);
       rootRef.current?.removeEventListener("pause", onPauseHandler);
       rootRef.current?.removeEventListener("ended", onEndedHandler);
+      rootRef.current?.removeEventListener("canplay", onCanPlayHandler);
     };
   }, []);
 
@@ -129,16 +139,21 @@ function NativeVideo(props: IProps) {
     props?.onEnded?.();
   };
 
+  const onCanPlayHandler = () => {
+    debug("onCanPlay");
+    props?.onCanPlay?.();
+  };
+
   return (
     <video
       ref={rootRef}
       className={[componentName, props.className].filter(e => e).join(" ")}
-      src={props?.url}
-      autoPlay={props?.autoPlay}
-      controls={props?.showControls}
       style={props?.style}
-      loop={props.loop}
+      src={props?.url}
+      controls={props?.showControls}
+      autoPlay={props?.autoPlay}
       muted={props.muted}
+      loop={props.loop}
       playsInline={props.playsInline}
       poster={props.poster}
     />

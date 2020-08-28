@@ -40,9 +40,14 @@ storiesOf(`react-components/${storyName}`, module)
           className={`${storyName}_native`}
           url={url}
           play={play}
+          autoPlay={true}
+          muted={true}
+          style={{ width: 300 }}
           onPause={() => debug("pause callback")}
           onPlay={() => debug("play callback")}
           onEnded={() => debug("ended callback")}
+          onCanPlay={() => debug("canplay callback")}
+          poster={FakeDataUtils.getResponsiveImageData()[0].url}
         />
       </>
     );
