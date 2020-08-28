@@ -27,7 +27,7 @@ interface IProps {
   /**
    * Play, pause, resume video
    */
-  playing: boolean;
+  play: boolean;
 
   /**
    * Add root component style
@@ -165,9 +165,9 @@ function VimeoVideo(props: IProps) {
    */
   useEffect(() => {
     if (!player) return;
-    debug("props.playing", props.playing);
-    props.playing ? player.play() : player.pause();
-  }, [props.playing, player]);
+    debug("props.playing", props.play);
+    props.play ? player.play() : player.pause();
+  }, [props.play, player]);
 
   const onPlayHandler = () => {
     debug("play");

@@ -25,7 +25,7 @@ interface IProps {
   /**
    * Play, pause, resume video
    */
-  playing: boolean;
+  play: boolean;
 
   /**
    * Add root component style

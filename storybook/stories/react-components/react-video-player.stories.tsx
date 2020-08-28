@@ -25,7 +25,7 @@ storiesOf(`react-components/${storyName}`, module)
     }
   })
   .add("native", () => {
-    const [playing, setPlaying] = useState<boolean>(false);
+    const [play, setPlay] = useState<boolean>(false);
 
     // TODO updater la liste de fake data utils
     const url =
@@ -33,13 +33,13 @@ storiesOf(`react-components/${storyName}`, module)
 
     return (
       <>
-        <button onClick={() => setPlaying(!playing)}>
-          {playing ? "pause" : "play"}
+        <button onClick={() => setPlay(!play)}>
+          {play ? "pause" : "play"}
         </button>
         <NativeVideo
           className={`${storyName}_native`}
           url={url}
-          playing={playing}
+          play={play}
           onPause={() => debug("pause callback")}
           onPlay={() => debug("play callback")}
           onEnded={() => debug("ended callback")}
@@ -49,7 +49,7 @@ storiesOf(`react-components/${storyName}`, module)
   })
 
   .add("vimeo", () => {
-    const [playing, setPlaying] = useState<boolean>(false);
+    const [play, setPlay] = useState<boolean>(false);
     const url = useMemo(() => {
       return `https://vimeo.com/${FakeDataUtils.getVideoId(
         DataEVideoType.VIMEO
@@ -57,13 +57,13 @@ storiesOf(`react-components/${storyName}`, module)
     }, []);
     return (
       <>
-        <button onClick={() => setPlaying(!playing)}>
-          {playing ? "pause" : "play"}
+        <button onClick={() => setPlay(!play)}>
+          {play ? "pause" : "play"}
         </button>
         <VimeoVideo
           className={`${storyName}_vimeo`}
           url={url}
-          playing={playing}
+          play={play}
           onPause={() => debug("pause callback")}
           onPlay={() => debug("play callback")}
           onEnded={() => debug("ended callback")}
@@ -73,7 +73,7 @@ storiesOf(`react-components/${storyName}`, module)
   })
 
   .add("youtube", () => {
-    const [playing, setPlaying] = useState<boolean>(false);
+    const [play, setPlay] = useState<boolean>(false);
     const url = useMemo(() => {
       return `https://youtu.be/${FakeDataUtils.getVideoId(
         DataEVideoType.YOUTUBE
@@ -81,13 +81,13 @@ storiesOf(`react-components/${storyName}`, module)
     }, []);
     return (
       <>
-        <button onClick={() => setPlaying(!playing)}>
-          {playing ? "pause" : "play"}
+        <button onClick={() => setPlay(!play)}>
+          {play ? "pause" : "play"}
         </button>
         <YoutubeVideo
           className={`${storyName}_youtube`}
           url={url}
-          playing={playing}
+          play={play}
           // onPause={() => debug("pause callback")}
           // onPlay={() => debug("play callback")}
           // onEnded={() => debug("ended callback")}

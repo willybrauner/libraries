@@ -40,7 +40,7 @@ interface IProps {
    * Play, pause, resume video
    * @type all
    */
-  playing: boolean;
+  play: boolean;
 
   /**
    * Vimeo: must be hosted by a Plus account or higher

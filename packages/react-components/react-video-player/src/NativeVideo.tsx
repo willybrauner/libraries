@@ -19,7 +19,7 @@ interface IProps {
   /**
    * Play, pause, resume video
    */
-  playing: boolean;
+  play: boolean;
 
   /**
    * Add root component style
@@ -93,9 +93,9 @@ function NativeVideo(props: IProps) {
    * On playing update
    */
   useEffect(() => {
-    if (props.playing) rootRef.current?.play();
-    if (!props.playing) rootRef.current?.pause();
-  }, [props.playing]);
+    if (props.play) rootRef.current?.play();
+    if (!props.play) rootRef.current?.pause();
+  }, [props.play]);
 
   /**
    * Bind events
