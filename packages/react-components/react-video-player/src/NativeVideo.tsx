@@ -25,7 +25,7 @@ interface IProps {
    * Show controls on video
    * @default true
    */
-  showControls?: boolean;
+  controls?: boolean;
 
   /**
    * Autoplay works only if muted is set to true
@@ -44,6 +44,8 @@ interface IProps {
   muted?: boolean;
 
   /**
+   * Whether the video plays inline on supported mobile devices.
+   * To force the device to play the video in fullscreen mode instead, set this value to false.
    * @default true
    */
   playsInline?: boolean;
@@ -82,7 +84,7 @@ interface IProps {
 }
 
 NativeVideo.defaultProps = {
-  showControls: true,
+  controls: true,
   autoPlay: false,
   loop: false,
   muted: false,
@@ -150,7 +152,7 @@ function NativeVideo(props: IProps) {
       className={[componentName, props.className].filter(e => e).join(" ")}
       style={props?.style}
       src={props?.url}
-      controls={props?.showControls}
+      controls={props?.controls}
       autoPlay={props?.autoPlay}
       muted={props.muted}
       loop={props.loop}

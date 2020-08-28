@@ -38,7 +38,7 @@ interface IProps {
    * Show controls on video
    * Must be hosted by a Plus account or higher
    */
-  showControls?: boolean;
+  controls?: boolean;
 
   /**
    * Autoplay works only if muted is set to true
@@ -55,6 +55,13 @@ interface IProps {
    * @default false
    */
   muted?: boolean;
+
+  /**
+   * Whether the video plays inline on supported mobile devices.
+   * To force the device to play the video in fullscreen mode instead, set this value to false.
+   * @default true
+   */
+  playsInline?: boolean;
 
   /**
    * Pause playing video if another start in the same window
@@ -75,21 +82,28 @@ interface IProps {
 
   /**
    * Execute function on ended state callback
+   * Is not fired if loop is true
    */
   onEnded?: () => void;
 
   /**
+   * Execute function when a new video is loaded in the player
+   */
+  onLoaded?: () => void;
+
+  /**
    * Add className to component root
    */
-  className: string;
+  className?: string;
 }
 
 VimeoVideo.defaultProps = {
-  showControls: true,
+  controls: true,
   autoPlay: false,
   loop: false,
   muted: false,
-  autoPause: false
+  playsInline: true,
+  autoPause: true
 };
 
 /**
@@ -136,20 +150,37 @@ function VimeoVideo(props: IProps) {
       );
     }
 
-    // Create player
-    const player = new Player("vimeo", {
+    // select options
+    const options = {
       url: `https://vimeo.com/${selectedId}`,
-      loop: props.loop,
+      autoplay: props.autoPlay,
       muted: props.muted,
-      autoplay: props.autoPlay
-    });
+      loop: props.loop,
+      controls: props?.controls,
+      playsinline: props?.playsInline,
+      autopause: props?.autoPause,
+
+      // If exist, set props.style size properties to child iframe
+      // because iframe size is automatically set
+      width: props?.style?.width,
+      height: props?.style?.height,
+      maxWidth: props?.style?.maxWidth,
+      maxHeight: props?.style?.maxHeight
+    };
+
+    // Create player
+    const player = new Player("vimeo", options);
 
     debug("player instance", player);
 
-    // bind events
-    player.on("play", onPlayHandler);
-    player.on("pause", onPauseHandler);
-    player.on("ended", onEndedHandler);
+    if (!player) {
+      debug("No player instance found. Return.");
+    }
+
+    player?.on("play", onPlayHandler);
+    player?.on("pause", onPauseHandler);
+    player?.on("ended", onEndedHandler);
+    player?.on("loaded", onLoadedHandler);
     setPlayer(player);
   };
 
@@ -160,6 +191,7 @@ function VimeoVideo(props: IProps) {
     player?.off("play", onPlayHandler);
     player?.off("pause", onPauseHandler);
     player?.off("ended", onEndedHandler);
+    player?.off("loaded", onLoadedHandler);
     player?.destroy();
     setPlayer(null);
   };
@@ -179,7 +211,7 @@ function VimeoVideo(props: IProps) {
 
     // destroy on unmount
     if (player) return destroyPlayer;
-  }, [selectedId]);
+  }, [selectedId, player]);
 
   /**
    * Listen PlayState
@@ -206,6 +238,11 @@ function VimeoVideo(props: IProps) {
     debug("ended");
     setIsPlaying(false);
     props?.onEnded?.();
+  };
+
+  const onLoadedHandler = () => {
+    debug("loaded");
+    props?.onLoaded?.();
   };
 
   return (

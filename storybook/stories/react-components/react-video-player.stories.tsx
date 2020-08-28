@@ -42,6 +42,7 @@ storiesOf(`react-components/${storyName}`, module)
           play={play}
           autoPlay={true}
           muted={true}
+          controls={true}
           style={{ width: 300 }}
           onPause={() => debug("pause callback")}
           onPlay={() => debug("play callback")}
@@ -54,7 +55,7 @@ storiesOf(`react-components/${storyName}`, module)
   })
 
   .add("vimeo", () => {
-    const [play, setPlay] = useState<boolean>(false);
+    const [play, setPlay] = useState<boolean>(true);
     const url = useMemo(() => {
       return `https://vimeo.com/${FakeDataUtils.getVideoId(
         DataEVideoType.VIMEO
@@ -67,12 +68,17 @@ storiesOf(`react-components/${storyName}`, module)
         </button>
         <VimeoVideo
           className={`${storyName}_vimeo`}
-          id={FakeDataUtils.getVideoId(DataEVideoType.VIMEO)}
           url={url}
           play={play}
+          style={{ width: 300 }}
+          controls={true}
+          autoPlay={true}
+          muted={true}
+          loop={false}
           onPause={() => debug("pause callback")}
           onPlay={() => debug("play callback")}
           onEnded={() => debug("ended callback")}
+          onLoaded={() => debug("loaded callback")}
         />
       </>
     );
