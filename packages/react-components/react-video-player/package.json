@@ -20,7 +20,8 @@
     "@vimeo/player": "^2.12.2",
     "@wbe/react-responsive-image": "^1.1.1-alpha.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "youtube-player": "^5.5.2"
   },
   "devDependencies": {
     "@types/react": "^16.9.16",
