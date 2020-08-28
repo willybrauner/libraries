@@ -37,6 +37,7 @@ interface IProps {
   /**
    * Show controls on video
    * Must be hosted by a Plus account or higher
+   * @default true
    */
   controls?: boolean;
 

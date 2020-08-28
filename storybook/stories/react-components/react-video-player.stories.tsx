@@ -91,7 +91,7 @@ storiesOf(`react-components/${storyName}`, module)
       return `https://youtu.be/${FakeDataUtils.getVideoId(
         DataEVideoType.YOUTUBE
       )}`;
-    }, []);
+    }, [play]);
     return (
       <>
         <button onClick={() => setPlay(!play)}>
@@ -102,6 +102,8 @@ storiesOf(`react-components/${storyName}`, module)
           id={FakeDataUtils.getVideoId(DataEVideoType.YOUTUBE)}
           url={url}
           play={play}
+          style={{ width: 300 }}
+          controls={false}
           // onPause={() => debug("pause callback")}
           // onPlay={() => debug("play callback")}
           // onEnded={() => debug("ended callback")}

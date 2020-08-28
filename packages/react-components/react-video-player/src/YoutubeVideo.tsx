@@ -33,10 +33,12 @@ interface IProps {
   style?: CSSProperties;
 
   /**
-   * TODO TEST
+   * Show controls on video
+   * Must be hosted by a Plus account or higher
    * @doc: https://developers.google.com/youtube/iframe_api_reference
+   * @default true
    */
-  showControls?: boolean;
+  controls?: boolean;
 
   /**
    * TODO TEST
@@ -50,9 +52,25 @@ interface IProps {
 }
 
 YoutubeVideo.defaultProps = {
-  showControls: true,
+  controls: true,
   autoPlay: false
 };
+
+/**
+ * resolver
+ */
+// @ts-ignore
+const previous = window.onYouTubeIframeAPIReady;
+const youtubeReady = new Promise(resolve => {
+  if (previous) {
+    return previous();
+  }
+  // @ts-ignore
+  window.onYouTubeIframeAPIReady = () => {
+    // @ts-ignore
+    resolve(window.YT);
+  };
+});
 
 /**
  * YoutubeVideo
@@ -60,10 +78,12 @@ YoutubeVideo.defaultProps = {
  */
 function YoutubeVideo(props: IProps) {
   const rootRef = useRef(null);
-  const [videoSrc, setVideoSrc] = useState<string>(null);
+  const [player, setPlayer] = useState(null);
+  const youtubeScriptId = "__youtube";
 
-  // --------------------------------------------------------------------------- YOUTUBE
-
+  /**
+   * Extract ID from youtube URL
+   */
   const getIdFromUrl = useMemo((): string | null => {
     if (!props?.url) return;
     const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
@@ -79,40 +99,81 @@ function YoutubeVideo(props: IProps) {
   );
   useEffect(() => {
     setSelectedId(props?.id || getIdFromUrl);
-  }, [props?.id, props?.url]);
-
-  const srcBuilder = useMemo((): string => {
-    if (!selectedId) {
-      debug(`No selectedId, Can't build URL, return.`);
-      return;
-    }
-
-    return [
-      `https://www.youtube.com/embed/`,
-      selectedId,
-      `?`,
-      `autoplay=${props?.autoPlay ? 1 : 0}`,
-      `&`,
-      `controls=${props?.showControls ? 1 : 0}`
-    ].join("");
-  }, [selectedId]);
+  }, [props?.id, getIdFromUrl]);
 
   /**
-   * Prepare src URL
+   * Check if script tag exist
+   * @param scriptId
+   */
+  const scriptTagExist = (scriptId = youtubeScriptId): boolean =>
+    document.getElementById(scriptId) != null;
+
+  /**
+   * Create script tag
+   */
+  const injectScriptTag = (
+    youtubeScriptSrc = "https://www.youtube.com/iframe_api",
+    scriptId = youtubeScriptId
+  ) => {
+    // create script tag
+    const scriptTag = document.createElement("script");
+    scriptTag.src = youtubeScriptSrc;
+    scriptTag.setAttribute("id", scriptId);
+    const firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+  };
+
+  /**
+   * Init
+   * @param videoId
    */
   useEffect(() => {
-    setVideoSrc(srcBuilder);
-  }, [props.url, props.autoPlay, props.showControls]);
+    //if (!scriptTagExist()) {
+    //debug("Youtube script tag doesn't exist, inject it...");
+    injectScriptTag();
+    //}
+
+    youtubeReady.then(YT => {
+      // @ts-ignore
+      const myPlayer = new YT.Player(`${componentName}-${selectedId}`, {
+        videoId: selectedId,
+        playerVars: {
+          width: props?.style?.width,
+          height: props?.style?.height,
+          autoplay: props?.autoPlay,
+          controls: props?.controls
+          // loop: props?.loop
+          // showinfo: props?.showinfo
+        },
+        events: {
+          onReady: (e: any) => {
+            debug("onReady", e);
+          },
+          onStateChange: (e: any) => {
+            debug("onStateChange", e);
+          },
+          onError: (e: any) => {
+            debug("onError", e);
+          }
+        }
+      });
+
+      setPlayer(myPlayer);
+    });
+  }, [selectedId]);
+
+  useEffect(() => {
+    debug("player", player);
+  }, [player]);
 
   return (
-    <iframe
+    <div
       ref={rootRef}
-      className={[componentName, props.className].filter(e => e).join(" ")}
-      src={videoSrc}
+      className={[`${componentName}-${selectedId}`, props.className]
+        .filter(e => e)
+        .join(" ")}
+      id={`${componentName}-${selectedId}`}
       style={props?.style}
-      frameBorder="0"
-      allow="autoplay"
-      allowFullScreen
     />
   );
 }
