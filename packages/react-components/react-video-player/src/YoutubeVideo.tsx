@@ -71,15 +71,15 @@ interface IProps {
   disableKb?: boolean;
 
   /**
-   *
-   */
-  end?: (time: number) => void;
-
-  /**
    * Active fullScreen button
    * @default true
    */
   fs?: boolean;
+
+  /**
+   * Execute function when video is ready
+   */
+  onReady?: (event: any) => void;
 
   /**
    * Execute function on play state callback
@@ -150,7 +150,7 @@ function YoutubeVideo(props: IProps) {
     const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
     const match = props?.url?.match(regExp);
     return match?.[1] ?? null;
-  }, [props?.url]);
+  }, [props.url]);
 
   /**
    * Select ID from id props or url prod, depends on who inquired
@@ -160,7 +160,7 @@ function YoutubeVideo(props: IProps) {
   );
   useEffect(() => {
     setSelectedId(props?.id || getIdFromUrl);
-  }, [props?.id, getIdFromUrl]);
+  }, [props.id, getIdFromUrl]);
 
   // prepare DOM id name
   const domId = `${componentName}-${selectedId}`;
@@ -173,14 +173,16 @@ function YoutubeVideo(props: IProps) {
   const createPlayer = (): void => {
     const options = {
       videoId: selectedId,
-      width: props?.style?.width,
-      height: props?.style?.height,
+      width: props.style?.width,
+      height: props.style?.height,
       playerVars: {
-        autoplay: props?.autoPlay ? 1 : 0,
-        controls: props?.controls ? 1 : 0,
-        loop: props?.loop ? 1 : 0,
+        autoplay: props.autoPlay ? 1 : 0,
+        controls: props.controls ? 1 : 0,
+        loop: props.loop ? 1 : 0,
         playsinline: props.playsInline ? 1 : 0,
-        modestbranding: 1
+        modestbranding: props.modestBranding ? 1 : 0,
+        disablebk: props.disableKb ? 1 : 0,
+        fs: props.fs ? 1 : 0
       }
     };
 
@@ -239,34 +241,37 @@ function YoutubeVideo(props: IProps) {
   /**
    * Events
    */
-  useEffect(() => {
-    const handler = (event: any) => {
-      if (!event?.data) return;
-      debug(event);
-      switch (event?.data) {
-        case playerState.UNSTARTED:
-          debug("unstart");
-          break;
-        case playerState.ENDED:
-          props?.onEnded?.(event);
-          break;
-        case playerState.PLAYING:
-          props?.onPlay?.(event);
-          break;
-        case playerState.PAUSED:
-          props?.onPause?.(event);
-          break;
-        case playerState.BUFFERING:
-          props?.onBuffering?.(event);
-          break;
-        case playerState.CUED:
-          debug("video cued");
-          break;
-      }
-    };
 
-    const listener = player?.on("stateChange", handler);
-    return () => player?.off(listener);
+  const readyHandler = (event: any) => {
+    debug("On ready", event);
+    props?.onReady?.(event);
+  };
+
+  const stateChangeHandler = (event: any) => {
+    debug(event);
+    switch (event?.data) {
+      case playerState.ENDED:
+        props?.onEnded?.(event);
+        break;
+      case playerState.PLAYING:
+        props?.onPlay?.(event);
+        break;
+      case playerState.PAUSED:
+        props?.onPause?.(event);
+        break;
+      case playerState.BUFFERING:
+        props?.onBuffering?.(event);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    const readyListener = player?.on("ready", readyHandler);
+    const stateChangeListener = player?.on("stateChange", stateChangeHandler);
+    return () => {
+      player?.off(stateChangeListener);
+      readyListener?.off(readyListener);
+    };
   }, [player]);
 
   /**
