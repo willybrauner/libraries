@@ -294,8 +294,8 @@ function YoutubeVideo(props: IProps) {
 
   return (
     <div
+      className={[componentName, props?.className].filter(e => e).join(" ")}
       ref={rootRef}
-      className={[componentName, props.className].filter(e => e).join(" ")}
       style={props?.style}
     >
       <div id={domId} />
