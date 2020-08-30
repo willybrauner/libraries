@@ -13,6 +13,7 @@
     "@wbe/fake-data-utils": "^1.2.0",
     "@wbe/react-grid-layout": "^1.2.0",
     "@wbe/react-responsive-image": "^1.2.0",
+    "@wbe/react-video-player": "^0.0.1",
     "@wbe/use-async-effect": "^1.2.0",
     "@wbe/use-bounding-client-rect": "^1.2.0",
     "@wbe/use-document-scroll-top": "^1.2.0",
