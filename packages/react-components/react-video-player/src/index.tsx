@@ -49,6 +49,7 @@ interface IProps {
    * Show controls on video
    * @type all
    * Vimeo: must be hosted by a Plus account or higher
+   * @default true
    */
   controls?: boolean;
 
@@ -57,16 +58,19 @@ interface IProps {
    * native: playsInline and muted props need to be true
    * vimeo: muted props need to be true
    * @type all
+   * @default false
    */
   autoPlay?: boolean;
 
   /**
    * @type all
+   * @default false
    */
   loop?: boolean;
 
   /**
    * @type all
+   * @default false
    */
   muted?: boolean;
 
@@ -74,6 +78,7 @@ interface IProps {
    * Whether the video plays inline on supported mobile devices.
    * To force the device to play the video in fullscreen mode instead, set this value to false.
    * @type all
+   * @default true
    */
   playsInline?: boolean;
 
@@ -84,19 +89,19 @@ interface IProps {
   onReady?: (event?: any) => void;
 
   /**
-   * Execute function on play state callback
+   * Execute callback function on play state
    * @type all
    */
   onPlay?: (event?: any) => void;
 
   /**
-   * Execute function on pause state callback
+   * Execute callback function on pause state
    * @type all
    */
   onPause?: (event?: any) => void;
 
   /**
-   * Execute function on ended state callback
+   * Execute callback function on ended state
    * @type all
    */
   onEnded?: (event?: any) => void;
@@ -116,8 +121,7 @@ VideoPlayer.defaultProps = {
   controls: true,
   loop: false,
   playsInline: true,
-  muted: false,
-  autoplay: false
+  muted: false
 };
 
 const componentName: string = "VideoPlayer";
@@ -210,4 +214,4 @@ function VideoPlayer(props: IProps) {
   }
 }
 
-export { VideoPlayer as default };
+export { VideoPlayer as default, NativeVideo, VimeoVideo, YoutubeVideo };
