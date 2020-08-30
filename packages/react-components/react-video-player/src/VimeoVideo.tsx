@@ -74,23 +74,24 @@ interface IProps {
   /**
    * Execute function on play state callback
    */
-  onPlay?: () => void;
+  onPlay?: (event?: any) => void;
 
   /**
    * Execute function on pause state callback
+   * @default true
    */
-  onPause?: () => void;
+  onPause?: (event?: any) => void;
 
   /**
    * Execute function on ended state callback
    * Is not fired if loop is true
    */
-  onEnded?: () => void;
+  onEnded?: (event?: any) => void;
 
   /**
-   * Execute function when a new video is loaded in the player
+   * Execute function when a new video is ready
    */
-  onLoaded?: () => void;
+  onReady?: (event?: any) => void;
 
   /**
    * Add className to component root
@@ -115,7 +116,8 @@ VimeoVideo.defaultProps = {
 function VimeoVideo(props: IProps) {
   const rootRef = useRef(null);
   const [player, setPlayer] = useState<Player>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  // --------------------------------------------------------------------------- CONFIG
 
   /**
    * Extract id from URL
@@ -123,7 +125,10 @@ function VimeoVideo(props: IProps) {
    * return {string} vimeo ID
    */
   const getIdFromUrl = useMemo((): string => {
-    if (!props?.url) return;
+    if (!props?.url) {
+      debug(`props.url doesn't exist. Return.`);
+      return;
+    }
     const regExp = /(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/;
     const match = props?.url?.match(regExp);
     return match?.[4] ?? null;
@@ -137,7 +142,12 @@ function VimeoVideo(props: IProps) {
   );
   useEffect(() => {
     setSelectedId(props?.id || getIdFromUrl);
-  }, [props?.id, props?.url]);
+  }, [props?.id, getIdFromUrl]);
+
+  // prepare DOM id name
+  const domId = `${componentName}-${selectedId}`;
+
+  // --------------------------------------------------------------------------- PLAYER
 
   /**
    * use Vimeo SDK and bind events
@@ -170,7 +180,7 @@ function VimeoVideo(props: IProps) {
     };
 
     // Create player
-    const player = new Player("vimeo", options);
+    const player = new Player(domId, options);
 
     debug("player instance", player);
 
@@ -223,33 +233,32 @@ function VimeoVideo(props: IProps) {
     props.play ? player.play() : player.pause();
   }, [props.play, player]);
 
-  const onPlayHandler = () => {
+  const onPlayHandler = (event: any) => {
     debug("play");
-    setIsPlaying(true);
-    props?.onPlay?.();
+    props?.onPlay?.(event);
   };
 
-  const onPauseHandler = () => {
+  const onPauseHandler = (event: any) => {
     debug("pause");
-    setIsPlaying(false);
-    props?.onPause?.();
+    props?.onPause?.(event);
   };
 
-  const onEndedHandler = () => {
+  const onEndedHandler = (event: any) => {
     debug("ended");
-    setIsPlaying(false);
-    props?.onEnded?.();
+    props?.onEnded?.(event);
   };
 
-  const onLoadedHandler = () => {
-    debug("loaded");
-    props?.onLoaded?.();
+  const onLoadedHandler = (event: any) => {
+    debug("loaded, onReady");
+    props?.onReady?.(event);
   };
+
+  // --------------------------------------------------------------------------- RENDER
 
   return (
     <div
       className={[componentName, props.className].filter(e => e).join("")}
-      id="vimeo"
+      id={domId}
       ref={rootRef}
       style={props.style}
     />

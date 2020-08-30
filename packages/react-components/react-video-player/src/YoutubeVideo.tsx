@@ -52,6 +52,11 @@ interface IProps {
   loop?: boolean;
 
   /**
+   * @type NATIVE | VIMEO
+   */
+  muted?: boolean;
+
+  /**
    * Whether the video plays inline on supported mobile devices.
    * To force the device to play the video in fullscreen mode instead, set this value to false.
    * @default true
@@ -79,28 +84,28 @@ interface IProps {
   /**
    * Execute function when video is ready
    */
-  onReady?: (event: any) => void;
+  onReady?: (event?: any) => void;
 
   /**
    * Execute function on play state callback
    */
-  onPlay?: (event: any) => void;
+  onPlay?: (event?: any) => void;
 
   /**
    * Execute function on pause state callback
    */
-  onPause?: (event: any) => void;
+  onPause?: (event?: any) => void;
 
   /**
    * Execute function on ended state callback
    * Is not fired if loop is true
    */
-  onEnded?: (event: any) => void;
+  onEnded?: (event?: any) => void;
 
   /**
    * Execute function when a new video is buffering
    */
-  onBuffering?: (event: any) => void;
+  onBuffering?: (event?: any) => void;
 
   /**
    * Add className to component root
@@ -241,7 +246,6 @@ function YoutubeVideo(props: IProps) {
   /**
    * Events
    */
-
   const readyHandler = (event: any) => {
     debug("On ready", event);
     props?.onReady?.(event);
@@ -270,7 +274,7 @@ function YoutubeVideo(props: IProps) {
     const stateChangeListener = player?.on("stateChange", stateChangeHandler);
     return () => {
       player?.off(stateChangeListener);
-      readyListener?.off(readyListener);
+      player?.off(readyListener);
     };
   }, [player]);
 
@@ -280,6 +284,13 @@ function YoutubeVideo(props: IProps) {
   useEffect(() => {
     props.play ? player?.playVideo() : player?.pauseVideo();
   }, [props.play]);
+
+  useEffect(() => {
+    // muted props
+    props?.muted ? player?.mute() : player?.unMute();
+  }, [player, props.muted]);
+
+  // --------------------------------------------------------------------------- RENDER
 
   return (
     <div

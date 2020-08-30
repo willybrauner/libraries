@@ -53,24 +53,24 @@ interface IProps {
   /**
    * Execute function on play state callback
    */
-  onPlay?: () => void;
+  onPlay?: (event?: any) => void;
 
   /**
    * Execute function on pause state callback
    */
-  onPause?: () => void;
+  onPause?: (event?: any) => void;
 
   /**
    * Execute function on ended state callback
    */
-  onEnded?: () => void;
+  onEnded?: (event?: any) => void;
 
   /**
    * Execute function on canplay state callback
    * "The canplay event is fired when the user agent can play the media [...]"
    * @doc https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplay_event
    */
-  onCanPlay?: () => void;
+  onCanPlay?: (event?: any) => void;
 
   /**
    * Add image as poster on video
@@ -126,24 +126,24 @@ function NativeVideo(props: IProps) {
     };
   }, []);
 
-  const onPlayHandler = () => {
+  const onPlayHandler = (event: any) => {
     debug("play");
-    props?.onPlay?.();
+    props?.onPlay?.(event);
   };
 
-  const onPauseHandler = () => {
+  const onPauseHandler = (event: any) => {
     debug("pause");
-    props?.onPause?.();
+    props?.onPause?.(event);
   };
 
-  const onEndedHandler = () => {
+  const onEndedHandler = (event: any) => {
     debug("ended");
-    props?.onEnded?.();
+    props?.onEnded?.(event);
   };
 
-  const onCanPlayHandler = () => {
+  const onCanPlayHandler = (event: any) => {
     debug("onCanPlay");
-    props?.onCanPlay?.();
+    props?.onCanPlay?.(event);
   };
 
   return (
