@@ -21,7 +21,6 @@
     "@wbe/use-bounding-client-rect": "^1.2.0",
     "@wbe/use-responsive-image-data": "^1.2.0",
     "intersection-observer": "^0.11.0",
-    "npm-check-updates": "^7.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
