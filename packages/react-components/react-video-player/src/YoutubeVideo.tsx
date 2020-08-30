@@ -84,23 +84,23 @@ interface IProps {
   /**
    * Execute function on play state callback
    */
-  onPlay?: () => void;
+  onPlay?: (event: any) => void;
 
   /**
    * Execute function on pause state callback
    */
-  onPause?: () => void;
+  onPause?: (event: any) => void;
 
   /**
    * Execute function on ended state callback
    * Is not fired if loop is true
    */
-  onEnded?: () => void;
+  onEnded?: (event: any) => void;
 
   /**
    * Execute function when a new video is buffering
    */
-  onBuffering?: () => void;
+  onBuffering?: (event: any) => void;
 
   /**
    * Add className to component root
@@ -117,6 +117,15 @@ YoutubeVideo.defaultProps = {
   fs: true
 };
 
+const playerState = {
+  UNSTARTED: -1,
+  ENDED: 0,
+  PLAYING: 1,
+  PAUSED: 2,
+  BUFFERING: 3,
+  CUED: 5
+};
+
 /**
  * YoutubeVideo
  * use youtube iframe API with youtube-player (https://github.com/gajus/youtube-player)
@@ -126,6 +135,8 @@ YoutubeVideo.defaultProps = {
 function YoutubeVideo(props: IProps) {
   const rootRef = useRef(null);
   const [player, setPlayer] = useState(null);
+
+  // --------------------------------------------------------------------------- CONFIG
 
   /**
    * Extract ID from youtube URL
@@ -150,13 +161,14 @@ function YoutubeVideo(props: IProps) {
     previousSelectedId.current = selectedId;
   }, [selectedId]);
 
+  // --------------------------------------------------------------------------- PLAYER
+
   /**
-   * Init
-   * @param videoId
+   * Create Player
    */
-  useEffect(() => {
-    const myPlayer = YouTubePlayer(selectedId, {
-      videoId: selectedId,
+  const createPlayer = (): void => {
+    const options = {
+      videoId: props?.id,
       width: props?.style?.width,
       height: props?.style?.height,
       playerVars: {
@@ -166,67 +178,84 @@ function YoutubeVideo(props: IProps) {
         playsinline: props.playsInline ? 1 : 0,
         modestbranding: 1
       }
-    });
+    };
+    const domId = `${componentName}-${props?.id}`;
+    const el = (rootRef?.current as HTMLElement)?.querySelector(`#${domId}`);
+    debug("el inside we create player", el);
 
-    setPlayer(myPlayer);
-  }, [selectedId]);
+    if (el) {
+      debug("el exist, create instance");
+      const instance = YouTubePlayer(domId, options);
+      setPlayer(instance);
+    }
+  };
 
   /**
-   * TODO
-   * test to reset
+   * Update player
    */
+  const updatePlayer = () => {
+    // If autoplay, load new video
+    if (props?.autoPlay) {
+      debug("loadVideoById");
+      player?.loadVideoById(props.id);
+    } else {
+      player?.getIframe().then((iframe: any): void => {
+        debug("el to transform as iframe", iframe);
+        resetPlayer();
+      });
+    }
+  };
+
+  /**
+   * Reset an recreate player
+   */
+  const resetPlayer = () => {
+    player?.destroy().then(() => createPlayer());
+  };
+
+  /**
+   * START create
+   */
+
+  useEffect(() => {
+    createPlayer();
+  }, []);
+
   const initialMount = useRef(true);
   useEffect(() => {
-    if (initialMount) {
+    debug("props.id change ", props.id);
+    if (initialMount.current) {
+      debug("initialMount", initialMount);
       initialMount.current = false;
       return;
+    } else {
+      debug("updatePlayer...");
+      updatePlayer();
     }
-    debug("update player...");
-    player?.getIframe().then((iframe: any) => {
-      debug("el to transform as iframe", iframe);
-      if (selectedId) iframe.setAttribute("id", selectedId);
-      else iframe.removeAttribute("id");
-    });
-  }, [selectedId]);
+  }, [props.id]);
 
   /**
    * Events
-   * "-1": "unstarted",
-   0: "ended",
-   1: "playing",
-   2: "paused",
-   3: "buffering",
-   5: "video cued"
    */
   useEffect(() => {
-    const playerState = {
-      UNSTARTED: -1,
-      ENDED: 0,
-      PLAYING: 1,
-      PAUSED: 2,
-      BUFFERING: 3,
-      CUED: 5
-    };
-
-    const handler = (e: any) => {
-      if (!e?.data) return;
-
-      debug(e);
-      switch (e?.data) {
+    const handler = (event: any) => {
+      if (!event?.data) return;
+      debug(event);
+      switch (event?.data) {
         case playerState.UNSTARTED:
           debug("unstart");
           break;
         case playerState.ENDED:
-          props?.onEnded?.();
+          props?.onEnded?.(event);
           break;
         case playerState.PLAYING:
-          props?.onPlay?.();
+          props?.onPlay?.(event);
           break;
         case playerState.PAUSED:
-          props?.onPause?.();
+          props?.onPause?.(event);
           break;
         case playerState.BUFFERING:
-          props?.onBuffering?.();
+          props?.onBuffering?.(event);
           break;
         case playerState.CUED:
           debug("video cued");
@@ -234,20 +263,17 @@ function YoutubeVideo(props: IProps) {
       }
     };
 
-    // listen
     const listener = player?.on("stateChange", handler);
-
-    // destroy events
-    //return () => player?.off(listener);
+    return () => player?.off(listener);
   }, [player]);
 
   /**
    * PlayPause
    */
   useEffect(() => {
-    debug("player", player);
+    debug("props.play change", player);
     props.play ? player?.playVideo() : player?.pauseVideo();
-  }, [player, props.play]);
+  }, [props.play]);
 
   return (
     <div
@@ -255,7 +281,7 @@ function YoutubeVideo(props: IProps) {
       className={[componentName, props.className].filter(e => e).join(" ")}
       style={props?.style}
     >
-      <div id={selectedId} />
+      <div id={`${componentName}-${props?.id}`} />
     </div>
   );
 }
