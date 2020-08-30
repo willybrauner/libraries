@@ -72,7 +72,7 @@ import { ResponsiveImage } from "@wbe/libraries";
 ## Documentation
 
 All modules documentations are available on
-[libraries.willybrauner.com](https://libraries.willybrauner.com)
+[https://willybrauner.github.io/libraries](https://willybrauner.github.io/libraries)
 
 ## Contribute
 
