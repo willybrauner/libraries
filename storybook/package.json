@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "Willy Brauner",
   "license": "ISC",
@@ -31,6 +32,7 @@
     "@storybook/addons": "^6.0.20",
     "@storybook/preset-create-react-app": "^3.1.4",
     "@storybook/react": "^6.0.20",
+    "@storybook/storybook-deployer": "^2.8.6",
     "@storybook/theming": "^6.0.20",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.2",
@@ -45,5 +47,10 @@
     "storybook-readme": "^5.0.8",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
+  },
+  "storybook-deployer": {
+    "gitUsername": "willybrauner",
+    "gitEmail": "mail@willybrauner.com",
+    "commitMessage": "Deploy Libraries Storybook to Github Pages"
   }
 }

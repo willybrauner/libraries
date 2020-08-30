@@ -2,7 +2,6 @@
 
 Libraries is a mono-repos of front-end javascript modules for React and vanilla js.
 
-![Travis (.org)](https://img.shields.io/travis/willybrauner/libraries)
 ![GitHub contributors](https://img.shields.io/github/contributors/willybrauner/libraries)
 
 ## About
@@ -11,7 +10,7 @@ Libraries is a mono-repos of front-end javascript modules for React and vanilla 
 
 ✅ Javascript modules written with typescript  
 ✅ Libraries standalone module  
-✅ Storybook documentation
+✅ [Storybook documentation](https://willybrauner.github.io/libraries/)
 
 ## Summary
 
@@ -73,7 +72,7 @@ import { ResponsiveImage } from "@wbe/libraries";
 ## Documentation
 
 All modules documentations are available on
-[libraries.willybrauner.com](https://libraries.willybrauner.com)
+[https://willybrauner.github.io/libraries](https://willybrauner.github.io/libraries)
 
 ## Contribute
 
