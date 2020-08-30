@@ -133,7 +133,7 @@ const playerState = {
  * @param props
  */
 function YoutubeVideo(props: IProps) {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const [player, setPlayer] = useState(null);
 
   // --------------------------------------------------------------------------- CONFIG
@@ -142,7 +142,11 @@ function YoutubeVideo(props: IProps) {
    * Extract ID from youtube URL
    */
   const getIdFromUrl = useMemo((): string | null => {
-    if (!props?.url) return;
+    if (!props?.url) {
+      debug(`props.url doesn't exist. Return.`);
+      return;
+    }
+    debug(`Get Id from Url ${props?.url}`);
     const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
     const match = props?.url?.match(regExp);
     return match?.[1] ?? null;
@@ -151,15 +155,15 @@ function YoutubeVideo(props: IProps) {
   /**
    * Select ID from id props or url prod, depends on who inquired
    */
-  const [selectedId, setSelectedId] = useState<string>(null);
-  const previousSelectedId = useRef(null);
+  const [selectedId, setSelectedId] = useState<string>(
+    props?.id || getIdFromUrl
+  );
   useEffect(() => {
     setSelectedId(props?.id || getIdFromUrl);
   }, [props?.id, getIdFromUrl]);
 
-  useEffect(() => {
-    previousSelectedId.current = selectedId;
-  }, [selectedId]);
+  // prepare DOM id name
+  const domId = `${componentName}-${selectedId}`;
 
   // --------------------------------------------------------------------------- PLAYER
 
@@ -168,7 +172,7 @@ function YoutubeVideo(props: IProps) {
    */
   const createPlayer = (): void => {
     const options = {
-      videoId: props?.id,
+      videoId: selectedId,
       width: props?.style?.width,
       height: props?.style?.height,
       playerVars: {
@@ -179,12 +183,11 @@ function YoutubeVideo(props: IProps) {
         modestbranding: 1
       }
     };
-    const domId = `${componentName}-${props?.id}`;
-    const el = (rootRef?.current as HTMLElement)?.querySelector(`#${domId}`);
-    debug("el inside we create player", el);
 
+    const el = rootRef?.current?.querySelector(`#${domId}`);
+    debug("el inside we create player", el);
     if (el) {
-      debug("el exist, create instance");
+      debug("el exist, create instance...");
       const instance = YouTubePlayer(domId, options);
       setPlayer(instance);
     }
@@ -196,11 +199,10 @@ function YoutubeVideo(props: IProps) {
   const updatePlayer = () => {
     // If autoplay, load new video
     if (props?.autoPlay) {
-      debug("loadVideoById");
-      player?.loadVideoById(props.id);
+      player?.loadVideoById(selectedId);
+      // reset player
     } else {
       player?.getIframe().then((iframe: any): void => {
-        debug("el to transform as iframe", iframe);
         resetPlayer();
       });
     }
@@ -214,25 +216,25 @@ function YoutubeVideo(props: IProps) {
   };
 
   /**
-   * START create
+   * Start
    */
-
   useEffect(() => {
     createPlayer();
   }, []);
 
+  /**
+   * Update
+   */
   const initialMount = useRef(true);
   useEffect(() => {
-    debug("props.id change ", props.id);
     if (initialMount.current) {
-      debug("initialMount", initialMount);
       initialMount.current = false;
       return;
     } else {
-      debug("updatePlayer...");
+      // only on update
       updatePlayer();
     }
-  }, [props.id]);
+  }, [selectedId]);
 
   /**
    * Events
@@ -271,7 +273,6 @@ function YoutubeVideo(props: IProps) {
    * PlayPause
    */
   useEffect(() => {
-    debug("props.play change", player);
     props.play ? player?.playVideo() : player?.pauseVideo();
   }, [props.play]);
 
@@ -281,7 +282,7 @@ function YoutubeVideo(props: IProps) {
       className={[componentName, props.className].filter(e => e).join(" ")}
       style={props?.style}
     >
-      <div id={`${componentName}-${props?.id}`} />
+      <div id={domId} />
     </div>
   );
 }
