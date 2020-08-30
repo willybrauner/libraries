@@ -114,7 +114,6 @@ VimeoVideo.defaultProps = {
  * @param props
  */
 function VimeoVideo(props: IProps) {
-  const rootRef = useRef(null);
   const [player, setPlayer] = useState<Player>(null);
 
   // --------------------------------------------------------------------------- CONFIG
@@ -257,9 +256,8 @@ function VimeoVideo(props: IProps) {
 
   return (
     <div
-      className={[componentName, props.className].filter(e => e).join("")}
+      className={[componentName, props?.className].filter(e => e).join(" ")}
       id={domId}
-      ref={rootRef}
       style={props.style}
     />
   );

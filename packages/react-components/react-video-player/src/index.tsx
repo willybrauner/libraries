@@ -171,6 +171,7 @@ function VideoPlayer(props: IProps) {
   if (props?.type === EVideoType.VIMEO) {
     return (
       <VimeoVideo
+        className={className}
         id={props.id}
         url={props.url}
         play={props.play}
@@ -194,6 +195,7 @@ function VideoPlayer(props: IProps) {
   if (props?.type === EVideoType.YOUTUBE) {
     return (
       <YoutubeVideo
+        className={className}
         id={props.id}
         url={props.url}
         play={props.play}

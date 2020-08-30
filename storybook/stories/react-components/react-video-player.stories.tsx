@@ -82,7 +82,7 @@ const VimeoVideoTest = () => {
  * Native
  */
 const NativeVideoTest = () => {
-  const [play, setPlay] = useState<boolean>(false);
+  const [play, setPlay] = useState<boolean>(true);
 
   const url =
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
@@ -94,7 +94,7 @@ const NativeVideoTest = () => {
         type={EVideoType.NATIVE}
         className={`${storyName}_native`}
         url={url}
-        play={true}
+        play={play}
         style={{ width: 400, display: "block" }}
         controls={false}
         muted={true}
