@@ -1,5 +1,5 @@
 import "../../global-style.css";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/react-video-player/README.md";
 import FakeDataUtils, {
@@ -7,13 +7,8 @@ import FakeDataUtils, {
 } from "@wbe/fake-data-utils";
 import VideoPlayer, { EVideoType } from "@wbe/react-video-player";
 
-// set story name$
 const storyName = "react-video-player";
 const debug = require("debug")(`lib:${storyName}`);
-
-/**
- *
- */
 
 /**
  * Youtube
@@ -89,7 +84,6 @@ const VimeoVideoTest = () => {
 const NativeVideoTest = () => {
   const [play, setPlay] = useState<boolean>(false);
 
-  // TODO updater la liste de fake data utils
   const url =
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
 
@@ -120,14 +114,7 @@ storiesOf(`react-components/${storyName}`, module)
       sidebar: README
     }
   })
-  .add("native", () => {
-    return (
-      <>
-        <NativeVideoTest />
-      </>
-    );
-  })
-
+  .add("native", () => <NativeVideoTest />)
   .add("vimeo", () => {
     return (
       <>
