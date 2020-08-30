@@ -21,6 +21,7 @@ Libraries is WIP! [You can check future plan](https://github.com/willybrauner/li
 
 - [react-grid-layout](packages/react-components/react-grid-layout)
 - [react-responsive-image](packages/react-components/react-responsive-image)
+- [react-video-player](packages/react-components/react-video-player)
 
 **react-hooks**
 
@@ -66,7 +67,7 @@ $ npm install -s @wbe/libraries
 ```
 
 ```tsx
-import { react-responsive-image } from "@wbe/libraries";
+import { ResponsiveImage } from "@wbe/libraries";
 ```
 
 ## Documentation
