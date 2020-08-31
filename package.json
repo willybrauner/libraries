@@ -6,12 +6,14 @@
     "clean": "lerna clean",
     "reset": "lerna clean && rm -rf packages/**/package-lock.json && rm -rf packages/**/**/package-lock.json && lerna bootstrap",
     "scaffold": "node ./config/tasks/scaffold.js",
-    "publish:all": "lerna bootstrap && lerna run compile && lerna publish && npm run deploy-storybook",
+    "test": "lerna exec 'npm run test'",
+    "publish:all": "lerna bootstrap && npm run test && lerna run compile && lerna publish && npm run deploy-storybook",
     "prettier": "prettier --write '*/**/**/**/*.{js,jsx,ts,tsx,css,json,md}'",
     "storybook": "cd storybook && npm run storybook",
     "deploy-storybook": "cd storybook && npm run deploy-storybook"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.10",
     "@zouloux/files": "^0.6.0",
     "app-root-path": "^3.0.0",
     "change-case": "^4.1.1",
@@ -19,6 +21,7 @@
     "debug": "^4.1.1",
     "husky": "^4.2.3",
     "inquirer": "^7.0.4",
+    "jest": "^26.4.2",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
