@@ -5,11 +5,12 @@
     "target": "es2015",
     "lib": ["es2015", "dom"],
     "outDir": "./dist",
-    "rootDir": ".",
+    "rootDir": "./src",
     "moduleResolution": "node",
+    "types": ["node", "jest"],
     "jsx": "react",
     "declaration": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "preserveConstEnums": true,
     "strictNullChecks": false,
@@ -18,5 +19,5 @@
     // pass to true for disable this check.
     "skipLibCheck": false
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "test"]
 }
