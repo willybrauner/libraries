@@ -14,7 +14,7 @@
     "esModuleInterop": true,
     "preserveConstEnums": true,
     "strictNullChecks": false,
-    // allow to not notify conflicts if the same dependance is imported in
+    // allow to not notify conflicts if the same dependency is imported in
     // two differents packages but not the same version
     // pass to true for disable this check.
     "skipLibCheck": false

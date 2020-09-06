@@ -11,7 +11,8 @@
     "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig.json"
+    "compile": "tsc -b tsconfig.json",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
