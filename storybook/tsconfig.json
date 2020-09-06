@@ -1,4 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "type": ["node"]
+  "compilerOptions": {
+    "rootDir": "stories"
+  }
 }
