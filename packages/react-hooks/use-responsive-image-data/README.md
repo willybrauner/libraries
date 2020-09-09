@@ -47,16 +47,14 @@ const App = () => {
 
 pImages: IImage[], pWidth?: number
 
-| params  | type     | description                        | default value |
-| ------- | -------- | ---------------------------------- | ------------- |
-| pImages | IImage[] | array of image object              | /             |
-| pWidth  | number   | with limit of image object we need | null          |
-
-- pWidth: if value is not set, dynamic window width will be set as width reference.
+| params  | type     | description                             | default value     |
+| ------- | -------- | --------------------------------------- | ----------------- |
+| pImages | IImage[] | array of image object                   | /                 |
+| pWidth  | number   | with limit of image object we need (px) | window.innerWidth |
 
 ## Returned
 
-The hook return an IImage object:
+The hook returns an IImage object:
 
 ```
 {
