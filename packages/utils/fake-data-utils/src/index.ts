@@ -1,7 +1,4 @@
-import { IImage } from "@wbe/react-responsive-image";
-// component name
 const name: string = "fake-data-utils";
-//  init debug tool
 const debug = require("debug")(`lib:${name}`);
 
 /**
@@ -11,6 +8,16 @@ export enum EVideoType {
   NATIVE,
   YOUTUBE,
   VIMEO
+}
+
+/**
+ * Image interface
+ * (same interface than ResponsiveImage IImage)
+ */
+export interface IImage {
+  url: string;
+  width: number;
+  height: number;
 }
 
 /**
@@ -61,8 +68,11 @@ class FakeDataUtils {
   ];
 
   // Collection of native video urls
+  // @source: https://gist.github.com/jsturgis/3b19447b304616f18657
   private static nativeVideosUrl = [
-    "https://cher-ami.tv/user/pages/02.works/12.le-bon-marche/SCENE_1.mp4"
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
   ];
 
   private static lorem = [
@@ -238,8 +248,7 @@ class FakeDataUtils {
     // get lorem text array
     const lorem: string[] = FakeDataUtils.lorem;
 
-    // register title text
-    const title =
+    return (
       // get a random value from array
       FakeDataUtils.randomValueFromArray(lorem)
         // split each spaces to get words
@@ -249,29 +258,26 @@ class FakeDataUtils {
         // remove null values
         .filter((v: any) => v)
         // join result as string
-        .join(" ");
-
-    debug("getTitle", title);
-    // return title result
-    return title;
+        .join(" ")
+    );
   }
 
   /**
    * Get regular text
-   * @param {number} pSentencies: number of sentencies we want to compose the text
-   * @return {string} the text
+   * @param {number} pSentences: number of sentences we want to compose text
+   * @return {string} text
    */
-  public static getText(pSentencies: number = 1): string {
+  public static getText(pSentences: number = 1): string {
     // get lorem text array
     const lorem: string[] = FakeDataUtils.lorem;
     // register text
     const text =
       // shuffle lorem array
       FakeDataUtils.shuffleArray(lorem)
-        // map all sentencies
+        // map all sentences
         .map((el: any, i: number) =>
-          // keep only right sentencies number
-          i <= pSentencies - 1 ? el : null
+          // keep only right sentences number
+          i <= pSentences - 1 ? el : null
         )
         // remove null values
         .filter(v => v)
