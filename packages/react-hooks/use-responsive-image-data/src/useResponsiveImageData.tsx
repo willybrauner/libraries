@@ -1,14 +1,6 @@
-import { useLayoutEffect } from "react";
-import { useState } from "react";
-import useWindowSize from "@wbe/use-window-size";
+import { useEffect, useState } from "react";
 
-/**
- * Single Image Object properties
- * TODO duplicate of IImage from react-responsive-image
- * TODO find a way get the same interface in :
- * - react-responsive-image
- * - use-responsive-image-data
- */
+// duplicate of IImage from react-responsive-image
 export interface IImage {
   url: string;
   width?: number;
@@ -17,31 +9,29 @@ export interface IImage {
 
 /**
  * useResponsiveImageData
- * Get responsive image depend of window Width / parent width
+ * Get responsive image depend of width container reference
  * @param {IImage[]} pImages
- * @param {number|null} pWidth
+ * @param {number} pWidthContainer
  */
 function useResponsiveImageData(
   pImages: IImage[],
-  pWidth: number | null = null
+  pWidthContainer: number = window?.innerWidth
 ) {
-  // get current window size use as fallback
-  const windowSize = useWindowSize();
-
   // get image data object depend of pWidth
-  const getImageDataObject = (pImages: IImage[], pWidth: number): IImage => {
+  const getImageDataObject = (
+    pImages: IImage[],
+    pWidthContainer: number
+  ): IImage => {
     // check and exit if no images
-    if (!pImages) return;
+    if (!pImages || pImages?.length < 1) return;
 
-    // return available image width in array, depend of pWidth
-    const imagesWidth =
-      // get each el width
-      pImages
-        .map((el: IImage) => el?.width)
-        // sort smaller to larger
-        .sort((a: number, b: number) => a - b)
-        // return only images who got biggest width than pWidth
-        .filter((el: any) => el > pWidth);
+    // return available image widths in array, depend of pWidthContainer
+    const imageWidths = pImages
+      .map((el: IImage): number => el?.width)
+      // sort smaller to larger
+      .sort((a: number, b: number) => a - b)
+      // return only images who got biggest width than pWidthContainer
+      .filter((el: any) => el > pWidthContainer);
 
     // keep the biggest image object of array
     const biggestImage = pImages.reduce(
@@ -51,35 +41,31 @@ function useResponsiveImageData(
 
     // prepare filtered image array we gonna return
     const filtered = pImages
-      .map((el: any) => {
-        // if image width is smallest than the images array
-        // return it
-        if (el.width === imagesWidth[0]) return el;
+      .map(
+        (pImage: IImage): IImage => {
+          // if current pImage width is smallest than the smallest imagesWidth array, return it
+          if (pImage.width === imageWidths[0]) return pImage;
 
-        // if the biggest image is smallest than the smallest image of array,
-        // return this biggest image
-        if (biggestImage.width <= pWidth) return biggestImage;
-      })
+          // if the biggest image is smallest than the smallest image of array,
+          // return this biggest image
+          if (biggestImage.width <= pWidthContainer) return biggestImage;
+        }
+      )
       // filter the array
-      .filter((val: any) => val);
+      .filter((val: IImage) => val);
 
     // return the appropriate image object
     return filtered.length > 0 ? filtered[0] : null;
   };
 
   const [responsiveImage, setResponsiveImage] = useState<IImage>(
-    getImageDataObject(pImages, pWidth)
+    getImageDataObject(pImages, pWidthContainer)
   );
 
-  useLayoutEffect(() => {
-    // select a width value as reference
-    // pForceWidth is a static value
-    // windowSize.width is a dynamic value
-    const selectedWidth = pWidth || windowSize?.width;
-
+  useEffect(() => {
     // set this value in local state
-    setResponsiveImage(getImageDataObject(pImages, selectedWidth));
-  }, [pWidth, windowSize]);
+    setResponsiveImage(getImageDataObject(pImages, pWidthContainer));
+  }, [pWidthContainer]);
 
   return responsiveImage;
 }
