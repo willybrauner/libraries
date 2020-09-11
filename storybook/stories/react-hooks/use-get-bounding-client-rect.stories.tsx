@@ -2,24 +2,17 @@ import React, { useRef } from "react";
 import useBoundingClientRect, {
   EListener
 } from "@wbe/use-bounding-client-rect";
-import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-bounding-client-rect/README.md";
-const storyName = "use-bounding-client-rect";
 import "../../global-style.css";
 
-/**
- * Demo
- */
-export const App = () => {
-  // get ref
-  const elementRef = useRef(null);
+const storyName = "use-bounding-client-rect";
 
-  // get ref rect
+export const App = () => {
+  const elementRef = useRef(null);
   const rect = useBoundingClientRect(
     elementRef,
     EListener.ON_SCROLL_AND_RESIZE
   );
-
   return (
     <div ref={elementRef}>
       <p> Resize your browser and check element properties change.</p>
@@ -28,15 +21,14 @@ export const App = () => {
   );
 };
 
-/**
- * Config
- */
-storiesOf(`react-hooks/${storyName}`, module)
-  .addParameters({
+App.storyName = "basic example";
+
+export default {
+  title: `react-hooks/${storyName}`,
+  component: App,
+  parameters: {
     readme: {
       sidebar: README
     }
-  })
-  .add("basic example", () => <App />, {
-    info: README
-  });
+  }
+};

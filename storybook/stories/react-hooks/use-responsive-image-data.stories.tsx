@@ -1,6 +1,5 @@
 import "../../global-style.css";
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-responsive-image-data/README.md";
 import useWindowSize from "@wbe/use-window-size";
 import FakeDataUtils from "@wbe/fake-data-utils";
@@ -9,13 +8,9 @@ import useResponsiveImageData from "@wbe/use-responsive-image-data";
 // set story name
 const storyName = "use-responsive-image-data";
 
-/**
- * Demo
- */
-// get fake thumbs array
-const thumbs = FakeDataUtils.getResponsiveImageData(16 / 9);
-
 export const App = () => {
+  // get fake thumbs array
+  const thumbs = FakeDataUtils.getResponsiveImageData(16 / 9);
   // get current width
   const { width } = useWindowSize();
   // get selected responsive image data object
@@ -23,28 +18,24 @@ export const App = () => {
 
   return (
     <div>
-      <pre>{JSON.stringify(responsiveImageData, null, 2)}</pre>
       <p>
-        <em>useResponsiveImageData</em> return image data depend to dynamic or
-        static width value. In this example, width value depend of current
-        window width, so, you can observe image data object changing if you
-        resize your browser.
+        <em>useResponsiveImageData</em> return image data depend here to current
+        window width, you can observe image data object changing if you resize
+        your browser.
       </p>
+      <pre>{JSON.stringify(responsiveImageData, null, 2)}</pre>
     </div>
   );
 };
 
-/**
- * Config
- */
-storiesOf(`react-hooks/${storyName}`, module)
-  .addParameters({
+App.storyName = "basic example";
+
+export default {
+  title: `react-hooks/${storyName}`,
+  component: App,
+  parameters: {
     readme: {
       sidebar: README
     }
-  })
-  .add(
-    "basic example",
-    () => <App />
-    //{info: README}
-  );
+  }
+};

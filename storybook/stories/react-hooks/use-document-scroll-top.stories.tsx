@@ -1,36 +1,30 @@
-import "../../global-style.css";
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import README from "@wbe/use-document-scroll-top/README.md";
 import useDocumentScrollTop from "@wbe/use-document-scroll-top";
+import "../../global-style.css";
 
-// set story name
 const storyName = "use-document-scroll-top";
 
-/**
- * Demo
- */
-const App = () => {
-  // get dynamic document scrollTop value
+export const App = () => {
   const documentScrollTop: number = useDocumentScrollTop();
-
   return (
     <div>
       <div style={{ height: "1000vh" }} />
-      <div style={{ position: "fixed", top: "0" }}>
-        Scroll & check document scrollTop change. <h1>{documentScrollTop}</h1>
-      </div>
+      <p style={{ position: "fixed", top: "1rem" }}>
+        Scroll & check document scrollTop change. <h2>{documentScrollTop}</h2>
+      </p>
     </div>
   );
 };
 
-/**
- * Config
- */
-storiesOf(`react-hooks/${storyName}`, module)
-  .addParameters({
+App.storyName = "basic example";
+
+export default {
+  title: `react-hooks/${storyName}`,
+  component: App,
+  parameters: {
     readme: {
       sidebar: README
     }
-  })
-  .add("basic example", () => <App />);
+  }
+};
