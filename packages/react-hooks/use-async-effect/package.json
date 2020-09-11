@@ -21,7 +21,11 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.48"
+    "@testing-library/react": "^11.0.2",
+    "@testing-library/react-hooks": "^3.4.1",
+    "@types/react": "^16.9.48",
+    "react-dom": "^16.13.1",
+    "react-test-renderer": "^16.13.1"
   },
   "keywords": [
     "react",

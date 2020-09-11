@@ -17,7 +17,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "@types/jest": "^26.0.10",
+    "@types/jest": "^26.0.13",
     "@zouloux/files": "^0.6.0",
     "app-root-path": "^3.0.0",
     "change-case": "^4.1.1",
