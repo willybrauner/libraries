@@ -1,5 +1,4 @@
 import React, { CSSProperties, useEffect, useState } from "react";
-import { storiesOf } from "@storybook/react";
 import GridLayout, { EOrientation } from "@wbe/react-grid-layout";
 import README from "@wbe/react-grid-layout/README.md";
 import "../../global-style.css";
@@ -12,17 +11,22 @@ import {
 } from "@storybook/addon-knobs";
 
 const storyName = "react-grid-layout";
-/**
- * Demo
- */
-const App = ({ gutter }: { gutter: number }) => {
-  // show grid state
-  const [showGrid, setShowGrid] = useState(true);
 
-  /**
-   * On key up listener
-   * Allow to toggle grid visibility
-   */
+export const App = ({
+  columnNumber,
+  gutterSize,
+  maxSize,
+  center,
+  color
+}: {
+  columnNumber: number;
+  gutterSize: string | number;
+  maxSize: string | number;
+  center: boolean;
+  color: string;
+}) => {
+  const [showGrid, setShowGrid] = useState(true);
+  // Allow to toggle grid visibility
   useEffect(() => {
     document.body.onkeyup = pEvent => {
       if (pEvent.code === "KeyG") setShowGrid(!showGrid);
@@ -44,11 +48,11 @@ const App = ({ gutter }: { gutter: number }) => {
               display: "select"
             }
           )}
-          columnsNumber={number("columnNumber", 6)}
-          gutterSize={number("gutterSize", gutter)}
-          maxSize={text("maxSize", "1024")}
-          center={boolean("center", true)}
-          color={text("color", "rgba(255, 0, 0, 0.14)")}
+          columnsNumber={columnNumber}
+          gutterSize={gutterSize}
+          maxSize={maxSize}
+          center={center}
+          color={color}
         />
       )}
       <div className="App_wrapper" style={css.wrapper}>
@@ -73,15 +77,21 @@ const css: { [x: string]: CSSProperties } = {
   }
 };
 
-/**
- * Config
- */
-storiesOf(`react-components/${storyName}`, module)
-  .addParameters({
+App.storyName = "basic";
+
+export default {
+  title: `react-components/${storyName}`,
+  component: App,
+  args: {
+    columnNumber: 9,
+    gutterSize: 30,
+    maxSize: 1024,
+    center: true,
+    color: "rgba(255, 0, 0, 0.14)"
+  },
+  parameters: {
     readme: {
       sidebar: README
     }
-  })
-  .addDecorator(withKnobs)
-  .add("basic example", () => <App gutter={20} />)
-  .add("column line", () => <App gutter={0} />);
+  }
+};

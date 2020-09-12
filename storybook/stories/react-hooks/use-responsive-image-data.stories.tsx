@@ -5,7 +5,6 @@ import useWindowSize from "@wbe/use-window-size";
 import FakeDataUtils from "@wbe/fake-data-utils";
 import useResponsiveImageData from "@wbe/use-responsive-image-data";
 
-// set story name
 const storyName = "use-responsive-image-data";
 
 export const App = () => {
@@ -19,9 +18,8 @@ export const App = () => {
   return (
     <div>
       <p>
-        <em>useResponsiveImageData</em> return image data depend here to current
-        window width, you can observe image data object changing if you resize
-        your browser.
+        Hook returns image data depend here to current window width, you can
+        observe image data object changing if you resize your browser.
       </p>
       <pre>{JSON.stringify(responsiveImageData, null, 2)}</pre>
     </div>

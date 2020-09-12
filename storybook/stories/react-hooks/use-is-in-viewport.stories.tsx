@@ -5,6 +5,22 @@ import "../../global-style.css";
 
 const storyName = "use-is-in-viewport";
 
+const css: { [x: string]: CSSProperties } = {
+  text: {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    padding: "1rem"
+  },
+  element: {
+    marginTop: "100vh",
+    marginBottom: "5rem",
+    width: "200px",
+    height: "200px",
+    background: "green"
+  }
+};
+
 export const App = ({ offset = 0 }: { offset: number }) => {
   const elementRef = useRef<HTMLDivElement>(null);
   // Check if is in viewport
@@ -15,7 +31,7 @@ export const App = ({ offset = 0 }: { offset: number }) => {
   useEffect(() => setIsVisible(isInViewport), [isInViewport]);
 
   return (
-    <div style={css.root}>
+    <div style={css.root} key={offset}>
       <div style={css.text}>
         <p>
           Element is visible?{" "}
@@ -36,28 +52,7 @@ export const App = ({ offset = 0 }: { offset: number }) => {
     </div>
   );
 };
-
 App.storyName = "basic example";
-
-const css: { [x: string]: CSSProperties } = {
-  text: {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    padding: "1rem"
-  },
-  element: {
-    marginTop: "100vh",
-    marginBottom: "5rem",
-    width: "200px",
-    height: "200px",
-    background: "green"
-  }
-};
-
-export const Secondary = App.bind({});
-Secondary.args = { offset: 100 };
-Secondary.storyName = "with offset";
 
 export default {
   title: `react-hooks/${storyName}`,
@@ -68,3 +63,7 @@ export default {
     }
   }
 };
+
+export const Secondary = App.bind({});
+Secondary.args = { offset: 100 };
+Secondary.storyName = "with offset";

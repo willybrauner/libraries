@@ -11,7 +11,8 @@ export const App = () => {
     <div>
       <div style={{ height: "1000vh" }} />
       <p style={{ position: "fixed", top: "1rem" }}>
-        Scroll & check document scrollTop change. <h2>{documentScrollTop}</h2>
+        Scroll & check document scrollTop change. <br />
+        <strong>{documentScrollTop}</strong>
       </p>
     </div>
   );

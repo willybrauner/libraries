@@ -2,7 +2,6 @@ module.exports = ({ config }) => {
   /**
    * Typescript
    */
-
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     loader: require.resolve("babel-loader"),
@@ -13,12 +12,15 @@ module.exports = ({ config }) => {
   config.resolve.extensions.push(".ts", ".tsx");
 
   /**
-   * Sources
+   * Markdown
    */
   config.module.rules.push({
-    test: /\.stories\.(tsx|jsx)?$/,
-    loaders: [require.resolve("@storybook/source-loader")],
-    enforce: "pre"
+    test: /\.md$/,
+    use: [
+      {
+        loader: "markdown-loader"
+      }
+    ]
   });
 
   return config;
