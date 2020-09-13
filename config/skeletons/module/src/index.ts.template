@@ -1,9 +1,1 @@
-
-/**
- * %%camelCaseModuleName%%
- */
-function %%camelCaseModuleName%%() {
-
-}
-
-export { %%camelCaseModuleName%% as default }
+export { default } from "./%%pascalCaseModuleName%%";

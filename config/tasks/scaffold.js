@@ -51,14 +51,6 @@ const _askDescription = (pType = "module") => {
   });
 };
 
-const _askStory = () => {
-  return Inquirer.prompt({
-    type: "confirm",
-    message: `Create a story in storybook?`,
-    name: "withStory"
-  });
-};
-
 /**
  * Ask question and scaffold a component with a specific script template
  * @returns {Promise<any>}
@@ -85,20 +77,13 @@ const moduleScaffolder = () =>
       moduleDescription = answer.moduleDescription;
     });
 
-    // Get with story response
-    let withStory = true;
-    await _askStory().then(answer => {
-      withStory = answer.withStory;
-      debug("withStory:", withStory);
-    });
-
     // component name "ComponentName" for subfolder and component
     let dashCaseModuleName = changeCase.paramCase(moduleName);
     let camelCaseModuleName = changeCase.camelCase(moduleName);
+    let pascalCaseModuleName = changeCase.pascalCase(moduleName);
 
     // Base path of the component (no extension here)
     let modulePath = `${paths.packagesPath}/${subFolder}/${dashCaseModuleName}`;
-    let storiesPath = `${paths.storiesPath}`;
 
     // Check if component already exists
     if (Files.getFiles(`${modulePath}`).files.length > 0) {
@@ -124,6 +109,7 @@ const moduleScaffolder = () =>
       replaceExpressions = {
         dashCaseModuleName,
         camelCaseModuleName,
+        pascalCaseModuleName,
         subFolder,
         moduleDescription
       }
@@ -134,7 +120,7 @@ const moduleScaffolder = () =>
       const templateFilePath = `${templatePath}${templateFileName}${extension}.template`;
       // log them
       debug({ newFilePath, templateFilePath });
-      // create file with template
+      //create file with template
       Files.new(newFilePath).write(
         QuickTemplate(
           Files.getFiles(templateFilePath).read(),
@@ -143,14 +129,44 @@ const moduleScaffolder = () =>
       );
     };
 
-    // create index
+    // create src/ index.ts
     createFile({
       filePath: `${modulePath}/src/`,
       templatePath: `${paths.skeletonsPath}/module/src/`,
       templateFileName: "index",
       outputFileName: "index",
-      extension: subFolder.includes("react") ? ".tsx" : ".ts"
+      extension: ".ts"
     });
+
+    // create src/ module.ts
+    createFile({
+      filePath: `${modulePath}/src/`,
+      templatePath: `${paths.skeletonsPath}/module/src/`,
+      templateFileName: "{module}",
+      outputFileName: pascalCaseModuleName,
+      extension: ".ts"
+    });
+
+    // create stories/{module}.stories.tsx file
+    createFile({
+      filePath: `${modulePath}/stories/`,
+      templatePath: `${paths.skeletonsPath}/module/stories/`,
+      templateFileName: "{module}.stories",
+      outputFileName: `${pascalCaseModuleName}.stories`,
+      extension: ".tsx"
+    });
+
+    // create test/{module}.test.ts file
+    createFile({
+      filePath: `${modulePath}/test/`,
+      templatePath: `${paths.skeletonsPath}/module/test/`,
+      templateFileName: "{module}.test",
+      outputFileName: `${pascalCaseModuleName}.test`,
+      extension: ".ts"
+    });
+
+    // ----------------------------- files
+
     // create gitignore
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
@@ -184,25 +200,13 @@ const moduleScaffolder = () =>
       outputFileName: "tsconfig",
       extension: ".json"
     });
-
-    if (withStory) {
-      debug(`withStory: ${withStory}, so we is create file...`);
-      // create module.stories.tsx file
-      createFile({
-        filePath: `${storiesPath}/${subFolder}/`,
-        templatePath: `${paths.skeletonsPath}/stories/`,
-        templateFileName: "stories",
-        outputFileName: `${dashCaseModuleName}.stories`,
-        extension: ".tsx"
-      });
-
-      console.log(`
-    You just create a new story in storybook module. 
-    Path: ${storiesPath}/${subFolder}/\n
-    run this command to add the new module as storybook dependance:
-    $ lerna add @wbe/${dashCaseModuleName} --scope=@wbe/storybook && lerna bootstrap \n
-      `);
-    }
+    // create .babelrc
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      templateFileName: ".babelrc",
+      outputFileName: ".babelrc",
+      extension: ""
+    });
 
     // Done
     showSuccess("Module created!");
