@@ -18,7 +18,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@vimeo/player": "^2.12.2",
+    "@vimeo/player": "^2.13.0",
     "react": "^16.13.1",
     "youtube-player": "^5.5.2"
   },
