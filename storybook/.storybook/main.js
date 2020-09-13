@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ["../stories/**/*.stories.tsx"],
+  stories: ["../../packages/**/**/stories/*.stories.tsx"],
 
   presets: ["@storybook/preset-create-react-app"],
 
@@ -23,7 +23,9 @@ module.exports = {
 
   typescript: {
     check: false,
-    checkOptions: {},
+    checkOptions: {
+      isolatedModules: false
+    },
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,

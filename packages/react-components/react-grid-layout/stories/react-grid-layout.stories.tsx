@@ -1,9 +1,7 @@
+// @ts-ignore
+import GridLayout, { EOrientation } from "../src";
 import React, { CSSProperties, useEffect, useState } from "react";
-import GridLayout, { EOrientation } from "@wbe/react-grid-layout";
-import README from "@wbe/react-grid-layout/README.md";
-import "../../global-style.css";
-import { Meta } from "@storybook/react";
-import { withReadme } from "storybook-readme";
+import "../../../../storybook/global-style.css";
 
 const storyName = "react-grid-layout";
 
@@ -76,4 +74,4 @@ export default {
     center: true,
     color: "rgba(255, 0, 0, 0.14)"
   }
-} as Meta;
+};

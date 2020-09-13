@@ -1,7 +1,7 @@
+// @ts-ignore
+import useIsInViewport from "../src";
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import README from "@wbe/use-is-in-viewport/README.md";
-import useIsInViewport from "@wbe/use-is-in-viewport";
-import "../../global-style.css";
+import "../../../../storybook/global-style.css";
 
 const storyName = "use-is-in-viewport";
 

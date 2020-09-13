@@ -15,7 +15,7 @@ export enum EVideoType {
 /**
  * VideoPlayer Props
  */
-interface IProps {
+export interface IProps {
   /**
    * Choose video type <native | vimeo | youtube>
    */

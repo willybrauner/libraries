@@ -1,9 +1,9 @@
-import "../../global-style.css";
-import React from "react";
-import README from "@wbe/use-responsive-image-data/README.md";
-import useWindowSize from "@wbe/use-window-size";
+// @ts-ignore
+import useResponsiveImageData from "../src";
 import FakeDataUtils from "@wbe/fake-data-utils";
-import useResponsiveImageData from "@wbe/use-responsive-image-data";
+import useWindowSize from "@wbe/use-window-size";
+import React from "react";
+import "../../../../storybook/global-style.css";
 
 const storyName = "use-responsive-image-data";
 

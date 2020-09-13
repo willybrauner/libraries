@@ -1,12 +1,12 @@
+// @ts-ignore
+import useWindowSize, { IWindowSize } from "../src/useWindowSize";
 import React from "react";
-import README from "@wbe/use-window-size/README.md";
-import useWindowSize from "@wbe/use-window-size";
-import "../../global-style.css";
+import "../../../../storybook/global-style.css";
 
 const storyName = "use-window-size";
 
 export const App = () => {
-  const windowSize = useWindowSize();
+  const windowSize: IWindowSize = useWindowSize();
   return (
     <div>
       <p> Resize your browser. and check values change.</p>
@@ -19,10 +19,5 @@ App.storyName = "basic example";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: App,
-  parameters: {
-    readme: {
-      data: README
-    }
-  }
+  component: App
 };

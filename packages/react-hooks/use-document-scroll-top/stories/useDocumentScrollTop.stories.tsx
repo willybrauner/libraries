@@ -1,7 +1,7 @@
+// @ts-ignore
+import useDocumentScrollTop from "../src";
 import React from "react";
-import README from "@wbe/use-document-scroll-top/README.md";
-import useDocumentScrollTop from "@wbe/use-document-scroll-top";
-import "../../global-style.css";
+import "../../../../storybook/global-style.css";
 
 const storyName = "use-document-scroll-top";
 

@@ -1,7 +1,7 @@
-import "../../global-style.css";
+// @ts-ignore
+import { useAsyncEffect, useAsyncLayoutEffect } from "../src";
 import React, { useState } from "react";
-import README from "@wbe/use-async-effect/README.md";
-import { useAsyncEffect, useAsyncLayoutEffect } from "@wbe/use-async-effect";
+import "../../../../storybook/global-style.css";
 
 const storyName = "use-async-effect";
 

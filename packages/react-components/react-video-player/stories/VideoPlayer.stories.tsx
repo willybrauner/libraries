@@ -1,10 +1,8 @@
-import "../../global-style.css";
-import React, { CSSProperties } from "react";
-import { Meta } from "@storybook/react";
+// @ts-ignore
+import VideoPlayer, { EVideoType as EVideoPlayerType } from "../src";
 import FakeDataUtils, { EVideoType } from "@wbe/fake-data-utils";
-import VideoPlayer, {
-  EVideoType as EVideoPlayerType
-} from "@wbe/react-video-player";
+import React, { CSSProperties } from "react";
+import "../../../../storybook/global-style.css";
 
 const storyName = "react-video-player";
 const debug = require("debug")(`lib:${storyName}`);
@@ -51,7 +49,7 @@ export default {
     onPause: e => debug("onPause callback", e),
     onEnded: e => debug("onEnded callback", e)
   } as IProps
-} as Meta;
+};
 
 export const Vimeo = Template.bind({});
 Vimeo.storyName = "vimeo";

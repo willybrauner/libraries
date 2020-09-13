@@ -1,7 +1,7 @@
-import "../../global-style.css";
+// @ts-ignore
+import FakeDataUtils, { EVideoType } from "../src/FakeDataUtils";
 import React from "react";
-import FakeDataUtils, { EVideoType } from "@wbe/fake-data-utils";
-import README from "@wbe/fake-data-utils/README.md";
+import "../../../../storybook/global-style.css";
 
 const storyName = "fake-data-utils";
 
@@ -50,7 +50,6 @@ export const GetTitle = ({ pWords }: { pWords: number }) => (
     <code>{FakeDataUtils.getTitle(pWords)}</code>
   </>
 );
-//export const GetTitle = Template.bind({});
 GetTitle.storyName = "getTitle()";
 GetTitle.args = {
   pWords: [3]

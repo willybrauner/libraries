@@ -1,11 +1,8 @@
+// @ts-ignore
+import ResponsiveImage, { EImageType, IImage } from "../src";
 import React, { CSSProperties, ReactNode } from "react";
-import "../../global-style.css";
-import README from "@wbe/react-responsive-image/README.md";
-import ResponsiveImage, {
-  EImageType,
-  IImage
-} from "@wbe/react-responsive-image";
 import FakeDataUtils from "@wbe/fake-data-utils";
+import "../../../../storybook/global-style.css";
 
 const storyName = "react-responsive-image";
 
