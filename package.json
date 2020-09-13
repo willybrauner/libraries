@@ -1,6 +1,6 @@
 {
   "name": "libraries",
-  "description": "Mono-repos libraries for front-end applications.",
+  "description": "Monorepo libraries for front-end applications.",
   "private": true,
   "scripts": {
     "clean": "lerna clean",
