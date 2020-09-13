@@ -1,0 +1,13 @@
+// @ts-ignore
+import %%pascalCaseModuleName%% from "../src/%%pascalCaseModuleName%%"
+import React from "react";
+
+const storyName = "%%dashCaseModuleName%%";
+
+const App = () => <div>{storyName}</div>
+App.storyName = "basic example";
+
+export default {
+  title: `%%subFolder%%/${storyName}`,
+  component: App
+};

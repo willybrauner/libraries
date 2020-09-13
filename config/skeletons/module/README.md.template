@@ -4,7 +4,6 @@
 
 ![](https://img.shields.io/npm/v/@wbe/%%dashCaseModuleName%%/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/%%dashCaseModuleName%%.svg)
-![](https://img.shields.io/david/willybrauner/libraries.svg?path=packages%2F%%subFolder%%%2F%%dashCaseModuleName%%)
 ![](https://img.shields.io/npm/dt/@wbe/%%dashCaseModuleName%%.svg)
 ![](https://img.shields.io/npm/l/@wbe/%%dashCaseModuleName%%.svg)
 
@@ -17,7 +16,7 @@ $ npm install -s @wbe/%%dashCaseModuleName%%
 ## How to use
 
 ```js
-import %%camelCaseModuleName%% from "@wbe/%%dashCaseModuleName%%"
+import %%pascalCaseModuleName%% from "@wbe/%%dashCaseModuleName%%"
 ```
 
 ## example

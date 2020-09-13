@@ -1,0 +1,8 @@
+/**
+ * %%pascalCaseModuleName%%
+ */
+function %%pascalCaseModuleName%%() {
+
+}
+
+export { %%pascalCaseModuleName%% as default }
