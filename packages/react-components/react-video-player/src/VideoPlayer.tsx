@@ -6,7 +6,7 @@ import { YoutubeVideo } from "./YoutubeVideo";
 /**
  * Type of video
  */
-export enum EVideoType {
+enum EVideoType {
   NATIVE = "native",
   VIMEO = "vimeo",
   YOUTUBE = "youtube"
@@ -15,7 +15,7 @@ export enum EVideoType {
 /**
  * VideoPlayer Props
  */
-export interface IProps {
+interface IProps {
   /**
    * Choose video type <native | vimeo | youtube>
    */
@@ -216,4 +216,11 @@ function VideoPlayer(props: IProps) {
   }
 }
 
-export { VideoPlayer as default, NativeVideo, VimeoVideo, YoutubeVideo };
+export {
+  VideoPlayer as default,
+  NativeVideo,
+  VimeoVideo,
+  YoutubeVideo,
+  EVideoType,
+  IProps
+};

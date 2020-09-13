@@ -32,7 +32,7 @@ import fakeDataUtils from "@wbe/fake-data-utils";
 
 ### <a name="getResponsiveImageData"></a>getResponsiveImageData
 
-Get an array of random IImage objects.
+Get an array of random IFakeImage objects.
 
 ```tsx
 getResponsiveImageData(pRatio, pBreakpoints);
@@ -45,12 +45,12 @@ getResponsiveImageData(pRatio, pBreakpoints);
 
 #### Returns
 
-`(Array) IImage[]`: Array of IImage data object
+`(Array) IFakeImage[]`: Array of IFakeImage data object
 
 #### Example
 
 ```tsx
-// will returned an array of IImage object with 16/9 ratio
+// will returned an array of IFakeImage object with 16/9 ratio
 const responsiveImageData = FakeDataUtils.getResponsiveImageData(16 / 9);
 ```
 
@@ -59,12 +59,12 @@ const responsiveImageData = FakeDataUtils.getResponsiveImageData(16 / 9);
 Get a random video URL.
 
 ```tsx
-getVideoUrl(pVideoType, pYoutubeId, pVimeoId);
+getVideoUrl(pFakeVideoType, pYoutubeId, pVimeoId);
 ```
 
 #### Parameters
 
-- `pVideoType (EVideoType<YOUTUBE|VIMEO|NATIVE>)`: Type of video
+- `pFakeVideoType (EVideoType<YOUTUBE|VIMEO|NATIVE>)`: Type of video
 - `pYoutubeId (string)`: Specify youtube ID to use - default: random ID
 - `pVimeoId (string)`: Specify vimeo ID to use - default: random ID
 
@@ -84,12 +84,12 @@ const youtubeUrl = FakeDataUtils.getVideoUrl(EVideoType.YOUTUBE);
 Get a random video ID.
 
 ```tsx
-getVideoId(pVideoType);
+getVideoId(pFakeVideoType);
 ```
 
 #### Parameters
 
-- `pVideoType (EVideoType<YOUTUBE|VIMEO>)`: Type of video
+- `pFakeVideoType (EVideoType<YOUTUBE|VIMEO>)`: Type of video
 
 #### Returns
 

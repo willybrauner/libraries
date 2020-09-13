@@ -4,7 +4,7 @@ const debug = require("debug")(`lib:${name}`);
 /**
  * Video Type
  */
-export enum EVideoType {
+export enum EFakeVideoType {
   NATIVE,
   YOUTUBE,
   VIMEO
@@ -12,9 +12,9 @@ export enum EVideoType {
 
 /**
  * Image interface
- * (same interface than ResponsiveImage IImage)
+ * (same interface than ResponsiveImage IFakeImage)
  */
-export interface IImage {
+export interface IFakeImage {
   url: string;
   width: number;
   height: number;
@@ -144,14 +144,14 @@ class FakeDataUtils {
    * Get Responsive Image Data
    * @param {number} pRatio: Image ratio
    * @param {number[]} pBeakpoints: Breakpoints list
-   * @return {IImage[]} return a array of IImage
+   * @return {IFakeImage[]} return a array of IFakeImage
    */
   public static getResponsiveImageData(
     pRatio: number = 4 / 3,
     pBeakpoints: number[] = [640, 1024, 1440, 1920]
-  ): IImage[] {
+  ): IFakeImage[] {
     //  build array
-    const fakeImageArray: IImage[] = pBeakpoints.map(el => {
+    const fakeImageArray: IFakeImage[] = pBeakpoints.map(el => {
       // get image size depend of el
       const imageSize = {
         width: el,
@@ -189,7 +189,7 @@ class FakeDataUtils {
    * @return {string} video URL
    */
   public static getVideoUrl(
-    pVideoType: EVideoType,
+    pVideoType: EFakeVideoType,
     pYoutubeId: string = FakeDataUtils.randomValueFromArray(
       FakeDataUtils.youtubeIds
     ),
@@ -198,19 +198,19 @@ class FakeDataUtils {
     )
   ): string {
     // if is youtube
-    if (pVideoType === EVideoType.YOUTUBE) {
+    if (pVideoType === EFakeVideoType.YOUTUBE) {
       const url = `https://youtu.be/${pYoutubeId}`;
       debug("random youtube url", url);
       return url;
     }
     // if is vimeo
-    if (pVideoType === EVideoType.VIMEO) {
+    if (pVideoType === EFakeVideoType.VIMEO) {
       const url = `https://vimeo.com/${pVimeoId}`;
       debug("random vimeo url", url);
       return url;
     }
     // if is native
-    if (pVideoType === EVideoType.NATIVE) {
+    if (pVideoType === EFakeVideoType.NATIVE) {
       const url = FakeDataUtils.randomValueFromArray(
         FakeDataUtils.nativeVideosUrl
       );
@@ -225,14 +225,14 @@ class FakeDataUtils {
    * @return {string} video ID
    */
   public static getVideoId(
-    pVideoType: EVideoType.YOUTUBE | EVideoType.VIMEO
+    pVideoType: EFakeVideoType.YOUTUBE | EFakeVideoType.VIMEO
   ): string {
-    if (pVideoType === EVideoType.YOUTUBE) {
+    if (pVideoType === EFakeVideoType.YOUTUBE) {
       const id = FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds);
       debug("random youtube id", id);
       return id;
     }
-    if (pVideoType === EVideoType.VIMEO) {
+    if (pVideoType === EFakeVideoType.VIMEO) {
       const id = FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds);
       debug("random viemo id", id);
       return id;
