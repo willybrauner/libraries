@@ -1,1 +1,8 @@
-export { default, NativeVideo, VimeoVideo, YoutubeVideo } from "./VideoPlayer";
+export {
+  default,
+  NativeVideo,
+  VimeoVideo,
+  YoutubeVideo,
+  EVideoType,
+  IProps
+} from "./VideoPlayer";

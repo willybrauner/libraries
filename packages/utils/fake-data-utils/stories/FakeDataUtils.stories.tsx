@@ -1,5 +1,5 @@
 // @ts-ignore
-import FakeDataUtils, { EVideoType } from "../src/FakeDataUtils";
+import FakeDataUtils, { EFakeVideoType } from "../src/FakeDataUtils";
 import React from "react";
 import "../../../../storybook/global-style.css";
 
@@ -16,15 +16,23 @@ export const GetVideoUrl = () => (
   <>
     <p>Random youtube url</p>
     <pre>
-      {JSON.stringify(FakeDataUtils.getVideoUrl(EVideoType.YOUTUBE), null, 2)}
+      {JSON.stringify(
+        FakeDataUtils.getVideoUrl(EFakeVideoType.YOUTUBE),
+        null,
+        2
+      )}
     </pre>
     <p>Random vimeo url</p>
     <pre>
-      {JSON.stringify(FakeDataUtils.getVideoUrl(EVideoType.VIMEO), null, 2)}
+      {JSON.stringify(FakeDataUtils.getVideoUrl(EFakeVideoType.VIMEO), null, 2)}
     </pre>
     <p>Random native video url</p>
     <pre>
-      {JSON.stringify(FakeDataUtils.getVideoUrl(EVideoType.NATIVE), null, 2)}
+      {JSON.stringify(
+        FakeDataUtils.getVideoUrl(EFakeVideoType.NATIVE),
+        null,
+        2
+      )}
     </pre>
   </>
 );
@@ -34,11 +42,15 @@ export const GetVideoId = () => (
   <>
     <p>Random youtube ID</p>
     <pre>
-      {JSON.stringify(FakeDataUtils.getVideoId(EVideoType.YOUTUBE), null, 2)}
+      {JSON.stringify(
+        FakeDataUtils.getVideoId(EFakeVideoType.YOUTUBE),
+        null,
+        2
+      )}
     </pre>
     <p>Random vimeo ID</p>
     <pre>
-      {JSON.stringify(FakeDataUtils.getVideoId(EVideoType.VIMEO), null, 2)}
+      {JSON.stringify(FakeDataUtils.getVideoId(EFakeVideoType.VIMEO), null, 2)}
     </pre>
   </>
 );

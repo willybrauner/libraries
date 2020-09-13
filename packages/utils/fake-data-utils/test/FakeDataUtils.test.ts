@@ -1,5 +1,5 @@
 // @ts-ignore
-import FakeDataUtils, { EVideoType } from "../src/FakeDataUtils";
+import FakeDataUtils, { EFakeVideoType } from "../src/FakeDataUtils";
 
 describe("FakeDataUtils", () => {
   it("should be defined", () => {
@@ -26,8 +26,8 @@ describe("FakeDataUtils", () => {
 
   describe("getVideoId", () => {
     it("should return a string", () => {
-      const youtubeId = FakeDataUtils.getVideoId(EVideoType.YOUTUBE);
-      const vimeoId = FakeDataUtils.getVideoId(EVideoType.VIMEO);
+      const youtubeId = FakeDataUtils.getVideoId(EFakeVideoType.YOUTUBE);
+      const vimeoId = FakeDataUtils.getVideoId(EFakeVideoType.VIMEO);
       [youtubeId, vimeoId].forEach(el => {
         expect(typeof el).toBe("string");
       });
@@ -39,9 +39,9 @@ describe("FakeDataUtils", () => {
       expect(FakeDataUtils.getVideoUrl).toBeDefined();
     });
     it("should return a string", () => {
-      const youtubeUrl = FakeDataUtils.getVideoUrl(EVideoType.YOUTUBE);
-      const vimeoUrl = FakeDataUtils.getVideoUrl(EVideoType.VIMEO);
-      const nativeUrl = FakeDataUtils.getVideoUrl(EVideoType.NATIVE);
+      const youtubeUrl = FakeDataUtils.getVideoUrl(EFakeVideoType.YOUTUBE);
+      const vimeoUrl = FakeDataUtils.getVideoUrl(EFakeVideoType.VIMEO);
+      const nativeUrl = FakeDataUtils.getVideoUrl(EFakeVideoType.NATIVE);
       [youtubeUrl, vimeoUrl, nativeUrl].forEach(el => {
         expect(typeof el).toBe("string");
       });
