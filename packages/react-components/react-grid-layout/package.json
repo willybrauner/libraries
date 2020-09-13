@@ -21,16 +21,10 @@
     "@wbe/use-window-size": "^1.4.0",
     "react": "^16.13.1"
   },
-  "devDependencies": {
-    "@testing-library/react": "^11.0.2",
-    "@types/react": "^16.9.48",
-    "@types/react-dom": "^16.9.8",
-    "react-dom": "^16.13.1",
-    "react-test-renderer": "^16.13.1"
-  },
   "keywords": [
     "react",
-    "component"
+    "component",
+    "grid"
   ],
   "publishConfig": {
     "access": "public"
