@@ -1,6 +1,6 @@
 # 📦 Libraries
 
-Libraries is a mono-repos of front-end javascript modules for React and vanilla js.
+Libraries is a front-end javascript monorepo of React and vanilla JS packages.
 
 ![GitHub contributors](https://img.shields.io/github/contributors/willybrauner/libraries)
 
@@ -8,13 +8,14 @@ Libraries is a mono-repos of front-end javascript modules for React and vanilla 
 
 ### Features
 
-✅ Javascript modules written with typescript  
-✅ Libraries standalone module  
+✅ Javascript modules written with [typescript](https://www.typescriptlang.org/)  
+✅ Unit tests with [jest](https://jestjs.io/)  
+✅ Libraries standalone package
 ✅ [Storybook documentation](https://willybrauner.github.io/libraries/)
 
 ## Summary
 
-Libraries is WIP! [You can check future plan](https://github.com/willybrauner/libraries/wiki).
+Libraries is WIP, [You can check future plan](https://github.com/willybrauner/libraries/wiki).
 
 **react-components**
 
@@ -92,14 +93,11 @@ Install all dependencies:
 $ npm i && lerna bootstrap
 ```
 
-Scaffold a new module:
+Scaffold a new module (will prepare a ready-made module file structure):
 
 ```shell script
 $ npm run scaffold
 ```
-
-Module scaffolder will prepare a module file struture ready to use + a dedicated `module.stories.tsx`
-in [storybook package](storybook/stories).
 
 ## Credits
 
