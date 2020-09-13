@@ -32,7 +32,7 @@ export const App = () => {
 
 ## Props
 
-[GridLayout component](src/index.tsx) contains default props, you can overwrite as you need:
+[GridLayout component](src/index.ts) contains default props, you can overwrite as you need:
 
 | props           | type                 | description                                             | default value           |
 | --------------- | -------------------- | ------------------------------------------------------- | ----------------------- |
