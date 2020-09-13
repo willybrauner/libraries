@@ -1,18 +1,12 @@
-import "../../global-style.css";
+// @ts-ignore
+import { useAsyncEffect, useAsyncLayoutEffect } from "../src";
 import React, { useState } from "react";
-import { storiesOf } from "@storybook/react";
-import README from "@wbe/use-async-effect/README.md";
-import { useAsyncEffect, useAsyncLayoutEffect } from "@wbe/use-async-effect";
+import "../../../../storybook/global-style.css";
 
-// set story name
 const storyName = "use-async-effect";
 
-/**
- * Demo
- */
-const UseAsyncEffectExample = () => {
+export const UseAsyncEffectExample = () => {
   const [promiseIsResolved, setPromiseIsResolved] = useState(false);
-
   useAsyncEffect(async () => {
     new Promise(resolve =>
       setTimeout(() => {
@@ -21,20 +15,20 @@ const UseAsyncEffectExample = () => {
       }, 1000)
     );
   });
-
   return (
-    <div>
+    <p>
       Promise is resolved?{" "}
       <span
         style={{ color: promiseIsResolved ? "green" : "red" }}
       >{`${promiseIsResolved}`}</span>
-    </div>
+    </p>
   );
 };
 
-const UseAsyncLayoutEffectExample = () => {
-  const [promiseIsResolved, setPromiseIsResolved] = useState(false);
+UseAsyncEffectExample.storyName = "with async effect";
 
+export const UseAsyncLayoutEffectExample = () => {
+  const [promiseIsResolved, setPromiseIsResolved] = useState(false);
   useAsyncLayoutEffect(async () => {
     new Promise(resolve =>
       setTimeout(() => {
@@ -43,25 +37,18 @@ const UseAsyncLayoutEffectExample = () => {
       }, 1000)
     );
   });
-
   return (
-    <div>
+    <p>
       Promise is resolved?{" "}
       <span
         style={{ color: promiseIsResolved ? "green" : "red" }}
       >{`${promiseIsResolved}`}</span>
-    </div>
+    </p>
   );
 };
+UseAsyncLayoutEffectExample.storyName = "with async layout effect";
 
-/**
- * Config
- */
-storiesOf(`react-hooks/${storyName}`, module)
-  .addParameters({
-    readme: {
-      sidebar: README
-    }
-  })
-  .add("with useAsyncEffect", () => <UseAsyncEffectExample />)
-  .add("with useAsyncLayoutEffect", () => <UseAsyncLayoutEffectExample />);
+export default {
+  title: `react-hooks/${storyName}`,
+  component: UseAsyncEffectExample
+};

@@ -1,4 +1,3 @@
-import "../../global-style.css";
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import README from "@wbe/%%dashCaseModuleName%%/README.md";

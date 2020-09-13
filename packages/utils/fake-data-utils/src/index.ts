@@ -1,1 +1,1 @@
-export { default } from "./FakeDataUtils";
+export { default, EVideoType, IImage } from "./FakeDataUtils";
