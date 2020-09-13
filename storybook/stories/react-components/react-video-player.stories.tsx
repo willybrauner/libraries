@@ -1,134 +1,93 @@
 import "../../global-style.css";
-import React, { useState } from "react";
-import { storiesOf } from "@storybook/react";
-import README from "@wbe/react-video-player/README.md";
-import FakeDataUtils, {
-  EVideoType as DataEVideoType
-} from "@wbe/fake-data-utils";
-import VideoPlayer, { EVideoType } from "@wbe/react-video-player";
+import React, { CSSProperties } from "react";
+import { Meta } from "@storybook/react";
+import FakeDataUtils, { EVideoType } from "@wbe/fake-data-utils";
+import VideoPlayer, {
+  EVideoType as EVideoPlayerType
+} from "@wbe/react-video-player";
 
 const storyName = "react-video-player";
 const debug = require("debug")(`lib:${storyName}`);
 
-/**
- * Youtube
- * @constructor
- */
-const YoutubeVideoTest = () => {
-  const [play, setPlay] = useState<boolean>(false);
-  const [id, setId] = useState<string>(
-    FakeDataUtils.getVideoId(DataEVideoType.YOUTUBE)
-  );
-  const switchVideo = () => {
-    setId(FakeDataUtils.getVideoId(DataEVideoType.YOUTUBE));
-  };
+// VideoPlayer props interface
+interface IProps {
+  type: EVideoPlayerType;
+  id?: string;
+  url?: string;
+  play: boolean;
+  style?: CSSProperties;
+  controls?: boolean;
+  autoPlay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  playsInline?: boolean;
+  className?: string;
+  onReady?: (event?: any) => void;
+  onPlay?: (event?: any) => void;
+  onPause?: (event?: any) => void;
+  onEnded?: (event?: any) => void;
+}
 
-  return (
-    <>
-      <button onClick={switchVideo}>switch video</button>
-      <button onClick={() => setPlay(!play)}>{play ? "pause" : "play"}</button>
-      <VideoPlayer
-        type={EVideoType.YOUTUBE}
-        className={`${storyName}_youtube`}
-        id={id}
-        play={play}
-        style={{ width: 400, height: 300 }}
-        controls={false}
-        muted={false}
-        onPause={e => debug("pause callback", e)}
-        onPlay={e => debug("play callback", e)}
-        onEnded={e => debug("ended callback", e)}
-        onReady={e => debug("ready callback", e)}
-      />
-    </>
-  );
+export const Template = (props: IProps) => <VideoPlayer {...props} />;
+Template.storyName = "youtube";
+
+export default {
+  title: `react-components/${storyName}`,
+  component: Template,
+  args: {
+    type: EVideoPlayerType.YOUTUBE,
+    id: FakeDataUtils.getVideoId(EVideoType.YOUTUBE),
+    url: null,
+    play: true,
+    style: { width: 400, height: 300 },
+    controls: false,
+    autoPlay: false,
+    loop: false,
+    muted: false,
+    playsInline: true,
+    className: "Youtube",
+    onReady: e => debug("onReady callback", e),
+    onPlay: e => debug("onPlay callback", e),
+    onPause: e => debug("onPause callback", e),
+    onEnded: e => debug("onEnded callback", e)
+  } as IProps
+} as Meta;
+
+export const Vimeo = Template.bind({});
+Vimeo.storyName = "vimeo";
+Vimeo.args = {
+  type: EVideoPlayerType.VIMEO,
+  id: FakeDataUtils.getVideoId(EVideoType.VIMEO),
+  url: null,
+  play: true,
+  style: { width: 400, height: 300 },
+  controls: false,
+  autoPlay: false,
+  loop: false,
+  muted: false,
+  playsInline: true,
+  onReady: e => debug("onReady callback", e),
+  onPlay: e => debug("onPlay callback", e),
+  onPause: e => debug("onPause callback", e),
+  onEnded: e => debug("onEnded callback", e),
+  className: "Vimeo"
 };
 
-/**
- * Vimeo
- */
-const VimeoVideoTest = () => {
-  const [play, setPlay] = useState<boolean>(false);
-  const [id, setId] = useState<string>(
-    FakeDataUtils.getVideoId(DataEVideoType.VIMEO)
-  );
-  const switchVideo = () => {
-    setId(FakeDataUtils.getVideoId(DataEVideoType.VIMEO));
-  };
-
-  return (
-    <>
-      <button onClick={switchVideo}>switch video</button>
-      <button onClick={() => setPlay(!play)}>{play ? "pause" : "play"}</button>
-      <VideoPlayer
-        type={EVideoType.VIMEO}
-        className={`${storyName}_vimeo`}
-        id={id}
-        play={play}
-        style={{ width: 400, height: 300 }}
-        controls={true}
-        muted={true}
-        autoPlay={true}
-        onPause={e => debug("pause callback", e)}
-        onPlay={e => debug("play callback", e)}
-        onEnded={e => debug("ended callback", e)}
-        onReady={e => debug("ready callback", e)}
-      />
-    </>
-  );
+export const Native = Template.bind({});
+Native.storyName = "native";
+Native.args = {
+  type: EVideoPlayerType.NATIVE,
+  url: FakeDataUtils.getVideoUrl(EVideoType.NATIVE),
+  play: true,
+  style: { width: 400, height: 300 },
+  controls: false,
+  autoPlay: false,
+  loop: true,
+  muted: true,
+  playsInline: true,
+  className: "Native",
+  onReady: e => debug("onReady callback", e),
+  onPlay: e => debug("onPlay callback", e),
+  onPause: e => debug("onPause callback", e),
+  onEnded: e => debug("onEnded callback", e)
 };
-
-/**
- * Native
- */
-const NativeVideoTest = () => {
-  const [play, setPlay] = useState<boolean>(true);
-
-  const url =
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
-
-  return (
-    <>
-      <button onClick={() => setPlay(!play)}>{play ? "pause" : "play"}</button>
-      <VideoPlayer
-        type={EVideoType.NATIVE}
-        className={`${storyName}_native`}
-        url={url}
-        play={play}
-        style={{ width: 400, display: "block" }}
-        controls={false}
-        muted={true}
-        autoPlay={true}
-        onPause={e => debug("pause callback", e)}
-        onPlay={e => debug("play callback", e)}
-        onEnded={e => debug("ended callback", e)}
-        onReady={e => debug("ready callback", e)}
-      />
-    </>
-  );
-};
-
-storiesOf(`react-components/${storyName}`, module)
-  .addParameters({
-    readme: {
-      sidebar: README
-    }
-  })
-  .add("native", () => <NativeVideoTest />)
-  .add("vimeo", () => {
-    return (
-      <>
-        <VimeoVideoTest />
-        <VimeoVideoTest />
-      </>
-    );
-  })
-
-  .add("youtube", () => {
-    return (
-      <>
-        <YoutubeVideoTest />
-        <YoutubeVideoTest />
-      </>
-    );
-  });
