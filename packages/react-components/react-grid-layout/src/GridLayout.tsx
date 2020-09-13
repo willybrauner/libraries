@@ -4,7 +4,6 @@ import useBoundingClientRect, {
 } from "@wbe/use-bounding-client-rect";
 import useWindowSize, { IWindowSize } from "@wbe/use-window-size";
 
-// init
 const component: string = "GridLayout";
 const debug = require("debug")(`lib:${component}`);
 
@@ -178,6 +177,7 @@ function GridLayout(props: IProps) {
 
     if (pOrientation === EOrientation.VERTICAL) {
       return {
+        pointerEvents: "none",
         position: "fixed",
         top: "0",
         bottom: "0",
@@ -191,6 +191,7 @@ function GridLayout(props: IProps) {
 
     if (pOrientation === EOrientation.HORIZONTAL) {
       return {
+        pointerEvents: "none",
         position: "fixed",
         top: "0",
         bottom: "0",
