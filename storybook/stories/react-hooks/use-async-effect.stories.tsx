@@ -50,10 +50,5 @@ UseAsyncLayoutEffectExample.storyName = "with async layout effect";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: UseAsyncEffectExample,
-  parameters: {
-    readme: {
-      sidebar: README
-    }
-  }
+  component: UseAsyncEffectExample
 };

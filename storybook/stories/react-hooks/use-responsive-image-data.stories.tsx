@@ -30,10 +30,5 @@ App.storyName = "basic example";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: App,
-  parameters: {
-    readme: {
-      sidebar: README
-    }
-  }
+  component: App
 };

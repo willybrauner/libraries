@@ -4,22 +4,19 @@ module.exports = {
   presets: ["@storybook/preset-create-react-app"],
 
   addons: [
-    // {
-    //   name: "storybook-readme"
-    // },
+    // waiting update to storybook v6.0
+    // https://github.com/tuchk4/storybook-readme/issues/240
+    // "storybook-readme",
     {
       name: "@storybook/addon-essentials",
       options: {
-        background: true
+        actions: false
       }
     },
     {
       name: "@storybook/addon-storysource",
       options: {
         test: /\.stories\.(tsx|jsx)?$/
-        // loaderOptions: {
-        //   prettierConfig: { printWidth: 80, singleQuote: false }
-        // }
       }
     }
   ],

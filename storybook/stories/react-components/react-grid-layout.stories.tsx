@@ -2,13 +2,8 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import GridLayout, { EOrientation } from "@wbe/react-grid-layout";
 import README from "@wbe/react-grid-layout/README.md";
 import "../../global-style.css";
-import {
-  withKnobs,
-  text,
-  number,
-  boolean,
-  optionsKnob as options
-} from "@storybook/addon-knobs";
+import { Meta } from "@storybook/react";
+import { withReadme } from "storybook-readme";
 
 const storyName = "react-grid-layout";
 
@@ -17,16 +12,18 @@ export const App = ({
   gutterSize,
   maxSize,
   center,
-  color
+  color,
+  orientation
 }: {
   columnNumber: number;
   gutterSize: string | number;
   maxSize: string | number;
   center: boolean;
   color: string;
+  orientation: EOrientation;
 }) => {
-  const [showGrid, setShowGrid] = useState(true);
   // Allow to toggle grid visibility
+  const [showGrid, setShowGrid] = useState(true);
   useEffect(() => {
     document.body.onkeyup = pEvent => {
       if (pEvent.code === "KeyG") setShowGrid(!showGrid);
@@ -37,17 +34,7 @@ export const App = ({
     <div className="App">
       {showGrid && (
         <GridLayout
-          orientation={options(
-            "orientation",
-            {
-              vertical: EOrientation.VERTICAL,
-              horizontal: EOrientation.HORIZONTAL
-            },
-            EOrientation.VERTICAL,
-            {
-              display: "select"
-            }
-          )}
+          orientation={orientation}
           columnsNumber={columnNumber}
           gutterSize={gutterSize}
           maxSize={maxSize}
@@ -77,7 +64,7 @@ const css: { [x: string]: CSSProperties } = {
   }
 };
 
-App.storyName = "basic";
+App.storyName = "basic example";
 
 export default {
   title: `react-components/${storyName}`,
@@ -88,10 +75,5 @@ export default {
     maxSize: 1024,
     center: true,
     color: "rgba(255, 0, 0, 0.14)"
-  },
-  parameters: {
-    readme: {
-      sidebar: README
-    }
   }
-};
+} as Meta;

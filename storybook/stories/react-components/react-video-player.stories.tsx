@@ -66,11 +66,11 @@ Vimeo.args = {
   loop: false,
   muted: false,
   playsInline: true,
+  className: "Vimeo",
   onReady: e => debug("onReady callback", e),
   onPlay: e => debug("onPlay callback", e),
   onPause: e => debug("onPause callback", e),
-  onEnded: e => debug("onEnded callback", e),
-  className: "Vimeo"
+  onEnded: e => debug("onEnded callback", e)
 };
 
 export const Native = Template.bind({});

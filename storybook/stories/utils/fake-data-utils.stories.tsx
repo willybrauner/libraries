@@ -68,10 +68,5 @@ GetText.storyName = "getText()";
 
 export default {
   title: `utils/${storyName}`,
-  component: GetResponsiveImageData,
-  parameters: {
-    readme: {
-      sidebar: README
-    }
-  }
+  component: GetResponsiveImageData
 };
