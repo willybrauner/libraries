@@ -22,7 +22,7 @@ export default {
   component: App,
   parameters: {
     readme: {
-      data: "coucou"
+      data: README
     }
   }
 };
