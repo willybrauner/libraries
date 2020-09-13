@@ -15,6 +15,7 @@ export { default as VideoPlayer, NativeVideo, VimeoVideo, YoutubeVideo, EVideoTy
  */
 export { useAsyncEffect, useAsyncLayoutEffect } from "@wbe/use-async-effect";
 export { default as useBoundingClientRect, EListener } from "@wbe/use-bounding-client-rect";
+export { default as useDidUpdate } from "@wbe/use-did-update";
 export { default as useDocumentScrollTop } from "@wbe/use-document-scroll-top";
 export { default as useIsInViewport } from "@wbe/use-is-in-viewport";
 export { default as useResponsiveImageData } from "@wbe/use-responsive-image-data";
