@@ -4,7 +4,7 @@ import React from "react";
 
 const storyName = "%%dashCaseModuleName%%";
 
-const App = () => <div>{storyName}</div>
+export const App = () => <div>{storyName}</div>
 App.storyName = "basic example";
 
 export default {

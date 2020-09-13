@@ -20,6 +20,7 @@
     "@wbe/react-video-player": "^1.4.0",
     "@wbe/use-async-effect": "^1.4.0",
     "@wbe/use-bounding-client-rect": "^1.4.0",
+    "@wbe/use-did-update": "^0.0.1",
     "@wbe/use-document-scroll-top": "^1.4.0",
     "@wbe/use-is-in-viewport": "^1.4.0",
     "@wbe/use-responsive-image-data": "^1.4.0",
