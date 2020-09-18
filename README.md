@@ -10,7 +10,7 @@ Libraries is a front-end javascript monorepo of React and vanilla JS packages.
 
 ✅ Javascript modules written with [typescript](https://www.typescriptlang.org/)  
 ✅ Unit tests with [jest](https://jestjs.io/)  
-✅ Libraries standalone package
+✅ Libraries standalone package    
 ✅ [Storybook documentation](https://willybrauner.github.io/libraries/)
 
 ## Summary
