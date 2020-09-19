@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-video-player",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "React video player for native vimeo and youtube video",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@vimeo/player": "^2.12.2",
-    "@wbe/react-responsive-image": "^1.4.0",
+    "@wbe/react-responsive-image": "^1.4.1",
     "react": "^16.13.1",
     "youtube-player": "^5.5.2"
   },
@@ -27,7 +27,7 @@
     "@testing-library/react": "^11.0.2",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
-    "@wbe/fake-data-utils": "^1.4.0",
+    "@wbe/fake-data-utils": "^1.4.1",
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
     "typescript": "^4.0.2"

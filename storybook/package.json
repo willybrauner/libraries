@@ -1,6 +1,6 @@
 {
   "name": "@wbe/storybook",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Storybook of libraries mono-repos.",
   "private": true,
   "scripts": {
