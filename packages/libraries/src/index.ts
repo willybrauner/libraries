@@ -6,7 +6,7 @@
 /**
  * react-components
  */
-export { default as GridLayout } from "@wbe/react-grid-layout";
+export { default as GridLayout, EOrientation } from "@wbe/react-grid-layout";
 export { default as ResponsiveImage, EImageType, IImage } from "@wbe/react-responsive-image";
 export { default as VideoPlayer, NativeVideo, VimeoVideo, YoutubeVideo, EVideoType } from "@wbe/react-video-player";
 
