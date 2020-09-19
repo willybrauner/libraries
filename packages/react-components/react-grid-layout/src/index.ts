@@ -1,1 +1,1 @@
-export { default } from "./GridLayout";
+export { default, EOrientation } from "./GridLayout";
