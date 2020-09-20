@@ -1,5 +1,5 @@
 // @ts-ignore
-import %%pascalCaseModuleName%% from "../src/%%pascalCaseModuleName%%";
+import { %%pascalCaseModuleName%% } from "../src/%%pascalCaseModuleName%%";
 
 describe("%%pascalCaseModuleName%%", () => {
   it("should be defined", () => {

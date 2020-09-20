@@ -5,4 +5,4 @@ function %%pascalCaseModuleName%%() {
 
 }
 
-export { %%pascalCaseModuleName%% as default }
+export { %%pascalCaseModuleName%% }
