@@ -1,4 +1,3 @@
-// @ts-ignore
 import { FakeDataUtils, EFakeVideoType } from "../src/FakeDataUtils";
 import React from "react";
 import "../../../../storybook/global-style.css";

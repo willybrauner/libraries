@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useIsInViewport } from "../src/useIsInViewport";
 
 describe("useIsInViewport", () => {

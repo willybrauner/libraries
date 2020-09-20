@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useDidUpdate } from "../src/useDidUpdate";
 import { renderHook } from "@testing-library/react-hooks";
 

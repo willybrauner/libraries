@@ -1,4 +1,3 @@
-// @ts-ignore
 import { ResponsiveImage, EImageType, IImage } from "../src/ResponsiveImage";
 import React, { CSSProperties, ReactNode } from "react";
 import FakeDataUtils from "@wbe/fake-data-utils";

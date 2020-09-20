@@ -8,5 +8,5 @@
     { "path": "../../react-hooks/use-bounding-client-rect" },
     { "path": "../../react-hooks/use-window-size" }
   ],
-  "exclude": ["node_modules", "dist", "test", "stories"]
+  "exclude": ["node_modules", "dist"]
 }

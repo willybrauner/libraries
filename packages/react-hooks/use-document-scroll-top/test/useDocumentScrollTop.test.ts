@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useDocumentScrollTop } from "../src/useDocumentScrollTop";
 
 describe("useDocumentScrollTop", () => {

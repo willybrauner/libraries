@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useWindowSize, IWindowSize } from "../src/useWindowSize";
 import { renderHook, act } from "@testing-library/react-hooks";
 import { cleanup, fireEvent } from "@testing-library/react";

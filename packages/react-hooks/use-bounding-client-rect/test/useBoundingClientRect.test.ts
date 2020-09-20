@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useBoundingClientRect } from "../src/useBoundingClientRect";
 
 describe("useBoundingClientRect", () => {

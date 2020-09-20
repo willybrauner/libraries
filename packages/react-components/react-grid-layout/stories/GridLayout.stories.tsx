@@ -1,4 +1,3 @@
-// @ts-ignore
 import { GridLayout, EOrientation } from "../src/GridLayout";
 import React, { CSSProperties, useEffect, useState } from "react";
 import "../../../../storybook/global-style.css";

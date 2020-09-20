@@ -1,4 +1,3 @@
-// @ts-ignore
 // prettier-ignore
 import { VideoPlayer, EVideoType as EVideoPlayerType } from "../src/VideoPlayer";
 import FakeDataUtils, { EFakeVideoType } from "@wbe/fake-data-utils";

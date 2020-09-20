@@ -1,4 +1,3 @@
-// @ts-ignore
 import { FakeDataUtils, EFakeVideoType } from "../src/FakeDataUtils";
 
 describe("FakeDataUtils", () => {

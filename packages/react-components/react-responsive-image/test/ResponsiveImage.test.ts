@@ -1,5 +1,4 @@
-// @ts-ignore
-import ResponsiveImage from "../src";
+import { ResponsiveImage } from "../src/ResponsiveImage";
 
 describe("ResponsiveImage", () => {
   it("should be defined", () => {
