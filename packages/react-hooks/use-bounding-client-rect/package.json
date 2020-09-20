@@ -1,6 +1,6 @@
 {
   "name": "@wbe/use-bounding-client-rect",
-  "version": "1.4.2-alpha.0",
+  "version": "1.4.2",
   "description": "Get dynamically bounding client rect",
   "author": "Willy Brauner",
   "license": "MIT",
