@@ -217,7 +217,7 @@ function VideoPlayer(props: IProps) {
 }
 
 export {
-  VideoPlayer as default,
+  VideoPlayer,
   NativeVideo,
   VimeoVideo,
   YoutubeVideo,

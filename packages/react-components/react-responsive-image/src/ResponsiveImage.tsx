@@ -74,7 +74,7 @@ ResponsiveImage.defaultProps = {
 /**
  * Image Type
  */
-export enum EImageType {
+enum EImageType {
   // <img> HTML tag
   TAG_IMAGE = "tagImage",
   // <div> background-image
@@ -84,7 +84,7 @@ export enum EImageType {
 /**
  * Single Image Object properties
  */
-export interface IImage {
+interface IImage {
   url: string;
   width?: number;
   height?: number;
@@ -442,4 +442,4 @@ function ResponsiveImage(props: IProps) {
   }
 }
 
-export { ResponsiveImage as default };
+export { ResponsiveImage, EImageType, IImage };

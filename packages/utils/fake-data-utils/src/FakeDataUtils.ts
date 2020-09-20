@@ -4,7 +4,7 @@ const debug = require("debug")(`lib:${name}`);
 /**
  * Video Type
  */
-export enum EFakeVideoType {
+enum EFakeVideoType {
   NATIVE,
   YOUTUBE,
   VIMEO
@@ -14,7 +14,7 @@ export enum EFakeVideoType {
  * Image interface
  * (same interface than ResponsiveImage IFakeImage)
  */
-export interface IFakeImage {
+interface IFakeImage {
   url: string;
   width: number;
   height: number;
@@ -298,4 +298,4 @@ class FakeDataUtils {
   }
 }
 
-export { FakeDataUtils as default };
+export { FakeDataUtils, EFakeVideoType, IFakeImage };

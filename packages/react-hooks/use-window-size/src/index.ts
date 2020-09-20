@@ -1,1 +1,1 @@
-export { default, IWindowSize } from "./useWindowSize";
+export { useWindowSize as default, IWindowSize } from "./useWindowSize";

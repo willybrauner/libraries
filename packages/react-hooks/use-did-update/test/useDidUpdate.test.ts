@@ -1,5 +1,5 @@
 // @ts-ignore
-import useDidUpdate from "../src/useDidUpdate";
+import { useDidUpdate } from "../src/useDidUpdate";
 import { renderHook } from "@testing-library/react-hooks";
 
 describe("useDidUpdate", () => {

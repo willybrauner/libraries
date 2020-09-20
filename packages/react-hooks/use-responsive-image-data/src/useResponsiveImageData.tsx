@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // duplicate of IImage from react-responsive-image
-export interface IImage {
+interface IImage {
   url: string;
   width?: number;
   height?: number;
@@ -70,4 +70,4 @@ function useResponsiveImageData(
   return responsiveImage;
 }
 
-export { useResponsiveImageData as default };
+export { useResponsiveImageData };

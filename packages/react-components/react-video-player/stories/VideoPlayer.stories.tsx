@@ -1,6 +1,6 @@
 // @ts-ignore
 // prettier-ignore
-import VideoPlayer, { EVideoType as EVideoPlayerType } from "../src/VideoPlayer";
+import { VideoPlayer, EVideoType as EVideoPlayerType } from "../src/VideoPlayer";
 import FakeDataUtils, { EFakeVideoType } from "@wbe/fake-data-utils";
 import React, { CSSProperties } from "react";
 import "../../../../storybook/global-style.css";

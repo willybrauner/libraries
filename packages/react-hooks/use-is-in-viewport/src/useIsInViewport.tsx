@@ -100,4 +100,4 @@ function useIsInViewport(
   return isVisible;
 }
 
-export { useIsInViewport as default };
+export { useIsInViewport };

@@ -1,1 +1,4 @@
-export { default, EListener } from "./useBoundingClientRect";
+export {
+  useBoundingClientRect as default,
+  EListener
+} from "./useBoundingClientRect";

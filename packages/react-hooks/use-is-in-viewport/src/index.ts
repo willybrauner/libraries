@@ -1,1 +1,1 @@
-export { default } from "./useIsInViewport";
+export { useIsInViewport as default } from "./useIsInViewport";

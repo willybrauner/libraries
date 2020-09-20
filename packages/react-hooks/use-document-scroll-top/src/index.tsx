@@ -1,1 +1,1 @@
-export { default } from "./useDocumentScrollTop";
+export { useDocumentScrollTop as default } from "./useDocumentScrollTop";
