@@ -1,6 +1,4 @@
-// @ts-ignore
-import useResponsiveImageData from "../src";
-// @ts-ignore
+import { useResponsiveImageData } from "../src/useResponsiveImageData";
 import { randomIntFromInterval, breakpoints, thumbs } from "./prepareTest";
 import { renderHook } from "@testing-library/react-hooks";
 

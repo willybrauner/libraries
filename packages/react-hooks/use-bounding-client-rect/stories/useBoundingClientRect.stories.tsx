@@ -1,5 +1,4 @@
-// @ts-ignore
-import useBoundingClientRect, { EListener } from "../src";
+import { useBoundingClientRect, EListener } from "../src/useBoundingClientRect";
 import React, { useRef } from "react";
 import "../../../../storybook/global-style.css";
 

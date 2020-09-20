@@ -1,5 +1,4 @@
-// @ts-ignore
-import FakeDataUtils, { EFakeVideoType } from "../src/FakeDataUtils";
+import { FakeDataUtils, EFakeVideoType } from "../src/FakeDataUtils";
 
 describe("FakeDataUtils", () => {
   it("should be defined", () => {

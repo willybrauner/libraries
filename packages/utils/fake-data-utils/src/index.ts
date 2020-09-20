@@ -1,1 +1,5 @@
-export { default, EFakeVideoType, IFakeImage } from "./FakeDataUtils";
+export {
+  FakeDataUtils as default,
+  EFakeVideoType,
+  IFakeImage
+} from "./FakeDataUtils";

@@ -14,7 +14,7 @@ const debug = require("debug")(`config:scaffold`);
  * Show a success message
  * @param pMessage Message to show
  */
-const showSuccess = pMessage => {
+const showSuccess = (pMessage) => {
   console.log(`→ ${pMessage}\n`.cyan);
 };
 
@@ -28,7 +28,7 @@ const _askFolder = (pFolder = config.moduleFolders) => {
     type: "list",
     name: "subFolder",
     message: "Which folder?",
-    choices: pFolder
+    choices: pFolder,
   });
 };
 
@@ -39,7 +39,7 @@ const _askName = (pType = "module") => {
   return Inquirer.prompt({
     type: "input",
     message: `${pType} name?`,
-    name: "moduleName"
+    name: "moduleName",
   });
 };
 
@@ -47,7 +47,7 @@ const _askDescription = (pType = "module") => {
   return Inquirer.prompt({
     type: "input",
     message: `${pType} description?`,
-    name: "moduleDescription"
+    name: "moduleDescription",
   });
 };
 
@@ -56,24 +56,24 @@ const _askDescription = (pType = "module") => {
  * @returns {Promise<any>}
  */
 const moduleScaffolder = () =>
-  new Promise(async resolve => {
+  new Promise(async (resolve) => {
     // Static sub-folder for pages
 
     let subFolder = "";
     // Get sub-folder for components
-    await _askFolder().then(answer => {
+    await _askFolder().then((answer) => {
       subFolder = answer.subFolder;
     });
 
     // Get component name
     let moduleName = "";
-    await _askName().then(answer => {
+    await _askName().then((answer) => {
       moduleName = answer.moduleName;
     });
 
     // Get component name
     let moduleDescription = "";
-    await _askDescription().then(answer => {
+    await _askDescription().then((answer) => {
       moduleDescription = answer.moduleDescription;
     });
 
@@ -111,8 +111,8 @@ const moduleScaffolder = () =>
         camelCaseModuleName,
         pascalCaseModuleName,
         subFolder,
-        moduleDescription
-      }
+        moduleDescription,
+      },
     }) => {
       // get new file path
       const newFilePath = `${filePath}${outputFileName}${extension}`;
@@ -135,7 +135,7 @@ const moduleScaffolder = () =>
       templatePath: `${paths.skeletonsPath}/module/src/`,
       templateFileName: "index",
       outputFileName: "index",
-      extension: ".ts"
+      extension: ".ts",
     });
 
     // create src/ module.ts
@@ -144,7 +144,7 @@ const moduleScaffolder = () =>
       templatePath: `${paths.skeletonsPath}/module/src/`,
       templateFileName: "{module}",
       outputFileName: pascalCaseModuleName,
-      extension: ".ts"
+      extension: ".ts",
     });
 
     // create stories/{module}.stories.tsx file
@@ -153,7 +153,7 @@ const moduleScaffolder = () =>
       templatePath: `${paths.skeletonsPath}/module/stories/`,
       templateFileName: "{module}.stories",
       outputFileName: `${pascalCaseModuleName}.stories`,
-      extension: ".tsx"
+      extension: ".tsx",
     });
 
     // create test/{module}.test.ts file
@@ -162,7 +162,7 @@ const moduleScaffolder = () =>
       templatePath: `${paths.skeletonsPath}/module/test/`,
       templateFileName: "{module}.test",
       outputFileName: `${pascalCaseModuleName}.test`,
-      extension: ".ts"
+      extension: ".ts",
     });
 
     // ----------------------------- files
@@ -171,41 +171,48 @@ const moduleScaffolder = () =>
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
       templateFileName: ".gitignore",
-      outputFileName: ".gitignore"
+      outputFileName: ".gitignore",
     });
     // create npmignore
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
       templateFileName: ".npmignore",
-      outputFileName: ".npmignore"
+      outputFileName: ".npmignore",
     });
     // create package.json
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
       templateFileName: "package",
       outputFileName: "package",
-      extension: ".json"
+      extension: ".json",
     });
     // create readme
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
       templateFileName: "README",
       outputFileName: "README",
-      extension: ".md"
+      extension: ".md",
     });
     // create tsconfig
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
       templateFileName: "tsconfig",
       outputFileName: "tsconfig",
-      extension: ".json"
+      extension: ".json",
+    });
+    // create tsconfig-build
+    createFile({
+      templatePath: `${paths.skeletonsPath}/module/`,
+      templateFileName: "tsconfig-build",
+      outputFileName: "tsconfig-build",
+      extension: ".json",
     });
     // create .babelrc
     createFile({
       templatePath: `${paths.skeletonsPath}/module/`,
       templateFileName: ".babelrc",
       outputFileName: ".babelrc",
-      extension: ""
+      extension: "",
     });
 
     // Done
@@ -218,15 +225,15 @@ const moduleScaffolder = () =>
 const scaffolders = [
   {
     name: "Module",
-    exec: () => moduleScaffolder()
-  }
+    exec: () => moduleScaffolder(),
+  },
 ];
 
 // ----------------------------------------------------------------------------- PUBLIC API
 const scaffold = () =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     // Get scaffolder to present listing to user
-    let scaffolderTypes = scaffolders.map(scaffolder => scaffolder.name);
+    let scaffolderTypes = scaffolders.map((scaffolder) => scaffolder.name);
 
     // List available scaffolders to user
     Inquirer.prompt({
@@ -234,8 +241,8 @@ const scaffold = () =>
       name: "type",
       message: "What kind of module to create?",
       choices: scaffolderTypes,
-      pageSize: 20
-    }).then(answer => {
+      pageSize: 20,
+    }).then((answer) => {
       // Get scaffolder index
       const scaffolderIndex = scaffolderTypes.indexOf(answer.type);
 

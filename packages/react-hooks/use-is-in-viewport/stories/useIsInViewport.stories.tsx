@@ -1,5 +1,4 @@
-// @ts-ignore
-import useIsInViewport from "../src";
+import { useIsInViewport } from "../src/useIsInViewport";
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import "../../../../storybook/global-style.css";
 

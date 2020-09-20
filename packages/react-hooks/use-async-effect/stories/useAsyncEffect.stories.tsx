@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useAsyncEffect, useAsyncLayoutEffect } from "../src";
 import React, { useState } from "react";
 import "../../../../storybook/global-style.css";

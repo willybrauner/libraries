@@ -1,5 +1,5 @@
 export {
-  default,
+  VideoPlayer as default,
   NativeVideo,
   VimeoVideo,
   YoutubeVideo,

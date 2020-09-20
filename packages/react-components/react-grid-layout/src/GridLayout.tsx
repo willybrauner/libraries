@@ -7,7 +7,7 @@ import useWindowSize, { IWindowSize } from "@wbe/use-window-size";
 const component: string = "GridLayout";
 const debug = require("debug")(`lib:${component}`);
 
-export enum EOrientation {
+enum EOrientation {
   VERTICAL = "vertical",
   HORIZONTAL = "horizontal"
 }
@@ -331,4 +331,4 @@ function GridLayout(props: IProps) {
   );
 }
 
-export { GridLayout as default };
+export { GridLayout, EOrientation };

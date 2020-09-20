@@ -1,5 +1,4 @@
-// @ts-ignore
-import useBoundingClientRect from "../src";
+import { useBoundingClientRect } from "../src/useBoundingClientRect";
 
 describe("useBoundingClientRect", () => {
   it("should be defined", () => {

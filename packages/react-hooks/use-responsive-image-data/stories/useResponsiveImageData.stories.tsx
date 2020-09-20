@@ -1,5 +1,4 @@
-// @ts-ignore
-import useResponsiveImageData from "../src";
+import { useResponsiveImageData } from "../src/useResponsiveImageData";
 import FakeDataUtils from "@wbe/fake-data-utils";
 import useWindowSize from "@wbe/use-window-size";
 import React from "react";

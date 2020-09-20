@@ -6,10 +6,9 @@
   "types": "dist/index",
   "private": false,
   "scripts": {
-    "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig.json",
+    "compile": "tsc -b tsconfig-build.json",
     "test": "jest"
   },
   "repository": {
@@ -22,8 +21,8 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.0.2",
-    "@types/react": "^16.9.48",
+    "@testing-library/react": "^11.0.4",
+    "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1"

@@ -103,4 +103,4 @@ function useBoundingClientRect(
   return rect;
 }
 
-export { useBoundingClientRect as default, EListener };
+export { useBoundingClientRect, EListener };

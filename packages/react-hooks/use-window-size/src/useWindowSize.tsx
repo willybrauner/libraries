@@ -40,4 +40,4 @@ function useWindowSize(): IWindowSize {
   return windowSize;
 }
 
-export { useWindowSize as default, IWindowSize };
+export { useWindowSize, IWindowSize };

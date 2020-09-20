@@ -1,5 +1,4 @@
-// @ts-ignore
-import useDocumentScrollTop from "../src";
+import { useDocumentScrollTop } from "../src/useDocumentScrollTop";
 import React from "react";
 import "../../../../storybook/global-style.css";
 

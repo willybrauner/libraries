@@ -1,1 +1,5 @@
-export { default, EImageType, IImage } from "./ResponsiveImage";
+export {
+  ResponsiveImage as default,
+  EImageType,
+  IImage
+} from "./ResponsiveImage";

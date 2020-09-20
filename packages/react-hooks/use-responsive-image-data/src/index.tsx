@@ -1,1 +1,1 @@
-export { default } from "./useResponsiveImageData";
+export { useResponsiveImageData as default } from "./useResponsiveImageData";

@@ -1,5 +1,4 @@
-// @ts-ignore
-import useDidUpdate from "../src/useDidUpdate";
+import { useDidUpdate } from "../src/useDidUpdate";
 import React, { useState } from "react";
 
 const storyName = "use-did-update";

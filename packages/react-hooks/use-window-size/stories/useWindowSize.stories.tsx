@@ -1,5 +1,4 @@
-// @ts-ignore
-import useWindowSize, { IWindowSize } from "../src/useWindowSize";
+import { useWindowSize, IWindowSize } from "../src/useWindowSize";
 import React from "react";
 import "../../../../storybook/global-style.css";
 

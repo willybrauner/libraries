@@ -1,5 +1,4 @@
-// @ts-ignore
-import useDocumentScrollTop from "../src";
+import { useDocumentScrollTop } from "../src/useDocumentScrollTop";
 
 describe("useDocumentScrollTop", () => {
   it("should be defined", () => {

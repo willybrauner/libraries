@@ -41,4 +41,4 @@ function useDocumentScrollTop(): number | null {
   return scrollTopPosition;
 }
 
-export { useDocumentScrollTop as default };
+export { useDocumentScrollTop };
