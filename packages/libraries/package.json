@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "1.4.1",
+  "version": "1.4.2-alpha.0",
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
@@ -14,17 +14,17 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/fake-data-utils": "^1.4.1",
-    "@wbe/react-grid-layout": "^1.4.1",
-    "@wbe/react-responsive-image": "^1.4.1",
-    "@wbe/react-video-player": "^1.4.1",
-    "@wbe/use-async-effect": "^1.4.1",
-    "@wbe/use-bounding-client-rect": "^1.4.1",
-    "@wbe/use-did-update": "^1.4.1",
-    "@wbe/use-document-scroll-top": "^1.4.1",
-    "@wbe/use-is-in-viewport": "^1.4.1",
-    "@wbe/use-responsive-image-data": "^1.4.1",
-    "@wbe/use-window-size": "^1.4.1"
+    "@wbe/fake-data-utils": "^1.4.2-alpha.0",
+    "@wbe/react-grid-layout": "^1.4.2-alpha.0",
+    "@wbe/react-responsive-image": "^1.4.2-alpha.0",
+    "@wbe/react-video-player": "^1.4.2-alpha.0",
+    "@wbe/use-async-effect": "^1.4.2-alpha.0",
+    "@wbe/use-bounding-client-rect": "^1.4.2-alpha.0",
+    "@wbe/use-did-update": "^1.4.2-alpha.0",
+    "@wbe/use-document-scroll-top": "^1.4.2-alpha.0",
+    "@wbe/use-is-in-viewport": "^1.4.2-alpha.0",
+    "@wbe/use-responsive-image-data": "^1.4.2-alpha.0",
+    "@wbe/use-window-size": "^1.4.2-alpha.0"
   },
   "keywords": [
     "react",
