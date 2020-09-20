@@ -1,4 +1,3 @@
-// @ts-ignore
 import { %%pascalCaseModuleName%% } from "../src/%%pascalCaseModuleName%%";
 
 describe("%%pascalCaseModuleName%%", () => {
