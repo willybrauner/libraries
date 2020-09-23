@@ -1,12 +1,14 @@
+import { doc } from "prettier";
+
 const debug = require("debug")("lib:MetasManager");
 
 /**
  * IMetas properties type
  */
 type TMetaProperty = {
-  selectAttr: string;
-  selectValue: string;
-  setAttr: string;
+  selectorAttr: string;
+  selectorValue: string;
+  attr: string;
 };
 
 /**
@@ -28,33 +30,33 @@ type TMetas = {
 // prettier-ignore
 const METAS_PROPERTIES: TMetas = {
   title: [
-    { selectAttr: "property", selectValue: "og:title", setAttr: "content" },
-    { selectAttr: "name", selectValue: "twitter:title", setAttr: "content" }
+    { selectorAttr: "property", selectorValue: "og:title", attr: "content" },
+    { selectorAttr: "name", selectorValue: "twitter:title", attr: "content" }
   ],
   description: [
-    { selectAttr: "name", selectValue: "description", setAttr: "content" },
-    { selectAttr: "property", selectValue: "og:description", setAttr: "content" },
-    { selectAttr: "name", selectValue: "twitter:description", setAttr: "content" }
+    { selectorAttr: "name", selectorValue: "description", attr: "content" },
+    { selectorAttr: "property", selectorValue: "og:description", attr: "content" },
+    { selectorAttr: "name", selectorValue: "twitter:description", attr: "content" }
   ],
   imageUrl: [
-    { selectAttr: "property", selectValue: "og:image", setAttr: "content" },
-    { selectAttr: "name", selectValue: "twitter:image", setAttr: "content" },
-    { selectAttr: "rel", selectValue: "image_src", setAttr: "href" }
+    { selectorAttr: "property", selectorValue: "og:image", attr: "content" },
+    { selectorAttr: "name", selectorValue: "twitter:image", attr: "content" },
+    { selectorAttr: "rel", selectorValue: "image_src", attr: "href" }
   ],
   siteName: [
-    { selectAttr: "property", selectValue: "og:site_name", setAttr: "content" },
-    { selectAttr: "name", selectValue: "twitter:site", setAttr: "content" }
+    { selectorAttr: "property", selectorValue: "og:site_name", attr: "content" },
+    { selectorAttr: "name", selectorValue: "twitter:site", attr: "content" }
   ],
   pageUrl: [
-    { selectAttr: "property", selectValue: "og:url", setAttr: "content" },
-    { selectAttr: "name", selectValue: "twitter:url", setAttr: "content" },
-    { selectAttr: "rel", selectValue: "canonical", setAttr: "href" }
+    { selectorAttr: "property", selectorValue: "og:url", attr: "content" },
+    { selectorAttr: "name", selectorValue: "twitter:url", attr: "content" },
+    { selectorAttr: "rel", selectorValue: "canonical", attr: "href" }
   ],
   author: [
-    { selectAttr: "name", selectValue: "author", setAttr: "content" }
+    { selectorAttr: "name", selectorValue: "author", attr: "content" }
   ],
   keywords: [
-    { selectAttr: "name", selectValue: "keywords", setAttr: "content" }
+    { selectorAttr: "name", selectorValue: "keywords", attr: "content" }
   ]
 };
 
@@ -123,7 +125,7 @@ class MetasManager {
    * @return cleanedString The cleaned string
    * @private
    */
-  private _cleanMetaString(source: string) {
+  private cleanMetaString(source: string) {
     return source.replace(/"/g, "'");
   }
 
@@ -133,8 +135,8 @@ class MetasManager {
    * @param pType
    * @private
    */
-  private _formatMeta(pMetaValue: string, pType: string): string {
-    return this._cleanMetaString(pMetaValue);
+  private formatMeta(pMetaValue: string, pType: string): string {
+    return this.cleanMetaString(pMetaValue);
   }
 
   /**
@@ -150,7 +152,7 @@ class MetasManager {
    * @param pType
    * @private
    */
-  private _selectMetaValue(
+  private selectMetaValue(
     pCustomMetas: TMetas,
     pDefaultMetas: TMetas,
     pType: string
@@ -173,54 +175,84 @@ class MetasManager {
    * @name inject
    * @description Inject metas in document <head>
    *
-   * @param pCustomMetas
-   * @param pDefaultMetas
-   * @param pProperties
+   * @param customMetas
+   * @param defaultMetas
+   * @param properties
+   * @param createElement
    */
   public inject(
-    pCustomMetas: TMetas = null,
-    pDefaultMetas: TMetas = this.defaultMetas,
-    pProperties: TMetas = this._metaProperties
+    customMetas: TMetas = null,
+    defaultMetas: TMetas = this.defaultMetas,
+    properties: TMetas = this._metaProperties,
+    createElement = true
   ): void {
     // specific case: update main document title
-    const selectDocumentTitle = this._selectMetaValue(
-      pCustomMetas,
-      pDefaultMetas,
+    const selectDocumentTitle = this.selectMetaValue(
+      customMetas,
+      defaultMetas,
       "title"
     );
 
+    // TODO - create title dom element if does't exist because we need it to insertMetas
     // set in DOM
-    document.title = this._cleanMetaString(selectDocumentTitle);
+    document.title = this.cleanMetaString(selectDocumentTitle);
 
     // loop on pMetas (ex: title, description, imageURL, siteName...)
-    Object.keys(pProperties).map((metaType) => {
-      // select meta value
-      let metaValue = this._selectMetaValue(
-        pCustomMetas,
-        pDefaultMetas,
-        metaType
-      );
+    Object.keys(properties).forEach((metaType: string) => {
+      // select meta value with preference order.
+      let metaValue = this.selectMetaValue(customMetas, defaultMetas, metaType);
+      if (!this.formatMeta(metaValue, metaType)) {
+        debug("There is no value to set in meta attr, return.");
+        return;
+      }
 
       // target properties {selector, setAttr} of this specific meta type
-      const propertiesMetaType: TMetaProperty[] = pProperties[metaType];
+      const propertiesMetaType: TMetaProperty[] = properties[metaType];
 
       // for each properties of this specific meta type
       for (let property of propertiesMetaType) {
         // format selector
-        const selector = `[${property.selectAttr}="${property.selectValue}"]`;
+        const selector = `[${property.selectorAttr}="${property.selectorValue}"]`;
 
         // if tag element exist
-        if (document.head.querySelector(selector) !== null) {
+        if (document.head.querySelector(selector) != null) {
           // set meta in tag element
           document.head
             .querySelector(selector)
-            .setAttribute(
-              property.setAttr,
-              this._formatMeta(metaValue, metaType)
-            );
+            .setAttribute(property.attr, this.formatMeta(metaValue, metaType));
         }
-        // else, return do nothing
-        else return;
+        // if tag element doesn"t exist
+        else {
+          debug(`Meta tag element doesn't exist, create it.`);
+          const newTagElement = document.createElement("meta");
+          newTagElement.setAttribute(
+            property.selectorAttr,
+            property.selectorValue
+          );
+          newTagElement.setAttribute(
+            property.attr,
+            this.formatMeta(metaValue, metaType)
+          );
+
+          const autoGeneratedAttr = "auto-generated";
+          newTagElement.setAttribute(autoGeneratedAttr, "");
+          // prettier-ignore
+          const autoGeneratedMetaElement = document.head.querySelectorAll(`[${autoGeneratedAttr}]`);
+
+          // if there is no meta auto-generated, insert after <title>
+          // prettier-ignore
+          if (autoGeneratedMetaElement.length === 0) {
+            debug('There is non auto-generated meta in document head, insert after title');
+            const documentTitle = document.getElementsByTagName("title")[0];
+            document.head.insertBefore(newTagElement, documentTitle.nextSibling)
+            
+          // if there is meta auto-generated, insert after the last one 
+          } else {
+            debug("Get last auto-generated meta tag in document head and insert newTag after it.");
+            const lastAutoGeneratedMeta = autoGeneratedMetaElement[autoGeneratedMetaElement.length - 1];
+            lastAutoGeneratedMeta.parentNode.insertBefore(newTagElement, lastAutoGeneratedMeta.nextSibling);
+          }
+        }
       }
     });
   }
