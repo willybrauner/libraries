@@ -103,18 +103,6 @@ class MetasManager {
     debug("pMetaProperties", pMetaProperties);
   }
 
-  // --------------------------------------------------------------------------- DEFAULT META
-
-  // store default metas in this variable
-  private _defaultMetas: TMetas = null;
-
-  get defaultMetas() {
-    return this._defaultMetas;
-  }
-  set defaultMetas(pDefaultMetas: TMetas) {
-    this._defaultMetas = pDefaultMetas;
-  }
-
   // --------------------------------------------------------------------------- PRIVATE
 
   /**
@@ -142,29 +130,14 @@ class MetasManager {
    *
    * Meta priority order:
    * - custom meta
-   * - default meta
    * - empty string
    *
    * @param pCustomMetas
-   * @param pDefaultMetas
    * @param pType
    * @private
    */
-  private selectMetaValue(
-    pCustomMetas: TMetas,
-    pDefaultMetas: TMetas,
-    pType: string
-  ): string {
-    // if a custom metatype is define, keep this custom value
-    if (pCustomMetas?.[pType]) {
-      return pCustomMetas[pType];
-    }
-    // else if default value is set, keep this default value
-    else if (pDefaultMetas?.[pType]) {
-      return pDefaultMetas[pType];
-    }
-    // else, there is any custom or default value, return an empty string
-    else return "";
+  private static selectMetaValue(pCustomMetas: TMetas, pType: string): string {
+    return pCustomMetas?.[pType] ? pCustomMetas[pType] : "";
   }
 
   // --------------------------------------------------------------------------- PULBIC API
@@ -174,20 +147,17 @@ class MetasManager {
    * @description Inject metas in document <head>
    *
    * @param customMetas
-   * @param defaultMetas
    * @param properties
    * @param createElement
    */
   public inject(
     customMetas: TMetas = null,
-    defaultMetas: TMetas = this.defaultMetas,
     properties: TMetas = this._metaProperties,
     createElement = true
   ): void {
     // specific case: update main document title
-    const selectDocumentTitle = this.selectMetaValue(
+    const selectDocumentTitle = MetasManager.selectMetaValue(
       customMetas,
-      defaultMetas,
       "title"
     );
 
@@ -198,7 +168,7 @@ class MetasManager {
     // loop on pMetas (ex: title, description, imageURL, siteName...)
     Object.keys(properties).forEach((metaType: string) => {
       // select meta value with preference order.
-      let metaValue = this.selectMetaValue(customMetas, defaultMetas, metaType);
+      let metaValue = MetasManager.selectMetaValue(customMetas, metaType);
       if (!this.formatMeta(metaValue, metaType)) {
         debug("There is no value to set in meta attr, return.");
         return;
