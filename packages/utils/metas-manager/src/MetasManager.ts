@@ -1,5 +1,3 @@
-import { doc } from "prettier";
-
 const debug = require("debug")("lib:MetasManager");
 
 /**

@@ -1,6 +1,7 @@
 import MetasManager from "../src";
 import React, { useEffect, useState } from "react";
 import { TMetas } from "../src/MetasManager";
+const htmlElementStringify = require("html-element-stringify");
 
 const storyName = "metas-manager";
 const debug = require("debug")(`lib:${storyName}`);
@@ -13,14 +14,41 @@ export const App = (props: TMetas) => {
     });
   }, [props]);
 
-  const [documentHead, setDocumentHead] = useState(null);
+  const [documentHead, setDocumentHead] = useState<string>(null);
+
+  const removeChildren = (pElementsToRemove): void => {
+    for (let i = pElementsToRemove.length - 1; i >= 0; i--) {
+      let item = pElementsToRemove[i];
+      item.parentNode.removeChild(item);
+    }
+  };
+
+  const keepingTags = (
+    head = document.head,
+    keepingList = ["title", "meta"]
+  ): HTMLElement[] => {
+    let final = [];
+    keepingList.forEach((el) => {
+      final = [
+        ...Array.from(final),
+        ...Array.from(head.getElementsByTagName(el) || []),
+      ];
+    });
+    return final;
+  };
+
+  const printHtml = (els: HTMLElement[]): string => {
+    return els.map((el: HTMLElement) => htmlElementStringify(el)).join("\n");
+  };
 
   useEffect(() => {
-    setDocumentHead(document.head);
-    // TODO remove style and script attr
+    const keep = keepingTags();
+    const print = printHtml(keep);
+    debug("print", print);
+    setDocumentHead(print);
   }, [props]);
 
-  return <pre>{documentHead?.innerHTML}</pre>;
+  return <pre>{documentHead}</pre>;
 };
 App.storyName = "basic example";
 
