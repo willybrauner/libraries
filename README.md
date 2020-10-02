@@ -1,6 +1,6 @@
 # 📦 Libraries
 
-Libraries is a front-end javascript monorepo of React and vanilla JS packages.
+Libraries is a front-end javascript mono-repo of React and vanilla JS packages.
 
 ![GitHub contributors](https://img.shields.io/github/contributors/willybrauner/libraries)
 
