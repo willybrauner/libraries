@@ -1,10 +1,10 @@
-import { DEFAULT_METAS_TAGS } from "./defaultMetasTags";
+import { DEFAULT_META_TAGS } from "./defaultMetaTags";
 const debug = require("debug")("lib:MetasManager");
 
 /**
  * IMetas properties type
  */
-type TMetaProperty = {
+type TMetaTagProperty = {
   selectorAttr: string;
   selectorValue: string;
   attr: string;
@@ -13,14 +13,20 @@ type TMetaProperty = {
 /**
  * IMetas interface
  */
-type TMetas = {
-  title?: string | TMetaProperty[];
-  description?: string | TMetaProperty[];
-  imageUrl?: string | TMetaProperty[];
-  siteName?: string | TMetaProperty[];
-  pageUrl?: string | TMetaProperty[];
-  author?: string | TMetaProperty[];
-  keywords?: string | TMetaProperty[];
+type TMetaType = string | TMetaTagProperty[];
+
+type TMetaTags = {
+  title?: TMetaType;
+  description?: TMetaType;
+  imageUrl?: TMetaType;
+  siteName?: TMetaType;
+  pageUrl?: TMetaType;
+  author?: TMetaType;
+  keywords?: TMetaType;
+  viewport?: TMetaType;
+  canonical?: TMetaType;
+  // allow to add any others meta types
+  [x: string]: TMetaType;
 };
 
 /**
@@ -34,15 +40,15 @@ type TMetas = {
  *
  */
 class MetasManager {
-  private _metasTags: TMetas;
+  private _metaTags: TMetaTags;
   private static AUTO_GENERATE_ATTR = "auto-generated";
 
   /**
    * Start constructor
    * @param defaultMetasTags
    */
-  constructor(defaultMetasTags = DEFAULT_METAS_TAGS) {
-    this._metasTags = defaultMetasTags;
+  constructor(defaultMetasTags = DEFAULT_META_TAGS) {
+    this._metaTags = defaultMetasTags;
   }
 
   /**
@@ -70,7 +76,7 @@ class MetasManager {
    * Select Meta value
    */
   private static selectMetaValue(
-    customMetasValue: TMetas,
+    customMetasValue: TMetaTags,
     pType: string
   ): string {
     return MetasManager.checkValue(customMetasValue?.[pType]) || "";
@@ -80,27 +86,27 @@ class MetasManager {
    * @name inject
    * @description Inject metas tag elements in document <head>
    *
-   * @param customMetasValue
+   * @param customMetaValues
    * @param autoCreateMetaTag: Auto create meta tag if it doesn't exist in <head>
    * @param autoRemoveMetaTag: Auto remove meta tag if is value is ""
-   * @param metasTags: Meta tags properties to inquire or create
+   * @param metaTags: Meta tags properties to inquire or create
    */
   public inject(
-    customMetasValue: TMetas = null,
+    customMetaValues: TMetaTags = null,
     autoCreateMetaTag: boolean = true,
     autoRemoveMetaTag: boolean = true,
-    metasTags: TMetas = this._metasTags
+    metaTags: TMetaTags = this._metaTags
   ): void {
     // specific case: update main document title
-    document.title = MetasManager.selectMetaValue(customMetasValue, "title");
+    document.title = MetasManager.selectMetaValue(customMetaValues, "title");
 
     // loop on metasTags keys (ex: title, description, imageUrl, siteName...)
-    Object.keys(metasTags).forEach((metaType: string) => {
+    Object.keys(metaTags).forEach((metaType: string) => {
       // select meta value with preference order.
-      let metaValue = MetasManager.selectMetaValue(customMetasValue, metaType);
+      let metaValue = MetasManager.selectMetaValue(customMetaValues, metaType);
 
       // target properties {selector, setAttr} of this specific meta type
-      const propertiesMetaType: TMetaProperty[] = metasTags[metaType];
+      const propertiesMetaType = metaTags[metaType] as TMetaTagProperty[];
 
       // for each properties of this specific meta type
       for (let property of propertiesMetaType) {
@@ -167,5 +173,10 @@ class MetasManager {
   }
 }
 
-// export with new instance
-export { MetasManager, TMetaProperty, TMetas };
+export {
+  TMetaTagProperty,
+  TMetaTags,
+  TMetaType,
+  DEFAULT_META_TAGS,
+  MetasManager,
+};

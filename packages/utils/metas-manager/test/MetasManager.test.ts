@@ -1,4 +1,4 @@
-import MetasManager from "../src";
+import MetasManager, { TMetaTags } from "../src";
 
 describe("MetasManager", () => {
   it("should be defined", () => {
@@ -19,16 +19,16 @@ describe("MetasManager", () => {
     ).toBe("New description");
   });
 
-  it("should works with custom meta properties", () => {
+  it("should works with custom metas tags", () => {
     // create new meta tags properties
-    const newMetasTagsProperties = {
+    const newMetaTagsProperties: TMetaTags = {
       title: [{ selectorAttr: "title", selectorValue: "bar", attr: "content" }],
       description: [
         { selectorAttr: "description", selectorValue: "foo", attr: "content" },
       ],
     };
 
-    const metasManager = new MetasManager(newMetasTagsProperties);
+    const metasManager = new MetasManager(newMetaTagsProperties);
     metasManager.inject({
       title: "hello title",
       description: "hello description",
@@ -49,9 +49,7 @@ describe("MetasManager", () => {
 
   it("should remove auto-generated meta tags if is value is empty", () => {
     const metasManager = new MetasManager();
-    metasManager.inject({
-      description: "hello description",
-    });
+    metasManager.inject({ description: "hello description" });
 
     let createdDescriptionTag = document.head.querySelector(
       "[property='og:description']"
@@ -61,9 +59,7 @@ describe("MetasManager", () => {
       "hello description"
     );
 
-    metasManager.inject({
-      description: "",
-    });
+    metasManager.inject({ description: "" });
 
     createdDescriptionTag = document.head.querySelector(
       "[property='og:description']"

@@ -1,10 +1,10 @@
-import { TMetas } from "./index";
+import { TMetaTags } from "./MetasManager";
 
 /**
  * Default Meta properties
  */
 // prettier-ignore
-export const DEFAULT_METAS_TAGS: TMetas = {
+export const DEFAULT_META_TAGS: TMetaTags = {
   title: [
     { selectorAttr: "property", selectorValue: "og:title", attr: "content" },
     { selectorAttr: "name", selectorValue: "twitter:title", attr: "content" }
@@ -33,5 +33,11 @@ export const DEFAULT_METAS_TAGS: TMetas = {
   ],
   keywords: [
     { selectorAttr: "name", selectorValue: "keywords", attr: "content" }
+  ],
+  viewport: [
+    { selectorAttr: "name", selectorValue: "viewport", attr: "content" }
+  ],
+  canonical: [
+    { selectorAttr: "rel", selectorValue: "canonical", attr: "href" }
   ]
 };

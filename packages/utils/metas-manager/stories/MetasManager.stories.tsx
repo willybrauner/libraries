@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { TMetas } from "../src";
-import { MetasManager } from "../src/MetasManager";
+import {
+  MetasManager,
+  DEFAULT_META_TAGS,
+  TMetaTags,
+  TMetaType,
+} from "../src/MetasManager";
 const htmlElementStringify = require("html-element-stringify");
 
 const storyName = "metas-manager";
 const debug = require("debug")(`lib:${storyName}`);
 
-export const App = (props: TMetas) => {
+export const App = (props: TMetaTags & { robots: TMetaType }) => {
   useEffect(() => {
-    MetasManager.instance.inject({
+    const robots = [
+      { selectorAttr: "name", selectorValue: "robots", attr: "content" },
+    ] as TMetaType;
+
+    const customMetaTags = {
+      ...DEFAULT_META_TAGS,
+      robots,
+    };
+    const metasManager = new MetasManager(customMetaTags);
+    metasManager.inject({
+      // default meta tags
       title: props.title,
       description: props.description,
       imageUrl: props.imageUrl,
@@ -16,6 +30,8 @@ export const App = (props: TMetas) => {
       pageUrl: props.pageUrl,
       author: props.author,
       keywords: props.keywords,
+      // other custom meta, need to prepare new meta in meta struct
+      robots: props.robots,
     });
   }, [props]);
 
@@ -54,7 +70,8 @@ export default {
   title: `utils/${storyName}`,
   component: App,
   args: {
-    title: "Mega title",
-    description: "Super description",
-  } as TMetas,
+    title: "Hello title",
+    description: "Hello description",
+    robots: "index,follow",
+  } as TMetaTags,
 };
