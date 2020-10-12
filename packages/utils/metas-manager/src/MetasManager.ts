@@ -1,3 +1,5 @@
+import { METAS_PROPERTIES } from "./metasProperties";
+
 const debug = require("debug")("lib:MetasManager");
 
 /**
@@ -23,156 +25,73 @@ type TMetas = {
 };
 
 /**
- * Default Meta properties
- */
-// prettier-ignore
-const METAS_PROPERTIES: TMetas = {
-  title: [
-    { selectorAttr: "property", selectorValue: "og:title", attr: "content" },
-    { selectorAttr: "name", selectorValue: "twitter:title", attr: "content" }
-  ],
-  description: [
-    { selectorAttr: "name", selectorValue: "description", attr: "content" },
-    { selectorAttr: "property", selectorValue: "og:description", attr: "content" },
-    { selectorAttr: "name", selectorValue: "twitter:description", attr: "content" }
-  ],
-  imageUrl: [
-    { selectorAttr: "property", selectorValue: "og:image", attr: "content" },
-    { selectorAttr: "name", selectorValue: "twitter:image", attr: "content" },
-    { selectorAttr: "rel", selectorValue: "image_src", attr: "href" }
-  ],
-  siteName: [
-    { selectorAttr: "property", selectorValue: "og:site_name", attr: "content" },
-    { selectorAttr: "name", selectorValue: "twitter:site", attr: "content" }
-  ],
-  pageUrl: [
-    { selectorAttr: "property", selectorValue: "og:url", attr: "content" },
-    { selectorAttr: "name", selectorValue: "twitter:url", attr: "content" },
-    { selectorAttr: "rel", selectorValue: "canonical", attr: "href" }
-  ],
-  author: [
-    { selectorAttr: "name", selectorValue: "author", attr: "content" }
-  ],
-  keywords: [
-    { selectorAttr: "name", selectorValue: "keywords", attr: "content" }
-  ]
-};
-
-/**
- * MetasManager
- *
+ * @name MetasManager
  * @description Manage metas document head
- * Default should be define on app initialisation via defaultMetas seter:
- *  MetasManager.defaultMetas = { }
+ * In order to use this manager, title need be set in each page.
  *
- * Each view should set custom meta value:
- *  MetasManager.inject({ title:"...", ... })
- *
- * In order to use this manager, DOM meta tags need be set in each HTML page:
- *  <title></title>
- *  <meta name="description" content="">
- *  <meta name="author" content="">
- * ...
+ * Use manager as singleton
+ * ex:
+ *  MetasManager.inject({ title:"...", description:"...", ... })
  *
  */
 class MetasManager {
-  // --------------------------------------------------------------------------- SINGLETON
-
-  // protected static _instance:MetasManager;
-  // public static get instance():MetasManager {
-  //   if (MetasManager._instance == null) {
-  //     MetasManager._instance = new MetasManager();
-  //   }
-  //   return MetasManager._instance;
-  // }
-
-  // --------------------------------------------------------------------------- LOCAL
-
   /**
-   * Default meta properties object
+   * Default metas properties object
    */
-  private readonly _metaProperties: TMetas;
+  private _metasProperties: TMetas;
+
+  private static AUTO_GENERATE_ATTR = "auto-generated";
 
   /**
    * Start constructor
-   * @param pMetaProperties
+   * @param metasProperties
    */
-  constructor(pMetaProperties: TMetas = METAS_PROPERTIES) {
-    // Set metas properties
-    this._metaProperties = pMetaProperties;
-    debug("pMetaProperties", pMetaProperties);
-  }
-
-  // --------------------------------------------------------------------------- PRIVATE
-
-  /**
-   * Cleans a string by remplacing the " with the '
-   * @param source The original string
-   * @return cleanedString The cleaned string
-   * @private
-   */
-  private cleanMetaString(source: string) {
-    return source.replace(/"/g, "'");
+  constructor(metasProperties: TMetas = METAS_PROPERTIES) {
+    this._metasProperties = metasProperties;
   }
 
   /**
-   * Format Meta string
-   * @param pMetaValue
-   * @param pType
-   * @private
+   * Prevent non string return
+   * @param metaValue
    */
-  private formatMeta(pMetaValue: string, pType: string): string {
-    return this.cleanMetaString(pMetaValue);
+  private static checkValue(metaValue): string {
+    return metaValue === undefined ||
+      (typeof metaValue === "object" && metaValue !== null)
+      ? ""
+      : metaValue;
   }
-
   /**
-   * _selectMetaValue
-   *
-   * Meta priority order:
-   * - custom meta
-   * - empty string
-   *
-   * @param pCustomMetas
-   * @param pType
-   * @private
+   * Select Meta value
    */
-  private static selectMetaValue(pCustomMetas: TMetas, pType: string): string {
-    return pCustomMetas?.[pType] ? pCustomMetas[pType] : "";
+  private static selectMetaValue(
+    customMetasValue: TMetas,
+    pType: string
+  ): string {
+    return MetasManager.checkValue(customMetasValue?.[pType]) || "";
   }
-
-  // --------------------------------------------------------------------------- PULBIC API
 
   /**
    * @name inject
    * @description Inject metas in document <head>
    *
-   * @param customMetas
-   * @param properties
-   * @param createElement
+   * @param customMetasValue
+   * @param properties: Meta tags properties to inquire or create
+   * @param createMetaTag: Auto create meta tag if it doesn't exist in <head>
+   * @param autoRemoveMetaTag: Auto remove meta tag if is value is ""
    */
   public inject(
-    customMetas: TMetas = null,
-    properties: TMetas = this._metaProperties,
-    createElement = true
+    customMetasValue: TMetas = null,
+    properties: TMetas = this._metasProperties,
+    createMetaTag = true,
+    autoRemoveMetaTag = true
   ): void {
     // specific case: update main document title
-    const selectDocumentTitle = MetasManager.selectMetaValue(
-      customMetas,
-      "title"
-    );
-
-    // TODO - create title dom element if does't exist because we need it to insertMetas
-    // set in DOM
-    document.title = this.cleanMetaString(selectDocumentTitle);
+    document.title = MetasManager.selectMetaValue(customMetasValue, "title");
 
     // loop on pMetas (ex: title, description, imageURL, siteName...)
     Object.keys(properties).forEach((metaType: string) => {
       // select meta value with preference order.
-      let metaValue = MetasManager.selectMetaValue(customMetas, metaType);
-      if (!this.formatMeta(metaValue, metaType)) {
-        debug("There is no value to set in meta attr, return.");
-        return;
-      }
+      let metaValue = MetasManager.selectMetaValue(customMetasValue, metaType);
 
       // target properties {selector, setAttr} of this specific meta type
       const propertiesMetaType: TMetaProperty[] = properties[metaType];
@@ -184,42 +103,58 @@ class MetasManager {
 
         // if tag element exist
         if (document.head.querySelector(selector) != null) {
-          // set meta in tag element
-          document.head
-            .querySelector(selector)
-            .setAttribute(property.attr, this.formatMeta(metaValue, metaType));
+          //
+          if (autoRemoveMetaTag && metaValue === "") {
+            debug(`el to remove`, document.head.querySelector(selector));
+            document.head.querySelector(selector).remove();
+          } else {
+            // set meta in tag element
+            document.head
+              .querySelector(selector)
+              .setAttribute(property.attr, metaValue);
+          }
         }
-        // if tag element doesn"t exist
-        else {
-          debug(`Meta tag element doesn't exist, create it.`);
+        // if tag element doesn"t exist and we need to create element
+        else if (createMetaTag) {
+          if (!metaValue) {
+            debug(
+              `"There is no value to set in meta attr type ${metaType}, return."`,
+              metaValue
+            );
+            return;
+          }
+
+          debug(`Create <meta> tag...`);
           const newTagElement = document.createElement("meta");
           newTagElement.setAttribute(
             property.selectorAttr,
             property.selectorValue
           );
-          newTagElement.setAttribute(
-            property.attr,
-            this.formatMeta(metaValue, metaType)
-          );
 
-          const autoGeneratedAttr = "auto-generated";
-          newTagElement.setAttribute(autoGeneratedAttr, "");
-          // prettier-ignore
-          const autoGeneratedMetaElement = document.head.querySelectorAll(`[${autoGeneratedAttr}]`);
+          newTagElement.setAttribute(property.attr, metaValue);
+          newTagElement.setAttribute(MetasManager.AUTO_GENERATE_ATTR, "true");
+          const autoGeneratedMetaElement = document.head.querySelectorAll(
+            `*[${MetasManager.AUTO_GENERATE_ATTR}]`
+          );
 
           // if there is no meta auto-generated, insert after <title>
           // prettier-ignore
-          if (autoGeneratedMetaElement.length === 0) {
+          if (autoGeneratedMetaElement?.length === 0) {
             debug('There is non auto-generated meta in document head, insert after title');
             const documentTitle = document.getElementsByTagName("title")[0];
             document.head.insertBefore(newTagElement, documentTitle.nextSibling)
-            
-          // if there is meta auto-generated, insert after the last one 
+
+          // if there is meta auto-generated, insert after the last one
           } else {
             debug("Get last auto-generated meta tag in document head and insert newTag after it.");
             const lastAutoGeneratedMeta = autoGeneratedMetaElement[autoGeneratedMetaElement.length - 1];
             lastAutoGeneratedMeta.parentNode.insertBefore(newTagElement, lastAutoGeneratedMeta.nextSibling);
           }
+        } else {
+          debug(
+            `Tag element doesn't exist but, createElement is set to false, do nothing, return.`
+          );
+          return;
         }
       }
     });
