@@ -1,10 +1,10 @@
-import { TMetas } from "./MetasManager";
+import { TMetas } from "./index";
 
 /**
  * Default Meta properties
  */
 // prettier-ignore
-export const METAS_PROPERTIES: TMetas = {
+export const DEFAULT_METAS_TAGS: TMetas = {
   title: [
     { selectorAttr: "property", selectorValue: "og:title", attr: "content" },
     { selectorAttr: "name", selectorValue: "twitter:title", attr: "content" }

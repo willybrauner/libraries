@@ -1,3 +1,3 @@
-import { MetasManager, TMetaProperty, TMetas } from "./MetasManager";
 // export as singleton
-export default new MetasManager();
+export { MetasManager as default, TMetaProperty, TMetas } from "./MetasManager";
+export { DEFAULT_METAS_TAGS } from "./defaultMetasTags";

@@ -1,5 +1,4 @@
-import { METAS_PROPERTIES } from "./metasProperties";
-
+import { DEFAULT_METAS_TAGS } from "./defaultMetasTags";
 const debug = require("debug")("lib:MetasManager");
 
 /**
@@ -35,19 +34,26 @@ type TMetas = {
  *
  */
 class MetasManager {
-  /**
-   * Default metas properties object
-   */
-  private _metasProperties: TMetas;
-
+  private _metasTags: TMetas;
   private static AUTO_GENERATE_ATTR = "auto-generated";
 
   /**
    * Start constructor
-   * @param metasProperties
+   * @param defaultMetasTags
    */
-  constructor(metasProperties: TMetas = METAS_PROPERTIES) {
-    this._metasProperties = metasProperties;
+  constructor(defaultMetasTags = DEFAULT_METAS_TAGS) {
+    this._metasTags = defaultMetasTags;
+  }
+
+  /**
+   * Singleton
+   */
+  protected static _instance: MetasManager;
+  public static get instance(): MetasManager {
+    if (MetasManager._instance == null) {
+      MetasManager._instance = new MetasManager();
+    }
+    return MetasManager._instance;
   }
 
   /**
@@ -72,29 +78,29 @@ class MetasManager {
 
   /**
    * @name inject
-   * @description Inject metas in document <head>
+   * @description Inject metas tag elements in document <head>
    *
    * @param customMetasValue
-   * @param properties: Meta tags properties to inquire or create
-   * @param createMetaTag: Auto create meta tag if it doesn't exist in <head>
+   * @param autoCreateMetaTag: Auto create meta tag if it doesn't exist in <head>
    * @param autoRemoveMetaTag: Auto remove meta tag if is value is ""
+   * @param metasTags: Meta tags properties to inquire or create
    */
   public inject(
     customMetasValue: TMetas = null,
-    properties: TMetas = this._metasProperties,
-    createMetaTag = true,
-    autoRemoveMetaTag = true
+    autoCreateMetaTag: boolean = true,
+    autoRemoveMetaTag: boolean = true,
+    metasTags: TMetas = this._metasTags
   ): void {
     // specific case: update main document title
     document.title = MetasManager.selectMetaValue(customMetasValue, "title");
 
-    // loop on pMetas (ex: title, description, imageURL, siteName...)
-    Object.keys(properties).forEach((metaType: string) => {
+    // loop on metasTags keys (ex: title, description, imageUrl, siteName...)
+    Object.keys(metasTags).forEach((metaType: string) => {
       // select meta value with preference order.
       let metaValue = MetasManager.selectMetaValue(customMetasValue, metaType);
 
       // target properties {selector, setAttr} of this specific meta type
-      const propertiesMetaType: TMetaProperty[] = properties[metaType];
+      const propertiesMetaType: TMetaProperty[] = metasTags[metaType];
 
       // for each properties of this specific meta type
       for (let property of propertiesMetaType) {
@@ -114,8 +120,8 @@ class MetasManager {
               .setAttribute(property.attr, metaValue);
           }
         }
-        // if tag element doesn"t exist and we need to create element
-        else if (createMetaTag) {
+        // if tag element doesn't exist and we need to create element
+        else if (autoCreateMetaTag) {
           if (!metaValue) {
             debug(
               `"There is no value to set in meta attr type ${metaType}, return."`,

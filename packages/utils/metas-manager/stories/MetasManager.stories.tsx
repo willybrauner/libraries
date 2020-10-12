@@ -1,6 +1,6 @@
-import MetasManager from "../src";
 import React, { useEffect, useState } from "react";
-import { TMetaProperty, TMetas } from "../src/MetasManager";
+import { TMetas } from "../src";
+import { MetasManager } from "../src/MetasManager";
 const htmlElementStringify = require("html-element-stringify");
 
 const storyName = "metas-manager";
@@ -8,7 +8,7 @@ const debug = require("debug")(`lib:${storyName}`);
 
 export const App = (props: TMetas) => {
   useEffect(() => {
-    MetasManager.inject({
+    MetasManager.instance.inject({
       title: props.title,
       description: props.description,
       imageUrl: props.imageUrl,
@@ -20,14 +20,6 @@ export const App = (props: TMetas) => {
   }, [props]);
 
   const [documentHead, setDocumentHead] = useState<string>(null);
-
-  // TODO remove
-  const removeChildren = (pElementsToRemove): void => {
-    for (let i = pElementsToRemove.length - 1; i >= 0; i--) {
-      let item = pElementsToRemove[i];
-      item.parentNode.removeChild(item);
-    }
-  };
 
   // need to remove tags but keeping each of them
   const keepingTags = (
