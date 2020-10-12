@@ -1,4 +1,3 @@
-// export as singleton
 export {
   MetasManager as default,
   TMetaTagProperty,
