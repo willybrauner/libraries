@@ -76,8 +76,7 @@ All modules documentations are available on
 
 ## Contribute
 
-For all those who wish to contribute, feel free to submit a pull request. You can
-submit a new module with the scaffolder tool.
+For all those who wish to contribute, feel free to submit a pull request. You can submit a new module with the scaffolder tool.
 
 Clone the repos and move to repos folder:
 
