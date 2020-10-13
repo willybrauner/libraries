@@ -33,7 +33,7 @@ export const App = (props: TMetaTags<string> & { robots: string }) => {
 
   const [documentHead, setDocumentHead] = useState<string>(null);
 
-  // need to remove tags but keeping each of them
+  // need to remove tags but keeping part of them
   const keepingTags = (
     head = document.head,
     keepingList = ["title", "meta"]
