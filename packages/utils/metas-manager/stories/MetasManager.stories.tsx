@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  MetasManager,
-  DEFAULT_META_TAGS,
-  TMetaTags,
-  TMetaType,
-} from "../src/MetasManager";
+import { MetasManager, TMetaTags, TMetaType } from "../src/MetasManager";
 const htmlElementStringify = require("html-element-stringify");
 
 const storyName = "metas-manager";
@@ -16,22 +11,23 @@ export const App = (props: TMetaTags & { robots: TMetaType }) => {
       { selectorAttr: "name", selectorValue: "robots", attr: "content" },
     ] as TMetaType;
 
-    const customMetaTags = {
-      ...DEFAULT_META_TAGS,
-      robots,
-    };
-    const metasManager = new MetasManager(customMetaTags);
-    metasManager.inject({
-      // default meta tags
-      title: props.title,
-      description: props.description,
-      imageUrl: props.imageUrl,
-      siteName: props.siteName,
-      pageUrl: props.pageUrl,
-      author: props.author,
-      keywords: props.keywords,
-      // other custom meta, need to prepare new meta in meta struct
-      robots: props.robots,
+    MetasManager.inject({
+      values: {
+        // default meta tags
+        title: props.title,
+        description: props.description,
+        imageUrl: props.imageUrl,
+        siteName: props.siteName,
+        pageUrl: props.pageUrl,
+        author: props.author,
+        keywords: props.keywords,
+        // other custom meta, need to prepare new meta in meta struct
+        robots: props.robots,
+      },
+      tags: {
+        ...MetasManager.DEFAULT_META_TAGS,
+        robots,
+      },
     });
   }, [props]);
 
