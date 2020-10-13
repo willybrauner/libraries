@@ -16,7 +16,7 @@ $ npm install -s @wbe/metas-manager
 ## How to use
 
 First, if your html page don't have a `<title></title>` meta tag, you need to set it.
-MetasManager need a title meta tag to create others.
+MetasManager need a document title tag to create others.
 
 ```js
 import MetasManager from "@wbe/metas-manager";
@@ -62,12 +62,12 @@ This meta markup can be extend by adding new properties to default meta tags:
 ex:
 
 ```ts
-import MetasManager, { TMetaType } from "@wbe/metas-manager";
+import MetasManager, { TMetaTags, TTag } from "@wbe/metas-manager";
 
-const robotsTag = [
-  // allow to create <meta name="robots" content="" auto-generated="true" />
+const robotsTag: TMetaTags<TTag[]> = [
+  // allow to create <meta name="robots" content="" auto-generated />
   { selectorAttr: "name", selectorValue: "robots", attr: "content" },
-] as TMetaType;
+];
 
 const tags = {
   ...MetasManager.DEFAULT_META_TAGS,
@@ -78,7 +78,7 @@ const values = {
  robots: "index,follow",
 }
 
-// will inject value in content attr: <meta name="robots" content="index,follow" auto-generated="true" />
+// will inject value in content attr: <meta name="robots" content="index,follow" auto-generated />
 MetasManager.inject({ values, tags });
 
 ```
@@ -87,7 +87,7 @@ MetasManager.inject({ values, tags });
 ### `inject` (static)
 
 ```ts
-MetasManager.inject({values, tags, autoCreateMetaTag, autoRemoveMetaTag});
+MetasManager.inject({ values, tags, autoCreateMetaTag, autoRemoveMetaTag });
 ```
 
 #### Parameters
@@ -95,8 +95,8 @@ MetasManager.inject({values, tags, autoCreateMetaTag, autoRemoveMetaTag});
 Object: 
 - `values (TMetaTags)`: object of values to inject - default: `null`
 - `tags (TMetaTags)`: object of meta tags struct - default: `MetasManager.DEFAULT_META_TAGS`
-- `autoCreateMetaTag (boolean)`: auto-generate meta tag in head if doesn't exist - default: `true`
-- `autoRemoveMetaTag (boolean)`: auto-remove meta tag in head if value is "" - default: `true`
+- `autoCreateMetaTag (boolean)`: auto create meta tag in document head if doesn't exist - default: `true`
+- `autoRemoveMetaTag (boolean)`: auto remove meta tag in document head if value is "" - default: `true`
 
 #### Returns
 

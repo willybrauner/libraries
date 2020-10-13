@@ -1,4 +1,4 @@
-import MetasManager, { TMetaTags } from "../src";
+import MetasManager, { TMetaTags, TTag } from "../src";
 
 describe("MetasManager", () => {
   it("should be defined", () => {
@@ -23,7 +23,7 @@ describe("MetasManager", () => {
 
   it("should works with custom metas tags", () => {
     // create new meta tags properties
-    const newMetaTagsProperties: TMetaTags = {
+    const newMetaTagsProperties: TMetaTags<TTag[]> = {
       title: [{ selectorAttr: "title", selectorValue: "bar", attr: "content" }],
       description: [
         { selectorAttr: "description", selectorValue: "foo", attr: "content" },

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { MetasManager, TMetaTags, TMetaType } from "../src/MetasManager";
+import { MetasManager, TMetaTags, TTag } from "../src/MetasManager";
 const htmlElementStringify = require("html-element-stringify");
 
 const storyName = "metas-manager";
 const debug = require("debug")(`lib:${storyName}`);
 
-export const App = (props: TMetaTags & { robots: TMetaType }) => {
+export const App = (props: TMetaTags<string> & { robots: string }) => {
   useEffect(() => {
     const robots = [
       { selectorAttr: "name", selectorValue: "robots", attr: "content" },
-    ] as TMetaType;
+    ] as TTag[];
 
     MetasManager.inject({
       values: {
@@ -69,5 +69,5 @@ export default {
     title: "Hello title",
     description: "Hello description",
     robots: "index,follow",
-  } as TMetaTags,
+  } as TMetaTags<string>,
 };

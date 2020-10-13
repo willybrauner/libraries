@@ -1,31 +1,23 @@
 const debug = require("debug")("lib:MetasManager");
 
-/**
- * IMetas properties type
- */
-type TMetaTagProperty = {
+type TTag = {
   selectorAttr: string;
   selectorValue: string;
   attr: string;
 };
 
-/**
- * IMetas interface
- */
-type TMetaType = string | TMetaTagProperty[];
-
-type TMetaTags = {
-  title?: TMetaType;
-  description?: TMetaType;
-  imageUrl?: TMetaType;
-  siteName?: TMetaType;
-  pageUrl?: TMetaType;
-  author?: TMetaType;
-  keywords?: TMetaType;
-  viewport?: TMetaType;
-  canonical?: TMetaType;
+type TMetaTags<T> = {
+  title?: T;
+  description?: T;
+  imageUrl?: T;
+  siteName?: T;
+  pageUrl?: T;
+  author?: T;
+  keywords?: T;
+  viewport?: T;
+  canonical?: T;
   // allow to add any others meta types
-  [x: string]: TMetaType;
+  [x: string]: T;
 };
 
 /**
@@ -43,7 +35,7 @@ class MetasManager {
   private static AUTO_GENERATE_ATTR = "auto-generated";
 
   // prettier-ignore
-  public static DEFAULT_META_TAGS: TMetaTags = {
+  public static DEFAULT_META_TAGS: TMetaTags<TTag[]> = {
     title: [
       { selectorAttr: "property", selectorValue: "og:title", attr: "content" },
       { selectorAttr: "name", selectorValue: "twitter:title", attr: "content" }
@@ -95,7 +87,7 @@ class MetasManager {
    * Select Meta value
    */
   private static selectMetaValue(
-    customMetasValue: TMetaTags,
+    customMetasValue: TMetaTags<string>,
     pType: string
   ): string {
     return MetasManager.checkValue(customMetasValue?.[pType]) || "";
@@ -115,8 +107,8 @@ class MetasManager {
     autoCreateMetaTag = true,
     autoRemoveMetaTag = true,
   }: {
-    values?: TMetaTags;
-    tags?: TMetaTags;
+    values?: TMetaTags<string>;
+    tags?: TMetaTags<TTag[]>;
     autoCreateMetaTag?: boolean;
     autoRemoveMetaTag?: boolean;
   }): void {
@@ -129,7 +121,7 @@ class MetasManager {
       let metaValue = MetasManager.selectMetaValue(values, metaType);
 
       // target properties {selector, setAttr} of this specific meta type
-      const propertiesMetaType = tags[metaType] as TMetaTagProperty[];
+      const propertiesMetaType = tags[metaType];
 
       // for each properties of this specific meta type
       for (let property of propertiesMetaType) {
@@ -196,4 +188,4 @@ class MetasManager {
   }
 }
 
-export { TMetaTagProperty, TMetaTags, TMetaType, MetasManager };
+export { TTag, TMetaTags, MetasManager };
