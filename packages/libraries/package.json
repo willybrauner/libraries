@@ -17,6 +17,7 @@
     "@wbe/fake-data-utils": "^1.4.2",
     "@wbe/metas-manager": "^0.0.1",
     "@wbe/react-grid-layout": "^1.4.2",
+    "@wbe/react-metas": "^0.0.1",
     "@wbe/react-responsive-image": "^1.4.2",
     "@wbe/react-video-player": "^1.4.2",
     "@wbe/use-async-effect": "^1.4.2",
