@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "1.4.2",
+  "version": "1.5.0-alpha.0",
   "description": "Standalone libraries package",
   "main": "dist/index",
   "types": "dist/index",
@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@wbe/fake-data-utils": "^1.4.2",
-    "@wbe/metas-manager": "^0.0.1",
+    "@wbe/metas-manager": "^1.5.0-alpha.0",
     "@wbe/react-grid-layout": "^1.4.2",
-    "@wbe/react-metas": "^0.0.1",
+    "@wbe/react-metas": "^1.5.0-alpha.0",
     "@wbe/react-responsive-image": "^1.4.2",
     "@wbe/react-video-player": "^1.4.2",
     "@wbe/use-async-effect": "^1.4.2",
