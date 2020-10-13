@@ -10,7 +10,7 @@ Libraries is a front-end javascript mono-repo of React and vanilla JS packages.
 
 ✅ Javascript modules written with [typescript](https://www.typescriptlang.org/)  
 ✅ Unit tests with [jest](https://jestjs.io/)  
-✅ Libraries standalone package    
+✅ Libraries standalone package  
 ✅ [Storybook documentation](https://willybrauner.github.io/libraries/)
 
 ## Summary
@@ -36,10 +36,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 **utils**
 
 - [fake-data-utils](packages/utils/fake-data-utils)
-
-**style**
-
-WIP
+- [metas-manager](packages/utils/metas-manager)
 
 **libraries**
 
@@ -78,8 +75,8 @@ All modules documentations are available on
 
 ## Contribute
 
-For all those who wish to contribute, feel free to submit a pull request. but please,
-do not submit a new module without using the scaffolder tool.
+For all those who wish to contribute, feel free to submit a pull request. You can 
+submit a new module with the scaffolder tool.
 
 Clone the repos and move to repos folder:
 
