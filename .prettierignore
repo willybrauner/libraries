@@ -3,3 +3,4 @@ package-lock.json
 skeletons
 dist
 packages/libraries/src/index.ts
+packages/utils/metas-manager/README.md

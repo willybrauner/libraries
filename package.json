@@ -23,6 +23,7 @@
     "change-case": "^4.1.1",
     "colors": "^1.4.0",
     "debug": "^4.2.0",
+    "html-element-stringify": "^0.2.0",
     "husky": "^4.3.0",
     "inquirer": "^7.3.3",
     "jest": "^26.4.2",
