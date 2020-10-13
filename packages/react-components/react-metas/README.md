@@ -21,10 +21,14 @@ This component is instanciated in render but don't returns DOM (on the same mode
 import Metas from "@wbe/react-metas";
 
 const App = () => {
-    return <Metas
-      title={"Hello World!"}
-      description={"Page description"}
-    >
+    return (
+      <Metas
+        values={
+          title={"Hello World!"}
+          description={"Page description"}
+        }
+      />
+    )
 }
 ```
 
