@@ -1,11 +1,11 @@
-import MetasManager, { TMetaTags } from "@wbe/metas-manager";
+import MetasManager from "@wbe/metas-manager";
 import { useEffect } from "react";
 
-type TMetasProps = TMetaTags;
+type TMetasProps = any;
 
 function Metas(props: TMetasProps) {
   useEffect(() => {
-    MetasManager.instance.inject(props);
+    MetasManager.inject(props);
   }, [props]);
   return null;
 }
