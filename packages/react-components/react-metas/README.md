@@ -1,6 +1,6 @@
 # @wbe/react-metas
 
-React component middleware of MetasManager
+React component middleware of MetasManager.
 
 ![](https://img.shields.io/npm/v/@wbe/react-metas/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/react-metas.svg)
@@ -15,12 +15,25 @@ $ npm install -s @wbe/react-metas
 
 ## How to use
 
-```js
-import ReactMetas from "@wbe/react-metas";
-```
+This component is instanciated in render but don't returns DOM (on the same model as React Helmet).
 
-## example
+```js
+import Metas from "@wbe/react-metas";
+
+const App = () => {
+    return <Metas
+      title={"Hello World!"}
+      description={"Page description"}
+    >
+}
+```
 
 ## Parameters / Props
 
+| props         | type        | description                                             | default value |
+| ------------- | ----------- | ------------------------------------------------------- | ------------- |
+| `TMetasProps` | `TMetaTags` | metas values objects (check MetasManager documentation) | /             |
+
 ## Returns
+
+null
