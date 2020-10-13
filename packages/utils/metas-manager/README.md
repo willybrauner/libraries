@@ -43,32 +43,12 @@ This will inject new metas data in theses meta tags:
   <meta property="og:title" content="Hello world!" auto-generated="true" />
   <meta name="twitter:title" content="Hello world!" auto-generated="true" />
   <meta name="description" content="Custom description" auto-generated="true" />
-  <meta
-    property="og:description"
-    content="Custom description"
-    auto-generated="true"
-  />
-  <meta
-    name="twitter:description"
-    content="Custom description"
-    auto-generated="true"
-  />
-  <meta
-    property="og:image"
-    content="Custom preview image URL"
-    auto-generated="true"
-  />
-  <meta
-    name="twitter:image"
-    content="Custom preview image URL"
-    auto-generated="true"
-  />
+  <meta property="og:description" content="Custom description" auto-generated="true" />
+  <meta name="twitter:description" content="Custom description" auto-generated="true" />
+  <meta property="og:image" content="Custom preview image URL" auto-generated="true" />
+  <meta name="twitter:image" content="Custom preview image URL" auto-generated="true" />
   <meta rel="image_src" href="Custom preview image URL" auto-generated="true" />
-  <meta
-    property="og:site_name"
-    content="Custom site name"
-    auto-generated="true"
-  />
+  <meta property="og:site_name" content="Custom site name" auto-generated="true" />
   <meta name="twitter:site" content="Custom site name" auto-generated="true" />
   <meta property="og:url" content="Custom page URL" auto-generated="true" />
   <meta name="twitter:url" content="Custom page URL" auto-generated="true" />
