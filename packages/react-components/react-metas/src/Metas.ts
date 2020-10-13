@@ -1,7 +1,18 @@
-import MetasManager from "@wbe/metas-manager";
+import MetasManager, { TMetaTags, TTag } from "@wbe/metas-manager";
 import { useEffect } from "react";
 
-type TMetasProps = any;
+type TMetasProps = {
+  values?: TMetaTags<string>;
+  tags?: TMetaTags<TTag[]>;
+  autoCreateMetaTag?: boolean;
+  autoRemoveMetaTag?: boolean;
+};
+
+Metas.defaultProps = {
+  tags: MetasManager.DEFAULT_META_TAGS,
+  autoCreateMetaTag: true,
+  autoRemoveMetaTag: true,
+};
 
 function Metas(props: TMetasProps) {
   useEffect(() => {

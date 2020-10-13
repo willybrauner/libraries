@@ -33,10 +33,10 @@ export const App = (props: TMetasProps) => {
   }, [props]);
 
   return (
-    <>
-      <Metas {...props} />
+    <div>
+      <Metas values={props.values} />
       <pre>{documentHead}</pre>
-    </>
+    </div>
   );
 };
 
@@ -46,6 +46,8 @@ export default {
   title: `react-components/${storyName}`,
   component: App,
   args: {
-    title: "Hello title",
-  },
+    values: {
+      title: "Hello title",
+    },
+  } as TMetasProps,
 };

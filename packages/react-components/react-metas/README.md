@@ -30,9 +30,14 @@ const App = () => {
 
 ## Parameters / Props
 
-| props         | type        | description                                             | default value |
-| ------------- | ----------- | ------------------------------------------------------- | ------------- |
-| `TMetasProps` | `TMetaTags` | metas values objects (check MetasManager documentation) | /             |
+Parameters are the same than `MetasManager.inject()` method.
+
+| props               | type                | description                                             | default value |
+| ------------------- | ------------------- | ------------------------------------------------------- | ------------- |
+| `values`            | `TMetaTags<string>` | metas values objects (check MetasManager documentation) | /             |
+| `tags`              | `TMetaTags<TTag[]>` | metas tags objects (check MetasManager documentation)   | /             |
+| `autoCreateMetaTag` | `boolean`           | auto create meta tag                                    | /             |
+| `autoRemoveMetaTag` | `boolean`           | auto remove meta tag                                    | /             |
 
 ## Returns
 
