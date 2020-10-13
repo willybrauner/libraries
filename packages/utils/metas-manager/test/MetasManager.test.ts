@@ -47,24 +47,44 @@ describe("MetasManager", () => {
     );
   });
 
-  it("should remove auto-generated meta tags if is value is empty", () => {
-    const metasManager = new MetasManager();
-    metasManager.inject({ description: "hello description" });
+  describe("auto add/remove or keep meta tags", () => {
+    it("should remove auto-generated meta tags if is value is empty", () => {
+      const metasManager = new MetasManager();
+      metasManager.inject({ description: "hello description" }, true, true);
 
-    let createdDescriptionTag = document.head.querySelector(
-      "[property='og:description']"
-    );
-    expect(createdDescriptionTag).toBeDefined();
-    expect(createdDescriptionTag.getAttribute("content")).toBe(
-      "hello description"
-    );
+      let createdDescriptionTag = document.head.querySelector(
+        "[property='og:description']"
+      );
+      expect(createdDescriptionTag).toBeDefined();
+      expect(createdDescriptionTag.getAttribute("content")).toBe(
+        "hello description"
+      );
 
-    metasManager.inject({ description: "" });
+      metasManager.inject({ description: "" });
+      createdDescriptionTag = document.head.querySelector(
+        "[property='og:description']"
+      );
+      expect(createdDescriptionTag).toBeNull();
+    });
 
-    createdDescriptionTag = document.head.querySelector(
-      "[property='og:description']"
-    );
+    it("should keep auto-generated meta tags if is value is empty", () => {
+      const metasManager = new MetasManager();
+      metasManager.inject({ description: "hello description" }, true, false);
 
-    expect(createdDescriptionTag).toBeNull();
+      let createdDescriptionTag = document.head.querySelector(
+        "[property='og:description']"
+      );
+      expect(createdDescriptionTag).toBeDefined();
+      expect(createdDescriptionTag.getAttribute("content")).toBe(
+        "hello description"
+      );
+
+      metasManager.inject({ description: "" });
+      createdDescriptionTag = document.head.querySelector(
+        "[property='og:description']"
+      );
+
+      expect(createdDescriptionTag).toBeDefined();
+    });
   });
 });
