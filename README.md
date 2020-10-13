@@ -22,6 +22,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 - [react-grid-layout](packages/react-components/react-grid-layout)
 - [react-responsive-image](packages/react-components/react-responsive-image)
 - [react-video-player](packages/react-components/react-video-player)
+- [react-metas](packages/react-components/react-metas)
 
 **react-hooks**
 
@@ -75,7 +76,7 @@ All modules documentations are available on
 
 ## Contribute
 
-For all those who wish to contribute, feel free to submit a pull request. You can 
+For all those who wish to contribute, feel free to submit a pull request. You can
 submit a new module with the scaffolder tool.
 
 Clone the repos and move to repos folder:
