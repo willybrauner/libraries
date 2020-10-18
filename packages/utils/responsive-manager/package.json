@@ -1,0 +1,28 @@
+{
+  "name": "@wbe/responsive-manager",
+  "version": "0.0.1",
+  "description": "Working with breakpoints",
+  "author": "Willy Brauner",
+  "license": "MIT",
+  "main": "dist/index",
+  "types": "dist/index",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "compile": "tsc -b tsconfig-build.json",
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "responsive-manager"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
