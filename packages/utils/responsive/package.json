@@ -1,5 +1,5 @@
 {
-  "name": "@wbe/responsive-manager",
+  "name": "@wbe/responsive",
   "version": "0.0.1",
   "description": "Working with breakpoints",
   "author": "Willy Brauner",
@@ -20,7 +20,7 @@
   "dependencies": {},
   "devDependencies": {},
   "keywords": [
-    "responsive-manager"
+    "responsive"
   ],
   "publishConfig": {
     "access": "public"
