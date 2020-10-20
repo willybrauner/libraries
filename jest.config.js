@@ -7,5 +7,7 @@ module.exports = {
     "ts",
     "tsx"
   ],
-  moduleDirectories: ["node_modules", "packages"]
+  moduleDirectories: ["node_modules", "packages"],
+  testTimeout: 30000
+
 };
