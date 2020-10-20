@@ -2,31 +2,38 @@ const name = "preloadImages";
 const debug = require("debug")(`lib:${name}`);
 
 /**
+ * Preload image
+ * @param url
+ */
+function preloadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve) => {
+    // create void image tag for each url
+    let $img = document.createElement("img");
+    // add url to src attr in order to start loading
+    $img.src = url;
+    // count loaded image, If all are loaded, resolve promise
+    $img.onload = () => {
+      resolve($img);
+    };
+  });
+}
+
+/**
  * Preload images
  * @description Allow to preload list of images
  * @param urls: List of image urls to preload
  */
 function preloadImages(urls: string[]): Promise<HTMLImageElement[]> {
-  const outputImages: HTMLImageElement[] = [];
-  let counter: number = 0;
-
-  return new Promise((resolve) => {
-    for (let i in urls) {
-      // create void image tag for each url
-      let $img = document.createElement("img");
-      // add url to src attr in order to start loading
-      $img.src = urls[i];
-      // keep image in array
-      outputImages.push($img);
-
-      $img.onload = () => {
-        // remove element
-        $img.remove();
-        // count loaded image, If all are loaded, resolve promise
-        if (++counter === urls.length) resolve(outputImages);
-      };
-    }
+  return new Promise(async (resolve) => {
+    // get all preload image promises
+    const promises: Promise<HTMLImageElement>[] = urls.map((url) =>
+      preloadImage(url)
+    );
+    // waiting foreach promises are resolved
+    const outputImages = await Promise.all(promises);
+    // and return html image elements
+    resolve(outputImages);
   });
 }
 
-export { preloadImages };
+export { preloadImage, preloadImages };

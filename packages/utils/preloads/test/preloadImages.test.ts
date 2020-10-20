@@ -1,4 +1,12 @@
-import { preloadImages } from "../src/preloadImages";
+import { preloadImage, preloadImages } from "../src/preloadImages";
+
+describe("preloadImage", () => {
+  it("should be defined", () => {
+    expect(preloadImage).toBeDefined();
+  });
+
+  it("should return an HTMLImageElement", () => {});
+});
 
 describe("preloadImages", () => {
   it("should be defined", () => {

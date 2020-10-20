@@ -18,7 +18,9 @@
     "test": "jest"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@wbe/fake-data-utils": "^1.4.2"
+  },
   "keywords": [
     "preloads"
   ],
