@@ -5,9 +5,7 @@ module.exports = {
     "js,",
     "jsx",
     "ts",
-    "tsx"
+    "tsx",
   ],
   moduleDirectories: ["node_modules", "packages"],
-  testTimeout: 30000
-
 };

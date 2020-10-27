@@ -5,13 +5,9 @@ describe("preloadImage", () => {
     expect(preloadImage).toBeDefined();
   });
 
-  it("should return an HTMLImageElement", async () => {
+  it("should wait single image is loaded before resolve promise", async () => {
     const url = "https://picsum.photos/200/300";
-
-    // FIXME
-    const request = await preloadImage(url);
-    console.log(request);
-    expect(request).toBeDefined();
+    await expect(preloadImage(url)).toBeDefined();
   });
 });
 
@@ -20,9 +16,13 @@ describe("preloadImages", () => {
     expect(preloadImages).toBeDefined();
   });
 
-  // it("should wait each images are loaded before resolve promise", () => {});
-  //
-  // it("should throw an error if image can not load", () => {});
-  //
+  it("should wait each images are loaded before resolve promise", async () => {
+    const urls = [
+      "https://picsum.photos/200/300",
+      "https://picsum.photos/200/300",
+    ];
+    await expect(preloadImages(urls)).toBeDefined();
+  });
+
   // it("should return an array of HTMLImageElement", () => {});
 });

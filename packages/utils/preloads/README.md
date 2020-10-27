@@ -1,6 +1,9 @@
 # @wbe/preloads
 
-Preloads assets utilities
+Preloads assets utilities:
+
+- [preloadImage](#preloadImage)
+- [preloadImages](#preloadImages)
 
 ![](https://img.shields.io/npm/v/@wbe/preloads/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/preloads.svg)
@@ -13,14 +16,45 @@ Preloads assets utilities
 $ npm install -s @wbe/preloads
 ```
 
-## How to use
+## <a name="preloadImage"></a>preloadImage
 
-```js
-import Preloads from "@wbe/preloads";
+#### Parameters
+
+- `url (string)`: image url
+
+#### Returns
+
+`(Promise<HTMLImageElement>)`: Promise who return image element
+
+#### Example
+
+```ts
+import { preloadImage } from "@wbe/preloads";
+
+preloadImage("https://picsum.photos/200/300").then((response) => {
+  // image is loaded, do something...
+});
 ```
 
-## example
+## <a name="preloadImages"></a>preloadImages
 
-## Parameters / Props
+#### Parameters
 
-## Returns
+- `urls (string[])`: image urls array
+
+#### Returns
+
+`(Promise<HTMLImageElement[]>)`: Promise who return image elements array
+
+#### Example
+
+```ts
+import { preloadImages } from "@wbe/preloads";
+
+preloadImages([
+  "https://picsum.photos/200/300",
+  "https://picsum.photos/200/300",
+]).then((response) => {
+  // images are loaded, do something...
+});
+```
