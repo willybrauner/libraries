@@ -27,3 +27,4 @@ export { default as useWindowSize, IWindowSize } from "@wbe/use-window-size";
  */
 export { default as FakeDataUtils, EFakeVideoType, IFakeImage } from "@wbe/fake-data-utils"
 export { default as MetasManager, TTag, TMetaTags } from "@wbe/metas-manager"
+export { preloadImage, preloadImages } from "@wbe/preloads"

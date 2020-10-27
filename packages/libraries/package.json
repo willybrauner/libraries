@@ -27,7 +27,8 @@
     "@wbe/use-document-scroll-top": "^1.5.0",
     "@wbe/use-is-in-viewport": "^1.5.0",
     "@wbe/use-responsive-image-data": "^1.5.0",
-    "@wbe/use-window-size": "^1.5.0"
+    "@wbe/use-window-size": "^1.5.0",
+    "@wbe/preloads": "^0.0.1"
   },
   "keywords": [
     "react",

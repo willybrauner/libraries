@@ -20,7 +20,7 @@ $ npm install -s @wbe/preloads
 
 #### Parameters
 
-- `url (string)`: image url
+- `url (string)`: image URL
 
 #### Returns
 
@@ -40,7 +40,7 @@ preloadImage("https://picsum.photos/200/300").then((response) => {
 
 #### Parameters
 
-- `urls (string[])`: image urls array
+- `urls (string[])`: image URLs array
 
 #### Returns
 
