@@ -38,6 +38,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 
 - [fake-data-utils](packages/utils/fake-data-utils)
 - [metas-manager](packages/utils/metas-manager)
+- [preloads](packages/utils/preloads)
 
 **libraries**
 
