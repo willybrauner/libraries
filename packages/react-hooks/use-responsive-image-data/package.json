@@ -1,6 +1,6 @@
 {
   "name": "@wbe/use-responsive-image-data",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "This hook allow to return a specific IImage object depending of specific width value.",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/react-hooks": "^5.1.0",
     "@types/react": "^17.0.3",
-    "@wbe/fake-data-utils": "^1.4.2",
-    "@wbe/use-window-size": "^1.4.2",
+    "@wbe/fake-data-utils": "^1.5.0",
+    "@wbe/use-window-size": "^1.5.0",
     "react-test-renderer": "^17.0.1"
   },
   "keywords": [
