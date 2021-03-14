@@ -1,17 +1,15 @@
-require("intersection-observer");
 import React, {
   CSSProperties,
   ReactNode,
   useEffect,
   useLayoutEffect,
   useRef,
-  useState
+  useState,
 } from "react";
 import useBoundingClientRect, {
-  EListener
+  EListener,
 } from "@wbe/use-bounding-client-rect";
 import useResponsiveImageData from "@wbe/use-responsive-image-data";
-import Observer from "@researchgate/react-intersection-observer";
 
 // ----------------------------------------------------------------------------- CONFIG
 
@@ -68,7 +66,7 @@ ResponsiveImage.defaultProps = {
   lazy: false,
   lazyOffset: 0,
   ariaLabel: null,
-  role: "img"
+  role: "img",
 };
 
 /**
@@ -78,7 +76,7 @@ enum EImageType {
   // <img> HTML tag
   TAG_IMAGE = "tagImage",
   // <div> background-image
-  BACKGROUND_IMAGE = "backgroundImage"
+  BACKGROUND_IMAGE = "backgroundImage",
 }
 
 /**
@@ -153,12 +151,28 @@ function ResponsiveImage(props: IProps) {
    * @param event
    * @param unobserve
    */
-  const handleIsInViewport = (event: any, unobserve: any): void => {
-    if (event.isIntersecting) {
-      setIsInViewPort(true);
-      unobserve();
-    }
-  };
+  useLayoutEffect(() => {
+    const intersectionObserverInWindow = "IntersectionObserver" in window;
+    if (!props.lazy || !intersectionObserverInWindow || !rootRef.current)
+      return;
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsInViewPort(true);
+          lazyImageObserver.disconnect();
+          console.log(">>> stop to observe...");
+        }
+      });
+    };
+
+    // create observer
+    const lazyImageObserver = new IntersectionObserver(observerCallback);
+    // start to observe
+    [rootRef.current].forEach((lazyImage) =>
+      lazyImageObserver.observe(lazyImage)
+    );
+  }, [props.lazy]);
 
   /**
    * Preload image
@@ -256,7 +270,7 @@ function ResponsiveImage(props: IProps) {
   const backgroundColorStyle = (
     pBackgroundColor: string = props?.placeholderColor
   ): CSSProperties => ({
-    backgroundColor: pBackgroundColor ? pBackgroundColor : null
+    backgroundColor: pBackgroundColor ? pBackgroundColor : null,
   });
 
   /**
@@ -270,7 +284,7 @@ function ResponsiveImage(props: IProps) {
       // Padding ratio set to wrapper about to show background behind image
       paddingBottom:
         // If a custom ratio exist
-        pRatio ? `${(pRatio * 100).toFixed(3)}%` : null
+        pRatio ? `${(pRatio * 100).toFixed(3)}%` : null,
     };
   };
 
@@ -281,7 +295,7 @@ function ResponsiveImage(props: IProps) {
     pRequiredURL: string = requiredURL
   ): CSSProperties => ({
     // return background image
-    backgroundImage: !!pRequiredURL ? `url("${pRequiredURL}")` : null
+    backgroundImage: !!pRequiredURL ? `url("${pRequiredURL}")` : null,
   });
 
   // image / cover child style
@@ -293,7 +307,7 @@ function ResponsiveImage(props: IProps) {
     left: "0",
     right: "0",
     width: "100%",
-    height: "100%"
+    height: "100%",
   };
 
   // --------------------------------------------------------------------------- PREPARE RENDER
@@ -327,7 +341,7 @@ function ResponsiveImage(props: IProps) {
               position: "relative",
               overflow: "hidden",
               ...backgroundColorStyle(),
-              ...paddingRatioStyle()
+              ...paddingRatioStyle(),
             }}
           >
             <img
@@ -341,7 +355,7 @@ function ResponsiveImage(props: IProps) {
                 // in case padding ratio is bigger or smaller than the real ratio
                 objectFit: "cover",
                 ...imageElementPosition,
-                ...props.imageStyle
+                ...props.imageStyle,
               }}
             />
           </div>
@@ -365,7 +379,7 @@ function ResponsiveImage(props: IProps) {
           role={props.role}
           style={{
             ...backgroundImageStyle(),
-            ...props?.imageStyle
+            ...props?.imageStyle,
           }}
         />
       );
@@ -381,7 +395,7 @@ function ResponsiveImage(props: IProps) {
               position: "relative",
               overflow: "hidden",
               ...backgroundColorStyle(),
-              ...paddingRatioStyle()
+              ...paddingRatioStyle(),
             }}
           >
             <div
@@ -392,7 +406,7 @@ function ResponsiveImage(props: IProps) {
               style={{
                 ...backgroundImageStyle(),
                 ...imageElementPosition,
-                ...props?.imageStyle
+                ...props?.imageStyle,
               }}
             />
           </div>
@@ -414,9 +428,9 @@ function ResponsiveImage(props: IProps) {
     // placeholderColor class
     props?.placeholder && `${componentName}-placeholder`,
     // props class
-    ...(props?.classNames ? props.classNames : [])
+    ...(props?.classNames ? props.classNames : []),
   ]
-    .filter(v => v)
+    .filter((v) => v)
     .join(" ");
 
   // --------------------------------------------------------------------------- RENDER
@@ -427,18 +441,11 @@ function ResponsiveImage(props: IProps) {
   }
   // if classic image DOM
   else if (props.type === EImageType.TAG_IMAGE) {
-    return (
-      <Observer onChange={handleIsInViewport}>{imageTagRender()}</Observer>
-    );
+    return imageTagRender();
   }
-
   // if Background image on div
   else if (props.type === EImageType.BACKGROUND_IMAGE) {
-    return (
-      <Observer onChange={handleIsInViewport}>
-        {backgroundImageRender()}
-      </Observer>
-    );
+    return backgroundImageRender();
   }
 }
 

@@ -18,15 +18,15 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "^16.13.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.0.4",
-    "@testing-library/react-hooks": "^3.4.1",
-    "@types/react": "^16.9.49",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/react-hooks": "^5.1.0",
+    "@types/react": "^17.0.3",
     "@wbe/fake-data-utils": "^1.4.2",
     "@wbe/use-window-size": "^1.4.2",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^17.0.1"
   },
   "keywords": [
     "react",

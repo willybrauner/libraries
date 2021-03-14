@@ -18,10 +18,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "^16.13.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.49"
+    "@types/react": "^17.0.3"
   },
   "keywords": [
     "react",
