@@ -161,7 +161,6 @@ function ResponsiveImage(props: IProps) {
         if (entry.isIntersecting) {
           setIsInViewPort(true);
           lazyImageObserver.disconnect();
-          console.log(">>> stop to observe...");
         }
       });
     };
