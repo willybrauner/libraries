@@ -10,18 +10,5 @@ module.exports = ({ config }) => {
     }
   });
   config.resolve.extensions.push(".ts", ".tsx");
-
-  /**
-   * Markdown
-   */
-  config.module.rules.push({
-    test: /\.md$/,
-    use: [
-      {
-        loader: "markdown-loader"
-      }
-    ]
-  });
-
   return config;
 };
