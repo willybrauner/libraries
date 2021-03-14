@@ -6,9 +6,10 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages",
+    "deploy-storybook": "gh-pages -d storybook-static",
     "test": "echo Error: no test specified"
   },
+  "homepage": "https://willybrauner.github.io/libraries",
   "author": "Willy Brauner",
   "license": "ISC",
   "devDependencies": {
@@ -25,15 +26,11 @@
     "@types/react-dom": "^17.0.2",
     "babel-loader": "^8.2.2",
     "babel-preset-react-app": "^10.0.0",
+    "gh-pages": "^3.1.0",
     "markdown-loader": "^6.0.0",
     "react": "^17.0.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-scripts": "^4.0.3",
     "typescript": "^4.2.3"
-  },
-  "storybook-deployer": {
-    "gitUsername": "willybrauner",
-    "gitEmail": "mail@willybrauner.com",
-    "commitMessage": "Deploy Libraries Storybook to Github Pages"
   }
 }
