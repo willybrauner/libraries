@@ -1,7 +1,0 @@
-.idea
-node_modules
-dist
-tsconfig.tsbuildinfo
-tsconfig-build.tsbuildinfo
-storybook-static
-out*
