@@ -5,7 +5,7 @@ module.exports = {
     "js,",
     "jsx",
     "ts",
-    "tsx"
+    "tsx",
   ],
-  moduleDirectories: ["node_modules", "packages"]
+  moduleDirectories: ["node_modules", "packages"],
 };
