@@ -20,17 +20,17 @@
   "dependencies": {
     "@vimeo/player": "^2.15.0",
     "@wbe/react-responsive-image": "^1.5.2",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "youtube-player": "^5.5.2"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.5",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
+    "@testing-library/react": "^11.2.6",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
     "@wbe/fake-data-utils": "^1.5.0",
-    "react-dom": "^17.0.1",
-    "react-test-renderer": "^17.0.1",
-    "typescript": "^4.2.3"
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "typescript": "^4.2.4"
   },
   "keywords": [
     "react"

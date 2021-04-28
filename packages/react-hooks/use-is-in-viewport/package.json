@@ -20,10 +20,10 @@
   "dependencies": {
     "@wbe/use-bounding-client-rect": "^1.5.0",
     "@wbe/use-window-size": "^1.5.0",
-    "react": "^17.0.1"
+    "react": "^17.0.2"
   },
   "devDependencies": {
-    "@types/react": "^17.0.3"
+    "@types/react": "^17.0.4"
   },
   "keywords": [
     "react",

@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@wbe/fake-data-utils": "^1.4.2"
+    "@wbe/fake-data-utils": "^1.5.0"
   },
   "keywords": [
     "preloads"
