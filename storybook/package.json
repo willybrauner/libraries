@@ -3,6 +3,7 @@
   "version": "2.0.0-alpha.1",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -18,5 +19,5 @@
     "@storybook/react": "^6.3.0",
     "babel-loader": "^8.2.2"
   },
-  "gitHead": "a8f598bd2b4a689aa31173efd0da883208db4e79"
+  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75"
 }
