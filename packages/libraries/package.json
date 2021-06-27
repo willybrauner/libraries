@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "2.0.0-alpha.5",
+  "version": "2.0.0-alpha.6",
   "description": "Standalone libraries package",
   "types": "dist/index",
   "source": "src/index.ts",
@@ -19,18 +19,18 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/fake-data-utils": "^2.0.0-alpha.3",
-    "@wbe/metas-manager": "^2.0.0-alpha.3",
-    "@wbe/preloads": "^2.0.0-alpha.3",
-    "@wbe/react-grid-layout": "^2.0.0-alpha.3",
-    "@wbe/react-metas": "^2.0.0-alpha.3",
-    "@wbe/react-video-player": "^2.0.0-alpha.3",
-    "@wbe/use-async-effect": "^2.0.0-alpha.3",
-    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.3",
-    "@wbe/use-did-update": "^2.0.0-alpha.3",
-    "@wbe/use-document-scroll-top": "^2.0.0-alpha.3",
-    "@wbe/use-is-in-viewport": "^2.0.0-alpha.3",
-    "@wbe/use-window-size": "^2.0.0-alpha.3"
+    "@wbe/fake-data-utils": "^2.0.0-alpha.6",
+    "@wbe/metas-manager": "^2.0.0-alpha.6",
+    "@wbe/preloads": "^2.0.0-alpha.6",
+    "@wbe/react-grid-layout": "^2.0.0-alpha.6",
+    "@wbe/react-metas": "^2.0.0-alpha.6",
+    "@wbe/react-video-player": "^2.0.0-alpha.6",
+    "@wbe/use-async-effect": "^2.0.0-alpha.6",
+    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.6",
+    "@wbe/use-did-update": "^2.0.0-alpha.6",
+    "@wbe/use-document-scroll-top": "^2.0.0-alpha.6",
+    "@wbe/use-is-in-viewport": "^2.0.0-alpha.6",
+    "@wbe/use-window-size": "^2.0.0-alpha.6"
   },
   "keywords": [
     "react",
