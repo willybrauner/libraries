@@ -1,1 +1,6 @@
-export { %%pascalCaseModuleName%% as default } from "./%%pascalCaseModuleName%%";
+/**
+ * %%pascalCaseModuleName%%
+ */
+export function %%pascalCaseModuleName%%() {
+
+}

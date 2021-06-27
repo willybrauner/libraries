@@ -1,7 +1,7 @@
 {
-  "name": "@wbe/react-video-player",
-  "version": "2.0.0-alpha.6",
-  "description": "React video player for native vimeo and youtube video",
+  "name": "@wbe/react-image",
+  "version": "0.0.1",
+  "description": "react image component",
   "author": "Willy Brauner",
   "license": "MIT",
   "types": "dist/index",
@@ -9,8 +9,8 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
-  "sideEffects": false,
   "private": false,
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"
@@ -21,31 +21,20 @@
     "compile": "microbundle"
   },
   "dependencies": {
-    "@vimeo/player": "^2.15.3",
-    "@wbe/react-responsive-image": "^1.6.0",
-    "react": "^17.0.2",
-    "youtube-player": "^5.5.2"
+    "@wbe/use-window-size": "^2.0.0-alpha.6"
   },
   "devDependencies": {
     "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.0",
     "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.8",
-    "@wbe/fake-data-utils": "^2.0.0-alpha.6",
-    "microbundle": "^0.13.3",
     "react-dom": "^17.0.2",
-    "react-test-renderer": "^17.0.2",
-    "typescript": "^4.3.4"
+    "react-test-renderer": "^17.0.2"
   },
   "keywords": [
-    "react"
+    "image",
+    "react-component"
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    }
-  },
-  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75"
+  }
 }

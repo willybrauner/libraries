@@ -1,8 +1,0 @@
-/**
- * %%pascalCaseModuleName%%
- */
-function %%pascalCaseModuleName%%() {
-
-}
-
-export { %%pascalCaseModuleName%% }

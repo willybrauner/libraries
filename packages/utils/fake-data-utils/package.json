@@ -7,7 +7,7 @@
   "types": "dist/index",
   "source": "src/index.ts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
   "private": false,
   "sideEffects": false,
