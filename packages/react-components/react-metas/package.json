@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-metas",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "React component middleware of MetasManager",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "compile": "tsc -b tsconfig-build.json"
   },
   "dependencies": {
-    "@wbe/metas-manager": "^2.0.0-alpha.1",
+    "@wbe/metas-manager": "^2.0.0-alpha.2",
     "react": "^17.0.2"
   },
   "devDependencies": {

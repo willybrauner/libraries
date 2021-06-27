@@ -1,6 +1,6 @@
 {
   "name": "@wbe/fake-data-utils",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "Generate fake data image/text/video allowing to test UI components",
   "author": "Willy Brauner",
   "license": "MIT",
