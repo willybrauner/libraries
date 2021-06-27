@@ -1,6 +1,4 @@
 /**
  * Preload fonts
  */
-function preloadFonts() {}
-
-export { preloadFonts };
+export function preloadFonts() {}

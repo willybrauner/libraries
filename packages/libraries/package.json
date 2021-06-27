@@ -18,6 +18,8 @@
     "@wbe/fake-data-utils": "^1.6.0",
     "@wbe/metas-manager": "^1.6.0",
     "@wbe/preloads": "^1.6.0",
+    "@wbe/react-grid-layout": "^1.6.0",
+    "@wbe/react-metas": "^1.6.0",
     "@wbe/react-video-player": "^1.6.0",
     "@wbe/use-async-effect": "^1.6.0",
     "@wbe/use-bounding-client-rect": "^1.6.0",

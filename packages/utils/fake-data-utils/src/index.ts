@@ -4,7 +4,7 @@ const debug = require("debug")(`lib:${name}`);
 /**
  * Video Type
  */
-enum EFakeVideoType {
+export enum EFakeVideoType {
   NATIVE,
   YOUTUBE,
   VIMEO,
@@ -14,7 +14,7 @@ enum EFakeVideoType {
  * Image interface
  * (same interface than ResponsiveImage IFakeImage)
  */
-interface IFakeImage {
+export interface IFakeImage {
   url: string;
   width: number;
   height: number;
@@ -24,7 +24,7 @@ interface IFakeImage {
  * @name FakeDataUtils
  * @description Generate fake data to simulate content
  */
-class FakeDataUtils {
+export class FakeDataUtils {
   // --------------------------------------------------------------------------- DATAS
 
   // image API
@@ -297,5 +297,3 @@ class FakeDataUtils {
     return "";
   }
 }
-
-export { FakeDataUtils, EFakeVideoType, IFakeImage };

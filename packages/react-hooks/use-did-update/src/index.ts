@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
  * @param effect
  * @param dependencies
  */
-function useDidUpdate(effect: () => void, dependencies?: any[]): void {
+export function useDidUpdate(effect: () => void, dependencies?: any[]): void {
   // initial reference
   const initialRef = useRef<boolean>(true);
   // listen to initial Action
@@ -19,5 +19,3 @@ function useDidUpdate(effect: () => void, dependencies?: any[]): void {
     }
   }, dependencies);
 }
-
-export { useDidUpdate };

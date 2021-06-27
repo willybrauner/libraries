@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "composite": true,
+    "composite": false,
     "module": "commonjs",
     "target": "es6",
-    "lib": ["es2015", "dom"],
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "lib": ["dom"],
     "moduleResolution": "node",
     "types": ["node", "jest"],
     "jsx": "react",

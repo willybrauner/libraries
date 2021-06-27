@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect } from "react";
 /**
  * useAsyncEffect
  */
-function useAsyncEffect(pEffect: () => void, pInputs?: any[]): void {
+export function useAsyncEffect(pEffect: () => void, pInputs?: any[]): void {
   useEffect(() => {
     pEffect();
   }, pInputs);
@@ -12,10 +12,11 @@ function useAsyncEffect(pEffect: () => void, pInputs?: any[]): void {
 /**
  * useAsyncLayoutEffect
  */
-function useAsyncLayoutEffect(pEffect: () => void, pInputs?: any[]): void {
+export function useAsyncLayoutEffect(
+  pEffect: () => void,
+  pInputs?: any[]
+): void {
   useLayoutEffect(() => {
     pEffect();
   }, pInputs);
 }
-
-export { useAsyncEffect, useAsyncLayoutEffect };

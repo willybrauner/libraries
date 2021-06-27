@@ -6,16 +6,16 @@ import { YoutubeVideo } from "./YoutubeVideo";
 /**
  * Type of video
  */
-enum EVideoType {
+export enum EVideoType {
   NATIVE = "native",
   VIMEO = "vimeo",
-  YOUTUBE = "youtube"
+  YOUTUBE = "youtube",
 }
 
 /**
  * VideoPlayer Props
  */
-interface IProps {
+export interface IProps {
   /**
    * Choose video type <native | vimeo | youtube>
    */
@@ -121,7 +121,7 @@ VideoPlayer.defaultProps = {
   controls: true,
   loop: false,
   playsInline: true,
-  muted: false
+  muted: false,
 };
 
 const componentName: string = "VideoPlayer";
@@ -133,13 +133,13 @@ const debug = require("debug")(`lib:${componentName}`);
  * If you need specific video props, create your own VideoPlayer and import
  * Sub components as needed
  */
-function VideoPlayer(props: IProps) {
+export function VideoPlayer(props: IProps) {
   const className = [
     `VideoPlayer`,
     `VideoPlayer-${props.type}`,
-    props.className
+    props.className,
   ]
-    .filter(e => e)
+    .filter((e) => e)
     .join(" ");
 
   /**
@@ -215,9 +215,3 @@ function VideoPlayer(props: IProps) {
     );
   }
 }
-
-export {
-  VideoPlayer,
-  EVideoType,
-  IProps
-};

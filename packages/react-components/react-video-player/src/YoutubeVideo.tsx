@@ -137,7 +137,7 @@ const playerState = {
  * @doc: https://developers.google.com/youtube/iframe_api_reference
  * @param props
  */
-function YoutubeVideo(props: IProps) {
+export function YoutubeVideo(props: IProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [player, setPlayer] = useState(null);
 
@@ -303,5 +303,3 @@ function YoutubeVideo(props: IProps) {
     </div>
   );
 }
-
-export { YoutubeVideo };

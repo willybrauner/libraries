@@ -12,7 +12,7 @@ import {
  * @param {number} pOffset: Define a positive or negative offset to the ref element
  * @return {boolean}
  */
-function useIsInViewport(
+export function useIsInViewport(
   pRef: MutableRefObject<HTMLElement>,
   pToggleVisibility: boolean = false,
   pOffset: number = 0
@@ -92,5 +92,3 @@ function useIsInViewport(
   // return
   return isVisible;
 }
-
-export { useIsInViewport };

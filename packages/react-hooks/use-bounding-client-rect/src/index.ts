@@ -3,13 +3,13 @@ import {
   useRef,
   useEffect,
   MutableRefObject,
-  useCallback
+  useCallback,
 } from "react";
 
 /**
  * Listener choice
  */
-enum EListener {
+export enum EListener {
   // listen rect only on init
   ON_INIT,
   //  listen rect on init + scroll
@@ -17,7 +17,7 @@ enum EListener {
   //  listen rect on init + resize
   ON_RESIZE,
   //  listen rect on init + scroll + resize
-  ON_SCROLL_AND_RESIZE
+  ON_SCROLL_AND_RESIZE,
 }
 
 /**
@@ -26,7 +26,7 @@ enum EListener {
  * @param {EListener} pListener
  * @return ClientRect
  */
-function useBoundingClientRect(
+export function useBoundingClientRect(
   pRef: MutableRefObject<HTMLElement>,
   pListener: EListener = EListener.ON_INIT
 ): ClientRect | DOMRect | null {
@@ -102,5 +102,3 @@ function useBoundingClientRect(
   // return offset
   return rect;
 }
-
-export { useBoundingClientRect, EListener };

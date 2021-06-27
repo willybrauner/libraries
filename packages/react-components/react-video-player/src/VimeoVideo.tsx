@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 // @ts-ignore
 import Player from "@vimeo/player";
@@ -105,7 +105,7 @@ VimeoVideo.defaultProps = {
   loop: false,
   muted: false,
   playsInline: true,
-  autoPause: true
+  autoPause: true,
 };
 
 /**
@@ -113,7 +113,7 @@ VimeoVideo.defaultProps = {
  * @doc: https://developer.vimeo.com/player/sdk/basics
  * @param props
  */
-function VimeoVideo(props: IProps) {
+export function VimeoVideo(props: IProps) {
   const [player, setPlayer] = useState<Player>(null);
 
   // --------------------------------------------------------------------------- CONFIG
@@ -128,7 +128,8 @@ function VimeoVideo(props: IProps) {
       debug(`props.url doesn't exist. Return.`);
       return;
     }
-    const regExp = /(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/;
+    const regExp =
+      /(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/;
     const match = props?.url?.match(regExp);
     return match?.[4] ?? null;
   }, [props?.url]);
@@ -175,7 +176,7 @@ function VimeoVideo(props: IProps) {
       width: props?.style?.width,
       height: props?.style?.height,
       maxWidth: props?.style?.maxWidth,
-      maxHeight: props?.style?.maxHeight
+      maxHeight: props?.style?.maxHeight,
     };
 
     // Create player
@@ -256,11 +257,9 @@ function VimeoVideo(props: IProps) {
 
   return (
     <div
-      className={[componentName, props?.className].filter(e => e).join(" ")}
+      className={[componentName, props?.className].filter((e) => e).join(" ")}
       id={domId}
       style={props.style}
     />
   );
 }
-
-export { VimeoVideo };

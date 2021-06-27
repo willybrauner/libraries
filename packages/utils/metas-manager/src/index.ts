@@ -1,12 +1,12 @@
 const debug = require("debug")("lib:MetasManager");
 
-type TTag = {
+export type TTag = {
   selectorAttr: string;
   selectorValue: string;
   attr: string;
 };
 
-type TMetaTags<T> = {
+export type TMetaTags<T> = {
   title?: T;
   description?: T;
   imageUrl?: T;
@@ -30,7 +30,7 @@ type TMetaTags<T> = {
  *  MetasManager.inject({ title:"...", description:"...", ... })
  *
  */
-class MetasManager {
+export class MetasManager {
   // attr added to auto-generated meta-tags
   private static AUTO_GENERATE_ATTR = "auto-generated";
 
@@ -79,7 +79,7 @@ class MetasManager {
    */
   private static checkValue(metaValue): string {
     return metaValue === undefined ||
-    (typeof metaValue === "object" && metaValue !== null)
+      (typeof metaValue === "object" && metaValue !== null)
       ? ""
       : metaValue;
   }
@@ -102,11 +102,11 @@ class MetasManager {
    * @param autoRemoveMetaTag: Auto remove meta tag if is value is ""
    */
   public static inject({
-                         values = null,
-                         tags = MetasManager.DEFAULT_META_TAGS,
-                         autoCreateMetaTag = true,
-                         autoRemoveMetaTag = true,
-                       }: {
+    values = null,
+    tags = MetasManager.DEFAULT_META_TAGS,
+    autoCreateMetaTag = true,
+    autoRemoveMetaTag = true,
+  }: {
     values?: TMetaTags<string>;
     tags?: TMetaTags<TTag[]>;
     autoCreateMetaTag?: boolean;
@@ -187,5 +187,3 @@ class MetasManager {
     });
   }
 }
-
-export { TTag, TMetaTags, MetasManager };

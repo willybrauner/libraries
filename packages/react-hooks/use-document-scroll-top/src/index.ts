@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
  * useDocumentScrollTop
  * return {number}
  */
-function useDocumentScrollTop(): number | null {
+export function useDocumentScrollTop(): number | null {
   // Disable utils for SSR
   if (typeof window === "undefined") return null;
 
@@ -38,4 +38,4 @@ function useDocumentScrollTop(): number | null {
   return scrollTopPosition;
 }
 
-export { useDocumentScrollTop };
+
