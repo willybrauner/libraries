@@ -10,7 +10,6 @@
     "publish:all": "lerna bootstrap && npm run test && lerna run compile && lerna publish",
     "prettier": "prettier --write ' .{js,jsx,ts,tsx,css,json,md}'",
     "storybook": "cd storybook && npm run storybook",
-    "deploy-storybook": "cd storybook && npm run build-storybook && npm run deploy-storybook",
     "prepare": "husky install"
   },
   "devDependencies": {
