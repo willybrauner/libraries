@@ -2,12 +2,15 @@
   "name": "@wbe/libraries",
   "version": "2.0.0-alpha.2",
   "description": "Standalone libraries package",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.umd.js",
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig.json",
+    "compile": "microbundle",
     "test": "echo Error: no test specified"
   },
   "repository": {

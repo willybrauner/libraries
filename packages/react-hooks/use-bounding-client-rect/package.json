@@ -4,14 +4,17 @@
   "description": "Get dynamically bounding client rect",
   "author": "Willy Brauner",
   "license": "MIT",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.umd.js",
   "private": false,
   "scripts": {
     "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
+    "compile": "microbundle",
     "test": "jest"
   },
   "repository": {

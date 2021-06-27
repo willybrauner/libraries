@@ -4,8 +4,11 @@
   "description": "Check if a specific ref element is visible in viewport.",
   "author": "Willy Brauner",
   "license": "MIT",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.umd.js",
   "private": false,
   "repository": {
     "type": "git",
@@ -14,8 +17,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
-    "test": "jest"
+    "compile": "microbundle"
   },
   "dependencies": {
     "@wbe/use-bounding-client-rect": "^2.0.0-alpha.2",

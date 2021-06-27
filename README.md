@@ -20,7 +20,6 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 **react-components**
 
 - [react-grid-layout](packages/react-components/react-grid-layout)
-- [react-responsive-image](packages/react-components/react-responsive-image)
 - [react-video-player](packages/react-components/react-video-player)
 - [react-metas](packages/react-components/react-metas)
 
@@ -31,7 +30,6 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 - [use-did-update](packages/react-hooks/use-did-update)
 - [use-document-scroll-top](packages/react-hooks/use-document-scroll-top)
 - [use-is-in-viewport](packages/react-hooks/use-is-in-viewport)
-- [use-responsive-image-data](packages/react-hooks/use-responsive-image-data)
 - [use-window-size](packages/react-hooks/use-window-size)
 
 **utils**
@@ -55,7 +53,7 @@ $ npm install -s @wbe/react-responsive-image
 ```
 
 ```tsx
-import ResponsiveImage from "@wbe/react-responsive-image";
+import { ResponsiveImage } from "@wbe/react-responsive-image";
 ```
 
 ### Install libraries standelone package
@@ -67,7 +65,7 @@ $ npm install -s @wbe/libraries
 ```
 
 ```tsx
-import { ResponsiveImage } from "@wbe/libraries";
+import { ResponsiveImage } from "@wbe/react-responsive-image";
 ```
 
 ## Documentation
