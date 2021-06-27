@@ -1,4 +1,7 @@
-import MetasManager, { TMetaTags, TTag } from "../src";
+/**
+ * @jest-environment jsdom
+ */
+import { MetasManager, TMetaTags, TTag } from "../src";
 
 describe("MetasManager", () => {
   it("should be defined", () => {
@@ -45,9 +48,8 @@ describe("MetasManager", () => {
     expect(createdTitleTag).toBeDefined();
     expect(createdTitleTag.getAttribute("content")).toBe("hello title");
 
-    const createdDescriptionTag = document.head.querySelector(
-      "[description=foo]"
-    );
+    const createdDescriptionTag =
+      document.head.querySelector("[description=foo]");
     expect(createdDescriptionTag).toBeDefined();
     expect(createdDescriptionTag.getAttribute("content")).toBe(
       "hello description"

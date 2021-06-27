@@ -1,4 +1,8 @@
-import { useWindowSize, IWindowSize } from "../src/useWindowSize";
+/**
+ * @jest-environment jsdom
+ */
+
+import { useWindowSize, IWindowSize } from "../src";
 import { renderHook, act } from "@testing-library/react-hooks";
 import { cleanup, fireEvent } from "@testing-library/react";
 

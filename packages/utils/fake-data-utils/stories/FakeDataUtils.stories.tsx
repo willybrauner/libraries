@@ -1,6 +1,5 @@
-import { FakeDataUtils, EFakeVideoType } from "../src/FakeDataUtils";
+import { FakeDataUtils, EFakeVideoType } from "../src";
 import React from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "fake-data-utils";
 

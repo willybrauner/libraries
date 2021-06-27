@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 // @ts-ignore
 import YouTubePlayer from "youtube-player";
@@ -119,7 +119,7 @@ YoutubeVideo.defaultProps = {
   playsinline: true,
   modestBranding: false,
   disableKb: false,
-  fs: true
+  fs: true,
 };
 
 const playerState = {
@@ -128,7 +128,7 @@ const playerState = {
   PLAYING: 1,
   PAUSED: 2,
   BUFFERING: 3,
-  CUED: 5
+  CUED: 5,
 };
 
 /**
@@ -152,7 +152,8 @@ function YoutubeVideo(props: IProps) {
       return;
     }
     debug(`Get Id from Url ${props?.url}`);
-    const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+    const regExp =
+      /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
     const match = props?.url?.match(regExp);
     return match?.[1] ?? null;
   }, [props.url]);
@@ -187,8 +188,8 @@ function YoutubeVideo(props: IProps) {
         playsinline: props.playsInline ? 1 : 0,
         modestbranding: props.modestBranding ? 1 : 0,
         disablebk: props.disableKb ? 1 : 0,
-        fs: props.fs ? 1 : 0
-      }
+        fs: props.fs ? 1 : 0,
+      },
     };
 
     const el = rootRef?.current?.querySelector(`#${domId}`);
@@ -294,7 +295,7 @@ function YoutubeVideo(props: IProps) {
 
   return (
     <div
-      className={[componentName, props?.className].filter(e => e).join(" ")}
+      className={[componentName, props?.className].filter((e) => e).join(" ")}
       ref={rootRef}
       style={props?.style}
     >

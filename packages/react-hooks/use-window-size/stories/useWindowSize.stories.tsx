@@ -1,7 +1,5 @@
-import { useWindowSize, IWindowSize } from "../src/useWindowSize";
+import { useWindowSize, IWindowSize } from "../src";
 import React from "react";
-import "../../../../storybook/global-style.css";
-
 const storyName = "use-window-size";
 
 export const App = () => {
@@ -18,5 +16,5 @@ App.storyName = "basic example";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: App
+  component: App,
 };

@@ -1,4 +1,4 @@
-import { Metas, TMetasProps } from "../src/Metas";
+import { Metas, TMetasProps } from "../src";
 import React, { useEffect, useState } from "react";
 const htmlElementStringify = require("html-element-stringify");
 

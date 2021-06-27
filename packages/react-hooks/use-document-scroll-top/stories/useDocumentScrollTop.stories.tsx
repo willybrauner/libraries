@@ -1,6 +1,5 @@
-import { useDocumentScrollTop } from "../src/useDocumentScrollTop";
+import { useDocumentScrollTop } from "../src";
 import React from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "use-document-scroll-top";
 
@@ -21,5 +20,5 @@ App.storyName = "basic example";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: App
+  component: App,
 };

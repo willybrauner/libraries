@@ -1,8 +1,4 @@
-export {
-  VideoPlayer as default,
-  NativeVideo,
-  VimeoVideo,
-  YoutubeVideo,
-  EVideoType,
-  IProps
-} from "./VideoPlayer";
+export { VideoPlayer, EVideoType, IProps } from "./VideoPlayer";
+export { NativeVideo } from "./NativeVideo";
+export { YoutubeVideo } from "./YoutubeVideo";
+export { VimeoVideo } from "./VimeoVideo";

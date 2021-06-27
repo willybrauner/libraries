@@ -5,7 +5,7 @@ import { renderHook } from "@testing-library/react-hooks";
 describe("useAsyncLayoutEffect", () => {
   // create mock who returns promise resolved after 500ms
   const mockAsyncCallback = jest.fn(
-    (): Promise<any> => new Promise(resolve => setTimeout(() => resolve(), 500))
+    (): Promise<void> => new Promise(resolve => setTimeout(() => resolve(), 500))
   );
 
   it("should be defined", () => {

@@ -14,28 +14,32 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
-    "test": "jest"
+    "compile": "tsc -b tsconfig-build.json"
   },
   "dependencies": {
-    "@vimeo/player": "^2.15.0",
+    "@vimeo/player": "^2.15.3",
     "@wbe/react-responsive-image": "^1.6.0",
     "react": "^17.0.2",
     "youtube-player": "^5.5.2"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.6",
-    "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.3",
+    "@testing-library/react": "^12.0.0",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "@wbe/fake-data-utils": "^1.6.0",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.4"
   },
   "keywords": [
     "react"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
   }
 }

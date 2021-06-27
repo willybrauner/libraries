@@ -218,9 +218,6 @@ function VideoPlayer(props: IProps) {
 
 export {
   VideoPlayer,
-  NativeVideo,
-  VimeoVideo,
-  YoutubeVideo,
   EVideoType,
   IProps
 };
