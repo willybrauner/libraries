@@ -4,12 +4,13 @@
   "description": "%%moduleDescription%%",
   "author": "Willy Brauner",
   "license": "MIT",
-  "types": "dist/index",
+  sideEffects: false, "types": "dist/index",
   "source": "src/index.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "unpkg": "./dist/index.umd.js",
   "private": true,
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"

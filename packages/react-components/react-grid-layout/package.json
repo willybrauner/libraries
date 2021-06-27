@@ -8,6 +8,7 @@
   "module": "./dist/index.mjs",
   "unpkg": "./dist/index.umd.js",
   "private": false,
+  "sideEffects": false,
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",

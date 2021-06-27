@@ -9,6 +9,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "unpkg": "./dist/index.umd.js",
+  "sideEffects": false,
   "private": false,
   "scripts": {
     "dev": "parcel ./example/index.html --open --out-dir example/dist",

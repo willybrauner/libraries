@@ -10,6 +10,7 @@
   "module": "./dist/index.mjs",
   "unpkg": "./dist/index.umd.js",
   "private": false,
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"
