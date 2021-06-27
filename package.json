@@ -7,7 +7,7 @@
     "reset": "lerna clean && rm -rf packages/**/package-lock.json && rm -rf packages/**/**/package-lock.json && lerna bootstrap",
     "scaffold": "node ./config/tasks/scaffold.js",
     "test": "jest",
-    "publish:all": "lerna bootstrap && npm run test && lerna run compile && lerna publish && npm run deploy-storybook",
+    "publish:all": "lerna bootstrap && npm run test && lerna run compile && lerna publish",
     "prettier": "prettier --write ' .{js,jsx,ts,tsx,css,json,md}'",
     "storybook": "cd storybook && npm run storybook",
     "deploy-storybook": "cd storybook && npm run build-storybook && npm run deploy-storybook",
