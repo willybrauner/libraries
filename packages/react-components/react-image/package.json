@@ -5,7 +5,7 @@
   "author": "Willy Brauner",
   "license": "MIT",
   "types": "dist/index",
-  "source": "src/index.ts",
+  "source": "src/index.tsx",
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
