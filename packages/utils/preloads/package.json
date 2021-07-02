@@ -1,6 +1,6 @@
 {
   "name": "@wbe/preloads",
-  "version": "2.0.0-alpha.6",
+  "version": "2.0.0-alpha.7",
   "description": "Preloads assets utilities",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@wbe/fake-data-utils": "^2.0.0-alpha.6"
+    "@wbe/fake-data-utils": "^2.0.0-alpha.7"
   },
   "keywords": [
     "preloads"
