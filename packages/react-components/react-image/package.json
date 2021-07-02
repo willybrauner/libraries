@@ -21,13 +21,14 @@
     "compile": "microbundle"
   },
   "dependencies": {
-    "@wbe/use-window-size": "^2.0.0-alpha.7"
+    "@wbe/use-window-size": "^2.0.0-alpha.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.0",
     "@types/react": "^17.0.11",
-    "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   },
   "keywords": [
