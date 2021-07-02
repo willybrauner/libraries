@@ -6,3 +6,4 @@ tsconfig-build.tsbuildinfo
 storybook-static
 out*
 .husky
+.DS_Store
