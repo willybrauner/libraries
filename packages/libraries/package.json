@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "2.0.0-alpha.8",
+  "version": "2.0.0-alpha.9",
   "description": "Standalone libraries package",
   "types": "dist/index",
   "source": "src/index.ts",
@@ -23,7 +23,7 @@
     "@wbe/metas-manager": "^2.0.0-alpha.7",
     "@wbe/preloads": "^2.0.0-alpha.7",
     "@wbe/react-grid-layout": "^2.0.0-alpha.7",
-    "@wbe/react-image": "^2.0.0-alpha.8",
+    "@wbe/react-image": "^2.0.0-alpha.9",
     "@wbe/react-metas": "^2.0.0-alpha.7",
     "@wbe/react-video-player": "^2.0.0-alpha.7",
     "@wbe/use-async-effect": "^2.0.0-alpha.7",
