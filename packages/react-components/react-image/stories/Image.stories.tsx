@@ -6,7 +6,7 @@ const storyName = "image";
 const srcset =
   "https://picsum.photos/id/1/360/600 360w, https://picsum.photos/id/1/1024/1900 1024w";
 
-export const App = () => <Image srcset={srcset} alt={"test"} />;
+export const App = () => <Image srcset={srcset} alt={"test"} width={"100%"} />;
 App.storyName = "basic example";
 
 export default {

@@ -1,6 +1,3 @@
-const name: string = "fake-data-utils";
-const debug = require("debug")(`lib:${name}`);
-
 /**
  * Video Type
  */
@@ -177,7 +174,6 @@ export class FakeDataUtils {
         height: imageSize.height,
       };
     });
-    debug("getResponsiveImageData return ", fakeImageArray);
     return fakeImageArray;
   }
 
@@ -199,22 +195,17 @@ export class FakeDataUtils {
   ): string {
     // if is youtube
     if (pVideoType === EFakeVideoType.YOUTUBE) {
-      const url = `https://youtu.be/${pYoutubeId}`;
-      debug("random youtube url", url);
-      return url;
+      return `https://youtu.be/${pYoutubeId}`;
     }
     // if is vimeo
     if (pVideoType === EFakeVideoType.VIMEO) {
-      const url = `https://vimeo.com/${pVimeoId}`;
-      debug("random vimeo url", url);
-      return url;
+      return `https://vimeo.com/${pVimeoId}`;
     }
     // if is native
     if (pVideoType === EFakeVideoType.NATIVE) {
       const url = FakeDataUtils.randomValueFromArray(
         FakeDataUtils.nativeVideosUrl
       );
-      debug("random native video url", url);
       return url;
     }
   }
@@ -228,14 +219,10 @@ export class FakeDataUtils {
     pVideoType: EFakeVideoType.YOUTUBE | EFakeVideoType.VIMEO
   ): string {
     if (pVideoType === EFakeVideoType.YOUTUBE) {
-      const id = FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds);
-      debug("random youtube id", id);
-      return id;
+      return FakeDataUtils.randomValueFromArray(FakeDataUtils.youtubeIds);
     }
     if (pVideoType === EFakeVideoType.VIMEO) {
-      const id = FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds);
-      debug("random viemo id", id);
-      return id;
+      return FakeDataUtils.randomValueFromArray(FakeDataUtils.vimeoIds);
     }
   }
 
