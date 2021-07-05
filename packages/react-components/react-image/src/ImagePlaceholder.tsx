@@ -17,6 +17,9 @@ interface IProps {
   // set ratio override native image ratio
   ratio?: number;
 
+  //
+  backgroundColor?: string
+
   // add style to each dom element
   style?: {
     root?: CSSProperties;
@@ -77,6 +80,7 @@ export function ImagePlaceholder(props: IProps) {
         display: "block",
         position: "relative",
         paddingBottom: paddingRatio,
+        backgroundColor: props.backgroundColor,
         ...(props.style?.wrapper || {}),
       },
 
@@ -93,7 +97,7 @@ export function ImagePlaceholder(props: IProps) {
         ...(props.style?.img || {}),
       },
     }),
-    [props.style, paddingRatio]
+    [props.style, props.backgroundColor, paddingRatio]
   );
 
   /**
