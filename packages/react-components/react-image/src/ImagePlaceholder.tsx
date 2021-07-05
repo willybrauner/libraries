@@ -1,25 +1,31 @@
-import React, { CSSProperties, ReactNode, useMemo, useRef, useState } from "react"
-import { TImageData } from "./Image"
+import React, {
+  CSSProperties,
+  ReactNode,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { TImageData } from "./Image";
 
-const componentName = "ImagePlaceholder"
+const componentName = "ImagePlaceholder";
 
 interface IProps {
   // Image component
-  children: ReactNode
+  children: ReactNode;
 
   // by default, ratio is calc from children image data dimension.
   // set ratio override native image ratio
-  ratio?: number
+  ratio?: number;
 
   // add style to each dom element
   style?: {
-    root: CSSProperties
-    wrapper: CSSProperties
-    img: CSSProperties
-  }
+    root?: CSSProperties;
+    wrapper?: CSSProperties;
+    img?: CSSProperties;
+  };
 
   // root class name
-  className?: string
+  className?: string;
 }
 
 /**
@@ -35,27 +41,28 @@ interface IProps {
  *
  */
 export function ImagePlaceholder(props: IProps) {
-  const rootRef = useRef(null)
+  const rootRef = useRef(null);
 
-  const [childrenPropsImageData, setChildrenPropsImageData] = useState<TImageData>()
+  const [childrenPropsImageData, setChildrenPropsImageData] =
+    useState<TImageData>();
 
   /**
    * Style
    */
   const paddingRatio = useMemo((): string => {
-    let ratio: number
-    const firstImageData: TImageData = childrenPropsImageData?.[0]
+    let ratio: number;
+    const firstImageData: TImageData = childrenPropsImageData?.[0];
     // if vertical ratio is set
     if (props.ratio) {
-      ratio = props.ratio
+      ratio = props.ratio;
     }
     // else if image as dimensions, calc ratio
     else if (firstImageData?.width && firstImageData?.height) {
-      ratio = firstImageData.width / firstImageData.height
+      ratio = firstImageData.width / firstImageData.height;
     }
 
-    return ratio ? `${(100 / ratio).toFixed(3)}%` : null
-  }, [childrenPropsImageData, props.ratio])
+    return ratio ? `${(100 / ratio).toFixed(3)}%` : null;
+  }, [childrenPropsImageData, props.ratio]);
 
   // prepare dom style
   const style: { [x: string]: CSSProperties } = useMemo(
@@ -87,20 +94,20 @@ export function ImagePlaceholder(props: IProps) {
       },
     }),
     [props.style, paddingRatio]
-  )
+  );
 
   /**
    * Prepare children image render
    */
   const childrenImageRender = useMemo(() => {
     return React.Children.map(props.children, (child: any) => {
-      setChildrenPropsImageData(child?.props?.data)
+      setChildrenPropsImageData(child?.props?.data);
       return React.cloneElement(child, {
         style: style.img,
         className: `${componentName}_image`,
-      })
-    })
-  }, [])
+      });
+    });
+  }, []);
 
   /**
    * Render
@@ -115,5 +122,5 @@ export function ImagePlaceholder(props: IProps) {
         {childrenImageRender as any}
       </div>
     </div>
-  )
+  );
 }

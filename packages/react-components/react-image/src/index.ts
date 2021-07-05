@@ -1,2 +1,2 @@
-export { Image, TLazy } from "./Image";
+export { Image } from "./Image";
 export { ImagePlaceholder } from "./ImagePlaceholder";

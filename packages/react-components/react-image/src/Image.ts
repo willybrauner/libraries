@@ -2,7 +2,7 @@ import React, { CSSProperties, useEffect, useLayoutEffect, useRef, useState } fr
 import { useWindowSize } from "@wbe/use-window-size"
 
 const componentName = "Image"
-const debug = require("debug")(`front:${componentName}`)
+// const debug = require("debug")(`front:${componentName}`)
 
 export type TImageData = {
   url: string
