@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TPlay, Transition } from "../../src";
-import { gsap } from "gsap/all";
+import { gsap } from "gsap";
 
 const App = () => {
   /**
