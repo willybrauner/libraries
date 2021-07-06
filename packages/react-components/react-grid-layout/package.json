@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-grid-layout",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.10",
   "description": "",
   "types": "dist/index",
   "source": "src/index.tsx",
@@ -19,8 +19,8 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.7",
-    "@wbe/use-window-size": "^2.0.0-alpha.7",
+    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.10",
+    "@wbe/use-window-size": "^2.0.0-alpha.10",
     "react": "^17.0.2"
   },
   "devDependencies": {
