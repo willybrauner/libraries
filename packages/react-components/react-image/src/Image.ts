@@ -17,17 +17,35 @@ export type TImageData = {
 export type TLazy = "lazyload" | "lazyloading" | "lazyloaded";
 
 interface IProps {
+  // image to display before lazyload
+  // default is lightest base64 transparent image
   srcPlaceholder?: string;
+
+  // src URL to lazyload
   src?: string;
+
+  // srcset URL to lazyload
   srcset?: string;
+
+  // list of images with dimension used to build srcset attr
   data?: TImageData[];
+
+  // callback when lazyload state change (lazyload | lazyloading | lazyloaded)
   lazyCallback?: (lazyState: TLazy) => void;
+
+  // alt attr and aria html
   alt: string;
   ariaLabel?: string;
+
+  // class name added on root element
   className?: string;
+
+  // style attrs
   style?: CSSProperties;
   width?: number | string;
   height?: number | string;
+
+  // intersection observer options
   observerOptions?: IntersectionObserverInit;
 }
 

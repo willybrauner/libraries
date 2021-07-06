@@ -12,6 +12,12 @@ function App() {
 
   return (
     <div className="App" style={{ width: "50%", margin: "0 auto" }}>
+
+      <Image
+        src={`https://picsum.photos/id/3/600/300`}
+        alt={"image"}
+      />
+
       <Placeholder backgroundColor={"pink"}>
         <Image
           data={FakeDataUtils.getResponsiveImageData(4 / 3)}
@@ -28,7 +34,7 @@ function App() {
           src={`https://picsum.photos/id/${i + 1}/360/600`}
           width={"100%"}
           height={600}
-          observerOptions={{rootMargin: "-30%"}}
+          observerOptions={{ rootMargin: "-30%" }}
         />
       ))}
       <br />
