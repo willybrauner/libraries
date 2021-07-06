@@ -1,6 +1,4 @@
 /**
  * Preload videos
  */
-function preloadVideos() {}
-
-export { preloadVideos };
+export function preloadVideos() {}

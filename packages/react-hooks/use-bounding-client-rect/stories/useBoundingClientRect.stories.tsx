@@ -1,6 +1,5 @@
-import { useBoundingClientRect, EListener } from "../src/useBoundingClientRect";
+import { useBoundingClientRect, EListener } from "../src";
 import React, { useRef } from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "use-bounding-client-rect";
 
@@ -19,5 +18,5 @@ App.storyName = "basic example";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: App
+  component: App,
 };

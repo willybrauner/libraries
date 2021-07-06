@@ -1,4 +1,4 @@
-import { useDidUpdate } from "../src/useDidUpdate";
+import { useDidUpdate } from "../src";
 import { renderHook } from "@testing-library/react-hooks";
 
 describe("useDidUpdate", () => {

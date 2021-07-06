@@ -19,7 +19,7 @@ $ npm install -s @wbe/react-video-player
 Import VideoPlayer:
 
 ```jsx
-import VideoPlayer, { EVideoType } from "@wbe/react-video-player";
+import { VideoPlayer, EVideoType } from "@wbe/react-video-player";
 // ...
 const App = () => {
   return (

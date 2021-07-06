@@ -1,0 +1,41 @@
+{
+  "name": "@wbe/react-image",
+  "version": "2.0.0-alpha.10",
+  "description": "react image component",
+  "author": "Willy Brauner",
+  "license": "MIT",
+  "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "private": false,
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "compile": "microbundle"
+  },
+  "dependencies": {
+    "@wbe/use-window-size": "^2.0.0-alpha.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.0",
+    "@types/react": "^17.0.11",
+    "react-test-renderer": "^17.0.2"
+  },
+  "keywords": [
+    "image",
+    "react-component"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

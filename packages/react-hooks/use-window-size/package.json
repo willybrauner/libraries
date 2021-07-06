@@ -1,14 +1,18 @@
 {
   "name": "@wbe/use-window-size",
-  "version": "1.6.0",
+  "version": "2.0.0-alpha.10",
   "description": "Returned dynamic window size",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "sideEffects": false,
   "private": false,
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
+    "compile": "microbundle",
     "test": "jest"
   },
   "repository": {
@@ -19,9 +23,9 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/react-hooks": "^5.1.2",
-    "@types/react": "^17.0.4",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.0",
+    "@types/react": "^17.0.11",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   },
@@ -34,5 +38,5 @@
   },
   "author": "Willy Brauner",
   "license": "MIT",
-  "gitHead": "6685e8d20f475c4fbd0ef670700a6f71add3a09e"
+  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75"
 }

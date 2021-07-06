@@ -1,4 +1,4 @@
-import { useBoundingClientRect } from "../src/useBoundingClientRect";
+import { useBoundingClientRect } from "../src";
 
 describe("useBoundingClientRect", () => {
   it("should be defined", () => {

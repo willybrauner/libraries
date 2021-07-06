@@ -1,6 +1,6 @@
-import { preloadImage, preloadImages } from "../src/preloadImages";
+import { preloadImage, preloadImages } from "../src";
 import React, { useEffect, useRef } from "react";
-import FakeDataUtils from "@wbe/fake-data-utils";
+import { FakeDataUtils } from "@wbe/fake-data-utils";
 
 const storyName = "preloads";
 const debug = require("debug")(`lib:${storyName}`);

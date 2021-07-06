@@ -1,11 +1,15 @@
 {
   "name": "@wbe/react-video-player",
-  "version": "1.6.0",
+  "version": "2.0.0-alpha.10",
   "description": "React video player for native vimeo and youtube video",
   "author": "Willy Brauner",
   "license": "MIT",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "sideEffects": false,
   "private": false,
   "repository": {
     "type": "git",
@@ -14,28 +18,34 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
-    "test": "jest"
+    "compile": "microbundle"
   },
   "dependencies": {
-    "@vimeo/player": "^2.15.0",
+    "@vimeo/player": "^2.15.3",
     "@wbe/react-responsive-image": "^1.6.0",
     "react": "^17.0.2",
     "youtube-player": "^5.5.2"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.6",
-    "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.3",
-    "@wbe/fake-data-utils": "^1.6.0",
+    "@testing-library/react": "^12.0.0",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "@wbe/fake-data-utils": "^2.0.0-alpha.10",
+    "microbundle": "^0.13.3",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.4"
   },
   "keywords": [
     "react"
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75"
 }

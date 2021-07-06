@@ -1,4 +1,4 @@
-import { FakeDataUtils, EFakeVideoType } from "../src/FakeDataUtils";
+import { FakeDataUtils, EFakeVideoType } from "../src";
 
 describe("FakeDataUtils", () => {
   it("should be defined", () => {
@@ -16,8 +16,8 @@ describe("FakeDataUtils", () => {
           expect.objectContaining({
             url: expect.any(String),
             width: expect.any(Number),
-            height: expect.any(Number)
-          })
+            height: expect.any(Number),
+          }),
         ])
       );
     });
@@ -27,7 +27,7 @@ describe("FakeDataUtils", () => {
     it("should return a string", () => {
       const youtubeId = FakeDataUtils.getVideoId(EFakeVideoType.YOUTUBE);
       const vimeoId = FakeDataUtils.getVideoId(EFakeVideoType.VIMEO);
-      [youtubeId, vimeoId].forEach(el => {
+      [youtubeId, vimeoId].forEach((el) => {
         expect(typeof el).toBe("string");
       });
     });
@@ -41,7 +41,7 @@ describe("FakeDataUtils", () => {
       const youtubeUrl = FakeDataUtils.getVideoUrl(EFakeVideoType.YOUTUBE);
       const vimeoUrl = FakeDataUtils.getVideoUrl(EFakeVideoType.VIMEO);
       const nativeUrl = FakeDataUtils.getVideoUrl(EFakeVideoType.NATIVE);
-      [youtubeUrl, vimeoUrl, nativeUrl].forEach(el => {
+      [youtubeUrl, vimeoUrl, nativeUrl].forEach((el) => {
         expect(typeof el).toBe("string");
       });
     });

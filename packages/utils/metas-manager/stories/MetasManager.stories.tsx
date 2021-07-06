@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MetasManager, TMetaTags, TTag } from "../src/MetasManager";
+import { MetasManager, TMetaTags, TTag } from "../src";
 const htmlElementStringify = require("html-element-stringify");
 
 const storyName = "metas-manager";

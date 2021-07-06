@@ -1,6 +1,5 @@
-import { useIsInViewport } from "../src/useIsInViewport";
+import { useIsInViewport } from "../src";
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "use-is-in-viewport";
 
@@ -9,15 +8,15 @@ const css: { [x: string]: CSSProperties } = {
     position: "fixed",
     top: "0",
     left: "0",
-    padding: "1rem"
+    padding: "1rem",
   },
   element: {
     marginTop: "100vh",
     marginBottom: "5rem",
     width: "200px",
     height: "200px",
-    background: "green"
-  }
+    background: "green",
+  },
 };
 
 export const App = ({ offset = 0 }: { offset: number }) => {
@@ -45,7 +44,7 @@ export const App = ({ offset = 0 }: { offset: number }) => {
         ref={elementRef}
         style={{
           ...css.element,
-          background: isVisible ? "green" : "red"
+          background: isVisible ? "green" : "red",
         }}
       />
     </div>
@@ -55,7 +54,7 @@ App.storyName = "basic example";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: App
+  component: App,
 };
 
 export const Secondary = App.bind({});

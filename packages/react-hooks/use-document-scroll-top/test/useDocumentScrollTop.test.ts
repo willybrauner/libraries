@@ -1,4 +1,4 @@
-import { useDocumentScrollTop } from "../src/useDocumentScrollTop";
+import { useDocumentScrollTop } from "../src";
 
 describe("useDocumentScrollTop", () => {
   it("should be defined", () => {

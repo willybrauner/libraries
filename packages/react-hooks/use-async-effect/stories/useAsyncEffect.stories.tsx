@@ -1,16 +1,15 @@
 import { useAsyncEffect, useAsyncLayoutEffect } from "../src";
 import React, { useState } from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "use-async-effect";
 
 export const UseAsyncEffectExample = () => {
   const [promiseIsResolved, setPromiseIsResolved] = useState(false);
   useAsyncEffect(async () => {
-    new Promise(resolve =>
+    new Promise((resolve) =>
       setTimeout(() => {
         setPromiseIsResolved(true);
-        resolve();
+        resolve(true);
       }, 1000)
     );
   });
@@ -29,10 +28,10 @@ UseAsyncEffectExample.storyName = "with async effect";
 export const UseAsyncLayoutEffectExample = () => {
   const [promiseIsResolved, setPromiseIsResolved] = useState(false);
   useAsyncLayoutEffect(async () => {
-    new Promise(resolve =>
+    new Promise((resolve) =>
       setTimeout(() => {
         setPromiseIsResolved(true);
-        resolve();
+        resolve(true);
       }, 1000)
     );
   });
@@ -49,5 +48,5 @@ UseAsyncLayoutEffectExample.storyName = "with async layout effect";
 
 export default {
   title: `react-hooks/${storyName}`,
-  component: UseAsyncEffectExample
+  component: UseAsyncEffectExample,
 };

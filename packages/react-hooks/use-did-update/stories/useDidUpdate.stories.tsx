@@ -1,4 +1,4 @@
-import { useDidUpdate } from "../src/useDidUpdate";
+import { useDidUpdate } from "../src";
 import React, { useState } from "react";
 
 const storyName = "use-did-update";
@@ -23,6 +23,6 @@ export default {
   title: `react-hooks/${storyName}`,
   component: App,
   args: {
-    changed: false
-  }
+    changed: false,
+  },
 };

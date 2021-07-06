@@ -1,17 +1,21 @@
 {
   "name": "@wbe/use-bounding-client-rect",
-  "version": "1.6.0",
+  "version": "2.0.0-alpha.10",
   "description": "Get dynamically bounding client rect",
   "author": "Willy Brauner",
   "license": "MIT",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "sideEffects": false,
   "private": false,
   "scripts": {
     "dev": "parcel ./example/index.html --open --out-dir example/dist",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
+    "compile": "microbundle",
     "test": "jest"
   },
   "repository": {
@@ -22,7 +26,7 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@types/react": "^17.0.4"
+    "@types/react": "^17.0.11"
   },
   "keywords": [
     "react",
@@ -31,5 +35,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "6685e8d20f475c4fbd0ef670700a6f71add3a09e"
+  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75"
 }

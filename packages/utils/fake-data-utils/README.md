@@ -19,7 +19,7 @@ $ npm install -s @wbe/fake-data-utils
 Import `fakeDataUtils`:
 
 ```tsx
-import fakeDataUtils from "@wbe/fake-data-utils";
+import { fakeDataUtils } from "@wbe/fake-data-utils";
 ```
 
 ## API

@@ -2,12 +2,10 @@ import {
   VideoPlayer,
   EVideoType as EVideoPlayerType,
 } from "../src/VideoPlayer";
-import FakeDataUtils, { EFakeVideoType } from "@wbe/fake-data-utils";
+import { FakeDataUtils, EFakeVideoType } from "@wbe/fake-data-utils";
 import React, { CSSProperties } from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "react-video-player";
-const debug = require("debug")(`lib:${storyName}`);
 
 // VideoPlayer props interface
 interface IProps {
@@ -46,10 +44,6 @@ export default {
     muted: false,
     playsInline: true,
     className: "Youtube",
-    onReady: (e) => debug("onReady callback", e),
-    onPlay: (e) => debug("onPlay callback", e),
-    onPause: (e) => debug("onPause callback", e),
-    onEnded: (e) => debug("onEnded callback", e),
   } as IProps,
 };
 
@@ -67,10 +61,6 @@ Vimeo.args = {
   muted: false,
   playsInline: true,
   className: "Vimeo",
-  onReady: (e) => debug("onReady callback", e),
-  onPlay: (e) => debug("onPlay callback", e),
-  onPause: (e) => debug("onPause callback", e),
-  onEnded: (e) => debug("onEnded callback", e),
 };
 
 export const Native = Template.bind({});
@@ -86,8 +76,4 @@ Native.args = {
   muted: true,
   playsInline: true,
   className: "Native",
-  onReady: (e) => debug("onReady callback", e),
-  onPlay: (e) => debug("onPlay callback", e),
-  onPause: (e) => debug("onPause callback", e),
-  onEnded: (e) => debug("onEnded callback", e),
 };

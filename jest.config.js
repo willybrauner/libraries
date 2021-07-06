@@ -7,5 +7,10 @@ module.exports = {
     "ts",
     "tsx",
   ],
+  transform: {
+    "^.+\\.ts?$": "ts-jest",
+  },
   moduleDirectories: ["node_modules", "packages"],
+  testEnvironment: "jsdom",
+  coverageProvider: "babel",
 };

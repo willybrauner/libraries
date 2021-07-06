@@ -5,7 +5,7 @@ const debug = require("debug")(`lib:${name}`);
  * Preload image
  * @param url
  */
-function preloadImage(url: string): Promise<HTMLImageElement> {
+export function preloadImage(url: string): Promise<HTMLImageElement> {
   return new Promise((resolve) => {
     // create void image tag for each url
     let $img = document.createElement("img");
@@ -23,7 +23,7 @@ function preloadImage(url: string): Promise<HTMLImageElement> {
  * @description Allow to preload list of images
  * @param urls: List of image urls to preload
  */
-function preloadImages(urls: string[]): Promise<HTMLImageElement[]> {
+export function preloadImages(urls: string[]): Promise<HTMLImageElement[]> {
   return new Promise(async (resolve) => {
     // get all preload image promises
     const promises: Promise<HTMLImageElement>[] = urls.map((url) =>
@@ -35,5 +35,3 @@ function preloadImages(urls: string[]): Promise<HTMLImageElement[]> {
     resolve(outputImages);
   });
 }
-
-export { preloadImage, preloadImages };

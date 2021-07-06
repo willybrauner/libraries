@@ -88,7 +88,7 @@ NativeVideo.defaultProps = {
   autoPlay: false,
   loop: false,
   muted: false,
-  playsInline: true
+  playsInline: true,
 };
 
 /**
@@ -96,7 +96,7 @@ NativeVideo.defaultProps = {
  * @doc https://developer.mozilla.org/fr/docs/Web/HTML/Element/video
  * @param props
  */
-function NativeVideo(props: IProps) {
+export function NativeVideo(props: IProps) {
   const rootRef = useRef(null);
 
   /**
@@ -149,7 +149,7 @@ function NativeVideo(props: IProps) {
   return (
     <video
       ref={rootRef}
-      className={[componentName, props.className].filter(e => e).join(" ")}
+      className={[componentName, props.className].filter((e) => e).join(" ")}
       style={props?.style}
       src={props?.url}
       controls={props?.controls}
@@ -161,5 +161,3 @@ function NativeVideo(props: IProps) {
     />
   );
 }
-
-export { NativeVideo };

@@ -1,29 +1,32 @@
 {
   "name": "@wbe/react-grid-layout",
-  "version": "1.6.0",
+  "version": "2.0.0-alpha.10",
   "description": "",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.tsx",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
   "private": false,
+  "sideEffects": false,
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
-    "test": "jest"
+    "compile": "microbundle"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^1.6.0",
-    "@wbe/use-window-size": "^1.6.0",
+    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.10",
+    "@wbe/use-window-size": "^2.0.0-alpha.10",
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.6",
-    "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.3",
+    "@testing-library/react": "^12.0.0",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   },
@@ -36,5 +39,5 @@
   },
   "author": "Willy Brauner",
   "license": "MIT",
-  "gitHead": "6685e8d20f475c4fbd0ef670700a6f71add3a09e"
+  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75"
 }

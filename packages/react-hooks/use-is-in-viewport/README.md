@@ -17,7 +17,7 @@ $ npm install -s @wbe/use-is-in-viewport
 ## How to use
 
 ```jsx
-import useIsInViewport from "@wbe/use-is-in-viewport;";
+import { useIsInViewport } from "@wbe/use-is-in-viewport;";
 
 // Get element ref
 const ref = useRef(null);

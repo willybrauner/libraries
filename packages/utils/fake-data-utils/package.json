@@ -1,12 +1,16 @@
 {
   "name": "@wbe/fake-data-utils",
-  "version": "1.6.0",
+  "version": "2.0.0-alpha.10",
   "description": "Generate fake data image/text/video allowing to test UI components",
   "author": "Willy Brauner",
   "license": "MIT",
-  "main": "dist/index",
   "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
   "private": false,
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/willybrauner/libraries.git"
@@ -14,7 +18,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "tsc -b tsconfig-build.json",
+    "compile": "microbundle",
     "test": "jest"
   },
   "keywords": [
@@ -24,7 +28,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "6685e8d20f475c4fbd0ef670700a6f71add3a09e",
+  "gitHead": "3bbadd2618c8a2e7b8d99ff7dbe2b661367bcc75",
   "devDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

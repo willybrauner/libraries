@@ -1,6 +1,5 @@
-import { GridLayout, EOrientation } from "../src/GridLayout";
+import { GridLayout, EOrientation } from "../src";
 import React, { CSSProperties, useEffect, useState } from "react";
-import "../../../../storybook/global-style.css";
 
 const storyName = "react-grid-layout";
 
@@ -10,7 +9,7 @@ export const App = ({
   maxSize,
   center,
   color,
-  orientation
+  orientation,
 }: {
   columnNumber: number;
   gutterSize: string | number;
@@ -22,7 +21,7 @@ export const App = ({
   // Allow to toggle grid visibility
   const [showGrid, setShowGrid] = useState(true);
   useEffect(() => {
-    document.body.onkeyup = pEvent => {
+    document.body.onkeyup = (pEvent) => {
       if (pEvent.code === "KeyG") setShowGrid(!showGrid);
     };
   });
@@ -54,11 +53,11 @@ const css: { [x: string]: CSSProperties } = {
     position: "absolute",
     top: "50%",
     left: "calc(100vw/6*1)",
-    transform: "translateY(-50%)"
+    transform: "translateY(-50%)",
   },
   title: {
-    fontSize: "3rem"
-  }
+    fontSize: "3rem",
+  },
 };
 
 App.storyName = "basic example";
@@ -71,6 +70,6 @@ export default {
     gutterSize: 30,
     maxSize: 1024,
     center: true,
-    color: "rgba(255, 0, 0, 0.14)"
-  }
+    color: "rgba(255, 0, 0, 0.14)",
+  },
 };

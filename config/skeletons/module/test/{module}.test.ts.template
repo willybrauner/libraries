@@ -1,4 +1,4 @@
-import { %%pascalCaseModuleName%% } from "../src/%%pascalCaseModuleName%%";
+import { %%pascalCaseModuleName%% } from "../src";
 
 describe("%%pascalCaseModuleName%%", () => {
   it("should be defined", () => {
