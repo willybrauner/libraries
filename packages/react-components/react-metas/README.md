@@ -18,7 +18,7 @@ $ npm install -s @wbe/react-metas
 This component is instanciated in render but don't returns DOM (on the same model as React Helmet).
 
 ```js
-import Metas from "@wbe/react-metas";
+import { Metas } from "@wbe/react-metas";
 
 const App = () => {
     return (

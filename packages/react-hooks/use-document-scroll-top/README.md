@@ -17,7 +17,7 @@ $ npm install -s @wbe/use-document-scroll-top
 ## How to use
 
 ```tsx
-import useDocumentScrolltop from "@wbe/use-document-scroll-top";
+import { useDocumentScrolltop } from "@wbe/use-document-scroll-top";
 
 // scrollTop returns dynamic document scrollTop value
 const scrollTop = useDocumentScrollTop();

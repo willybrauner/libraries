@@ -19,7 +19,7 @@ First, if your html page don't have a `<title></title>` meta tag, you need to se
 MetasManager need a document title tag to create others.
 
 ```js
-import MetasManager from "@wbe/metas-manager";
+import { MetasManager } from "@wbe/metas-manager";
 
 const values = {
  title: "Hello world!",

@@ -20,7 +20,7 @@ Basic usage:
 
 ```jsx
 // ...
-import useBoundingClientRect from "@wbe/use-window-size";
+import { useBoundingClientRect } from "@wbe/use-window-size";
 
 const App = () => {
   // get ref

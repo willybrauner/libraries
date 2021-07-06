@@ -16,7 +16,7 @@ $ npm install -s @wbe/use-did-update
 ## How to use
 
 ```js
-import UseDidUpdate from "@wbe/use-did-update";
+import { UseDidUpdate } from "@wbe/use-did-update";
 ```
 
 ## example
