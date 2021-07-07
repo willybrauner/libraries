@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "2.0.0-alpha.12",
+  "version": "2.0.0-alpha.13",
   "description": "Standalone libraries package",
   "types": "dist/index",
   "source": "src/index.ts",
@@ -23,7 +23,7 @@
     "@wbe/metas-manager": "^2.0.0-alpha.11",
     "@wbe/preloads": "^2.0.0-alpha.11",
     "@wbe/react-grid-layout": "^2.0.0-alpha.11",
-    "@wbe/react-image": "^2.0.0-alpha.12",
+    "@wbe/react-image": "^2.0.0-alpha.13",
     "@wbe/react-metas": "^2.0.0-alpha.11",
     "@wbe/react-transition": "^2.0.0-alpha.12",
     "@wbe/react-video-player": "^2.0.0-alpha.11",
