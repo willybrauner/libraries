@@ -12,7 +12,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "microbundle"
+    "compile": "microbundle --jsx React.createElement"
   },
   "repository": {
     "type": "git",
