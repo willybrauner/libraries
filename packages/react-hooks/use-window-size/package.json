@@ -1,6 +1,6 @@
 {
   "name": "@wbe/use-window-size",
-  "version": "2.0.0-alpha.11",
+  "version": "2.0.0",
   "description": "Returned dynamic window size",
   "types": "dist/index",
   "source": "src/index.ts",
