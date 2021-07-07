@@ -25,6 +25,7 @@ export { useWindowSize, IWindowSize } from "@wbe/use-window-size";
 /**
  * utils
  */
+export { deferredPromise } from "@wbe/deferred-promise"
 export { FakeDataUtils, EFakeVideoType, IFakeImage } from "@wbe/fake-data-utils"
 export { MetasManager, TTag, TMetaTags } from "@wbe/metas-manager"
 export { preloadImage, preloadImages } from "@wbe/preloads"

@@ -23,7 +23,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 - [react-image](packages/react-components/react-image)
 - [react-metas](packages/react-components/react-metas)
 - [react-video-player](packages/react-components/react-video-player)
-- [react-transition](packages/react-transition/react-transition)
+- [react-transition](packages/react-components/react-transition)
 
 **react-hooks**
 
@@ -36,6 +36,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 
 **utils**
 
+- [deferred-promise](packages/utils/deferred-promise)
 - [fake-data-utils](packages/utils/fake-data-utils)
 - [metas-manager](packages/utils/metas-manager)
 - [preloads](packages/utils/preloads)
