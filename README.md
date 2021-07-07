@@ -10,7 +10,7 @@ Libraries is a front-end javascript mono-repo of React and vanilla JS packages.
 
 ✅ Javascript modules written with [typescript](https://www.typescriptlang.org/)  
 ✅ Unit tests with [jest](https://jestjs.io/)  
-✅ Libraries standalone package  
+✅ Libraries standalone package
 
 ## Summary
 
@@ -22,6 +22,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 - [react-image](packages/react-components/react-image)
 - [react-metas](packages/react-components/react-metas)
 - [react-video-player](packages/react-components/react-video-player)
+- [react-transition](packages/react-transition/react-transition)
 
 **react-hooks**
 
@@ -49,11 +50,11 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 Each modules can be imported separately like this:
 
 ```shell script
-$ npm install -s @wbe/react-responsive-image
+$ npm install -s @wbe/react-image
 ```
 
 ```tsx
-import { ResponsiveImage } from "@wbe/react-responsive-image";
+import { Image } from "@wbe/react-image";
 ```
 
 ### Install libraries standelone package
@@ -65,13 +66,8 @@ $ npm install -s @wbe/libraries
 ```
 
 ```tsx
-import { ResponsiveImage } from "@wbe/libraries";
+import { Image } from "@wbe/libraries";
 ```
-
-## Documentation
-
-All modules documentations are available on
-[https://willybrauner.github.io/libraries](https://willybrauner.github.io/libraries)
 
 ## Contribute
 

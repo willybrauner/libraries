@@ -128,34 +128,34 @@ interface IProps {
 }
 ```
 
-## `<ImagePlaceholder />` wrapper component
+## `<Placeholder />` wrapper component
 
-Image component comes with `<ImagePlaceholder />` parent component
+Image component comes with `<Placeholder />` parent component
 used to display a placeholder behind Image. This process is particulary useful
 when image is lazyloading. It allows to not preload all 1px height images in pages
 on page load but really waiting the image was shown in viewport to lazyload it.
 
 ```js
-<ImagePlaceholder>
+<Placeholder>
     <Image
       src={`https://image-url`}
       width={600}
       height={400}
       alt={"with placeholder"}
     />
-<ImagePlaceholder/>
+<Placeholder/>
 ```
 
-`<ImagePlaceholder />` get children Image ratio to calculate its placeholder height.
+`<Placeholder />` get children Image ratio to calculate its placeholder height.
 It's possible to specify an arbitrary ratio who will override image dimension
 
 ```js
-<ImagePlaceholder ratio={3/4}>
+<Placeholder ratio={3/4}>
     <Image
       src={`https://image-url`}
       alt={"with placeholder"}
     />
-<ImagePlaceholder />
+<Placeholder />
 ```
 
 ## Props list

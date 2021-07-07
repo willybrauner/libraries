@@ -1,2 +1,2 @@
 export { Image } from "./Image";
-export { ImagePlaceholder } from "./ImagePlaceholder";
+export { Placeholder } from "./Placeholder";

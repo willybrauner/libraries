@@ -9,7 +9,7 @@
 export { GridLayout, EOrientation } from "@wbe/react-grid-layout";
 export { VideoPlayer, NativeVideo, VimeoVideo, YoutubeVideo, EVideoType } from "@wbe/react-video-player";
 export { Metas, TMetasProps } from "@wbe/react-metas";
-export { Image, ImagePlaceholder } from "@wbe/react-image";
+export { Image, Placeholder } from "@wbe/react-image";
 export { Transition, TPlay } from "@wbe/react-transition";
 
 /**
