@@ -19,6 +19,7 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
+    "@wbe/deferred-promise": "^0.0.1",
     "@wbe/fake-data-utils": "^2.0.0",
     "@wbe/metas-manager": "^2.0.0",
     "@wbe/preloads": "^2.0.0",

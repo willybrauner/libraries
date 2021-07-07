@@ -1,0 +1,32 @@
+{
+  "name": "@wbe/deferred-promise",
+  "version": "0.0.1",
+  "description": "Create a deferred promise who can be resolved or rejected from anywhere.",
+  "author": "Willy Brauner",
+  "license": "MIT",
+  "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "private": false,
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "compile": "microbundle",
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+  "deferred-promise"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
