@@ -22,9 +22,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@wbe/use-window-size": "^2.0.0-alpha.11"
-  },
-  "peerDependencies": {
+    "@wbe/use-window-size": "^2.0.0-alpha.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
