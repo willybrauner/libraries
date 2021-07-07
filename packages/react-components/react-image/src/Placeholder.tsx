@@ -123,7 +123,7 @@ export function Placeholder(props: IProps) {
       ref={rootRef}
     >
       <div className={`${componentName}_wrapper`} style={style.wrapper}>
-        {childrenImageRender as any}
+        {childrenImageRender}
       </div>
     </div>
   );

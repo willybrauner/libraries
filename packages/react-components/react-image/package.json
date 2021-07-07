@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-image",
-  "version": "2.0.0-alpha.13",
+  "version": "2.0.0-alpha.14",
   "description": "react image component",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -18,11 +18,13 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "microbundle",
+    "compile": "microbundle --jsx React.createElement",
     "dev": "vite"
   },
   "dependencies": {
-    "@wbe/use-window-size": "^2.0.0-alpha.11",
+    "@wbe/use-window-size": "^2.0.0-alpha.11"
+  },
+  "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

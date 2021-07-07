@@ -134,21 +134,19 @@ export function Image(props: IProps) {
   /**
    * Render
    */
-  return React.createElement(
-    "img",
-    {
-      ref: rootRef,
-      className: `${componentName} ${lazyState}`,
-      alt: props.alt,
-      style: props.style,
-      width: props.width,
-      height: props.height,
-      sizes: rootRefWidth && `${rootRefWidth}px`,
-      src: props.srcPlaceholder,
-      "data-srcset": props.srcset || srcSet,
-      "data-src": props.src,
-      "aria-label": props.ariaLabel,
-    },
-    null
+  return (
+    <img
+      ref={rootRef}
+      className={`${componentName} ${lazyState}`}
+      alt={props.alt}
+      style={props.style}
+      width={props.width}
+      height={props.height}
+      sizes={rootRefWidth && `${rootRefWidth}px`}
+      src={props.srcPlaceholder}
+      data-srcset={props.srcset || srcSet}
+      data-src={props.src}
+      aria-label={props.ariaLabel}
+    />
   );
 }

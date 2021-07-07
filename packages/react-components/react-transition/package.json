@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-transition",
-  "version": "2.0.0-alpha.12",
+  "version": "2.0.0-alpha.14",
   "description": "",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -18,7 +18,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "compile": "microbundle",
+    "compile": "microbundle --jsx React.createElement",
     "test": "jest",
     "dev": "vite"
   },
