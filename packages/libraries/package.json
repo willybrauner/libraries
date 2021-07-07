@@ -25,6 +25,7 @@
     "@wbe/react-grid-layout": "^2.0.0-alpha.10",
     "@wbe/react-image": "^2.0.0-alpha.10",
     "@wbe/react-metas": "^2.0.0-alpha.10",
+    "@wbe/react-transition": "^0.0.1",
     "@wbe/react-video-player": "^2.0.0-alpha.10",
     "@wbe/use-async-effect": "^2.0.0-alpha.7",
     "@wbe/use-bounding-client-rect": "^2.0.0-alpha.10",

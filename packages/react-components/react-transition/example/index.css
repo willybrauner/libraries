@@ -1,0 +1,49 @@
+body {
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  background: #222;
+  color: #eee;
+}
+
+code {
+  color: #999;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 0.3em;
+}
+
+button {
+  cursor: pointer;
+  background: #000;
+  border: none;
+  border-radius: 0.5em;
+  color: #eee;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100px;
+}
+button:hover {
+  background: #444;
+}
+
+.App {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.App_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.App_element {
+  display: block;
+  width: 300px;
+  height: 200px;
+  background: plum;
+  margin-top: 20px;
+}

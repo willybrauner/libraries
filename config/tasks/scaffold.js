@@ -138,15 +138,6 @@ const moduleScaffolder = () =>
       extension: ".ts",
     });
 
-    // create src/ module.ts
-    createFile({
-      filePath: `${modulePath}/src/`,
-      templatePath: `${paths.skeletonsPath}/module/src/`,
-      templateFileName: "{module}",
-      outputFileName: pascalCaseModuleName,
-      extension: ".ts",
-    });
-
     // create stories/{module}.stories.tsx file
     createFile({
       filePath: `${modulePath}/stories/`,
