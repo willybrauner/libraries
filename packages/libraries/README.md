@@ -1,6 +1,6 @@
 # @wbe/libraries
 
-This package is standalone repos who embarks every modules of [libraries](https://github.com/willybrauner/libraries).
+This package is standalone repo who embarks every modules of [libraries](https://github.com/willybrauner/libraries).
 
 ![](https://img.shields.io/npm/v/@wbe/libraries/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/libraries.svg)
@@ -19,9 +19,9 @@ $ npm install -s @wbe/libraries
 Each modules can be imported separatly:
 
 ```jsx
-import { GridLayout } from "@wbe/libraries";
+import { Image } from "@wbe/libraries";
 ```
 
 ## Availables modules
 
-Check [storybook](https://github.com/willybrauner/libraries/storybook/).
+Get all modules list in [main documentation](https://github.com/willybrauner/libraries/README.md).
