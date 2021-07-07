@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { TPlay, Transition } from "../../src";
+import ReactDOM from "react-dom";
+import "./index.css";
 import { gsap } from "gsap";
+import { TPlay, Transition } from "../src";
 
-const App = () => {
-  /**
-   * Default button transition in main header
-   */
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+/**
+ * App
+ */
+function App() {
   const elTransition = (
     el: HTMLElement,
     done: () => void,
@@ -52,6 +61,4 @@ const App = () => {
       </div>
     </div>
   );
-};
-
-export default App;
+}
