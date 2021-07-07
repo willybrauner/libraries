@@ -2,6 +2,7 @@
 
 Libraries is a front-end javascript mono-repo of React and vanilla JS packages.
 
+![](https://img.shields.io/npm/v/@wbe/libraries/latest.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/willybrauner/libraries)
 
 ## About
