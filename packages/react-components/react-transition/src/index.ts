@@ -1,4 +1,4 @@
-import React, { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import React, { ReactElement, useLayoutEffect, useRef, useState } from "react";
 
 /**
  * TPlay type is used in order to get/set current transtion step
@@ -20,7 +20,7 @@ type TProps = {
   /**
    * React children to transit
    */
-  children?: ReactNode;
+  children?: ReactElement;
 
   /**
    * playIn transition

@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import React, { useState } from "react";
 import { render } from "@testing-library/react";
 import { TPlay, Transition } from "../src";
