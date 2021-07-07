@@ -46,11 +46,13 @@ import {
 export function lazyBackgroundImage({
   $element,
   srcset,
+  additonalUrl,
   bigQuality = false,
   $root = document.body,
 }: {
   $element?: HTMLElement;
   srcset?: string;
+  additonalUrl?: string;
   bigQuality?: boolean;
   $root?: HTMLElement;
 } = {}) {
@@ -157,7 +159,7 @@ export function lazyBackgroundImage({
   ): void => {
     $element.style.backgroundImage = [
       `url('${selectedImageObject.url}')`,
-      // TODO add other url after
+      additonalUrl && `, url('${additonalUrl}')`,
     ]
       .filter((v) => v)
       .join("");
