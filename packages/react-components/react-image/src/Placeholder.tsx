@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { TImageData } from "./Image";
 
-const componentName = "ImagePlaceholder";
+const componentName = "Placeholder";
 
 interface IProps {
   // Image component
@@ -18,7 +18,7 @@ interface IProps {
   ratio?: number;
 
   //
-  backgroundColor?: string
+  backgroundColor?: string;
 
   // add style to each dom element
   style?: {
@@ -37,13 +37,13 @@ interface IProps {
  * @desc Add placeholder around Image component
  * @ex
  *
- *    <ImagePlaceholder ratio={3/4}>
+ *    <Placeholder ratio={3/4}>
  *      <Image src={`https://picsum.photos/id/1/360/600`} alt={""}  />
- *    </ImagePlaceholder>
+ *    </Placeholder>
  *
  *
  */
-export function ImagePlaceholder(props: IProps) {
+export function Placeholder(props: IProps) {
   const rootRef = useRef(null);
 
   const [childrenPropsImageData, setChildrenPropsImageData] =

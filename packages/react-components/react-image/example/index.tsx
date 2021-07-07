@@ -1,14 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Image, ImagePlaceholder as Placeholder } from "../src";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Image, Placeholder } from "../src";
 import { FakeDataUtils } from "@wbe/fake-data-utils";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);
 
 function App() {
   // prettier-ignore
@@ -20,11 +20,7 @@ function App() {
 
   return (
     <div className="App" style={{ width: "50%", margin: "0 auto" }}>
-
-      <Image
-        src={`https://picsum.photos/id/3/600/300`}
-        alt={"image"}
-      />
+      <Image src={`https://picsum.photos/id/3/600/300`} alt={"image"} />
 
       <Placeholder backgroundColor={"pink"}>
         <Image
