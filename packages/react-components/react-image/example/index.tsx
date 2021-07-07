@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Image, Placeholder } from "../src";
+import { Image, Placeholder, BackgroundImage } from "../src";
 import { FakeDataUtils } from "@wbe/fake-data-utils";
 
 const buildSrcset = (id: number, ratio = 4 / 3) =>
@@ -23,6 +23,18 @@ ReactDOM.render(
 function App() {
   return (
     <div className="App" style={{ width: "50%", margin: "0 auto" }}>
+      <BackgroundImage
+        ariaLabel={"cocou"}
+        srcset={buildSrcset(1)}
+        //src={`https://picsum.photos/id/3/600/300`}
+        // data={FakeDataUtils.getResponsiveImageData(4 / 3)}
+        style={{
+          backgroundSize: "cover",
+          height: "50vh",
+          width: "100%",
+        }}
+      />
+
       <Image
         src={`https://picsum.photos/id/3/600/300`}
         alt={"image"}
