@@ -1,6 +1,6 @@
 {
   "name": "@wbe/libraries",
-  "version": "2.0.0-alpha.10",
+  "version": "2.0.0-alpha.11",
   "description": "Standalone libraries package",
   "types": "dist/index",
   "source": "src/index.ts",
@@ -19,20 +19,20 @@
     "url": "https://github.com/willybrauner/libraries.git"
   },
   "dependencies": {
-    "@wbe/fake-data-utils": "^2.0.0-alpha.10",
-    "@wbe/metas-manager": "^2.0.0-alpha.10",
-    "@wbe/preloads": "^2.0.0-alpha.10",
-    "@wbe/react-grid-layout": "^2.0.0-alpha.10",
-    "@wbe/react-image": "^2.0.0-alpha.10",
-    "@wbe/react-metas": "^2.0.0-alpha.10",
-    "@wbe/react-transition": "^0.0.1",
-    "@wbe/react-video-player": "^2.0.0-alpha.10",
-    "@wbe/use-async-effect": "^2.0.0-alpha.7",
-    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.10",
-    "@wbe/use-did-update": "^2.0.0-alpha.10",
-    "@wbe/use-document-scroll-top": "^2.0.0-alpha.10",
-    "@wbe/use-is-in-viewport": "^2.0.0-alpha.10",
-    "@wbe/use-window-size": "^2.0.0-alpha.10"
+    "@wbe/fake-data-utils": "^2.0.0-alpha.11",
+    "@wbe/metas-manager": "^2.0.0-alpha.11",
+    "@wbe/preloads": "^2.0.0-alpha.11",
+    "@wbe/react-grid-layout": "^2.0.0-alpha.11",
+    "@wbe/react-image": "^2.0.0-alpha.11",
+    "@wbe/react-metas": "^2.0.0-alpha.11",
+    "@wbe/react-transition": "^2.0.0-alpha.11",
+    "@wbe/react-video-player": "^2.0.0-alpha.11",
+    "@wbe/use-async-effect": "^2.0.0-alpha.11",
+    "@wbe/use-bounding-client-rect": "^2.0.0-alpha.11",
+    "@wbe/use-did-update": "^2.0.0-alpha.11",
+    "@wbe/use-document-scroll-top": "^2.0.0-alpha.11",
+    "@wbe/use-is-in-viewport": "^2.0.0-alpha.11",
+    "@wbe/use-window-size": "^2.0.0-alpha.11"
   },
   "keywords": [
     "react",
