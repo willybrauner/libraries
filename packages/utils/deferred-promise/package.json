@@ -1,6 +1,6 @@
 {
   "name": "@wbe/deferred-promise",
-  "version": "0.0.1",
+  "version": "2.1.0",
   "description": "Create a deferred promise who can be resolved or rejected from anywhere.",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -21,10 +21,8 @@
     "compile": "microbundle",
     "test": "jest"
   },
-  "dependencies": {},
-  "devDependencies": {},
   "keywords": [
-  "deferred-promise"
+    "deferred-promise"
   ],
   "publishConfig": {
     "access": "public"
