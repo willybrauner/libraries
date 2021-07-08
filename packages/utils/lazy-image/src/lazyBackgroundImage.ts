@@ -62,9 +62,9 @@ export function lazyBackgroundImage({
   bigQuality?: boolean;
 } = {}) {
   const lazyState: { [x: string]: TLazy } = {
-    lazyload: "lazyload",
-    lazyloading: "lazyloading",
-    lazyloaded: "lazyloaded",
+    LAZY_LOAD: "lazyload",
+    LAZY_LOADING: "lazyloading",
+    LAZY_LOADED: "lazyloaded",
   };
   const dataSrcsetAttr = "data-background-srcset";
   let observer: IntersectionObserver;
@@ -72,7 +72,7 @@ export function lazyBackgroundImage({
   /**
    * Start
    */
-  const start = () => {
+  const start = (): void => {
     _observe();
     window.addEventListener("resize", _handlResize);
   };
@@ -80,7 +80,7 @@ export function lazyBackgroundImage({
   /**
    * Update
    */
-  const update = () => {
+  const update = (): void => {
     stop();
     start();
   };
@@ -88,7 +88,7 @@ export function lazyBackgroundImage({
   /**
    * Stop
    */
-  const stop = () => {
+  const stop = (): void => {
     observer.disconnect();
     window.removeEventListener("resize", _handlResize);
   };
@@ -116,6 +116,7 @@ export function lazyBackgroundImage({
    */
   const _observe = (): void => {
     if (!("IntersectionObserver" in window)) return;
+
     observer = new IntersectionObserver(
       _observeOnChangeCallBack,
       observerOptions
@@ -133,7 +134,8 @@ export function lazyBackgroundImage({
   ): void => {
     entries?.forEach(async (el) => {
       const $current = el.target as HTMLElement;
-      _switchLazyState($current, lazyState.lazyload);
+      // switch lazy callback
+      _switchLazyState($current, lazyState.LAZY_LOAD);
 
       if (!el.isIntersecting) return;
       // image size reference
@@ -150,11 +152,11 @@ export function lazyBackgroundImage({
         );
       if (!selectedImageObject?.url) return;
       // switch lazy state
-      _switchLazyState($current, lazyState.lazyloading);
+      _switchLazyState($current, lazyState.LAZY_LOADING);
       // start preload and wait
       await _preloadImage($current, selectedImageObject.url);
       // switch lazy state
-      _switchLazyState($current, lazyState.lazyloaded);
+      _switchLazyState($current, lazyState.LAZY_LOADED);
       // then replace url
       _replaceBackgroundImageUrl($current, selectedImageObject);
       // disconnect

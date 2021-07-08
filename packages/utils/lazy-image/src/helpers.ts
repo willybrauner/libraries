@@ -38,6 +38,9 @@ export function parseSrcsetToArray(
 
 /**
  * getImageDataObject
+ *
+ * @desc select appropriate data image
+ *
  * @param images: images array
  * @param width: Width reference
  * @param bigQuality: if true, allow to selected the second biggest image (when possible) up to the width container reference
