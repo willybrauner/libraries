@@ -1,22 +1,22 @@
-# @wbe/lazy-background-image
+# @wbe/lazy-image
 
-lazy and responsive background image management.
+Lazy and responsive image management for img and backgroud-image.
 
-![](https://img.shields.io/npm/v/@wbe/lazy-background-image/latest.svg)
-![](https://img.shields.io/bundlephobia/minzip/@wbe/lazy-background-image.svg)
-![](https://img.shields.io/npm/dt/@wbe/lazy-background-image.svg)
-![](https://img.shields.io/npm/l/@wbe/lazy-background-image.svg)
+![](https://img.shields.io/npm/v/@wbe/lazy-image/latest.svg)
+![](https://img.shields.io/bundlephobia/minzip/@wbe/lazy-image.svg)
+![](https://img.shields.io/npm/dt/@wbe/lazy-image.svg)
+![](https://img.shields.io/npm/l/@wbe/lazy-image.svg)
 
 ## Installation
 
 ```shell script
-$ npm install -s @wbe/lazy-background-image
+$ npm install -s @wbe/lazy-image
 ```
 
 ## How to use
 
 ```js
-import LazyBackgroundImage from "@wbe/lazy-background-image"
+import { lazyImage, lazyBackgroundImage } from "@wbe/lazy-image"
 ```
 
 ## example

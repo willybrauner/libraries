@@ -15,7 +15,6 @@ export function lazyImage({
   $root = document.body,
   lazyCallback = () => {},
   observerOptions = {},
-  id,
 }: {
   $element?: HTMLElement;
   src?: string;
@@ -23,8 +22,9 @@ export function lazyImage({
   $root?: HTMLElement;
   lazyCallback?: (state) => void;
   observerOptions?: IntersectionObserverInit;
-  id?: number;
 } = {}) {
+
+  // TODO mettre en commun avec lazyBackgroundImage
   const lazyState: { [x: string]: TLazy } = {
     LAZY_LOAD: "lazyload",
     LAZY_LOADING: "lazyloading",
@@ -33,6 +33,9 @@ export function lazyImage({
   const dataSrcsetAttr = "data-srcset";
   const dataSrcAttr = "data-src";
   let observer: IntersectionObserver;
+
+  // check props to know if specific src
+  const isSpecificElement = !!$element || !!src || !!srcset;
 
   /**
    * Start
@@ -89,9 +92,6 @@ export function lazyImage({
       _observeOnChangeCallBack,
       observerOptions
     );
-
-    // check props to know if specific src
-    const isSpecificElement = !!$element || !!src || !!srcset;
 
     // get elements to observe
     const elsToObserve = isSpecificElement

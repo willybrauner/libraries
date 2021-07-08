@@ -23,39 +23,6 @@ ReactDOM.render(
 function App() {
   return (
     <div className="App" style={{ width: "50%", margin: "0 auto" }}>
-      <BackgroundImage
-        srcset={buildSrcset(1)}
-        //src={`https://picsum.photos/id/3/600/300`}
-        // data={FakeDataUtils.getResponsiveImageData(4 / 3)}
-        style={{
-          backgroundSize: "cover",
-          height: "50vh",
-          width: "100%",
-        }}
-      />
-
-      <BackgroundImage
-        srcset={buildSrcset(1)}
-        //src={`https://picsum.photos/id/3/600/300`}
-        // data={FakeDataUtils.getResponsiveImageData(4 / 3)}
-        style={{
-          backgroundSize: "cover",
-          height: "50vh",
-          width: "100%",
-        }}
-      />
-      <BackgroundImage
-        ariaLabel={"cocou"}
-        srcset={buildSrcset(1)}
-        //src={`https://picsum.photos/id/3/600/300`}
-        // data={FakeDataUtils.getResponsiveImageData(4 / 3)}
-        style={{
-          backgroundSize: "cover",
-          height: "50vh",
-          width: "100%",
-        }}
-      />
-
       <Image
         src={`https://picsum.photos/id/3/600/300`}
         alt={"image"}
@@ -78,7 +45,7 @@ function App() {
           src={`https://picsum.photos/id/${i + 1}/360/600`}
           width={"100%"}
           height={600}
-          observerOptions={{ rootMargin: "-30%" }}
+          //observerOptions={{ rootMargin: "-30%" }}
         />
       ))}
       <br />
@@ -89,6 +56,19 @@ function App() {
           alt={"simple srcset image"}
           srcset={buildSrcset(i)}
           width={"100%"}
+        />
+      ))}
+
+      {new Array(5).fill(null).map((el, i) => (
+        <BackgroundImage
+          ariaLabel={"background img"}
+          key={i}
+          srcset={buildSrcset(i)}
+          style={{
+            backgroundSize: "cover",
+            height: "50vh",
+            width: "100%",
+          }}
         />
       ))}
     </div>

@@ -1,11 +1,10 @@
 import React, { CSSProperties, useLayoutEffect, useRef, useState } from "react";
 
+import { lazyBackgroundImage } from "@wbe/lazy-image";
+import { DEFAULT_SRC_IMAGE_PLACEHOLDER } from "./common";
+
 // TODO move in COMMON TYPE file
 import { Image, TImageData, TLazy } from "./Image";
-
-// TODO import real lib
-// @ts-ignore
-import { lazyBackgroundImage } from "../../../utils/lazy-image/src";
 
 const componentName = "BackgroundImage";
 
@@ -33,9 +32,6 @@ interface IProps {
   ariaLabel?: string;
 }
 
-const defaultSrcPlaceholder =
-  "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-
 export function BackgroundImage(props: IProps) {
   const rootRef = useRef(null);
   const backgroundImage = useRef(null);
@@ -52,16 +48,14 @@ export function BackgroundImage(props: IProps) {
     backgroundImage.current = lazyBackgroundImage({
       $element: rootRef.current,
       srcset: url,
-      observerOptions: props.observerOptions,
+      observerOptions: props.observerOptions || {},
       lazyCallback: (state: TLazy) => {
         props.lazyCallback?.(state);
         setLazyState(state);
       },
     });
-
     // start
     backgroundImage.current.start();
-
     // stop
     return () => backgroundImage.current.stop();
   }, [
@@ -77,12 +71,12 @@ export function BackgroundImage(props: IProps) {
       ref={rootRef}
       className={[componentName, props.className, lazyState]
         .filter((e) => e)
-        .join("")}
+        .join(" ")}
       style={{
         ...(props.style || {}),
         ...{
           backgroundImage: `url(${
-            props.srcPlaceholder || defaultSrcPlaceholder
+            props.srcPlaceholder || DEFAULT_SRC_IMAGE_PLACEHOLDER
           })`,
         },
       }}

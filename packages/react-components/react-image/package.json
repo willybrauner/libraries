@@ -22,6 +22,7 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@wbe/lazy-image": "^0.0.1",
     "@wbe/use-window-size": "^2.1.0"
   },
   "peerDependencies": {
