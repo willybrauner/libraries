@@ -121,7 +121,14 @@ export function lazyBackgroundImage({
       _observeOnChangeCallBack,
       observerOptions
     );
-    const elsToObserve = $element ? [$element] : _getElementsWithDataAttr();
+
+    const elsToObserve =
+      $element || srcset
+        ? $element
+          ? [$element]
+          : null
+        : _getElementsWithDataAttr();
+
     elsToObserve?.forEach((el) => observer.observe(el));
   };
 

@@ -101,7 +101,6 @@ export function Image(props: IProps) {
           lazyImageObserver.unobserve($img);
 
           const dataSrcValue = $img.getAttribute("data-src");
-
           if (dataSrcValue) {
             $img.src = dataSrcValue;
           }

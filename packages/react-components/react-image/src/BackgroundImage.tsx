@@ -54,7 +54,7 @@ export function BackgroundImage(props: IProps) {
       srcset: url,
       observerOptions: props.observerOptions,
       lazyCallback: (state: TLazy) => {
-        props.lazyCallback(state);
+        props.lazyCallback?.(state);
         setLazyState(state);
       },
     });

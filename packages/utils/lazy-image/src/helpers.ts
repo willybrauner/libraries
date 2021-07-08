@@ -1,3 +1,5 @@
+import { TLazy } from "./types";
+
 const descriptorNames = { w: "width", x: "density" } as const;
 
 type TDescriptor = keyof typeof descriptorNames;
