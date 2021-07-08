@@ -3,13 +3,14 @@ import {
   parseSrcsetToArray,
   TResponsiveBackgroundImage,
 } from "./helpers";
+import { TLazy } from "./types";
 
 /**
  * @name lazyBackgroundImage
  * @desc Choose the appropriate image URL from srcset attr and
  * preload image before add its url in background-image style attr.
  *
- * @example-1 with multiple elements
+ * @example1 with multiple elements
  *
  * - Add "data-background-srcset" attr on div:
  *    <div data-background-srcset="image-1.jpg 640w, image-2.jpg 1240w" />
@@ -26,7 +27,7 @@ import {
  *    bg.stop();
  *
  *
- * @example-2 with specific element
+ * @example2 with specific element
  *
  *  * - Add div:
  *    <div class="my-bg-img" />
@@ -47,19 +48,25 @@ export function lazyBackgroundImage({
   $element,
   srcset,
   additonalUrl,
-  bigQuality = false,
   $root = document.body,
+  lazyCallback = () => {},
+  observerOptions = {},
+  bigQuality = false,
 }: {
   $element?: HTMLElement;
   srcset?: string;
   additonalUrl?: string;
-  bigQuality?: boolean;
   $root?: HTMLElement;
+  lazyCallback?: (state) => void;
+  observerOptions?: IntersectionObserverInit;
+  bigQuality?: boolean;
 } = {}) {
+  const lazyState: { [x: string]: TLazy } = {
+    lazyload: "lazyload",
+    lazyloading: "lazyloading",
+    lazyloaded: "lazyloaded",
+  };
   const dataSrcsetAttr = "data-background-srcset";
-  const lazyloadClass = "lazyload";
-  const lazyloadingClass = "lazyloading";
-  const lazyloadedClass = "lazyloaded";
   let observer: IntersectionObserver;
 
   /**
@@ -109,9 +116,11 @@ export function lazyBackgroundImage({
    */
   const _observe = (): void => {
     if (!("IntersectionObserver" in window)) return;
-    observer = new IntersectionObserver(_observeOnChangeCallBack);
+    observer = new IntersectionObserver(
+      _observeOnChangeCallBack,
+      observerOptions
+    );
     const elsToObserve = $element ? [$element] : _getElementsWithDataAttr();
-    console.log("elsToObserve", elsToObserve);
     elsToObserve?.forEach((el) => observer.observe(el));
   };
 
@@ -123,9 +132,10 @@ export function lazyBackgroundImage({
     entries: IntersectionObserverEntry[]
   ): void => {
     entries?.forEach(async (el) => {
-      if (!el.isIntersecting) return;
-      // get current element
       const $current = el.target as HTMLElement;
+      _switchLazyState($current, lazyState.lazyload);
+
+      if (!el.isIntersecting) return;
       // image size reference
       const imageSizeReference: number =
         $current.getBoundingClientRect()?.width || window.innerWidth;
@@ -139,9 +149,13 @@ export function lazyBackgroundImage({
           bigQuality
         );
       if (!selectedImageObject?.url) return;
+      // switch lazy state
+      _switchLazyState($current, lazyState.lazyloading);
       // start preload and wait
       await _preloadImage($current, selectedImageObject.url);
-      // then replace
+      // switch lazy state
+      _switchLazyState($current, lazyState.lazyloaded);
+      // then replace url
       _replaceBackgroundImageUrl($current, selectedImageObject);
       // disconnect
       observer.unobserve($current);
@@ -173,19 +187,30 @@ export function lazyBackgroundImage({
    */
   const _preloadImage = ($el: HTMLElement, url: string): Promise<void> =>
     new Promise((resolve) => {
-      $el.classList.remove(lazyloadedClass);
-      $el.classList.remove(lazyloadClass);
-      $el.classList.add(lazyloadingClass);
       // create void image tag for each url
       const $img = document.createElement("img");
       // add url to src attr in order to start loading
       $img.src = url;
       $img.onload = () => {
-        $el.classList.remove(lazyloadingClass);
-        $el.classList.add(lazyloadedClass);
         resolve();
       };
     });
+
+  /**
+   * Switch lazyState and execute lazyCallback
+   * @param $el
+   * @param state
+   */
+  const _switchLazyState = ($el, state: TLazy): void => {
+    // remove all lazy class
+    Object.values(lazyState).forEach((el) => {
+      $el.classList.remove(el);
+    });
+    // add param lazyclass
+    $el.classList.add(state);
+    // execute callback
+    lazyCallback(state);
+  };
 
   return {
     start,

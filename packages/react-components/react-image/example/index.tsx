@@ -24,6 +24,27 @@ function App() {
   return (
     <div className="App" style={{ width: "50%", margin: "0 auto" }}>
       <BackgroundImage
+        srcset={buildSrcset(1)}
+        //src={`https://picsum.photos/id/3/600/300`}
+        // data={FakeDataUtils.getResponsiveImageData(4 / 3)}
+        style={{
+          backgroundSize: "cover",
+          height: "50vh",
+          width: "100%",
+        }}
+      />
+
+      <BackgroundImage
+        srcset={buildSrcset(1)}
+        //src={`https://picsum.photos/id/3/600/300`}
+        // data={FakeDataUtils.getResponsiveImageData(4 / 3)}
+        style={{
+          backgroundSize: "cover",
+          height: "50vh",
+          width: "100%",
+        }}
+      />
+      <BackgroundImage
         ariaLabel={"cocou"}
         srcset={buildSrcset(1)}
         //src={`https://picsum.photos/id/3/600/300`}
