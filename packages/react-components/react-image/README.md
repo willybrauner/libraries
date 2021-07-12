@@ -111,6 +111,9 @@ interface IProps {
   // callback when lazyload state change (lazyload | lazyloading | lazyloaded)
   lazyCallback?: (lazyState: TLazy) => void;
 
+  // intersection observer options
+  observerOptions?: IntersectionObserverInit;
+
   // alt attr and aria html
   alt: string;
   ariaLabel?: string;
@@ -122,10 +125,31 @@ interface IProps {
   style?: CSSProperties;
   width?: number | string;
   height?: number | string;
-
-  // intersection observer options
-  observerOptions?: IntersectionObserverInit;
 }
+```
+
+## `<BackgroundImage />`
+
+Works this the same API than `<Image />` component.
+
+Before lazyload:
+
+```html
+<div
+  class="BackgroundImage lazyload"
+  style="background-image: url('data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==')"
+  data-background-srcset="img-1.jpg 360w, img-2.jpg 768w"
+/>
+```
+
+After lazyload:
+
+```html
+<div
+  class="BackgroundImage lazyloaded"
+  style="background-image: url('img-1.jpg')"
+  data-background-srcset="img-1.jpg 360w, img-2.jpg 768w"
+/>
 ```
 
 ## `<Placeholder />` wrapper component
@@ -135,10 +159,26 @@ used to display a placeholder behind Image. This process is particulary useful
 when image is lazyloading. It allows to not preload all 1px height images in pages
 on page load but really waiting the image was shown in viewport to lazyload it.
 
+Example with `<Image />`:
+
 ```js
 <Placeholder>
     <Image
       src={`https://image-url`}
+      width={600}
+      height={400}
+      alt={"with placeholder"}
+    />
+<Placeholder/>
+```
+
+Example with `<BackgroundImage />`:
+
+```js
+<Placeholder>
+    <BackgroundImage
+      src={`https://image-url`}
+      // or srcset={`https://image-url 360w, https://image-url 768w`}
       width={600}
       height={400}
       alt={"with placeholder"}

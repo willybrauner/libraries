@@ -1,10 +1,7 @@
 import React, { CSSProperties, useLayoutEffect, useRef, useState } from "react";
-
 import { lazyBackgroundImage } from "@wbe/lazy-image";
 import { DEFAULT_SRC_IMAGE_PLACEHOLDER } from "./common";
-
-// TODO move in COMMON TYPE file
-import { Image, TImageData, TLazy } from "./Image";
+import { TImageData, TLazy } from "./types";
 
 const componentName = "BackgroundImage";
 
@@ -73,11 +70,11 @@ export function BackgroundImage(props: IProps) {
         .filter((e) => e)
         .join(" ")}
       style={{
-        ...(props.style || {}),
         ...{
           backgroundImage: `url(${
             props.srcPlaceholder || DEFAULT_SRC_IMAGE_PLACEHOLDER
           })`,
+          ...(props.style || {}),
         },
       }}
       aria-label={props.ariaLabel}

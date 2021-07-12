@@ -8,16 +8,9 @@ import React, {
 import { useWindowSize } from "@wbe/use-window-size";
 import { lazyImage } from "@wbe/lazy-image";
 import { DEFAULT_SRC_IMAGE_PLACEHOLDER } from "./common";
+import { TImageData, TLazy } from "./types";
 
 const componentName = "Image";
-
-export type TImageData = {
-  url: string;
-  width?: number;
-  height?: number;
-};
-
-export type TLazy = "lazyload" | "lazyloading" | "lazyloaded";
 
 interface IProps {
   // image to display before lazyload, default is lightest base64 transparent image
