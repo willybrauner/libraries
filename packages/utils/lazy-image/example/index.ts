@@ -9,22 +9,17 @@ const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
   ].join(", ");
 
 // -----------------------------------------------------------------------------  IMAGE
-// avec attr
-const image = lazyImage({
-  id: 1,
-});
-image.start();
+// // avec attr
+// const image = lazyImage();
+// image.start();
 
 // // pas d'attr
-const singleImage = lazyImage({
-  id: 2,
-  $element: document.getElementById("singleImage"),
-  srcset: buildSrcset(),
-  //src: `https://picsum.photos/id/${1}/360/${Math.round(360 * 4/6)}`,
-});
-singleImage.start();
-
-
+// const singleImage = lazyImage({
+//   $element: document.getElementById("singleImage"),
+//   srcset: buildSrcset(),
+//   // src: `https://picsum.photos/id/${1}/360/${Math.round(360 * 4/6)}`,
+// });
+// singleImage.start();
 
 // ----------------------------------------------------------------------------- BACKGROUND IMAGE
 /**
@@ -38,7 +33,7 @@ backgroundImageWithAttr.start();
  */
 const singleBackgroundImage = lazyBackgroundImage({
   $element: document.getElementById("single"),
-  srcset: buildSrcset(),
+  srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
+  //srcset: buildSrcset(),
 });
 singleBackgroundImage.start();
-

@@ -1,12 +1,26 @@
-import { TLazy } from "./types";
-
 /**
  * @name lazyImage
  * @desc Choose the appropriate image URL from srcset attr and
  * preload image before add its url in background-image style attr.
- *    ...
  *
  */
+import { TLazy } from "./types";
+import { lazyState } from "./common";
+
+type TLazyImageParams = {
+  $element?: HTMLElement;
+  src?: string;
+  srcset?: string;
+  $root?: HTMLElement;
+  lazyCallback?: (state) => void;
+  observerOptions?: IntersectionObserverInit;
+};
+
+export type TLazyImage = {
+  stop: () => void;
+  start: () => void;
+  update: () => void;
+};
 
 export function lazyImage({
   $element,
@@ -15,21 +29,7 @@ export function lazyImage({
   $root = document.body,
   lazyCallback = () => {},
   observerOptions = {},
-}: {
-  $element?: HTMLElement;
-  src?: string;
-  srcset?: string;
-  $root?: HTMLElement;
-  lazyCallback?: (state) => void;
-  observerOptions?: IntersectionObserverInit;
-} = {}) {
-
-  // TODO mettre en commun avec lazyBackgroundImage
-  const lazyState: { [x: string]: TLazy } = {
-    LAZY_LOAD: "lazyload",
-    LAZY_LOADING: "lazyloading",
-    LAZY_LOADED: "lazyloaded",
-  };
+}: TLazyImageParams = {}): TLazyImage {
   const dataSrcsetAttr = "data-srcset";
   const dataSrcAttr = "data-src";
   let observer: IntersectionObserver;
@@ -42,7 +42,6 @@ export function lazyImage({
    */
   const start = (): void => {
     _observe();
-    window.addEventListener("resize", _handlResize);
   };
 
   /**
@@ -58,14 +57,6 @@ export function lazyImage({
    */
   const stop = (): void => {
     observer.disconnect();
-    window.removeEventListener("resize", _handlResize);
-  };
-
-  /**
-   * handle resize
-   */
-  const _handlResize = (): void => {
-    update();
   };
 
   /**
@@ -73,15 +64,13 @@ export function lazyImage({
    */
   // prettier-ignore
   const _getElementsWithDataAttr = (): HTMLImageElement[] => {
-    const $elsWithDataSrcSetAttr = $root.querySelectorAll(`[${dataSrcsetAttr}]`);
-    const $elsWithDataSrcAttr = $root.querySelectorAll(`[${dataSrcAttr}]`);
-    const $els = [
-      // @ts-ignore
-      ...($elsWithDataSrcSetAttr || []),
-      ...($elsWithDataSrcAttr || []),
-    ];
-    return $els?.length ? $els : null;
-  };
+     const $els = [
+        // @ts-ignore
+        ...($root.querySelectorAll(`[${dataSrcsetAttr}]`) || []),
+        ...($root.querySelectorAll(`[${dataSrcAttr}]`) || []),
+      ];
+      return $els?.length ? $els : null;
+    };
 
   /**
    * Start observer via intersection observer
@@ -92,13 +81,10 @@ export function lazyImage({
       _observeOnChangeCallBack,
       observerOptions
     );
-
     // get elements to observe
+    // prettier-ignore
     const elsToObserve = isSpecificElement
-      ? $element
-        ? [$element]
-        : null
-      : _getElementsWithDataAttr();
+      ? $element ? [$element] : null : _getElementsWithDataAttr();
 
     elsToObserve?.forEach((el) => observer.observe(el));
   };

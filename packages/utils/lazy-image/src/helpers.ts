@@ -1,5 +1,3 @@
-import { TLazy } from "./types";
-
 const descriptorNames = { w: "width", x: "density" } as const;
 
 type TDescriptor = keyof typeof descriptorNames;
@@ -9,8 +7,6 @@ export type TDescriptorName = typeof descriptorNames[TDescriptor];
 export type TResponsiveBackgroundImage = { url: string } & {
   [K in TDescriptorName]?: number;
 };
-
-// ----------------------------------------------------------------------------- HELPERS
 
 /**
  * Parses an srcset string and returns an array of objects

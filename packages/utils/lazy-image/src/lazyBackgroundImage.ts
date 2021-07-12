@@ -4,6 +4,7 @@ import {
   TResponsiveBackgroundImage,
 } from "./helpers";
 import { TLazy } from "./types";
+import { lazyState } from "./common";
 
 /**
  * @name lazyBackgroundImage
@@ -61,13 +62,11 @@ export function lazyBackgroundImage({
   observerOptions?: IntersectionObserverInit;
   bigQuality?: boolean;
 } = {}) {
-  const lazyState: { [x: string]: TLazy } = {
-    LAZY_LOAD: "lazyload",
-    LAZY_LOADING: "lazyloading",
-    LAZY_LOADED: "lazyloaded",
-  };
   const dataSrcsetAttr = "data-background-srcset";
+  const dataIdAttr = "data-background-id";
   let observer: IntersectionObserver;
+  const storeImageList = [];
+  let ID = 0;
 
   /**
    * Start
@@ -114,22 +113,44 @@ export function lazyBackgroundImage({
   /**
    * Start observer via intersection observer
    */
+  // prettier-ignore
   const _observe = (): void => {
     if (!("IntersectionObserver" in window)) return;
-
     observer = new IntersectionObserver(
       _observeOnChangeCallBack,
       observerOptions
     );
 
+    // prettier-ignore
     const elsToObserve =
-      $element || srcset
-        ? $element
-          ? [$element]
-          : null
+      ($element || srcset)
+        ? $element ? [$element] : null
         : _getElementsWithDataAttr();
 
-    elsToObserve?.forEach((el) => observer.observe(el));
+    elsToObserve?.forEach((el: HTMLElement) => {
+      // get image width reference
+      const imageWidthRef = _getImageWidth(el);
+      // get image URL
+      const url = _getImageUrl(el);
+      // get current image object deduce by srcset and width
+      const currentImageObject = getImageDataObject(
+        parseSrcsetToArray(url),
+        imageWidthRef,
+        bigQuality
+      );
+      // get store image object
+      const storeImageObject = storeImageList?.[el.getAttribute(dataIdAttr)];
+
+      if (
+        !storeImageObject
+        ||
+        currentImageObject.width > storeImageObject?.width
+      ) {
+        console.log("start observe");
+        observer.observe(el);
+      }
+
+    });
   };
 
   /**
@@ -148,8 +169,10 @@ export function lazyBackgroundImage({
       // image size reference
       const imageSizeReference: number =
         $current.getBoundingClientRect()?.width || window.innerWidth;
+
       // get url from DOM attr
       const url: string = srcset || $current.getAttribute(dataSrcsetAttr);
+
       // selected image object
       const selectedImageObject: TResponsiveBackgroundImage =
         getImageDataObject(
@@ -157,6 +180,16 @@ export function lazyBackgroundImage({
           imageSizeReference,
           bigQuality
         );
+
+      const dataId = $current.getAttribute(dataIdAttr);
+      if (!dataId) {
+        $current.setAttribute(dataIdAttr, `${ID}`);
+        storeImageList[ID] = selectedImageObject;
+        ID++;
+      } else {
+        storeImageList[dataId] = selectedImageObject;
+      }
+
       if (!selectedImageObject?.url) return;
       // switch lazy state
       _switchLazyState($current, lazyState.LAZY_LOADING);
@@ -170,6 +203,12 @@ export function lazyBackgroundImage({
       observer.unobserve($current);
     });
   };
+
+  const _getImageWidth = ($el: HTMLElement): number =>
+    $el.getBoundingClientRect()?.width || window.innerWidth;
+
+  const _getImageUrl = ($el): string =>
+    srcset || $el.getAttribute(dataSrcsetAttr);
 
   /**
    * Replace background image URL depend of element size
