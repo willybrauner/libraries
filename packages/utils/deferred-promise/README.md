@@ -16,7 +16,7 @@ $ npm install -s @wbe/deferred-promise
 ## How to use
 
 ```js
-import deferredPromise from "@wbe/deferred-promise";
+import { deferredPromise } from "@wbe/deferred-promise";
 
 // create deferred promise
 const deferred = deferredPromise();

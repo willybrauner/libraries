@@ -1,6 +1,6 @@
 {
   "name": "@wbe/metas-manager",
-  "version": "2.1.0",
+  "version": "2.2.0-alpha.0",
   "description": "Metas manager allow to inject new metas value in HTML metas tags on demand",
   "author": "Willy Brauner",
   "license": "MIT",

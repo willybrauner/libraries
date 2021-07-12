@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { TImageData } from "./Image";
+import { TImageData } from "./types";
 
 const componentName = "Placeholder";
 
@@ -17,7 +17,7 @@ interface IProps {
   // set ratio override native image ratio
   ratio?: number;
 
-  //
+  // shortcut for background color on wrapper
   backgroundColor?: string;
 
   // add style to each dom element
@@ -46,15 +46,16 @@ interface IProps {
 export function Placeholder(props: IProps) {
   const rootRef = useRef(null);
 
-  const [childrenPropsImageData, setChildrenPropsImageData] =
-    useState<TImageData>();
-
   /**
    * Style
    */
+  // child image data
+  const [childPropsImageData, setChildPropsImageData] = useState<TImageData>();
+  // child style
+  const [childPropsStyle, setChildPropsStyle] = useState<CSSProperties>();
   const paddingRatio = useMemo((): string => {
     let ratio: number;
-    const firstImageData: TImageData = childrenPropsImageData?.[0];
+    const firstImageData: TImageData = childPropsImageData?.[0];
     // if vertical ratio is set
     if (props.ratio) {
       ratio = props.ratio;
@@ -65,7 +66,7 @@ export function Placeholder(props: IProps) {
     }
 
     return ratio ? `${(100 / ratio).toFixed(3)}%` : null;
-  }, [childrenPropsImageData, props.ratio]);
+  }, [childPropsImageData, props.ratio]);
 
   // prepare dom style
   const style: { [x: string]: CSSProperties } = useMemo(
@@ -93,11 +94,11 @@ export function Placeholder(props: IProps) {
         right: "0",
         width: "100%",
         height: "100%",
-        objectFit: "cover",
         ...(props.style?.img || {}),
+        ...(childPropsStyle || {}),
       },
     }),
-    [props.style, props.backgroundColor, paddingRatio]
+    [props.style, props.backgroundColor, paddingRatio, childPropsStyle]
   );
 
   /**
@@ -105,13 +106,14 @@ export function Placeholder(props: IProps) {
    */
   const childrenImageRender = useMemo(() => {
     return React.Children.map(props.children, (child: any) => {
-      setChildrenPropsImageData(child?.props?.data);
+      setChildPropsImageData(child?.props?.data);
+      setChildPropsStyle(child?.props?.style);
       return React.cloneElement(child, {
         style: style.img,
         className: `${componentName}_image`,
       });
     });
-  }, []);
+  }, [style]);
 
   /**
    * Render

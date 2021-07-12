@@ -5,21 +5,11 @@
 ![](https://img.shields.io/npm/dt/@wbe/react-transition.svg)
 ![](https://img.shields.io/npm/l/@wbe/react-transition.svg)
 
-<h1 align="center" style="text-align:center">react-transition</h1>
 
-<p align="center">
 A zero dependency React transition component who allows to manage play-in & play-out transitions of any DOM element.
-<br>
-<br>
-<img alt="npm" src="https://img.shields.io/npm/v/@wbe/react-transition">
-<img alt="build" src="https://github.com/willybrauner/react-transition/workflows/CI/badge.svg">
-
-</p>
 
 <br>
-<p align="center">
 <img alt="demo" src="./assets/demo.gif">
-</p>
 <br>
 
 ## About

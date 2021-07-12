@@ -1,0 +1,34 @@
+{
+  "name": "@wbe/lazy-image",
+  "version": "2.2.0-alpha.0",
+  "description": "Lazy and responsive image management for image and background-image",
+  "author": "Willy Brauner",
+  "license": "MIT",
+  "types": "dist/index",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "private": false,
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willybrauner/libraries.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "compile": "microbundle",
+    "test": "jest",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^2.4.0"
+  },
+  "keywords": [
+    "lazy-background-image"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

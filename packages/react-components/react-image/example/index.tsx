@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Image, Placeholder } from "../src";
+import { Image, Placeholder, BackgroundImage } from "../src";
 import { FakeDataUtils } from "@wbe/fake-data-utils";
 
 const buildSrcset = (id: number, ratio = 4 / 3) =>
@@ -22,14 +22,14 @@ ReactDOM.render(
 
 function App() {
   return (
-    <div className="App" style={{ width: "50%", margin: "0 auto" }}>
+    <div className="App" style={{ width: "75%", margin: "0 auto" }}>
       <Image
         src={`https://picsum.photos/id/3/600/300`}
         alt={"image"}
         width={"100%"}
       />
 
-      <Placeholder backgroundColor={"pink"}>
+      <Placeholder backgroundColor={"pink"} ratio={1}>
         <Image
           data={FakeDataUtils.getResponsiveImageData(4 / 3)}
           alt={"image"}
@@ -46,6 +46,7 @@ function App() {
           width={"100%"}
           height={600}
           observerOptions={{ rootMargin: "-30%" }}
+          style={{ objectFit: "cover" }}
         />
       ))}
       <br />
@@ -57,6 +58,33 @@ function App() {
           srcset={buildSrcset(i)}
           width={"100%"}
         />
+      ))}
+
+      {new Array(5).fill(null).map((el, i) => (
+        <BackgroundImage
+          ariaLabel={"background img"}
+          key={i}
+          srcset={buildSrcset(i)}
+          style={{
+            backgroundSize: "cover",
+            height: "50vh",
+            width: "100%",
+          }}
+        />
+      ))}
+
+      {new Array(5).fill(null).map((el, i) => (
+        <Placeholder backgroundColor={"red"} key={i}>
+          <BackgroundImage
+            key={i}
+            //srcset={buildSrcset(i)}
+            data={FakeDataUtils.getResponsiveImageData(4 / 3)}
+            style={{
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+        </Placeholder>
       ))}
     </div>
   );

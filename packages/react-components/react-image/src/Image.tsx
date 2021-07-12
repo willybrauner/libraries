@@ -6,62 +6,46 @@ import React, {
   useState,
 } from "react";
 import { useWindowSize } from "@wbe/use-window-size";
+import { lazyImage } from "@wbe/lazy-image";
+import { DEFAULT_SRC_IMAGE_PLACEHOLDER } from "./common";
+import { TImageData, TLazy } from "./types";
+
 const componentName = "Image";
 
-export type TImageData = {
-  url: string;
-  width?: number;
-  height?: number;
-};
-
-export type TLazy = "lazyload" | "lazyloading" | "lazyloaded";
-
 interface IProps {
-  // image to display before lazyload
-  // default is lightest base64 transparent image
+  // image to display before lazyload, default is lightest base64 transparent image
   srcPlaceholder?: string;
-
   // src URL to lazyload
   src?: string;
-
   // srcset URL to lazyload
   srcset?: string;
-
   // list of images with dimension used to build srcset attr
   data?: TImageData[];
 
   // callback when lazyload state change (lazyload | lazyloading | lazyloaded)
   lazyCallback?: (lazyState: TLazy) => void;
-
-  // alt attr and aria html
-  alt: string;
-  ariaLabel?: string;
-
-  // class name added on root element
-  className?: string;
+  // intersection observer options
+  observerOptions?: IntersectionObserverInit;
 
   // style attrs
   style?: CSSProperties;
   width?: number | string;
   height?: number | string;
 
-  // intersection observer options
-  observerOptions?: IntersectionObserverInit;
+  // alt attr and aria html
+  alt: string;
+  ariaLabel?: string;
+  // class name added on root element
+  className?: string;
 }
-
-Image.defaultProps = {
-  srcPlaceholder:
-    "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
-};
 
 /**
  * React Image
- *
- * - lazyload src or srcset
- *
  */
 export function Image(props: IProps) {
   const rootRef = useRef<HTMLImageElement>(null);
+  const imageInstance = useRef(null);
+  const [lazyState, setLazyState] = useState<TLazy>("lazyload");
 
   /**
    * 1. Root Dimension
@@ -73,63 +57,33 @@ export function Image(props: IProps) {
   }, [windowSize]);
 
   /**
-   * 2. Prepare srcSet from data
+   * Create lazyImage instance
    */
-  const [srcSet, setSrcSet] = useState<string>(null);
-
   useLayoutEffect(() => {
-    if (!props.data) return;
-    setSrcSet(props.data.map((el) => `${el.url} ${el.width}w`).join(", "));
-  }, [props.data]);
-
-  /**
-   * 3. Lazy
-   * - Check if is in viewport
-   * - Preload image
-   * - copy data-src on src / data-srcset on srcset
-   */
-  const [lazyState, setLazyState] = useState<TLazy>("lazyload");
-
-  useLayoutEffect(() => {
-    if (!("IntersectionObserver" in window) || !rootRef.current) return;
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setLazyState("lazyloading");
-
-          const $img: HTMLImageElement = entry.target;
-          lazyImageObserver.unobserve($img);
-
-          const dataSrcValue = $img.getAttribute("data-src");
-
-          if (dataSrcValue) {
-            $img.src = dataSrcValue;
-          }
-
-          const dataSrcSetValue = $img.getAttribute("data-srcset");
-          if (dataSrcSetValue) {
-            $img.srcset = dataSrcSetValue;
-          }
-          // when img is loading, update lazy state
-          $img.onload = () => setLazyState("lazyloaded");
-        }
-      });
-    };
-    // create observer
-    const lazyImageObserver = new IntersectionObserver(
-      observerCallback,
-      props.observerOptions
-    );
-    // start to observe
-    [rootRef.current].forEach((lazyImage) =>
-      lazyImageObserver.observe(lazyImage)
-    );
-  }, []);
-
-  // execute callback each type lazy state change
-  useEffect(() => {
-    props.lazyCallback?.(lazyState);
-  }, [lazyState]);
+    // create instance
+    imageInstance.current = lazyImage({
+      $element: rootRef.current,
+      srcset:
+        props.data?.map((el) => `${el.url} ${el.width}w`).join(", ") ||
+        props.srcset,
+      src: props.src,
+      observerOptions: props.observerOptions || {},
+      lazyCallback: (state: TLazy) => {
+        props.lazyCallback?.(state);
+        setLazyState(state);
+      },
+    });
+    // start
+    imageInstance.current.start();
+    // stop
+    return () => imageInstance.current.stop();
+  }, [
+    props.data,
+    props.srcset,
+    props.src,
+    props.lazyCallback,
+    props.observerOptions,
+  ]);
 
   /**
    * Render
@@ -137,14 +91,16 @@ export function Image(props: IProps) {
   return (
     <img
       ref={rootRef}
-      className={`${componentName} ${lazyState}`}
+      className={[componentName, props.className, lazyState]
+        .filter((e) => e)
+        .join(" ")}
       alt={props.alt}
       style={props.style}
       width={props.width}
       height={props.height}
       sizes={rootRefWidth && `${rootRefWidth}px`}
-      src={props.srcPlaceholder}
-      data-srcset={props.srcset || srcSet}
+      src={props.srcPlaceholder || DEFAULT_SRC_IMAGE_PLACEHOLDER}
+      data-srcset={props.srcset}
       data-src={props.src}
       aria-label={props.ariaLabel}
     />
