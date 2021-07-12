@@ -1,6 +1,6 @@
 {
   "name": "@wbe/use-is-in-viewport",
-  "version": "2.1.0",
+  "version": "2.2.0-alpha.0",
   "description": "Check if a specific ref element is visible in viewport.",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -21,8 +21,8 @@
     "compile": "microbundle"
   },
   "dependencies": {
-    "@wbe/use-bounding-client-rect": "^2.1.0",
-    "@wbe/use-window-size": "^2.1.0",
+    "@wbe/use-bounding-client-rect": "^2.2.0-alpha.0",
+    "@wbe/use-window-size": "^2.2.0-alpha.0",
     "react": "^17.0.2"
   },
   "devDependencies": {

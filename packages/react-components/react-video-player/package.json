@@ -1,6 +1,6 @@
 {
   "name": "@wbe/react-video-player",
-  "version": "2.1.0",
+  "version": "2.2.0-alpha.0",
   "description": "React video player for native vimeo and youtube video",
   "author": "Willy Brauner",
   "license": "MIT",
@@ -30,7 +30,7 @@
     "@testing-library/react": "^12.0.0",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
-    "@wbe/fake-data-utils": "^2.1.0",
+    "@wbe/fake-data-utils": "^2.2.0-alpha.0",
     "microbundle": "^0.13.3",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
