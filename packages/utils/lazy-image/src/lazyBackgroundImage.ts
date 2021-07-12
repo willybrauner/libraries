@@ -47,18 +47,18 @@ import { lazyState } from "./common";
  */
 
 export function lazyBackgroundImage({
+  $root = document.body,
   $element,
   srcset,
   additonalUrl,
-  $root = document.body,
   lazyCallback = () => {},
   observerOptions = {},
   bigQuality = false,
 }: {
+  $root?: HTMLElement;
   $element?: HTMLElement;
   srcset?: string;
   additonalUrl?: string;
-  $root?: HTMLElement;
   lazyCallback?: (state) => void;
   observerOptions?: IntersectionObserverInit;
   bigQuality?: boolean;

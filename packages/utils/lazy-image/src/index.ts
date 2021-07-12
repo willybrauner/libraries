@@ -1,2 +1,2 @@
 export { lazyBackgroundImage } from "./lazyBackgroundImage";
-export { lazyImage } from "./TLazyImage";
+export { lazyImage } from "./lazyImage";

@@ -1,7 +1,7 @@
 {
   "name": "@wbe/lazy-image",
   "version": "0.0.1",
-  "description": "Lazy and responsive image management for img and backgroud-image",
+  "description": "Lazy and responsive image management for image and background-image",
   "author": "Willy Brauner",
   "license": "MIT",
   "types": "dist/index",

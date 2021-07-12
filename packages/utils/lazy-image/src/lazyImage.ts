@@ -1,9 +1,3 @@
-/**
- * @name lazyImage
- * @desc Choose the appropriate image URL from srcset attr and
- * preload image before add its url in background-image style attr.
- *
- */
 import { TLazy } from "./types";
 import { lazyState } from "./common";
 
@@ -16,12 +10,18 @@ type TLazyImageParams = {
   observerOptions?: IntersectionObserverInit;
 };
 
-export type TLazyImage = {
+export type LazyImage = {
   stop: () => void;
   start: () => void;
   update: () => void;
 };
 
+/**
+ * @name lazyImage
+ * @desc Choose the appropriate image URL from srcset attr and
+ * preload image before add its url in background-image style attr.
+ *
+ */
 export function lazyImage({
   $element,
   srcset,
@@ -29,7 +29,7 @@ export function lazyImage({
   $root = document.body,
   lazyCallback = () => {},
   observerOptions = {},
-}: TLazyImageParams = {}): TLazyImage {
+}: TLazyImageParams = {}): LazyImage {
   const dataSrcsetAttr = "data-srcset";
   const dataSrcAttr = "data-src";
   let observer: IntersectionObserver;

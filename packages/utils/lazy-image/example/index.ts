@@ -9,7 +9,7 @@ const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
   ].join(", ");
 
 // -----------------------------------------------------------------------------  IMAGE
-// // avec attr
+// avec attr
 // const image = lazyImage();
 // image.start();
 
@@ -22,15 +22,15 @@ const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
 // singleImage.start();
 
 // ----------------------------------------------------------------------------- BACKGROUND IMAGE
-/**
- * All div element with data-background-srcset attr
- */
+// /**
+//  * All div element with data-background-srcset attr
+//  */
 const backgroundImageWithAttr = lazyBackgroundImage();
 backgroundImageWithAttr.start();
-
-/**
- *  specific div
- */
+//
+// /**
+//  *  specific div
+//  */
 const singleBackgroundImage = lazyBackgroundImage({
   $element: document.getElementById("single"),
   //srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
