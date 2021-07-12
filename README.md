@@ -38,6 +38,7 @@ Libraries is WIP, [You can check future plan](https://github.com/willybrauner/li
 
 - [deferred-promise](packages/utils/deferred-promise)
 - [fake-data-utils](packages/utils/fake-data-utils)
+- [lazy-image](packages/utils/lazy-image)
 - [metas-manager](packages/utils/metas-manager)
 - [preloads](packages/utils/preloads)
 
