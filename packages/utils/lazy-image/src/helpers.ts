@@ -35,9 +35,40 @@ export function parseSrcsetToArray(
 }
 
 /**
+ * Get Biggest image object from data list
+ * ex:
+ *  [
+ *    { url: "/url", width: 200 },
+ *    { url: "/url", width: 500 },
+ *    { url: "/url", width: 700 },
+ *  ]
+ *
+ *  returns  { url: "/url", width: 700 }
+ *
+ * @param images
+ */
+export const getBiggestImageDataOject = (
+  images: TResponsiveBackgroundImage[]
+) =>
+  images.reduce(
+    (a: any, b: any) => ((a.width || 0) > b.width ? a : b),
+    images[0]
+  );
+
+/**
  * getImageDataObject
  *
  * @desc select appropriate data image
+ *
+ *  * ex:
+ *  [
+ *    { url: "/url", width: 200 },
+ *    { url: "/url", width: 500 },
+ *    { url: "/url", width: 700 },
+ *  ]
+ *
+ *  if window width = 300
+ *  returns  { url: "/url", width: 500 }
  *
  * @param images: images array
  * @param width: Width reference
@@ -61,10 +92,7 @@ export function getImageDataObject(
       .filter((el: any) => el > width);
 
   // keep the biggest image object of array
-  const biggestImage = images.reduce(
-    (a: any, b: any) => ((a.width || 0) > b.width ? a : b),
-    images[0]
-  );
+  const biggestImage = getBiggestImageDataOject(images);
 
   // prepare filtered image array we gonna return
   const filtered = images

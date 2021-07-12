@@ -1,4 +1,5 @@
 import {
+  getBiggestImageDataOject,
   getImageDataObject,
   parseSrcsetToArray,
   TResponsiveBackgroundImage,
@@ -113,7 +114,6 @@ export function lazyBackgroundImage({
   /**
    * Start observer via intersection observer
    */
-  // prettier-ignore
   const _observe = (): void => {
     if (!("IntersectionObserver" in window)) return;
     observer = new IntersectionObserver(
@@ -121,35 +121,29 @@ export function lazyBackgroundImage({
       observerOptions
     );
 
+    // select dom element to observe
+    // depend of witch kind of element
     // prettier-ignore
-    const elsToObserve =
-      ($element || srcset)
+    const elsToObserve = ($element || srcset)
         ? $element ? [$element] : null
         : _getElementsWithDataAttr();
 
     elsToObserve?.forEach((el: HTMLElement) => {
-      // get image width reference
-      const imageWidthRef = _getImageWidth(el);
-      // get image URL
-      const url = _getImageUrl(el);
-      // get current image object deduce by srcset and width
-      const currentImageObject = getImageDataObject(
-        parseSrcsetToArray(url),
-        imageWidthRef,
-        bigQuality
-      );
+      // get current image informations
+      const imageInfos = _getImageInformations(el);
       // get store image object
       const storeImageObject = storeImageList?.[el.getAttribute(dataIdAttr)];
 
       if (
-        !storeImageObject
-        ||
-        currentImageObject.width > storeImageObject?.width
+        // if store image doest exist
+        !storeImageObject ||
+        // or store image with is smaller than current image (dom) width
+        // and image (dom) width is smaller than the biggest width available
+        (storeImageObject?.width < imageInfos.width &&
+          imageInfos.width <= imageInfos.biggestImageDataOject.width)
       ) {
-        console.log("start observe");
         observer.observe(el);
       }
-
     });
   };
 
@@ -166,61 +160,81 @@ export function lazyBackgroundImage({
       _switchLazyState($current, lazyState.LAZY_LOAD);
 
       if (!el.isIntersecting) return;
-      // image size reference
-      const imageSizeReference: number =
-        $current.getBoundingClientRect()?.width || window.innerWidth;
 
-      // get url from DOM attr
-      const url: string = srcset || $current.getAttribute(dataSrcsetAttr);
+      // get current image information
+      const image = _getImageInformations($current);
 
-      // selected image object
-      const selectedImageObject: TResponsiveBackgroundImage =
-        getImageDataObject(
-          parseSrcsetToArray(url),
-          imageSizeReference,
-          bigQuality
-        );
-
+      // get data id on DOM element
       const dataId = $current.getAttribute(dataIdAttr);
+
+      // if didn't exist, set in on DOM element and store it
       if (!dataId) {
         $current.setAttribute(dataIdAttr, `${ID}`);
-        storeImageList[ID] = selectedImageObject;
+        storeImageList[ID] = image?.imageDataObject;
         ID++;
+        // else, store it only
       } else {
-        storeImageList[dataId] = selectedImageObject;
+        storeImageList[dataId] = image?.imageDataObject;
       }
 
-      if (!selectedImageObject?.url) return;
+      // check if data object url exist
+      if (!image?.imageDataObject?.url) return;
+
       // switch lazy state
       _switchLazyState($current, lazyState.LAZY_LOADING);
       // start preload and wait
-      await _preloadImage($current, selectedImageObject.url);
+      await _preloadImage($current, image.imageDataObject.url);
       // switch lazy state
       _switchLazyState($current, lazyState.LAZY_LOADED);
       // then replace url
-      _replaceBackgroundImageUrl($current, selectedImageObject);
+      _replaceBackgroundImageUrl($current, image.imageDataObject);
       // disconnect
       observer.unobserve($current);
     });
   };
 
-  const _getImageWidth = ($el: HTMLElement): number =>
-    $el.getBoundingClientRect()?.width || window.innerWidth;
+  /**
+   * Get selected image information
+   * @param $el
+   */
+  const _getImageInformations = (
+    $el: HTMLElement
+  ): {
+    width: number;
+    dataSrcset: string;
+    imageDataObject: TResponsiveBackgroundImage;
+    biggestImageDataOject: TResponsiveBackgroundImage;
+  } => {
+    // get image width reference
+    const width = $el.getBoundingClientRect()?.width || window.innerWidth;
+    // get image URL
+    const dataSrcset = srcset || $el.getAttribute(dataSrcsetAttr);
+    // extract image array from from srcset
+    const imagesArray = parseSrcsetToArray(dataSrcset);
+    // get image object depend of current width and quality size
+    const imageDataObject = getImageDataObject(imagesArray, width, bigQuality);
+    // ge biggest image object from image data array
+    const biggestImageDataOject = getBiggestImageDataOject(imagesArray);
 
-  const _getImageUrl = ($el): string =>
-    srcset || $el.getAttribute(dataSrcsetAttr);
+    return {
+      width,
+      dataSrcset,
+      imageDataObject,
+      biggestImageDataOject,
+    };
+  };
 
   /**
    * Replace background image URL depend of element size
    * @param $element
-   * @param selectedImageObject
+   * @param imageDataObject
    */
   const _replaceBackgroundImageUrl = (
     $element: HTMLElement,
-    selectedImageObject: TResponsiveBackgroundImage
+    imageDataObject: TResponsiveBackgroundImage
   ): void => {
     $element.style.backgroundImage = [
-      `url('${selectedImageObject.url}')`,
+      `url('${imageDataObject.url}')`,
       additonalUrl && `, url('${additonalUrl}')`,
     ]
       .filter((v) => v)

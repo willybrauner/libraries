@@ -33,7 +33,7 @@ backgroundImageWithAttr.start();
  */
 const singleBackgroundImage = lazyBackgroundImage({
   $element: document.getElementById("single"),
-  srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
-  //srcset: buildSrcset(),
+  //srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
+  srcset: buildSrcset(),
 });
 singleBackgroundImage.start();
